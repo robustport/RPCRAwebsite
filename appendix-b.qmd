@@ -1,0 +1,28 @@
+---
+title: "Appendix B: Probability and Statistics for RPCRA"
+subtitle: "Distributions, Estimation, and Asymptotic Theory"
+---
+
+::: {.copyright-notice}
+**Copyright Notice.** Planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2025.
+:::
+
+::: {.pdf-callout}
+::: {.pdf-icon}
+&#128196;
+:::
+::: {.pdf-text}
+**Download the full appendix**
+[Appendix B — Probability and Statistics for RPCRA](pdfs/appendix-b.pdf){target="_blank"}
+:::
+:::
+
+```{=html}
+<iframe
+  src="pdfs/appendix-b.pdf"
+  width="100%"
+  height="1050px"
+  class="pdf-embed"
+  title="Appendix B: Probability and Statistics for RPCRA">
+</iframe>
+```

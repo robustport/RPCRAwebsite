@@ -1,0 +1,22 @@
+---
+title: "Demo Code"
+---
+
+The RPCRA book has a distinctive **reproducibility** theme: most figures and tables in most chapters are reproducible using R scripts provided in the `PCRA` R package. These scripts allow students and instructors to replicate book results and experiment with different portfolio strategies, time periods, stock groups, and optimization parameters.
+
+## Chapter Demo Scripts
+
+Download any script directly. Each script reproduces all figures and tables for its chapter.
+
+| Chapter | Topic | Download |
+|---------|-------|----------|
+| Ch. 1 | Introduction to Portfolio Management | [Download R script](demos/Ch1_Introduction_Demo.R){target="_blank"} |
+| Ch. 2 | Foundations | [Download R script](demos/Ch2_Foundations_Demo.R){target="_blank"} |
+| Ch. 3 | Modeling Asset Returns | [Download R script](demos/Ch3_ModelingAssetReturns_Demo.R){target="_blank"} |
+| Ch. 4 | Covariance Matrices | [Download R script](demos/Ch4_CovarianceMatrices_Demo.R){target="_blank"} |
+| Ch. 5 | Portfolio Constraints and Penalties | [Download R script](demos/Ch5_PortfolioConstraintsAndPenalties_Demo.R){target="_blank"} |
+| Ch. 6 | Time Series Models | [Download R script](demos/Ch6_TimeSeriesModels_Demo.R){target="_blank"} |
+
+::: {.callout-warning appearance="minimal"}
+Some scripts take several minutes to run in full. It is better to run the code for selected Figures and Tables.
+:::

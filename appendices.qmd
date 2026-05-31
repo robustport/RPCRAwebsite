@@ -1,0 +1,93 @@
+---
+title: "Online Appendices"
+toc: false
+---
+
+This site hosts the five technical appendices to RPCRA. Each appendix provides self-contained background material that underpins the methods and results developed in the main text. Full PDF downloads are available on each appendix page.
+
+```{=html}
+<div class="appendix-grid">
+
+  <div class="appendix-card">
+    <div class="card-label">Appendix A</div>
+    <div class="card-title">Mathematical Tools for RPCRA</div>
+    <p class="card-desc">
+      Vectors and vector spaces, matrix algebra, eigendecompositions, convex analysis, and
+      constrained optimization — the essential mathematical infrastructure for portfolio mathematics.
+    </p>
+    <div class="card-topics">
+      <span class="topic-tag">Linear Algebra</span>
+      <span class="topic-tag">Eigenvalues</span>
+      <span class="topic-tag">Optimization</span>
+      <span class="topic-tag">SVD</span>
+    </div>
+    <a href="appendix-a.html" class="card-link">Read Appendix A</a>
+  </div>
+
+  <div class="appendix-card">
+    <div class="card-label">Appendix B</div>
+    <div class="card-title">Probability and Statistics for RPCRA</div>
+    <p class="card-desc">
+      Location-scale distributions, least squares (OLS, WLS, GLS), maximum likelihood
+      estimation, asymptotic theory, delta methods, and the Fisher information framework.
+    </p>
+    <div class="card-topics">
+      <span class="topic-tag">OLS / WLS / GLS</span>
+      <span class="topic-tag">MLE</span>
+      <span class="topic-tag">CLT</span>
+      <span class="topic-tag">Delta Method</span>
+    </div>
+    <a href="appendix-b.html" class="card-link">Read Appendix B</a>
+  </div>
+
+  <div class="appendix-card">
+    <div class="card-label">Appendix C</div>
+    <div class="card-title">Utility Theory</div>
+    <p class="card-desc">
+      Expected utility maximization, concave utility and risk aversion, certainty equivalents,
+      absolute and relative risk aversion, and the relationship between expected utility and
+      mean-variance optimization.
+    </p>
+    <div class="card-topics">
+      <span class="topic-tag">VNM Axioms</span>
+      <span class="topic-tag">Risk Aversion</span>
+      <span class="topic-tag">CARA / CRRA</span>
+      <span class="topic-tag">EUM</span>
+    </div>
+    <a href="appendix-c.html" class="card-link">Read Appendix C</a>
+  </div>
+
+  <div class="appendix-card">
+    <div class="card-label">Appendix D</div>
+    <div class="card-title">Portfolio Theory</div>
+    <p class="card-desc">
+      Minimum-variance frontier mathematics, the tangent portfolio, CAPM proofs,
+      zero-beta portfolios, APT derivation, and robust estimation details.
+    </p>
+    <div class="card-topics">
+      <span class="topic-tag">Efficient Frontier</span>
+      <span class="topic-tag">CAPM</span>
+      <span class="topic-tag">APT</span>
+      <span class="topic-tag">Zero-Beta</span>
+    </div>
+    <a href="appendix-d.html" class="card-link">Read Appendix D</a>
+  </div>
+
+  <div class="appendix-card">
+    <div class="card-label">Appendix E</div>
+    <div class="card-title">Machine Learning</div>
+    <p class="card-desc">
+      Supervised learning, regularization (Ridge, Lasso, Elastic Net), cross-validation,
+      robust regularized regression, logistic regression, and projection pursuit / neural networks.
+    </p>
+    <div class="card-topics">
+      <span class="topic-tag">Ridge / Lasso</span>
+      <span class="topic-tag">Elastic Net</span>
+      <span class="topic-tag">Projection Pursuit</span>
+      <span class="topic-tag">Robust ML</span>
+    </div>
+    <a href="appendix-e.html" class="card-link">Read Appendix E</a>
+  </div>
+
+</div>
+```

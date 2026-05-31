@@ -1,0 +1,23 @@
+---
+title: "Vignette 3: RPCRA Reproducibility"
+---
+
+::: {.pdf-callout}
+::: {.pdf-icon}
+&#128196;
+:::
+::: {.pdf-text}
+**Download the full vignette**
+[Vignette 3 — RPCRA Reproducibility](pdfs/vignette-3.pdf){target="_blank"}
+:::
+:::
+
+```{=html}
+<iframe
+  src="pdfs/vignette-3.pdf"
+  width="100%"
+  height="1050px"
+  class="pdf-embed"
+  title="Vignette 3: PCRA Reproducibility">
+</iframe>
+```

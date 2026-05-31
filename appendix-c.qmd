@@ -1,0 +1,28 @@
+---
+title: "Appendix C: Utility Theory"
+subtitle: "Expected Utility, Risk Aversion, and Mean-Variance Optimization"
+---
+
+::: {.copyright-notice}
+**Copyright Notice.** Planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2025.
+:::
+
+::: {.pdf-callout}
+::: {.pdf-icon}
+&#128196;
+:::
+::: {.pdf-text}
+**Download the full appendix**
+[Appendix C — Utility Theory](pdfs/appendix-c.pdf){target="_blank"}
+:::
+:::
+
+```{=html}
+<iframe
+  src="pdfs/appendix-c.pdf"
+  width="100%"
+  height="1050px"
+  class="pdf-embed"
+  title="Appendix C: Utility Theory">
+</iframe>
+```

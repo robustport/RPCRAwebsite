@@ -1,0 +1,27 @@
+---
+title: "Vignette 2: CRSP Stocks and SPGMI Factors in PCRA"
+---
+
+::: {.copyright-notice}
+**Authors:** Doug Martin and Jon Spinney
+:::
+
+::: {.pdf-callout}
+::: {.pdf-icon}
+&#128196;
+:::
+::: {.pdf-text}
+**Download the full vignette**
+[Vignette 2 — CRSP Stocks and SPGMI Factors in PCRA](pdfs/vignette-2.pdf){target="_blank"}
+:::
+:::
+
+```{=html}
+<iframe
+  src="pdfs/vignette-2.pdf"
+  width="100%"
+  height="1050px"
+  class="pdf-embed"
+  title="Vignette 2: CRSP Stocks and SPGMI Factors in PCRA">
+</iframe>
+```

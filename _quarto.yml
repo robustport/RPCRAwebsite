@@ -1,0 +1,74 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "RPCRA"
+  description: >
+    Robust Portfolio Construction and Risk Analysis —
+    a forthcoming Springer textbook by Martin, Philips, Scherer & Li.
+
+  open-graph:
+    title: "Robust Portfolio Construction and Risk Analysis"
+    description: >
+      Online supplementary materials covering preface, vignettes, demo code,
+      and five technical appendices for the forthcoming RPCRA textbook.
+    image: ""
+
+  navbar:
+    background: "#0d1b2a"
+    foreground: light
+    title: "RPCRA"
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Preface"
+        href: preface.qmd
+      - text: "Vignettes"
+        href: vignettes.qmd
+      - text: "Demo Code"
+        href: demo-code.qmd
+      - text: "Appendices"
+        href: appendices.qmd
+      - text: "About"
+        href: about.qmd
+
+  page-footer:
+    background: "#0d1b2a"
+    foreground: light
+    left: "© 2025 Martin, Philips, Scherer & Li. All rights reserved."
+    right: "Built with [Quarto](https://quarto.org)"
+
+  search:
+    location: navbar
+    type: overlay
+
+  back-to-top-navigation: true
+
+format:
+  html:
+    theme:
+      - styles.css
+    toc: true
+    toc-depth: 3
+    toc-title: "On this page"
+    toc-expand: 2
+    number-sections: false
+    html-math-method: mathjax
+    smooth-scroll: true
+    link-external-newpage: true
+    link-external-icon: true
+    fig-cap-location: bottom
+    fig-align: center
+    lightbox: true
+    include-in-header: _fonts.html
+    grid:
+      sidebar-width: 0px
+      body-width: 900px
+      margin-width: 250px
+
+execute:
+  freeze: auto
+  echo: false
+  warning: false
+  message: false

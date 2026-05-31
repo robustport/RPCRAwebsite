@@ -1,0 +1,13 @@
+---
+title: "PCRA Reference Manual"
+---
+
+Complete function and dataset reference for the `PCRA` R package. Documents all exported functions, data objects, and their arguments.
+
+::: {.callout-note appearance="minimal"}
+[Download PDF](pdfs/reference-manual.pdf){target="_blank" .btn .btn-outline-primary} &nbsp;&nbsp; [PCRA on CRAN](https://cran.r-project.org/web/packages/PCRA){target="_blank" .btn .btn-outline-secondary} &nbsp;&nbsp; [PCRA on GitHub](https://github.com/robustport/PCRA){target="_blank" .btn .btn-outline-secondary}
+:::
+
+```{=html}
+<iframe src="pdfs/reference-manual.pdf" width="100%" height="950px" style="border: 1px solid #dee2e6; border-radius: 4px;"></iframe>
+```

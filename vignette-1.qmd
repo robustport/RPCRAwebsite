@@ -1,0 +1,27 @@
+---
+title: "Vignette 1: RPCRA Package and Data Overview"
+---
+
+::: {.copyright-notice}
+**Authors:** Doug Martin, Tom Philips, Jon Spinney, and Kirk Li
+:::
+
+::: {.pdf-callout}
+::: {.pdf-icon}
+&#128196;
+:::
+::: {.pdf-text}
+**Download the full vignette**
+[Vignette 1 — RPCRA Package and Data Overview](pdfs/vignette-1.pdf){target="_blank"}
+:::
+:::
+
+```{=html}
+<iframe
+  src="pdfs/vignette-1.pdf"
+  width="100%"
+  height="1050px"
+  class="pdf-embed"
+  title="Vignette 1: PCRA Package and Data Overview">
+</iframe>
+```

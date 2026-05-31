@@ -1,0 +1,44 @@
+---
+title: "Vignettes"
+toc: false
+---
+
+The book is accompanied by three vignettes that provide hands-on documentation for the `PCRA` R package and its data. Click any title below to view the full vignette PDF.
+
+```{=html}
+<div class="vignette-list">
+
+  <div class="vignette-item">
+    <div class="vignette-label">Vignette 1</div>
+    <div class="vignette-title"><a href="vignette-1.html">RPCRA Package and Data Overview</a></div>
+    <p class="vignette-desc">
+      Structure and contents of the <code>PCRA</code> package: the 31 included data sets,
+      the two package versions (CRAN and development), <code>data.table</code> basics, the
+      CRSP and SPGMI datasets, and the non-open-source data policy.
+    </p>
+  </div>
+
+  <div class="vignette-item">
+    <div class="vignette-label">Vignette 2</div>
+    <div class="vignette-title"><a href="vignette-2.html">CRSP Stocks and SPGMI Factors</a></div>
+    <p class="vignette-desc">
+      Deep dive into <code>stocksCRSPmonthly</code> and <code>factorsSPGMI</code>: data structure,
+      monthly, weekly and daily CRSP data, monthly SPGMI factor exposures, the
+      <code>selectCRSPandSPGMI</code> function, <code>xts</code> time series manipulation,
+      sector/capitalization subsetting.
+    </p>
+  </div>
+
+  <div class="vignette-item">
+    <div class="vignette-label">Vignette 3</div>
+    <div class="vignette-title"><a href="vignette-3.html">RPCRA Reproducibility</a></div>
+    <p class="vignette-desc">
+      How to access and run the demo R scripts that reproduce most of the figures
+      and tables in the chapters: the <code>demo()</code> command, copy/paste workflow,
+      sourcing with <code>rstudioapi</code>, character of the scripts, and setup of
+      <code>devtools</code> and Rtools.
+    </p>
+  </div>
+
+</div>
+```

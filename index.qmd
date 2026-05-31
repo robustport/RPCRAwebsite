@@ -1,0 +1,166 @@
+---
+title: ""
+page-layout: full
+toc: false
+---
+
+```{=html}
+<div class="hero-outer">
+  <div class="hero-inner">
+
+    <div class="hero-eyebrow">Book Overview &amp; Supplementary Materials</div>
+
+    <h1 class="hero-title">Robust Portfolio Construction<br>and <em>Risk Analysis</em></h1>
+
+    <p class="hero-date">May 18, 2026</p>
+
+    <p class="hero-subtitle">
+      A rigorous treatment of quantitative methods for investment based on robust<br>
+      portfolio construction and risk analysis methods.
+    </p>
+
+    <div class="hero-authors">
+      <span class="author-name">R. Douglas Martin</span> &ensp;&middot;&ensp;
+      <span class="author-name">Thomas K. Philips</span> &ensp;&middot;&ensp;
+      <span class="author-name">Bernd Scherer</span> &ensp;&middot;&ensp;
+      <span class="author-name">Kirk Li</span>
+    </div>
+
+    <div class="hero-meta">
+      <span class="hero-badge hero-badge-gold">&#9670; Springer &nbsp;|&nbsp; Planned Publication: 2026</span>
+      <span class="hero-badge">5 Appendices</span>
+      <span class="hero-badge">3 Vignettes</span>
+      <span class="hero-badge">6 Demo Scripts</span>
+    </div>
+
+  </div>
+</div>
+```
+
+::: {.copyright-notice}
+**Copyright Notice.** Material on this site is planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2025.
+:::
+
+```{=html}
+<div class="stat-row">
+  <div class="stat-box">
+    <span class="stat-number">5</span>
+    <span class="stat-label">Appendices</span>
+  </div>
+  <div class="stat-box">
+    <span class="stat-number">3</span>
+    <span class="stat-label">Vignettes</span>
+  </div>
+  <div class="stat-box">
+    <span class="stat-number">6</span>
+    <span class="stat-label">Demo Scripts</span>
+  </div>
+  <div class="stat-box">
+    <span class="stat-number">2026</span>
+    <span class="stat-label">Publication</span>
+  </div>
+</div>
+```
+
+## 1 About the Book
+
+*Robust Portfolio Construction and Risk Analysis* (RPCRA) provides a comprehensive and rigorous account of the quantitative foundations of modern portfolio management. The book develops the mathematical, statistical, and computational tools needed to construct, evaluate, and manage the risk of investment portfolios in a principled way.
+
+The text integrates classical theory — mean-variance optimization, the Capital Asset Pricing Model, the Arbitrage Pricing Theory — with modern statistical methodology including robust estimators that are not much influenced by outliers, influence function analysis of risk and performance estimators, minimum downside risk portfolios, portfolios that meet spending objectives, and portfolios with options. Throughout, the authors emphasize computation with R packages alongside theoretical justification.
+
+```{=html}
+<div class="section-rule"><span>Preface</span></div>
+```
+
+## [2 Preface](preface.qmd)
+
+The [Preface](preface.qmd) provides an overview of the book's 16 chapters and 5 appendices, describes the reproducibility theme and supporting R packages (`PCRA`, `facmodCS`, `facmodTS`, `robustGarch`), motivates the use of robust estimators, introduces the special focus topics in Chapters 10–16, and includes data use disclaimers for CRSP, SPGMI, ICE, Tradeweb, S&P, and CBOE datasets.
+
+```{=html}
+<div class="section-rule"><span>Vignettes</span></div>
+```
+
+## [3 Vignettes](vignettes.qmd)
+
+The book is accompanied by three vignettes that provide hands-on documentation for the `PCRA` R package and its data. PDFs are available for download on each vignette page.
+
+```{=html}
+<div class="appendix-grid">
+
+  <div class="appendix-card">
+    <div class="card-label">Vignette 1</div>
+    <div class="card-title">RPCRA Package and Data Overview</div>
+    <p class="card-desc">
+      Structure and contents of the <code>PCRA</code> package: the 31 included data sets,
+      the two package versions (CRAN and development), <code>data.table</code> basics, the
+      CRSP and SPGMI datasets, and the non-open-source data policy.
+    </p>
+    <a href="vignette-1.html" class="card-link">Read Vignette 1</a>
+  </div>
+
+  <div class="appendix-card">
+    <div class="card-label">Vignette 2</div>
+    <div class="card-title">CRSP Stocks and SPGMI Factors</div>
+    <p class="card-desc">
+      Deep dive into <code>stocksCRSPmonthly</code> and <code>factorsSPGMI</code>: data structure,
+      monthly, weekly and daily CRSP data, monthly SPGMI factor exposures, the
+      <code>selectCRSPandSPGMI</code> function, <code>xts</code> time series manipulation, sector/capitalization subsetting.
+    </p>
+    <a href="vignette-2.html" class="card-link">Read Vignette 2</a>
+  </div>
+
+  <div class="appendix-card">
+    <div class="card-label">Vignette 3</div>
+    <div class="card-title">RPCRA Reproducibility</div>
+    <p class="card-desc">
+      How to access and run the demo R scripts that reproduce most of the figures
+      and tables in the chapters: the <code>demo()</code> command, copy/paste workflow,
+      sourcing with <code>rstudioapi</code>, character of the scripts, and setup of
+      <code>devtools</code> and Rtools.
+    </p>
+    <a href="vignette-3.html" class="card-link">Read Vignette 3</a>
+  </div>
+
+</div>
+```
+
+```{=html}
+<div class="section-rule"><span>Demo Code</span></div>
+```
+
+## [4 Demo Code](demo-code.qmd)
+
+Chapter-by-chapter R scripts that reproduce the figures and tables in the book are provided in the `PCRA` R package. The [Demo Code](demo-code.qmd) page lists all available scripts and instructions for running them.
+
+```{=html}
+<a href="demo-code.html" class="card-link" style="display:inline-flex;margin-top:0.5rem;">View Demo Code</a>
+```
+
+```{=html}
+<div class="section-rule"><span>Online Appendices</span></div>
+```
+
+## [5 Online Appendices](appendices.qmd)
+
+This site hosts the five technical appendices to RPCRA. Each appendix provides self-contained background material that underpins the methods and results developed in the main text. Full PDF downloads are available on each appendix page.
+
+- [Appendix A — Mathematical Tools for RPCRA](appendix-a.html)
+- [Appendix B — Probability and Statistics for RPCRA](appendix-b.html)
+- [Appendix C — Utility Theory](appendix-c.html)
+- [Appendix D — Portfolio Theory](appendix-d.html)
+- [Appendix E — Machine Learning](appendix-e.html)
+
+```{=html}
+<div class="section-rule"><span>Citation</span></div>
+```
+
+## Citation
+
+```{=html}
+<div class="cite-block">
+Martin, R. D., Philips, T. K., Scherer, B., and Li, K. (2026).
+<em>Portfolio Construction and Risk Analysis</em>. Springer. (In press.)
+<br><br>
+© 2025 Martin, Philips, Scherer &amp; Li. All rights reserved.
+</div>
+```
