@@ -4,21 +4,27 @@ Official supplementary website for **Robust Portfolio Construction and Risk Anal
 
 This repository contains the source for the public website: landing page, preface, vignettes, demo code, and online appendices (A–E). The site is built with [Quarto](https://quarto.org) and deployed automatically to GitHub Pages.
 
-**Live site:** [https://robustport.github.io/RPCRAwebsite/](https://robustport.github.io/RPCRAwebsite/)
+## Quick pointers
+
+| Pointer | Link |
+|---------|------|
+| **Live website** | [robustport.github.io/RPCRAwebsite](https://robustport.github.io/RPCRAwebsite/) |
+| **RPCRA R package** | [github.com/robustport/PCRA](https://github.com/robustport/PCRA) |
 
 ---
 
 ## Table of Contents
 
 1. [About This Repository](#about-this-repository)
-2. [Repository Structure](#repository-structure)
-3. [How the Site Is Built](#how-the-site-is-built)
-4. [Editing Content](#editing-content)
-5. [Adding a New Page](#adding-a-new-page)
-6. [Local Preview (Optional)](#local-preview-optional)
-7. [Deployment to GitHub Pages](#deployment-to-github-pages)
-8. [What Not to Commit](#what-not-to-commit)
-9. [Support](#support)
+2. [Repository Pointers (Git Remotes)](#repository-pointers-git-remotes)
+3. [Repository Structure](#repository-structure)
+4. [How the Site Is Built](#how-the-site-is-built)
+5. [Editing Content](#editing-content)
+6. [Adding a New Page](#adding-a-new-page)
+7. [Local Preview (Optional)](#local-preview-optional)
+8. [Deployment to GitHub Pages](#deployment-to-github-pages)
+9. [What Not to Commit](#what-not-to-commit)
+10. [Support](#support)
 
 ---
 
@@ -33,6 +39,53 @@ This repository contains the source for the public website: landing page, prefac
 | **Deployment** | GitHub Actions → GitHub Pages |
 
 Every push to `main` triggers a build. GitHub Actions renders all `.qmd` files to HTML and publishes the result. You do not need to build or upload HTML manually.
+
+---
+
+## Repository Pointers (Git Remotes)
+
+This project uses **two Git remotes** — pointers to two related repositories on GitHub:
+
+| Remote name | Repository | Purpose |
+|-------------|------------|---------|
+| **`origin`** | [robustport/RPCRAwebsite](https://github.com/robustport/RPCRAwebsite) | **Primary.** Edit here and push to deploy the live site. |
+| **`legacy`** | [Aakarsh751/pcra-book-website](https://github.com/Aakarsh751/pcra-book-website) | **Archive.** Earlier site version; kept for reference only. Do not deploy from here. |
+
+### View configured remotes
+
+```bash
+git remote -v
+```
+
+Expected output:
+
+```
+origin   https://github.com/robustport/RPCRAwebsite.git (fetch)
+origin   https://github.com/robustport/RPCRAwebsite.git (push)
+legacy   https://github.com/Aakarsh751/pcra-book-website.git (fetch)
+legacy   https://github.com/Aakarsh751/pcra-book-website.git (push)
+```
+
+### Daily workflow (deploy to live site)
+
+```bash
+git add .
+git commit -m "Describe your change"
+git push origin main
+```
+
+### Add the legacy remote (if missing)
+
+```bash
+git remote add legacy https://github.com/Aakarsh751/pcra-book-website.git
+```
+
+To compare with the older site without switching folders:
+
+```bash
+git fetch legacy
+git log legacy/main --oneline -5
+```
 
 ---
 

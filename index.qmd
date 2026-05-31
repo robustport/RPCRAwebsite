@@ -33,6 +33,11 @@ toc: false
       <span class="hero-badge">6 Demo Scripts</span>
     </div>
 
+    <div class="hero-pointers">
+      <a href="https://github.com/robustport/PCRA" class="hero-pointer" target="_blank" rel="noopener">RPCRA R Package</a>
+      <a href="https://github.com/robustport/RPCRAwebsite" class="hero-pointer" target="_blank" rel="noopener">Website Repository</a>
+    </div>
+
   </div>
 </div>
 ```
