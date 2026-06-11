@@ -12,7 +12,7 @@ toc: false
 
     <h1 class="hero-title"><em>Robust</em> Portfolio Construction<br>and Risk Analysis</h1>
 
-    <p class="hero-date">Springer &nbsp;|&nbsp; Planned Publication: 2026</p>
+    <p class="hero-date">To be published by Springer in 2026</p>
 
     <p class="hero-subtitle">
       A rigorous treatment of quantitative methods for investment based on robust<br>
