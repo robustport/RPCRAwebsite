@@ -12,7 +12,7 @@ toc: false
 
     <h1 class="hero-title"><em>Robust</em> Portfolio Construction<br>and Risk Analysis</h1>
 
-    <p class="hero-date">June 11, 2026</p>
+    <p class="hero-date">Springer &nbsp;|&nbsp; Planned Publication: 2026</p>
 
     <p class="hero-subtitle">
       A rigorous treatment of quantitative methods for investment based on robust<br>
@@ -24,10 +24,6 @@ toc: false
       <span class="author-name">Thomas K. Philips</span> &ensp;&middot;&ensp;
       <span class="author-name">Bernd Scherer</span> &ensp;&middot;&ensp;
       <span class="author-name">Kirk Li</span>
-    </div>
-
-    <div class="hero-meta">
-      <span class="hero-badge hero-badge-gold">&#9670; Springer &nbsp;|&nbsp; Planned Publication: 2026</span>
     </div>
 
     <div class="hero-pointers">
