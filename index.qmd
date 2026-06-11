@@ -10,9 +10,9 @@ toc: false
 
     <div class="hero-eyebrow">Book Overview &amp; Supplementary Materials</div>
 
-    <h1 class="hero-title">Robust Portfolio Construction<br>and <em>Risk Analysis</em></h1>
+    <h1 class="hero-title"><em>Robust</em> Portfolio Construction<br>and Risk Analysis</h1>
 
-    <p class="hero-date">May 18, 2026</p>
+    <p class="hero-date">June 11, 2026</p>
 
     <p class="hero-subtitle">
       A rigorous treatment of quantitative methods for investment based on robust<br>
@@ -28,14 +28,13 @@ toc: false
 
     <div class="hero-meta">
       <span class="hero-badge hero-badge-gold">&#9670; Springer &nbsp;|&nbsp; Planned Publication: 2026</span>
-      <span class="hero-badge">5 Appendices</span>
-      <span class="hero-badge">3 Vignettes</span>
-      <span class="hero-badge">6 Demo Scripts</span>
     </div>
 
     <div class="hero-pointers">
-      <a href="https://github.com/robustport/PCRA" class="hero-pointer" target="_blank" rel="noopener">RPCRA R Package</a>
-      <a href="https://github.com/robustport/RPCRAwebsite" class="hero-pointer" target="_blank" rel="noopener">Website Repository</a>
+      <a href="preface.html" class="hero-pointer">Preface</a>
+      <a href="vignettes.html" class="hero-pointer">Vignettes</a>
+      <a href="demo-code.html" class="hero-pointer">Demo Scripts</a>
+      <a href="appendices.html" class="hero-pointer">Appendices</a>
     </div>
 
   </div>
@@ -45,27 +44,6 @@ toc: false
 ::: {.copyright-notice}
 **Copyright Notice.** Material on this site is planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2025.
 :::
-
-```{=html}
-<div class="stat-row">
-  <div class="stat-box">
-    <span class="stat-number">5</span>
-    <span class="stat-label">Appendices</span>
-  </div>
-  <div class="stat-box">
-    <span class="stat-number">3</span>
-    <span class="stat-label">Vignettes</span>
-  </div>
-  <div class="stat-box">
-    <span class="stat-number">6</span>
-    <span class="stat-label">Demo Scripts</span>
-  </div>
-  <div class="stat-box">
-    <span class="stat-number">2026</span>
-    <span class="stat-label">Publication</span>
-  </div>
-</div>
-```
 
 ## 1 About the Book
 
