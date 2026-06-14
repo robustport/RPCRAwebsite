@@ -24,6 +24,8 @@ website:
         href: index.qmd
       - text: "Preface"
         href: preface.qmd
+      - text: "Chapter Summaries"
+        href: chapter-summaries.qmd
       - text: "Vignettes"
         href: vignettes.qmd
       - text: "Demo Code"

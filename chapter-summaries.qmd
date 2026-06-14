@@ -1,0 +1,30 @@
+---
+title: "Chapter Summaries"
+subtitle: "Robust Portfolio Construction and Risk Analysis"
+page-layout: full
+toc: false
+---
+
+::: {.copyright-notice}
+**Copyright Notice.** Planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2025.
+:::
+
+::: {.pdf-callout}
+::: {.pdf-icon}
+&#128196;
+:::
+::: {.pdf-text}
+**Download chapter summaries**
+[RPCRA Chapter Summaries](pdfs/chapter-summaries.pdf){target="_blank"}
+:::
+:::
+
+```{=html}
+<iframe
+  src="pdfs/chapter-summaries.pdf"
+  width="100%"
+  height="1100px"
+  class="pdf-embed"
+  title="RPCRA Chapter Summaries">
+</iframe>
+```
