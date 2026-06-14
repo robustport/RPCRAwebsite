@@ -1,6 +1,8 @@
 ---
 title: "Preface"
 subtitle: "Robust Portfolio Construction and Risk Analysis"
+page-layout: full
+toc: false
 ---
 
 ::: {.copyright-notice}
@@ -21,7 +23,7 @@ R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. Springer, plan
 <iframe
   src="pdfs/preface.pdf"
   width="100%"
-  height="1050px"
+  height="1100px"
   class="pdf-embed"
   title="Preface: Robust Portfolio Construction and Risk Analysis">
 </iframe>

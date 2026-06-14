@@ -1,5 +1,7 @@
 ---
 title: "Vignette 2: CRSP Stocks and SPGMI Factors in PCRA"
+page-layout: full
+toc: false
 ---
 
 ::: {.copyright-notice}
@@ -20,7 +22,7 @@ title: "Vignette 2: CRSP Stocks and SPGMI Factors in PCRA"
 <iframe
   src="pdfs/vignette-2.pdf"
   width="100%"
-  height="1050px"
+  height="1100px"
   class="pdf-embed"
   title="Vignette 2: CRSP Stocks and SPGMI Factors in PCRA">
 </iframe>

@@ -1,6 +1,8 @@
 ---
 title: "Appendix A: Mathematical Tools for RPCRA"
 subtitle: "Vectors, Matrices, Functions, and Optimization"
+page-layout: full
+toc: false
 ---
 
 ::: {.copyright-notice}
@@ -21,7 +23,7 @@ subtitle: "Vectors, Matrices, Functions, and Optimization"
 <iframe
   src="pdfs/appendix-a.pdf"
   width="100%"
-  height="1050px"
+  height="1100px"
   class="pdf-embed"
   title="Appendix A: Mathematical Tools for RPCRA">
 </iframe>

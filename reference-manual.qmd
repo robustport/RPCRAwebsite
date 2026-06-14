@@ -1,5 +1,7 @@
 ---
 title: "PCRA Reference Manual"
+page-layout: full
+toc: false
 ---
 
 Complete function and dataset reference for the `PCRA` R package. Documents all exported functions, data objects, and their arguments.
@@ -9,5 +11,11 @@ Complete function and dataset reference for the `PCRA` R package. Documents all 
 :::
 
 ```{=html}
-<iframe src="pdfs/reference-manual.pdf" width="100%" height="950px" style="border: 1px solid #dee2e6; border-radius: 4px;"></iframe>
+<iframe
+  src="pdfs/reference-manual.pdf"
+  width="100%"
+  height="1100px"
+  class="pdf-embed"
+  title="PCRA Reference Manual">
+</iframe>
 ```

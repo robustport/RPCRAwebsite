@@ -1,6 +1,8 @@
 ---
 title: "Appendix B: Probability and Statistics for RPCRA"
 subtitle: "Distributions, Estimation, and Asymptotic Theory"
+page-layout: full
+toc: false
 ---
 
 ::: {.copyright-notice}
@@ -21,7 +23,7 @@ subtitle: "Distributions, Estimation, and Asymptotic Theory"
 <iframe
   src="pdfs/appendix-b.pdf"
   width="100%"
-  height="1050px"
+  height="1100px"
   class="pdf-embed"
   title="Appendix B: Probability and Statistics for RPCRA">
 </iframe>

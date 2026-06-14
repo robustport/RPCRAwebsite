@@ -64,8 +64,8 @@ format:
     include-in-header: _fonts.html
     grid:
       sidebar-width: 0px
-      body-width: 900px
-      margin-width: 250px
+      body-width: 1400px
+      margin-width: 160px
 
 execute:
   freeze: auto

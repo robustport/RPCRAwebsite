@@ -752,8 +752,19 @@ table {
   border-radius: 10px;
   box-shadow: 0 8px 40px rgba(13, 27, 42, 0.18);
   display: block;
-  margin-top: 0.5rem;
+  width: 100%;
+  max-width: min(1600px, 98vw);
+  margin: 0.5rem auto 0;
   background: #f5f2eb;
+  height: calc(100vh - 9rem);
+  min-height: 1100px;
+}
+
+.page-layout-full .content,
+.page-layout-full main.content {
+  max-width: min(1680px, 98vw);
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
