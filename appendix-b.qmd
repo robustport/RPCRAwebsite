@@ -14,7 +14,7 @@ toc: false
 &#128196;
 :::
 ::: {.pdf-text}
-**Download the full appendix**
+**Download appendix**
 [Appendix B — Probability and Statistics for RPCRA](pdfs/appendix-b.pdf){target="_blank"}
 :::
 :::

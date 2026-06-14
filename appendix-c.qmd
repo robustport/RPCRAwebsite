@@ -14,7 +14,7 @@ toc: false
 &#128196;
 :::
 ::: {.pdf-text}
-**Download the full appendix**
+**Download appendix**
 [Appendix C — Utility Theory](pdfs/appendix-c.pdf){target="_blank"}
 :::
 :::

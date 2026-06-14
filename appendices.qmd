@@ -1,5 +1,5 @@
 ---
-title: "Online Appendices"
+title: "Appendices"
 toc: false
 ---
 

@@ -14,7 +14,7 @@ R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. Springer, plan
 &#128196;
 :::
 ::: {.pdf-text}
-**Download the Preface**
+**Download Preface**
 [Preface — Robust Portfolio Construction and Risk Analysis](pdfs/preface.pdf){target="_blank"}
 :::
 :::

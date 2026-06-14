@@ -116,10 +116,10 @@ Chapter-by-chapter R scripts that reproduce the figures and tables in the book a
 ```
 
 ```{=html}
-<div class="section-rule"><span>Online Appendices</span></div>
+<div class="section-rule"><span>Appendices</span></div>
 ```
 
-## [5 Online Appendices](appendices.qmd)
+## [5 Appendices](appendices.qmd)
 
 This site hosts the five technical appendices to RPCRA. Each appendix provides self-contained background material that underpins the methods and results developed in the main text. Full PDF downloads are available on each appendix page.
 

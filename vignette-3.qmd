@@ -9,7 +9,7 @@ toc: false
 &#128196;
 :::
 ::: {.pdf-text}
-**Download the full vignette**
+**Download vignette**
 [Vignette 3 — RPCRA Reproducibility](pdfs/vignette-3.pdf){target="_blank"}
 :::
 :::

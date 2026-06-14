@@ -13,7 +13,7 @@ toc: false
 &#128196;
 :::
 ::: {.pdf-text}
-**Download the full vignette**
+**Download vignette**
 [Vignette 2 — CRSP Stocks and SPGMI Factors in PCRA](pdfs/vignette-2.pdf){target="_blank"}
 :::
 :::

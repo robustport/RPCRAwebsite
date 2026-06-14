@@ -3,7 +3,7 @@ title: "Vignettes"
 toc: false
 ---
 
-The book is accompanied by three vignettes that provide hands-on documentation for the `PCRA` R package and its data. Click any title below to view the full vignette PDF.
+The book is accompanied by three vignettes that provide hands-on documentation for the `PCRA` R package and its data. Click any title below to view the vignette PDF.
 
 ```{=html}
 <div class="vignette-list">

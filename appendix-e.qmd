@@ -14,7 +14,7 @@ toc: false
 &#128196;
 :::
 ::: {.pdf-text}
-**Download the full appendix**
+**Download appendix**
 [Appendix E — Machine Learning](pdfs/appendix-e.pdf){target="_blank"}
 :::
 :::

@@ -13,7 +13,7 @@ toc: false
 &#128196;
 :::
 ::: {.pdf-text}
-**Download the full vignette**
+**Download vignette**
 [Vignette 1 — RPCRA Package and Data Overview](pdfs/vignette-1.pdf){target="_blank"}
 :::
 :::
