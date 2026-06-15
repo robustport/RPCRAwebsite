@@ -28,6 +28,7 @@ toc: false
 
     <div class="hero-pointers">
       <a href="preface.html" class="hero-pointer">Preface</a>
+      <a href="chapter-summaries.html" class="hero-pointer">Chapter Summaries</a>
       <a href="vignettes.html" class="hero-pointer">Vignettes</a>
       <a href="demo-code.html" class="hero-pointer">Demo Scripts</a>
       <a href="appendices.html" class="hero-pointer">Appendices</a>
