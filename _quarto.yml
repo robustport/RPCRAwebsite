@@ -70,6 +70,7 @@ format:
       margin-width: 240px
 
 execute:
+  enabled: false
   freeze: auto
   echo: false
   warning: false
