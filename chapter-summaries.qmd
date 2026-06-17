@@ -7,7 +7,7 @@ classes: chapter-summaries-page
 ---
 
 ::: {.copyright-notice}
-**Copyright Notice.** Planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2025.
+**Copyright Notice.** Planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2026.
 :::
 
 ::: {.pdf-callout}

@@ -278,4 +278,4 @@ The `.gitignore` file excludes these automatically.
 
 ---
 
-© 2025 Martin, Philips, Scherer & Li. All rights reserved.
+© 2026 Martin, Philips, Scherer & Li. All rights reserved.

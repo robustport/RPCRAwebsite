@@ -40,7 +40,7 @@ website:
   page-footer:
     background: "#0d1b2a"
     foreground: light
-    left: "© 2025 Martin, Philips, Scherer & Li. All rights reserved."
+    left: "© 2026 Martin, Philips, Scherer & Li. All rights reserved."
     right: "Built with [Quarto](https://quarto.org)"
 
   search:
@@ -68,6 +68,7 @@ format:
     include-in-header:
       - _fonts.html
       - _margin-toc.html
+      - _navbar-brand.html
     grid:
       sidebar-width: 0px
       body-width: 1200px

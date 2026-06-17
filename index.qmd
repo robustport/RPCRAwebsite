@@ -15,12 +15,9 @@ toc-title: ""
 
     <h1 class="hero-title"><em>Robust</em> Portfolio Construction<br>and Risk Analysis</h1>
 
-    <p class="hero-date">To be published by Springer in 2026</p>
+    <p class="hero-subtitle">Taming Outliers and Reducing Estimation Error.</p>
 
-    <p class="hero-subtitle">
-      A rigorous treatment of quantitative methods for investment based on robust<br>
-      portfolio construction and risk analysis methods.
-    </p>
+    <p class="hero-date">To be published by Springer in 2026</p>
 
     <div class="hero-authors">
       <span class="author-name">R. Douglas Martin</span> &ensp;&middot;&ensp;
@@ -31,13 +28,15 @@ toc-title: ""
 
   </div>
 </div>
+
+<div class="margin-toc-page">
 ```
 
 ::: {.copyright-notice}
-**Copyright Notice.** Material on this site is planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2025.
+**Copyright Notice.** Material on this site is planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2026.
 :::
 
-## 1 About the Book {#about-the-book}
+## 1 About this Book {#about-the-book}
 
 *Robust Portfolio Construction and Risk Analysis* (RPCRA) provides a comprehensive and rigorous account of the quantitative foundations of modern portfolio management. The book develops the mathematical, statistical, and computational tools needed to construct, evaluate, and manage the risk of investment portfolios in a principled way.
 
@@ -146,67 +145,12 @@ This site hosts the five technical appendices to RPCRA. Each appendix provides s
 ```{=html}
 <div class="cite-block">
 Martin, R. D., Philips, T. K., Scherer, B., and Li, K. (2026).
-<em>Portfolio Construction and Risk Analysis</em>. Springer. (In press.)
+<em>Robust Portfolio Construction and Risk Analysis</em>. Springer. (In press.)
 <br><br>
-© 2025 Martin, Philips, Scherer &amp; Li. All rights reserved.
+© 2026 Martin, Philips, Scherer &amp; Li. All rights reserved.
 </div>
 ```
 
 ```{=html}
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const sidebar = document.querySelector("#quarto-margin-sidebar");
-  const aboutSection = document.querySelector("#about-the-book");
-
-  function alignHomeToc() {
-    if (!sidebar || !aboutSection) return;
-
-    if (window.innerWidth <= 991) {
-      sidebar.style.marginTop = "";
-      return;
-    }
-
-    const offset = aboutSection.getBoundingClientRect().top - sidebar.getBoundingClientRect().top;
-    sidebar.style.marginTop = Math.max(0, Math.round(offset)) + "px";
-  }
-
-  alignHomeToc();
-  window.addEventListener("resize", alignHomeToc);
-
-  const toc = document.querySelector("#quarto-margin-sidebar #TOC, #TOC");
-  if (!toc) return;
-
-  const links = [...toc.querySelectorAll('a[href^="#"]')];
-  const sections = links
-    .map(function (link) {
-      return document.querySelector(link.getAttribute("href"));
-    })
-    .filter(Boolean);
-
-  if (!sections.length) return;
-
-  const setActive = function (id) {
-    links.forEach(function (link) {
-      link.classList.toggle("active", link.getAttribute("href") === "#" + id);
-    });
-  };
-
-  const observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id);
-        }
-      });
-    },
-    { rootMargin: "-15% 0px -65% 0px", threshold: 0 }
-  );
-
-  sections.forEach(function (section) {
-    observer.observe(section);
-  });
-
-  if (sections[0]) setActive(sections[0].id);
-});
-</script>
+</div>
 ```

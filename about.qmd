@@ -6,7 +6,7 @@ toc: false
 
 ## The Book
 
-*Portfolio Construction and Risk Analysis* (PCRA) is a graduate-level textbook providing a rigorous, unified treatment of quantitative investment management. It is planned for publication in 2026 by Springer.
+*Robust Portfolio Construction and Risk Analysis* (RPCRA) is a graduate-level textbook providing a rigorous, unified treatment of quantitative portfolio management techniques that are designed to work in the presence of noise.
 
 The book integrates the classical theory of mean-variance optimization, the Capital Asset Pricing Model, and the Arbitrage Pricing Theory with modern statistical methodology — including robust estimation, regularized regression, time-series factor models, and machine learning — all grounded in practical portfolio construction.
 
@@ -50,12 +50,12 @@ Quantitative researcher and practitioner specializing in systematic investment s
 
 ## This Website
 
-This site hosts the five technical appendices to PCRA:
+This site hosts the five technical appendices to RPCRA:
 
 | Appendix | Title | PDF |
 |---|---|---|
-| A | Mathematical Tools for PCRA | [Download](Appendix%20A%20Math%20for%20PCRA.pdf){target="_blank"} |
-| B | Probability & Statistics for PCRA | [Download](Appendix%20B%20ProbStat%20for%20PCRA.pdf){target="_blank"} |
+| A | Mathematical Tools for RPCRA | [Download](Appendix%20A%20Math%20for%20PCRA.pdf){target="_blank"} |
+| B | Probability & Statistics for RPCRA | [Download](Appendix%20B%20ProbStat%20for%20PCRA.pdf){target="_blank"} |
 | C | Utility Theory | [Download](Appendix%20C%20Utility%20Theory.pdf){target="_blank"} |
 | D | Portfolio Theory | [Download](Appendix%20D%20Portfolio%20Theory.pdf){target="_blank"} |
 | E | Machine Learning | [Download](Appendix%20E%20Machine%20Learning.pdf){target="_blank"} |
@@ -68,7 +68,7 @@ To cite the book:
 
 ```
 Martin, R. D., Philips, T. K., Scherer, B., and Li, K. (2026).
-Portfolio Construction and Risk Analysis. Springer. (In press.)
+Robust Portfolio Construction and Risk Analysis. Springer. (In press.)
 ```
 
 BibTeX:
@@ -77,7 +77,8 @@ BibTeX:
 @book{MartinPhilipsSchererLi2026,
   author    = {Martin, R. Douglas and Philips, Thomas K. and
                Scherer, Bernd and Li, Kirk},
-  title     = {Portfolio Construction and Risk Analysis},
+  title     = {Robust Portfolio Construction and Risk Analysis},
+  subtitle  = {Taming Outliers and Reducing Estimation Error},
   publisher = {Springer},
   year      = {2026},
   note      = {In press}
@@ -88,4 +89,4 @@ BibTeX:
 
 ## Copyright
 
-All material on this site is planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. **All rights reserved. © Copyright 2025.** No part of this material may be reproduced, distributed, or transmitted in any form without prior written permission from the authors.
+All material on this site is planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. **All rights reserved. © Copyright 2026.** No part of this material may be reproduced, distributed, or transmitted in any form without prior written permission from the authors.
