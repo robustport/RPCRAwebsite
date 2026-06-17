@@ -542,6 +542,153 @@ table {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// 4b. CHAPTER NAV GRID (CHAPTER SUMMARIES PAGE)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+.chapter-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+
+.chapter-nav-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  background: #ffffff;
+  border: 1px solid #e4e0d8;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  text-decoration: none !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #c4a45a, #8a6e3a);
+    transition: width 0.2s ease;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(13, 27, 42, 0.08);
+    border-color: #c4a45a;
+
+    &::before { width: 4px; }
+
+    .chapter-nav-num {
+      background: #c4a45a;
+      color: #0d1b2a;
+    }
+
+    .chapter-nav-title { color: #1b3a5c; }
+  }
+}
+
+.chapter-nav-num {
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: #0d1b2a;
+  color: #e8d5a3;
+  font-family: "Inter", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.chapter-nav-title {
+  font-family: "Playfair Display", serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #0d1b2a;
+  line-height: 1.35;
+  transition: color 0.2s ease;
+}
+
+.chapter-summaries-page {
+  counter-reset: chapter-section;
+}
+
+.chapter-summaries-page h2 {
+  counter-increment: chapter-section;
+  background: #ffffff;
+  border: 1px solid #e4e0d8;
+  border-left: 4px solid #c4a45a;
+  border-radius: 0 10px 10px 0;
+  padding: 1rem 1.25rem 1rem 3.25rem;
+  margin-top: 2.75rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+  scroll-margin-top: 5rem;
+  max-width: none;
+
+  &::before {
+    content: counter(chapter-section);
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.65rem;
+    height: 1.65rem;
+    line-height: 1.65rem;
+    text-align: center;
+    border-radius: 50%;
+    background: #0d1b2a;
+    color: #e8d5a3;
+    font-family: "Inter", sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+
+  &::after {
+    display: none;
+  }
+}
+
+.chapter-summaries-page h2 + p {
+  padding-left: 0.25rem;
+}
+
+.chapter-summaries-page .footnotes {
+  font-family: "Inter", sans-serif;
+  font-size: 0.82rem;
+  color: #5a5550;
+  border-top: 1px solid #e4e0d8;
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+#introduction-to-portfolio-management,
+#foundations,
+#modeling-asset-returns,
+#covariance-matrices,
+#portfolio-constraints-and-penalties,
+#time-series-models,
+#cross-section-factor-models,
+#portfolio-risk-analysis,
+#minimum-downside-risk-portfolios,
+#performance-analysis,
+#expected-returns,
+#fixed-income-portfolio-management,
+#portfolios-with-options,
+#managing-portfolios-to-meet-spending-objectives,
+#influence-functions-and-standard-errors,
+#robust-estimation-methods {
+  scroll-margin-top: 5rem;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // 5. VIGNETTE LIST (VIGNETTES PAGE)
 // ═══════════════════════════════════════════════════════════════════════════════
 
@@ -1128,6 +1275,7 @@ body:has(.margin-toc-page) #quarto-margin-sidebar #TOC a {
     padding: 0.45rem 0.75rem;
   }
   .appendix-grid { grid-template-columns: 1fr; }
+  .chapter-nav-grid { grid-template-columns: 1fr; }
   .stat-row { grid-template-columns: repeat(2, 1fr); }
   .author-card { flex-direction: column; gap: 0.8rem; }
   h1 { font-size: 1.75rem; }

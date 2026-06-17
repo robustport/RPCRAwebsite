@@ -1,8 +1,9 @@
 ---
 title: "Chapter Summaries"
 subtitle: "Robust Portfolio Construction and Risk Analysis"
-page-layout: full
-toc: false
+toc: true
+toc-depth: 2
+classes: chapter-summaries-page
 ---
 
 ::: {.copyright-notice}
@@ -19,12 +20,208 @@ toc: false
 :::
 :::
 
+Brief introductions to each of the sixteen chapters in *Robust Portfolio Construction and Risk Analysis*. Select a chapter below or use the table of contents in the margin.
+
 ```{=html}
-<iframe
-  src="pdfs/chapter-summaries.pdf"
-  width="100%"
-  height="1100px"
-  class="pdf-embed"
-  title="RPCRA Chapter Summaries">
-</iframe>
+<div class="section-rule"><span>Chapter Summaries</span></div>
+
+<div class="chapter-nav-grid">
+
+  <a href="#introduction-to-portfolio-management" class="chapter-nav-card">
+    <span class="chapter-nav-num">1</span>
+    <span class="chapter-nav-title">Introduction to Portfolio Management</span>
+  </a>
+
+  <a href="#foundations" class="chapter-nav-card">
+    <span class="chapter-nav-num">2</span>
+    <span class="chapter-nav-title">Foundations</span>
+  </a>
+
+  <a href="#modeling-asset-returns" class="chapter-nav-card">
+    <span class="chapter-nav-num">3</span>
+    <span class="chapter-nav-title">Modeling Asset Returns</span>
+  </a>
+
+  <a href="#covariance-matrices" class="chapter-nav-card">
+    <span class="chapter-nav-num">4</span>
+    <span class="chapter-nav-title">Covariance Matrices</span>
+  </a>
+
+  <a href="#portfolio-constraints-and-penalties" class="chapter-nav-card">
+    <span class="chapter-nav-num">5</span>
+    <span class="chapter-nav-title">Portfolio Constraints and Penalties</span>
+  </a>
+
+  <a href="#time-series-models" class="chapter-nav-card">
+    <span class="chapter-nav-num">6</span>
+    <span class="chapter-nav-title">Time Series Models</span>
+  </a>
+
+  <a href="#cross-section-factor-models" class="chapter-nav-card">
+    <span class="chapter-nav-num">7</span>
+    <span class="chapter-nav-title">Cross Section Factor Models</span>
+  </a>
+
+  <a href="#portfolio-risk-analysis" class="chapter-nav-card">
+    <span class="chapter-nav-num">8</span>
+    <span class="chapter-nav-title">Portfolio Risk Analysis</span>
+  </a>
+
+  <a href="#minimum-downside-risk-portfolios" class="chapter-nav-card">
+    <span class="chapter-nav-num">9</span>
+    <span class="chapter-nav-title">Minimum Downside Risk Portfolios</span>
+  </a>
+
+  <a href="#performance-analysis" class="chapter-nav-card">
+    <span class="chapter-nav-num">10</span>
+    <span class="chapter-nav-title">Performance Analysis</span>
+  </a>
+
+  <a href="#expected-returns" class="chapter-nav-card">
+    <span class="chapter-nav-num">11</span>
+    <span class="chapter-nav-title">Expected Returns</span>
+  </a>
+
+  <a href="#fixed-income-portfolio-management" class="chapter-nav-card">
+    <span class="chapter-nav-num">12</span>
+    <span class="chapter-nav-title">Fixed Income Portfolio Management</span>
+  </a>
+
+  <a href="#portfolios-with-options" class="chapter-nav-card">
+    <span class="chapter-nav-num">13</span>
+    <span class="chapter-nav-title">Portfolios with Options</span>
+  </a>
+
+  <a href="#managing-portfolios-to-meet-spending-objectives" class="chapter-nav-card">
+    <span class="chapter-nav-num">14</span>
+    <span class="chapter-nav-title">Managing Portfolios to Meet Spending Objectives</span>
+  </a>
+
+  <a href="#influence-functions-and-standard-errors" class="chapter-nav-card">
+    <span class="chapter-nav-num">15</span>
+    <span class="chapter-nav-title">Influence Functions and Standard Errors</span>
+  </a>
+
+  <a href="#robust-estimation-methods" class="chapter-nav-card">
+    <span class="chapter-nav-num">16</span>
+    <span class="chapter-nav-title">Robust Estimation Methods</span>
+  </a>
+
+</div>
 ```
+
+## Introduction to Portfolio Management {#introduction-to-portfolio-management}
+
+The first chapter of this book offers a sweeping overview of the history of capital markets and portfolio management starting with its early Talmudic antecedents and ending in the middle 2020s. It covers the evolution of capital markets and their role in the world of commerce, as well as the rapid evolution of portfolio management from an art to a science in the second half of the twentieth century. It also takes a brief look at robust statistical methods, which are used extensively in this book, and which are, in part, what differentiates it from most other books on the subject. Finally, it points readers to a large number of publicly available financial datasets, both on the web and in the companion `PCRA` package that supports this book. These datasets form the backbone of the computing exercises that are provided at the end of each chapter and we encourage our readers to work through them, as well as to redo them with new datasets from other sources. Some (but not all) of the tables and figures in this chapter are reproducible with the `Ch 1 Introduction Demo.R` code.
+
+## Foundations {#foundations}
+
+This chapter includes standard coverage of mean-variance optimal (MVO) portfolios and their maximum quadratic utility equivalent, along with optimal active portfolios, the Capital Asset Pricing Model (CAPM), and related expected utility maximization. Because of its practical computational and performance evaluation relevance, we discuss early in the chapter the computation of global minimum variance (GMV) portfolios, and their out-of-sample performance evaluation that includes: (1) Plots of cumulative gross returns of the portfolio and the market; (2) Leverage, turnover, and diversification values; and (3) Symmetric and downside risk measures, as well as risk-adjusted performance measures.
+
+Additional topics not currently found in M.S. degree level quantitative finance books include: (1) Computing and reporting standard errors for GMV portfolo risk and risk adjusted performance estimates; (2) The zero beta CAPM and the Beta factor; (3) The mathematics of the arbitrage pricing theory (APT); (4) Robust M-estimators of a returns mean and standard deviation that are not much influenced by outliers, along with their computation and a striking application example. These estimator are stepping stones to robust regression estimators introduced and used in later chapters; (5) A brief section that introduces minimum expected shortfall (MES) portfolios and their efficient frontiers in comparison with MV portfolio efficient frontiers.
+
+The computations used for this chapter make considerable use of the `stocksCRSPmonthly` data set in the `PCRA` package, as well as other R packages, discussed in the Preface. Most of the tables and figures in this chapter are reproducible with the `Ch 2 Foundations Demo.R` code.
+
+## Modeling Asset Returns {#modeling-asset-returns}
+
+This chapter begins with discussion of multi-period geometric and logarithmic returns, and active returns, and their mean and variance. Then returns non-normality is explored in several ways for monthly, weekly, and daily returns, and for largecap, midcap, smallcap and microcaps stocks. One of the ways is using classical and robust skewness and kurtosis estimates, where the robust versions are obtained using a simple outliers shrinkage method. A second way is with normal and non-normal qqplots, and a third way is with tests of normality. Finally, the chapter discusses how to model non-normal returns using normal mixture distributions, standard t-distributions, and skew t-distributons.
+
+The computations used for this chapter make considerable use of the `stocksCRSPmonthly` data set in the `PCRA` package, as well as other R packages, discussed in the Preface. Most of the tables and figures in this chapter are reproducible with the `Ch 2 Foundations Demo.R` code.
+
+## Covariance Matrices {#covariance-matrices}
+
+Returns covariance matrices and their inverses play a central role in the theory and application of mean-variance optimal portfolios, and as such they are deserving of a thorough treatment. Thus our discussion in this chapter contains not only standard analytic material on covariance matrices and their inverses, as well as their returns based estimates, but also of a number of additional topics not currently found in M.S. degree level quantitative finance books. Classical sample covariance and correlation matrix estimators are not at all robust toward outliers, small fractions of which can adversely influence them. Thus we discuss modern robust covariance and correlation matrix estimators that are not much influenced by outliers. Classical Mahalanobis distance (MD) measures based on classical sample covariance estimates are often used to detect, and sometimes shrink multivariate outliers. Since the MD's inherit the lack of robustness of the sample covariance matrix estimates toward outliers, they are unreliable for detecting multivariate outliers. So we discuss robustness multivariate distances (RMD's) that reliably detect multivariate outliers, and demonstrate by example their efficacy in detecting multivariate returns outliers. Then we explore the usefulness of using robust covariance matrices in place of classical covariance matrices for MVO portfolio construction. We conclude the chapter with a discussion of a shrinkage method of estimating covariance matrices.
+
+The computations used for this chapter make use of the `CRSP` data sets in the `PCRA` package. Virtually all of the tables and figures in this chapter are reproducible with the `Ch 4 Covariance Matrices Demo.R` code.
+
+## Portfolio Constraints and Penalties {#portfolio-constraints-and-penalties}
+
+The main focus of this chapter is evaluation of MVO portfolios with inequality weights constraints in terms of their efficient frontier plots, weights along the efficient frontiers, using specified `CRSP` returns data sets on specified time intervals. The weights constraints treated are long-only and long-short box constraints, groups constraints, market risk constraints, dollar neutral constraint, and turnover constraints. Additional topics covered include (1) Concentration penalized MVO portfolio efficient frontiers using the Herfindahl-Hirschman Index (HHI) penalty for over-concentration of portfolio weights; (2) Portfolio bootstrap efficient frontier variability; (3) Transfer coefficients.
+
+In practice, the selection of portfolios for actual investment are guided by extensive out of sample backtesting using historical constituent returns. Thus the efficient frontier focus of this chapter is complemented by homework exercises on backtesting the portfolios whose efficient frontiers were computed for single specified time intervals. These exercises are facilitated by using `PortfolioAnalytics` package backtesting code that was used to produce specific out-of-sample performance results in previous chapters.
+
+The computations used for this chapter make use of the `CRSP` data sets in the `PCRA` package. Virtually all of the tables and figures in this chapter are reproducible with the `Ch 5 Portfolio Constraints and Penalties Demo.R` code.
+
+## Time Series Models {#time-series-models}
+
+This chapter is mainly devoted to introducing and establishing the usefulness of a "best of breed" robust regression method for fitting financial time series factor models as an important complement to least squares (LS) model fitting. We begin by introducing some basic types of time series factor models, and discussing the lack of robustness of least squares (LS) factor model fitting. Then we introduce maximum-likelihood type regression estimators, commonly referred to as M-estimators, and discuss in detail an important optimal robust regression M-estimator called the `mOpt` estimator. The mOpt estimator has the two key properties that it minimizes coefficient estimator bias due to outliers, and performs almost as well as the least squares estimator for normally distributed data. The comparative performance of the mOpt estimator relative to LS is evaluated for estimating CAPM betas using weekly returns, first for a few individual stocks and then for the cross-section of thousands of liquid stocks in the CRSP database from 1963 through 2018. These results show that the `mOpt` estimator is effective in avoiding the adverse influence of outliers on LS estimates, and provides a good fit to the bulk of the outlier free data. Then we evaluate the comparative performance of the mOpt versus LS estimator for a variety of single factor model extensions, including better robust estimates of up and down market betas, and for market timing betas.
+
+An important central section of the chapter discusses robust mOpt versus non-robust LS multi-factor model fits of Fama-French three-factor (FF3) and Fama-French-Carhart four-factor (FFC4) models to stock returns. This section first compare the FF3 and FFC4 model LS and robust mOpt fits based on standard interpretation of the corresponding coefficient t-statistics, and classic and robust adjusted R-squared values, which reveals a striking difference between significant FFC4 model robust and LS coefficients. A second comparison of the mOpt and LS coefficients is assessed with a significance test for biased differences in coefficient estimate. Finally, the efficacy of a a robust final predication error (RFPE) model subset selection method is demonstrated in finding a best subset of the FFC4 model, in comparison with a standard non-robust Akaike Information Criterion (AIC) method. These results encourage the standard use of such robust model selection methods for multi-factor time series model.
+
+In addition to the above time series factor models core material, we discuss robust EWMA and robust GARCH model fitting methods that are not much influenced by outliers. Finally we demonstrate the substantial adverse impact of small serial correlation on standard errors and confidence interval error rates for the sample mean estimator.
+
+## Cross Section Factor Models {#cross-section-factor-models}
+
+This chapter begins by introducing the notation for cross-section factor models with an intercept, along with brief descriptions of the numeric and categorical factor exposures variables provided in the PCRA package `factorsSPGMI` data set, and a description the cross-section model version of the mOpt robust regression method introduced in Chapter 6.
+
+The second section revisits the Fama and French (1992) (FF92) least squares (LS) study of the Size, BM, Beta and EP factors, using the mOpt robust regression estimator. Whereas FF92 concluded using LS for the 1963-1992 time period that the Size premium is negative and significant, the BM factor is significant alone and jointly with Size, the Beta factor is not significant, a positive EP factor is not significant when included with Size, our mOpt robust regression results differ dramatically from FF92 in several ways, the chief of which are that the Size premium is positive, Beta is a significant negative factor, and EP is always significant. We show that similar results for robust mOpt versus LS hold for the longer time period 1980-2018.[^martin2026]
+
+The third section provides an in-depth treatment of cross-section factor models, also known as fundamental factor models, as they are used in the context of MVO portfolio construction and performance analysis. The coverage here includes: fundamental factor model mean and covariance structure, computational handling of mixed numeric (style) and categorical factors, factor mimicking portfolios, portfolio factor exposures and factor returns contributions. Most importantly, the section describes the cross-section factor model based MVO portfolio weights computation and backtesting, using a combination of the `facmodCS` and `portfolioAnalytics` packages, with a reproducible illustrative example.
+
+The fourth section describes a modern fundamental law of active management (FLAM) based cross-section factor models. The main FLAM payoff is that it allows a portfolio manager to estimate the maximum information ratio (IR) for single and multiple factor models, as a function of the cross-section number of stocks in the portfolio. Plots of such IR's can guide the manager on the choice of factors to include in the factor model.[^ding-sources]
+
+The tables and figures in the third section of the this chapter are reproducible with the `Ch 7 Cross Section Factor Models Demo.R` code.
+
+[^martin2026]: This section is an adaptation of the Open Source article Martin (2026) (reference to be updated).
+
+[^ding-sources]: This Section is an adaption of the Open Source articles Ding and Martin (2017) and Ding and Sun (2023).
+
+## Portfolio Risk Analysis {#portfolio-risk-analysis}
+
+This chapter begins by discussing a variety of portfolio volatility risk analysis methods that include portfolio assets contributions to volatility risk and the relationship of such contributions to quadratic utility implied returns, risk parity portfolios, and factor contributions to volatility risk.
+
+Similar risk analysis methods using downside risk measures are treated, with emphasis on the expected shortfall (ES) downside risk measure, and the discussion includes homogeneous risk measures and the Euler Theorem. The latter leads to linear decompositions of such risk measures, and the linear decomposition of portfolio factor contributions to downside risk. Coherent risk measures axioms are discussed, along with the lack of coherence of value-at-risk (Var), and the coherence of ES. The latter property in combination with is intuitive appeal has led to ES being the leading portfolio risk measure.
+
+Then the chapter discusses the differences between non-parametric and parametric ES estimator sensitivity to returns outliers, and asymptotic variances, using statistical influence functions. For accurately estimated parametric returns distributions, the parametric ES estimators are shown to have smaller variances than non-parametric ES. Parametric ES estimators behave like non-parametric ES estimators in that negative returns are regarded as risk contributor, but while parametric ES estimators behave like non-parametric ES estimators for negative returns, they have the undesirable feature of regarding positive returns as risk contributors. Parametric ES estimators are also shown to differ from non-parametric risk estimators in that the former lack coherence. This leads to discussion of mean-semi-standard deviation (SSD) risk measures, and in particular those such measures with monotonic influence functions which turn out to be coherent.
+
+A common problem in asset and portfolio risk and performance analysis is that the manager has such a short history of asset returns that risk and performance measure estimates are quite unreliable. But the manager has available long histories of many risk factors and can use a subset of them to construct a high R-squared risk-factor model for the asset returns. The last chapter section introduce a simple method of simulating from such a factor-model, which results considerably improved accuracy of risk and performance measures, and illustrates that it is important to use a statistically justified method of choosing the risk factors. The resulting factor-model Monte Carlo (FMMC) method works well by virtue of adequately reflecting the impact of non-normality of the factor and asset returns, and by borrowing strength from the correlation between the risk factors and the asset returns.
+
+The tables and figures in the first two sections of the this chapter are reproducible with the `Ch 8 Portfolio Risk Analysis Demo.R` code.
+
+## Minimum Downside Risk Portfolios {#minimum-downside-risk-portfolios}
+
+This chapter discusses minimum downside risk portfolios, in particular those based semi-variance (SV), expected shortfall (ES), coherent second moment (SCM), expected quadratic shortfall (EQS) risk measures. The corresponding optimal minimum risk portfolios are referred to as the MSV, MES, MCSM, and MEQS portfolios. There are two distinguishing features of these four types of portfolios: (1) Whereas MSV portfolios take all returns below the mean as contributors to risk, MES, MCSM and MEQS portfolios only take returns below a tail probability based quantile, where currently popular choices of tail probabilities are $\gamma=0.025$ and $\gamma=0.050$; (2) MES and MCSM portfolios minimize coherent risk measures, but MSV and MEQS portfolios do not.
+
+In view of the broad acceptance of ES as a standard risk measure, it is not surprising that there have been a number of studies of the performances of MES portfolio. But there are few studies of MSV, MCSM and MEQS portfolios, and this chapter aims to file that gap. We begin by briefly discussing the coherence of the ES and CSM risk measures, and the lack of coherence of the SV and EQS rrisk measures. Then we discuss the character of the optimization problems posed by the minimum downside risk portfolios, and the specific computational algorithms used for the minimization.
+
+A substantial portion of the chapter is devoted to out-of-sample back-test comparisons of the four types of minimum downside risk portfolios, for different types of constraints, different returns data time periods, and different returns frequencies. One important question that these studies address is whether or not the MES portfolios, which penalize downside risk only linearly, can deliver performance competitive with that of the MSV, MCSM and MEQS portfolios that penalize downside risk quadratically. Another important question addressed is the relative performance of the latter three portfolios.
+
+Last but not least, an important question is the extent to which the specified tail probability for the MSV, MCSM and MEQS portfolios impacts there performance, especially in view of the fact the typical choices $\gamma=0.025$ and $\gamma=0.050$ lead to considerable intrinsic variability due to the resulting small sample sizes. It may be that larger tail probabilities, e.g., $\gamma=0.25$ and $\gamma=0.50$, will lead to better overall performance that the currently popular choices.
+
+The computations used for this chapter make use of the `stocksCRSPmonthly` data set in the `CRAP` package, and the `PortfolioAnalytics` package. The figures and tables in this chapter are reproducible with the `Ch 9 Minimum Downside Risk Portfolios Demo.R` code.
+
+## Performance Analysis {#performance-analysis}
+
+This chapter starts where Chapters 2 and 3 left off. In these early chapters we discussed simple measures of performance, both with and without any adjustment for risk. Here, we explore the principles that underlie good measures of performance and use them to guide the development of measures that usefully characterize portfolio performance. By and large, past performance has little predictive power for future performance on account of market efficiency, but well-chosen measures of performance, in conjunction with thoughtful performance attributions, allow us to better understand how a portfolio's performance was achieved and illuminate its underlying investment process. Importantly, we cover the evaluation of private portfolio performance (an important topic given the growth of private equity and venture capital funds, and one that has not been adequately addressed in other textbooks) and show how an exceptionally powerful statistical quality control technique (the CUSUM) can rapidly detect underperfomance for actively managed portfolio.
+
+## Expected Returns {#expected-returns}
+
+Earlier chapters in this textbook assume that the expected returns of all the securities in a universe from which a portfolio is constructed are known. In this chapter, we explore some of the ways in which these expectations are formed. We touch lightly on accounting and fundamental analysis (which are fields unto themselves) and focus instead on quantitative models of return, which are the bedrock of most quantitative portfolio management strategies. Unusually, we show how ideas from accounting can be used to derive estimates of the expected return of the market and the cost of equity capital, a staple of corporate finance. In addition, we show how these ideas can be used to value individual stocks. Some investors condition their expected returns on the state of the economy, and we discuss enhancements of the Sahm rule that permit the identification of business cycles using nothing more than unemployment rates.
+
+## Fixed Income Portfolio Management {#fixed-income-portfolio-management}
+
+While most textbooks on portfolio management focus on equities, we think it is important to cover fixed income securities as well on account of the fact that they are actually larger than equity markets. While their heterogeneity precludes and in-depth study of all the available types of fixed income securities, we do cover the major types -- fixed- and floating-rate bonds, inflation linked bonds and corporate bonds. This chapter also covers the construction of yield curves and the behavior of yields and corporate spreads. As movements in yields and spreads are remarkably well-characterized by just a few factors, much of fixed income portfolio management revolves around the construction of trades that exploit certain types of movements in yield curves -- primarily changes in their level, slope and curvature. We explore the underpinnings of these trades and address the construction of fixed income portfolios, both for index tracking and for active management. We also develop a form of active management that combines an index tracking portfolio with a collection of zero-investment active portfolios that express non-consensus investment views and which can be implemented using derivatives. Finally, we show how properties of fixed income securities make the prediction of index returns over certain intervals highly predictable.
+
+## Portfolios with Options {#portfolios-with-options}
+
+This chapter is not about "clever option trades," but about optimization technology once portfolios are allowed to be nonlinear. Options are simply instruments that span payoff shapes; the economics sits entirely within the optimization problem. In a complete-market benchmark, options add nothing -- dynamic trading delivers any desired payoff. The moment we introduce constraints, preferences with kinks, downside protection mandates, or limited trading, the optimization problem becomes nonlinear and options re-enter the portfolio manager's toolkit as a practical approximation device. Naive strategies (covered calls, protective puts, CPPI) are shown to be crude, and often expensive, ways of implementing implicit leverage and state dependence. The chapter systematically compares three optimization technologies: mean-variance extensions, scenario-based optimization with explicit option payoffs, and martingale/dual methods that solve directly for optimal state-contingent wealth. The unifying message is that performance must be evaluated at the level of payoffs and utility, not returns or alphas. Once viewed through this lens, options are neither magic nor alpha generators; they are a costly numerical shortcut for solving constrained nonlinear portfolio problems in the real world.
+
+## Managing Portfolios to Meet Spending Objectives {#managing-portfolios-to-meet-spending-objectives}
+
+Unfortunately, much of portfolio theory is developed without reference to the end use of the funds held in a portfolio. This is misguided -- portfolios do not exist in a vacuum to compound wealth in perpetuity. Instead, they are used to fund real investment and consumption choices -- the purchase of a home, the education of a child, or paying for expenses in retirement. Managing portfolios to defease liabilities is surprisingly rare, but is arguably the single most important enhancement that investors can make to their thinking about investments. In this chapter, we cover the management of portfolios to meet behavioral objectives as well as spending needs. The results developed here as relevant to household finance as they are to institutional investing, and are of particular importance to insurance companies, pension fund managers and individuals planning their futures.
+
+## Influence Functions and Standard Errors {#influence-functions-and-standard-errors}
+
+Returns based risk estimates and performance ratio estimates used in portfolio construction and analysis are subject to estimation error whose assessment is ignored all too often. For example, one very seldom sees a standard error or confidence interval provided for a portfolio's Sharpe Ratio estimate, or for a difference in two Sharpe ratio estimates. A major reason for this state of affairs is that analytic formulas for accurate computation of the standard error (SE) of risk and performance estimators under realistic returns behavior, which includes skewness, fat tails, and seemingly small but potent serial correlations, either do not exist or are very difficult to find. The goal of this chapter is to provide portfolio analysts and managers with practical computational methods for computing standard errors that cope with such realistic behavior of returns.
+
+The chapter begins by briefly discussing two general overall methods for computing such standard errors. The first of these is a general analytic standard error method based on using large sample estimator asymptotic variance formulas to derive finite sample estimator standard errors. Such asymptotic variance formulas were traditionally derived using a classic "delta method", but a modern "influence functions" method turns out to be overall more attractive. The second method is a bootstrap resampling method that is conceptually simple, and computationally straightforward.
+
+A major portion of the chapter is devoted to the influence function (IF) based method (IF method) of computing standard errors. Thus considerable portions of the chapter are devoted to the definition and properties of IF's, and their use for easily deriving estimator asymptotic variance formulas, and hence estimator standard error formulas. Illustrative application examples include standard deviation (SD), Sharp Ratio (SR) estimators, and skewness and excess kurtosis estimators. The chapter also discusses how the IF method can be adapted to take into account returns serial correlation.
+
+The main alternative to the IF method of computing standard errors is the *bootstrap* method. The last section of the chapter discusses both a *basic bootstrap* method that accounts for returns non-normality but not serial dependence, and a *block bootstrap* method that can account for serial dependence as well as non-normality in computing standard errors.
+
+## Robust Estimation Methods {#robust-estimation-methods}
+
+This chapter complements and extends the discussions of robust estimators in a number of earlier chapters of the book, and does so in the following ways. First, the chapter discusses basic concepts of robust estimation, including both data orient robustness and statistical robustness. Data oriented robustness is characterized in terms estimator breakdown points and influence functions, and statistical robustness is characterized in terms of qualitative stability features of estimator bias and variance. The basic idea concerning the latter is a strong form of continuity according to which small deviations of data distributions from a nominal normal distribution result in only small increases in estimator bias and variance. Particularly attractive versions of such robust estimators are those that minimize the maximum variance, or minimize the maximum bias, over mixture distribution neighborhoods of a normal distribution
+
+Then the chapter provides a variety of additional mathematical aspects of the robust estimators of means and variances, robust covariance matrix estimators, and robust regression estimators, that were introduced in earlier chapters. It is anticipated that this chapter will serve as a helpful bridge from the minimal descriptions of the robust estimators in earlier chapters to the more complete mathematical treatment of robust statistics theory and methods in the Maronna et al. (2019).
