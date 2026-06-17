@@ -5,10 +5,20 @@ toc: true
 toc-location: right
 toc-depth: 2
 toc-title: ""
+execute:
+  enabled: true
 ---
 
 ```{=html}
 <div class="margin-toc-page">
+```
+
+```{r}
+#| include: false
+library(PCRA)
+library(data.table)
+library(xts)
+dir.create("vignette-assets", showWarnings = FALSE)
 ```
 
 ::: {.copyright-notice}
@@ -59,8 +69,7 @@ Most of the contents of this section apply equally well to the weekly and daily 
 
 After installing`the PCRA`and`data.table`packages, the following lines of code can be used to load and extract the class, dimension, and names of the`stocksCRSPmonthly`data:
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 library(PCRA) library(data.table) class(stocksCRSPmonthly) # Class of stocksCRSPmonthly dim(stocksCRSPmonthly) # Number of rows and columns names(stocksCRSPmonthly) # Names of items in each column
 ```
 
@@ -68,8 +77,7 @@ The dimension values 81,144 and 14 are the number of rows and columns, respectiv
 
 The temporal structure of stocksCRSPmonthly is revealed by displaying the first and last five rows of its first four columns using a single line of code :
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 stocksCRSPmonthly[, 1:4]
 ```
 
@@ -79,8 +87,7 @@ The ten`stocksCRSPmonthly`data items “ Date ” , “ Ticker ” , “ TickerL
 
 The “ GICS ” data is based the *Global Industry Classification Standard* six digit code developed by MSCI and Standard and Poor’s (S&P), the details of which are available at <https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard> . The “ Sector ” item indicates which of a number of broad industry groups each Company belongs to, and the following line of code reveals that the stocks in`stocksCRSPmonthly`belong to one of eight sectors:
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 unique(stocksCRSPmonthly[ , Sector])
 ```
 
@@ -90,8 +97,7 @@ The “ CapGroup ” data is the time-varying capitalization group of a company 
 
 Detailed descriptions of the data in the columns of`stocksCRSPmonthly`are provided in the “ PCRA Reference Manual ” , which is downloadable from the CRAN PCRA website ( <https://CRAN.R-project.org/package=PCRA> ), and you can view these descriptions using the R`help`function:
 
-```r
-
+```{r eval=FALSE, echo=TRUE, warning=FALSE}
 help(stocksCRSPmonthly)
 ```
 
@@ -101,15 +107,13 @@ Readers are encouraged to familiarize themselves with the detailed descriptions 
 
 Everything discussed in this section applies equally well to the unrounded SPGMI factors data set`factorsSPGMI`. It takes only three lines of code to display the class, dimension, and item names associated with`factorsSPGMIr`in the RStudio Console:
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 class(factorsSPGMIr) dim(factorsSPGMIr) names(factorsSPGMIr)
 ```
 
 Observe that the number of rows of the`factorsSPGMIr`table is the same as for the`stocksCRSPmonthly`table, but the number of columns is 22, not 14. The first 8 columns of`factorsSPGMIr`are identical to the first 8 columns of`stockSPGMI`, and its last 14 columns contain the 14 SPGMI factors, whose values are referred to as *factor exposures* . Detailed descriptions of each of the 14 factors are provided in the “ PCRA Reference Manual ” , which is downloadable from the PCRA CRAN website, and can be viewed in the RStudio`help`tab with:
 
-```r
-
+```{r eval=FALSE, echo=TRUE, warning=FALSE}
 help(factorsSPGMIr)
 ```
 
@@ -117,8 +121,7 @@ We recommend that readers familiarize themselves with the detailed descriptions 
 
 The following code line displays the first and last five rows of the first four columns of`factorsSPGMIr`and makes clear that it has the same table structure as`stocksCRSPmonthly`:
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 factorsSPGMIr[,c(1, 3, 10:13)]
 ```
 
@@ -128,22 +131,19 @@ Check that`factorsSPGMIr[c(1:3, 81142:81144), c(1, 2, 11, 12)]`results in the fi
 
 The simple method of sub-setting the columns of a`data.table`with numeric column values is identical to the method applicable to`data.frames`. But sub-setting columns by their names is done differently for`data.table`and`data.frame`objects. We illustrate this by first converting the`stocksCRSPmonthly`to a`data.frame`object in preparation for comparing sub-setting by column names:
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 dat.df <- data.frame(stocksCRSPmonthly) class(dat.df) names(dat.df)
 ```
 
 Recall that you can subset a`data.frame`by using a character vector of the column names in quotes, and if you subset by two or more columns, the subset will also be a`data.frame`. But if you subset a single column, the result is (somewhat unexpectedly) a *vector* instead of a`data.frame`. We can force R to return a`data.frame`by using the`drop = FALSE`argument when sub-setting a single column as in the example below.
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 dat.Return <- dat.df[ , "Return"] class(dat.Return) dat.Return <- dat.df[ , "Return", drop = FALSE] class(dat.Return) dat.DateAndReturn <- dat.df[, c("Date","Return")] class(dat.DateAndReturn)
 ```
 
 In the case of a`data.table,`we can subset a single column, for example the “ Return ” column, by using its name without quotes, but the result is once again a vector (in this case a numeric vector) instead of a`data.table`. The way to return a`data.table`when sub-setting one or more columns of a`data.table`is to define the subset using a list of column names without quotes, e.g.,`list(Return)`instead of`Return`. This is illustrated below, where it is also shown that`Return)`is shorthand for`list(Return)`, and that this shorthand also works when selecting two or more columns of a`data.table`.
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 dat <- stocksCRSPmonthly # This is a data.table dat.Return <- dat[, Return] class(dat.Return) dat.Return <- dat[, list(Return)] class(dat.Return) dat.Return <- dat[, .(Return)] class(dat.Return) dat.DateAndReturn <- dat[, .(Date, Return)] class(dat.DateAndReturn)
 ```
 
@@ -151,8 +151,7 @@ There is much to learn about manipulating`data.table`objects, and the interested
 
 Meanwhile, the code below illustrates simple uses of`data.table`sub-setting of a single column, which results in a`numeric`object, first to compute the number of rows of`stocksCRSPmonthly`, and then to determine first and last dates of` stocksCRSPmonthly.`
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 nMonths <- length(unique(stocksCRSPmonthly[,Date])) nStocks <- length(unique(stocksCRSPmonthly[,TickerLast])) nMonths nStocks nMonths*nStocks # Number of rows range(stocksCRSPmonthly[,Date]) # First and last date
 ```
 
@@ -164,8 +163,7 @@ We next discuss use of the`selectCRSPandSPGMI`function to select individual or m
 
 The default arguments of`selectCRSPandSPGMI`are:
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 args(selectCRSPandSPGMI)
 ```
 
@@ -179,8 +177,7 @@ It is important to keep in mind that:
 
 The reader should now type
 
-```r
-
+```{r eval=FALSE, echo=TRUE, warning=FALSE}
 help(selectCRSPandSPGMI)
 ```and carefully read the Arguments and Details sections.
 
@@ -188,8 +185,7 @@ In general`stockItems`can be any subset of the 14`stocksCRSPmonthly`items, and`f
 
 In the code example below we select 6 of 14 stocksCRSPmonthly items and select no factorsSPGMIr items.
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 stockItems1 <- c("Date","TickerLast","CapGroupLast","Return","MktIndexCRSP", "Ret13WkBill") dateRange <- c("1997-01-31","2010-12-31") stocksSmall <- selectCRSPandSPGMI("monthly", dateRange = dateRange, stockItems = stockItems1, factorItems = NULL, subsetType = "CapGroupLast", subsetValues = "SmallCap", outputType = "data.table") length(unique(stocksSmall[, TickerLast])) dim(stocksSmall) names(stocksSmall) range(stocksSmall[, Date])
 ```
 
@@ -197,15 +193,13 @@ Show that the number rows of`stocksSmall`is equal to the number of months times 
 
 In the code example below, for which we have in mind studying the relationship between small capitalization stock returns and the Size, Beta and BM factors, we select the SmallCap subset over the same time range as in the example above, but without the MktIndexCRSP and Ret13WkBill`stockItems`, and with the LogMktCap, Beta60M and EP`factorItems`.
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 stockItems2 <- c("Date", "TickerLast", "CapGroupLast", "Return") factorItems <- c("LogMktCap", "Beta60M", "EP") dateRange <- c("1997-01-31", "2010-12-31") stocksSmall3Fac <- selectCRSPandSPGMI("monthly", dateRange = dateRange, stockItems = stockItems2, factorItems = factorItems, subsetType = "CapGroupLast", subsetValues = "SmallCap", outputType = "data.table") length(unique(stocksSmall3Fac[, TickerLast])) dim(stocksSmall3Fac) names(stocksSmall3Fac)
 ```
 
 Here we modify the code of Example by changing`subsetValues = ‘‘ SmallCap ’’`to`subsetValues = ‘‘ MicroCap ’’ ,`and changing`outputType`from`‘‘ data.table ’’`to`‘‘ xts ’’`. This creates the`xts`time series object`stocksMicro`, which consists of the MicroCap stocks in`stocksCRSPmonthly`, along with the return of the market ("MktIndexCRSP"), and the risk-free rate ("Ret13WkBill").
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 dateRange <- c("1997-01-31","2010-12-31") stocksMicro <- selectCRSPandSPGMI("monthly", dateRange = dateRange, stockItems = stockItems1, factorItems = NULL, subsetType = "CapGroupLast", subsetValues = "MicroCap", outputType = "xts") class(stocksMicro) dim(stocksMicro) names(stocksMicro)
 ```
 
@@ -213,17 +207,17 @@ We see that stocksMicro is indeed an`xts`time series object, with 168 rows and 3
 
 For labeling convenience, we replace "MktIndexCRSP" with “ Market ” and "Ret13WkBill" with “ Risk-Free ” , and display in Figure the time series of returns of the first 4 microcap stocks, the Market, and the Risk-Free rate.
 
-```r
+```{r echo=2, warning=FALSE, results="hide"}
+png(file = "vignette-assets/stocksMicroAll.png", width = 4, height = 3, units = "in", pointsize = 6, res = 600) names(stocksMicro)[c(35,36)] <- c("Market", "Risk-Free") tsPlotMP(stocksMicro[, c(1:4,35,36)], scaleType = "free", stripText.cex = .45, axis.cex = 0.4, lwd = 0.5) dev.off()
+```
 
-png(file = "Plots/stocksMicroAll.png", width = 4, height = 3, units = "in", pointsize = 6, res = 600) names(stocksMicro)[c(35,36)] <- c("Market", "Risk-Free") tsPlotMP(stocksMicro[, c(1:4,35,36)], scaleType = "free", stripText.cex = .45, axis.cex = 0.4, lwd = 0.5) dev.off()
-```![Returns of the first 4 {](vignette-assets/stocksMicroAll.png)
+![Returns of the first 4 {](vignette-assets/stocksMicroAll.png)
 
 ## Manipulation of xts Objects
 
 The package`xts`contains a large set of functions for manipulating and plotting`xts`objects, and you need to have`xts`loaded in order to take advantage of its capabilities. We illustrate here just one such capability here, namely use of the`index`and`range`functions as applied to the`stocksMicro` `xts`object we earlier created .
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 library(xts) datesIndex <- index(stocksMicro) class(datesIndex) length(datesIndex) # Recall 14 years x 12 months head(datesIndex, 3) tail(datesIndex, 3) range(datesIndex)
 ```
 
@@ -233,29 +227,27 @@ To find out more about working with`xts`objects, it is recommended to read the v
 
 As we have seen, the function`selectCRSPandSPGMI`has general capabilities for selecting joint and separate subsets of`stockCRSPmonthly`and`factorsSPGMIr`. Sometimes, users of PCRA may wish to create an`xts`time series object from a very simple subset of the stocks in`stocksCRSPmonthly`, e.g., by specifying only a time interval and a subset of the tickers in`TickerLast`. The function`stocksCRSPxts`serves this purpose, and its arguments are:
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 args(stocksCRSPxts)
 ```
 
 Use of`stocksCRSPxts`with the default arguments creates an`xts`object that contains the entire cross-section of 294 CRSP® stocks for the entire 276 month time interval 1993 - 2015:
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 stocksAll <- stocksCRSPxts(stocksCRSPmonthly) class(stocksAll) dim(stocksAll) library(xts) range(index(stocksAll))
 ```
 
 The following is a typical application example where the simple function`stocksCRSPxts`proves convenient. The goal of the application is to compute the excess Kurtosis (eKR) of the cross-section of CRSP® stocks monthly returns for the 6 contiguous time intervals "1993-1995", "1996-1999", "2000-2003", "2004-2007", "2008-2011", "2012-2015", and display the cross-section distributions of the eKR values with 6 boxplots. The code is displayed below and is followed by the display of the boxplots in Figure .
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 # Extract cross-sections of stocksCRSPmonthly returns on 6 time intervals dates1 <- c("1993-01-31","1995-12-31") dates2 <- c("1996-01-31","1999-12-31") dates3 <- c("2000-01-31","2003-12-31") dates4 <- c("2004-01-31","2007-12-31") dates5 <- c("2008-01-31","2011-12-31") dates6 <- c("2012-01-31","2015-12-31") ret1 <- stocksCRSPxts(stocksCRSPmonthly,dateRange = dates1) ret2 <- stocksCRSPxts(stocksCRSPmonthly,dateRange = dates2) ret3 <- stocksCRSPxts(stocksCRSPmonthly,dateRange = dates3) ret4 <- stocksCRSPxts(stocksCRSPmonthly,dateRange = dates4) ret5 <- stocksCRSPxts(stocksCRSPmonthly,dateRange = dates5) ret6 <- stocksCRSPxts(stocksCRSPmonthly,dateRange = dates6) # Compute cross-section of excess kurtosis values on those time intervals eKR1 <- apply(coredata(ret1),2,KRest) eKR2 <- apply(coredata(ret2),2,KRest) eKR3 <- apply(coredata(ret3),2,KRest) eKR4 <- apply(coredata(ret4),2,KRest) eKR5 <- apply(coredata(ret5),2,KRest) eKR6 <- apply(coredata(ret6),2,KRest) eKR <- cbind(eKR1,eKR2,eKR3,eKR4,eKR5,eKR6) times <- c("1993-1995","1996-1999","2000-2003","2004-2007","2008-2011","2012-2015")
 ```
 
-```r
+```{r echo=2, warning=FALSE, results="hide"}
+png(file = "vignette-assets/eKRstocksMonthly.png", width = 5, height = 4, units = "in", pointsize = 8, res = 600) boxplot(eKR, xaxt = "n", ylim = c(-2,12), main = "Excess Kutosis stocksCRSPmonthly", cex.main = 1.5, col = "cyan") axis(1, at=1:6, labels=times, cex.axis = 1.1) abline(h=0, lty = "dotted") dev.off()
+```
 
-png(file = "Plots/eKRstocksMonthly.png", width = 5, height = 4, units = "in", pointsize = 8, res = 600) boxplot(eKR, xaxt = "n", ylim = c(-2,12), main = "Excess Kutosis stocksCRSPmonthly", cex.main = 1.5, col = "cyan") axis(1, at=1:6, labels=times, cex.axis = 1.1) abline(h=0, lty = "dotted") dev.off()
-```![Boxplots of cross-sections of {](vignette-assets/eKRstocksMonthly.png)
+![Boxplots of cross-sections of {](vignette-assets/eKRstocksMonthly.png)
 
 # Using Weekly and Daily CRSP® Data and Unrounded SPGMI Data
 
@@ -263,17 +255,17 @@ The data sets`stocksCRSPweekly`,`stocksCRSPdaily`, and the unrounded SPGMI data 
 
 These data sets can be accessed using the`getPCRAdata`function in the`PCRA`package. We next illustrate its use to extract`stocksCRSPweekly`data:
 
-```r
-
+```{r echo=TRUE, warning=FALSE, eval=FALSE}
 stocksCRSPweekly <- getPCRAData(dataset = "stocksCRSPweekly") dateRange <- c("2000-01-7","2000-12-31") stocksMicroWeekly <- selectCRSPandSPGMI("weekly", dateRange = dateRange, stockItems = stockItems1, factorItems = NULL, subsetType = "CapGroupLast", subsetValues = "MicroCap", outputType = "xts") class(stocksMicroWeekly) dim(stocksMicroWeekly) names(stocksMicroWeekly)[35] <- "Market"
 ```
 
 Next, we create a time series plot of the data using:
 
-```r
+```{r echo=2, warning=FALSE, results="hide", eval=FALSE}
+png(file = "vignette-assets/weeklyStockReturns.png", width = 6,height = 5,units = "in",pointsize = 8, res = 600) tsPlotMP(stocksMicroWeekly[, c(1:5,35)], scaleType = "free", stripText.cex = .45, yname = "RETURNS", layout = c(1,6), type = "l", axis.cex = 0.7, lwd = 0.6) dev.off()
+```
 
-png(file = "Plots/weeklyStockReturns.png", width = 6,height = 5,units = "in",pointsize = 8, res = 600) tsPlotMP(stocksMicroWeekly[, c(1:5,35)], scaleType = "free", stripText.cex = .45, yname = "RETURNS", layout = c(1,6), type = "l", axis.cex = 0.7, lwd = 0.6) dev.off()
-```![Time series of weekly returns for the first 5 of the 34 MicroCap {](vignette-assets/weeklyStockReturns.png)
+![Time series of weekly returns for the first 5 of the 34 MicroCap CRSP® stocks, and the CRSP® Market returns](vignette-assets/weeklyStockReturns.png)
 
 To obtain returns and related data for daily CRSP® stocks, we need only replace`"stocksCRSPweekly"`with`"stocksCRSPdaily"`in the`getPCRAData`function, and the argument`‘‘ weekly ’’`with`‘‘ daily ’’`in the`selectCRSPandSPGMI`function.
 
@@ -287,8 +279,7 @@ The`data.table`package provides a variety of powerful data manipulation and anal
 
 You will have noticed that`stocksCRSPmonthly`and`factorsSPGMIr` `data.table`objects contain “ Sector ” , and “ CapGroupLast ” variables. The following code prints the number of stocks in each sector and capitalizatio n group.
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 lastDate <- tail(factorsSPGMIr[,Date],1) factorsSPGMILast <- factorsSPGMIr[Date == lastDate] factorsSPGMILast[ , .N, by = Sector] factorsSPGMILast[ , .N, by = CapGroup]
 ```
 
@@ -298,8 +289,7 @@ Modify the above code to check that the stocks’ sectors are the same in Januar
 
 We typically work with a merged or unmerged subset of the variables in`stocksCRSPmonthly`and`factorsSPGMIr`, and often end up needing only a few of the items in the the subset. For example, we might find that we are interested in only the Date, TickerLast, Return, Beta60M and EP items of the`data.table`object`stocksSmall3Fac`in Example of Section 2. The following code creates the`data.table`we need:
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 colNames <- c("Date", "TickerLast", "Return", "Beta60M", "EP") stocksSmall3FacSubset <- stocksSmall3Fac[, .SD , .SDcols = colNames] names(stocksSmall3FacSubset)
 ```
 
@@ -309,22 +299,19 @@ In this code,`.SD`represents the subset of columns that is specified by`.SDcols`
 
 Some of the names of variables in`stocksCRSPmonthly`and`factorsSPGMIr`are long, and it is often convenient to shorten them. We may, for example, wish to replace the names "MktIndexCRSP" and “ Ret13WkBill ” with the shorter common names “ Market ” and "RiskFree". This is easily done using`data.table`’s`setnames`function, as is done below for the data set`stocksSmall`of Example 1:
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 setnames(stocksSmall, old = c("MktIndexCRSP", "Ret13WkBill"), new = c("Market","RiskFree")) names(stocksSmall)
 ```## Intersecting Sector and Size Groupings
 
 One sometimes wants to study portfolios whose constituents are all drawn from a single sector and size group, e.g. the Information Technology (IT) sector of the SmallCap group. This is easily done by first obtaining the subset of all SmallCap stocks for the default`dateRange`of 1993 to 2015 and then extracting the Information Technology sector from this subset.
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 stockItems <- c("Date", "TickerLast", "CapGroupLast", "Return", "Sector") stocksSmallCap <- selectCRSPandSPGMI("monthly", stockItems = stockItems, factorItems = NULL, subsetType = "CapGroupLast", subsetValues = "SmallCap", outputType = "data.table") length(unique(stocksSmallCap[,TickerLast])) # Verifying that there are 106 smallcap stocks stocksSmallCapIT <- stocksSmallCap[Sector == "Information Technology"] unique(stocksSmallCapIT[,TickerLast])
 ```## Selecting a Time Range for a Set of Stocks and Factors
 
 One may wish to look at stocks, factors, or merged stocks and factors data over a specified subset of a longer timeframe. For example, we can extract the 5 years from 2010 to 2014 of the`stocksSmallCapIT`data with the first line below, and check its time range and length (i.e. the number of months) with the second and third lines:
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 stocksSmallCapIT5Year <- stocksSmallCapIT[stocksSmallCapIT[,Date] >= as.Date("2010-01-31") & stocksSmallCapIT[,Date] <= as.Date("2014-12-31"), ] range(stocksSmallCapIT5Year[,Date]) length(unique(stocksSmallCapIT5Year[,Date]))
 ```# CRSP® Stocks Market Capitalization Break Points
 
@@ -342,52 +329,4 @@ The following table provides table provides CRSP® database Names and Descriptio
 
 ```{=html}
 </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const sidebar = document.querySelector("#quarto-margin-sidebar");
-  const firstSection = document.querySelector("#quarto-document-content h2, #quarto-document-content h3");
-
-  function alignMarginToc() {
-    if (!sidebar || !firstSection) return;
-    if (window.innerWidth <= 991) {
-      sidebar.style.marginTop = "";
-      return;
-    }
-    const offset = firstSection.getBoundingClientRect().top - sidebar.getBoundingClientRect().top;
-    sidebar.style.marginTop = Math.max(0, Math.round(offset)) + "px";
-  }
-
-  alignMarginToc();
-  window.addEventListener("resize", alignMarginToc);
-
-  const toc = document.querySelector("#quarto-margin-sidebar #TOC, #TOC");
-  if (!toc) return;
-
-  const links = [...toc.querySelectorAll('a[href^="#"]')];
-  const sections = links
-    .map(function (link) { return document.querySelector(link.getAttribute("href")); })
-    .filter(Boolean);
-  if (!sections.length) return;
-
-  const setActive = function (id) {
-    links.forEach(function (link) {
-      link.classList.toggle("active", link.getAttribute("href") === "#" + id);
-    });
-  };
-
-  const observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) setActive(entry.target.id);
-      });
-    },
-    { rootMargin: "-15% 0px -65% 0px", threshold: 0 }
-  );
-
-  sections.forEach(function (section) { observer.observe(section); });
-  if (sections[0]) setActive(sections[0].id);
-});
-</script>
-
 ```

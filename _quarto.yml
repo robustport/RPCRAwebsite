@@ -2,8 +2,6 @@ project:
   type: website
   output-dir: docs
 
-engine: markdown
-
 website:
   title: "RPCRA"
   description: >
@@ -65,7 +63,9 @@ format:
     fig-cap-location: bottom
     fig-align: center
     lightbox: true
-    include-in-header: _fonts.html
+    include-in-header:
+      - _fonts.html
+      - _margin-toc.html
     grid:
       sidebar-width: 0px
       body-width: 1200px
@@ -74,6 +74,6 @@ format:
 execute:
   enabled: false
   freeze: auto
-  echo: false
+  echo: true
   warning: false
   message: false

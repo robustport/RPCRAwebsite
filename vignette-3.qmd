@@ -5,10 +5,20 @@ toc: true
 toc-location: right
 toc-depth: 2
 toc-title: ""
+execute:
+  enabled: true
 ---
 
 ```{=html}
 <div class="margin-toc-page">
+```
+
+```{r}
+#| include: false
+library(PCRA)
+library(data.table)
+library(xts)
+dir.create("vignette-assets", showWarnings = FALSE)
 ```
 
 ::: {.pdf-callout}
@@ -91,8 +101,7 @@ You can also run an entire script using the R`source`function, with the script n
 
 With just two additional lines of code ahead of the start of the script,`rstudioapi`automates the process of setting the working directory to the location of a script when sourcing it. The library and the corresponding lines of code are shown below.
 
-```r
-
+```{r echo=TRUE, warning=FALSE}
 library(rstudioapi) current_path <- rstudioapi::getActiveDocumentContext()$path setwd(dirname(current_path ))
 ```
 
@@ -114,52 +123,4 @@ Eventually, you may want to compile one or more packages from source using a Win
 
 ```{=html}
 </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const sidebar = document.querySelector("#quarto-margin-sidebar");
-  const firstSection = document.querySelector("#quarto-document-content h2, #quarto-document-content h3");
-
-  function alignMarginToc() {
-    if (!sidebar || !firstSection) return;
-    if (window.innerWidth <= 991) {
-      sidebar.style.marginTop = "";
-      return;
-    }
-    const offset = firstSection.getBoundingClientRect().top - sidebar.getBoundingClientRect().top;
-    sidebar.style.marginTop = Math.max(0, Math.round(offset)) + "px";
-  }
-
-  alignMarginToc();
-  window.addEventListener("resize", alignMarginToc);
-
-  const toc = document.querySelector("#quarto-margin-sidebar #TOC, #TOC");
-  if (!toc) return;
-
-  const links = [...toc.querySelectorAll('a[href^="#"]')];
-  const sections = links
-    .map(function (link) { return document.querySelector(link.getAttribute("href")); })
-    .filter(Boolean);
-  if (!sections.length) return;
-
-  const setActive = function (id) {
-    links.forEach(function (link) {
-      link.classList.toggle("active", link.getAttribute("href") === "#" + id);
-    });
-  };
-
-  const observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) setActive(entry.target.id);
-      });
-    },
-    { rootMargin: "-15% 0px -65% 0px", threshold: 0 }
-  );
-
-  sections.forEach(function (section) { observer.observe(section); });
-  if (sections[0]) setActive(sections[0].id);
-});
-</script>
-
 ```

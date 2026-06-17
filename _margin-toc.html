@@ -1,0 +1,32 @@
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  if (!document.querySelector(".margin-toc-page, .hero-outer")) return;
+
+  const toc = document.querySelector("#quarto-margin-sidebar #TOC, #TOC");
+  if (!toc) return;
+
+  const links = [...toc.querySelectorAll('a[href^="#"]')];
+  const sections = links
+    .map(function (link) { return document.querySelector(link.getAttribute("href")); })
+    .filter(Boolean);
+  if (!sections.length) return;
+
+  const setActive = function (id) {
+    links.forEach(function (link) {
+      link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+    });
+  };
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    },
+    { rootMargin: "-15% 0px -65% 0px", threshold: 0 }
+  );
+
+  sections.forEach(function (section) { observer.observe(section); });
+  if (sections[0]) setActive(sections[0].id);
+});
+</script>

@@ -1039,6 +1039,18 @@ body:has(.margin-toc-page) #quarto-margin-sidebar #TOC > h2 {
   display: none !important;
 }
 
+body:has(.hero-outer) #quarto-margin-sidebar #TOC::before,
+body:has(.margin-toc-page) #quarto-margin-sidebar #TOC::before {
+  content: "On this page";
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #8a8480;
+  margin-bottom: 0.65rem;
+}
+
 body:has(.hero-outer) #quarto-margin-sidebar #TOC ul,
 body:has(.margin-toc-page) #quarto-margin-sidebar #TOC ul {
   list-style: none;
@@ -1260,7 +1272,41 @@ body:has(.margin-toc-page) #quarto-margin-sidebar #TOC a {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// 17. RESPONSIVE
+// 17b. EXECUTABLE R CELLS (VIGNETTES)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+.cell {
+  margin: 1.75em 0;
+}
+
+.cell-output {
+  margin-top: 0.75rem;
+}
+
+.cell-output pre,
+.cell-output-display pre {
+  background: #f5f2eb;
+  color: #1c1c1e;
+  border: 1px solid #e4e0d8;
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  overflow-x: auto;
+}
+
+.cell-output-display {
+  margin-top: 0.75rem;
+}
+
+.cell-output-display img,
+.cell-output-display figure img {
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(13, 27, 42, 0.12);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 18. RESPONSIVE
 // ═══════════════════════════════════════════════════════════════════════════════
 
 @media (max-width: 768px) {

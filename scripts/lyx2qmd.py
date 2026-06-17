@@ -48,21 +48,6 @@ TOC_JS = r"""
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const sidebar = document.querySelector("#quarto-margin-sidebar");
-  const firstSection = document.querySelector("#quarto-document-content h2, #quarto-document-content h3");
-
-  function alignMarginToc() {
-    if (!sidebar || !firstSection) return;
-    if (window.innerWidth <= 991) {
-      sidebar.style.marginTop = "";
-      return;
-    }
-    const offset = firstSection.getBoundingClientRect().top - sidebar.getBoundingClientRect().top;
-    sidebar.style.marginTop = Math.max(0, Math.round(offset)) + "px";
-  }
-
-  alignMarginToc();
-  window.addEventListener("resize", alignMarginToc);
-
   const toc = document.querySelector("#quarto-margin-sidebar #TOC, #TOC");
   if (!toc) return;
 
