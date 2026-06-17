@@ -178,7 +178,11 @@ class LyXParser:
             out.append("}")
         if tt and not plain:
             out.append("}")
-        return re.sub(r"\s+", " ", "".join(out)).strip()
+        result = re.sub(r"\s+", " ", "".join(out)).strip()
+        if not plain:
+            result = re.sub(r"\\texttt\{\s+([^}]+?)\s+\}", r"\\texttt{\1}", result)
+            result = re.sub(r"\\emph\{\s+([^}]+?)\s+\}", r"\\emph{\1}", result)
+        return result
 
     def _is_setup_layout(self, content: str) -> bool:
         if "include=FALSE" in content and "opts_chunk" in content:
@@ -313,7 +317,16 @@ class LyXParser:
         if header and "include=FALSE" in header:
             return ""
         body_text = "\n".join(body).strip()
-        opts = header.strip("<>=").strip() if header else ""
+        opts = ""
+        if header:
+            raw = header.strip()
+            if raw.startswith("<<"):
+                raw = raw[2:]
+            if raw.endswith(">>="):
+                raw = raw[:-3]
+            elif raw.endswith(">>"):
+                raw = raw[:-2]
+            opts = self._code_line(raw)
         return (
             "\\begin{verbatim}\n"
             f"{body_text}\n"
@@ -350,7 +363,10 @@ class LyXParser:
                     fname = Path(m.group(1)).name
                     fig = f"\\includegraphics[width=0.85\\linewidth]{{vignette-assets/{fname}}}"
             if inset_type.startswith("Caption"):
-                caption = esc(self._plain_layout_text(chunk).strip())
+                cap = self._plain_layout_text(chunk)
+                cap = re.sub(r"\\family typewriter\s*", "", cap)
+                cap = re.sub(r"\\family default\s*", "", cap)
+                caption = esc(cap.strip())
         if not fig:
             return ""
         cap = f"\\caption{{{caption}}}" if caption else ""

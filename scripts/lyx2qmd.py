@@ -91,6 +91,13 @@ document.addEventListener("DOMContentLoaded", function () {
 """
 
 
+def clean_caption(text: str) -> str:
+    text = re.sub(r"\\[a-zA-Z]+\{([^}]*)\}", r"\1", text)
+    text = re.sub(r"\\[a-zA-Z]+", "", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
 def tex_prepare_for_pandoc(tex: str) -> tuple[str, dict[str, str]]:
     placeholders: dict[str, str] = {}
 
@@ -118,7 +125,7 @@ def tex_prepare_for_pandoc(tex: str) -> tuple[str, dict[str, str]]:
     def stash_figure(match: re.Match[str]) -> str:
         key = f"ZZZFIG{len(placeholders)}ZZZ"
         fname = Path(match.group(1)).name
-        caption = match.group(2).strip() if match.lastindex >= 2 and match.group(2) else fname
+        caption = clean_caption(match.group(2).strip() if match.lastindex >= 2 and match.group(2) else fname)
         placeholders[key] = f'\n\n![{caption}](vignette-assets/{fname})\n\n'
         return key
 
@@ -160,12 +167,50 @@ def normalize_markdown(md: str) -> str:
     md = md.replace(r"\texttrademark{}", "™")
     md = re.sub(r"\\url\{([^}]+)\}", r"[\1](\1)", md)
 
-    # Fix spacing inside inline code
+    # Remove leaked LaTeX commands
+    md = re.sub(r"^\\noindent.*$", "", md, flags=re.MULTILINE)
+    md = re.sub(r"^printbibliography\s*$", "", md, flags=re.MULTILINE)
+    md = re.sub(r"^newpage\s*$", "", md, flags=re.MULTILINE)
+    md = re.sub(r"\\series bold\s+", "**", md)
+    md = re.sub(r"\\series default", "**", md)
+    md = re.sub(r"\\color blue\s+", "", md)
+    md = re.sub(r"\\color inherit", "", md)
+    md = re.sub(r"\\begin_inset Quotes eld\\end_inset", '"', md)
+    md = re.sub(r"\\begin_inset Quotes erd\\end_inset", '"', md)
+
+    # Convert HTML figures from pandoc to markdown images
+    def html_figure(match: re.Match[str]) -> str:
+        src = match.group(1)
+        cap = clean_caption(match.group(2))
+        return f"\n\n![{cap}]({src})\n\n"
+
+    md = re.sub(
+        r"<figure[^>]*>\s*<img src=\"([^\"]+)\"[^>]*/>\s*<figcaption>([^<]*)</figcaption>\s*</figure>",
+        html_figure,
+        md,
+        flags=re.DOTALL,
+    )
+
+    # Fix broken markdown images from malformed captions
+    md = re.sub(
+        r"!\[[^\]]*\\textbackslash\{?\]\((vignette-assets/[^)]+)\)",
+        r"![](\1)",
+        md,
+    )
+
+    # Ensure blank lines around fenced code blocks
+    md = re.sub(r"([^\n])```\{r", r"\1\n\n```{r", md)
+    md = re.sub(r"```\n([A-Za-z#*])", r"```\n\n\1", md)
+    md = re.sub(r"```([A-Za-z])", r"```\n\n\1", md)
+    md = re.sub(r"([.!?])```\{r", r"\1\n\n```{r", md)
+
+    # Fix spacing inside inline code and broken list items
     md = re.sub(r"`\s+([^`]+?)\s+`", r"`\1`", md)
-    md = re.sub(r"([^\n])```\{r", r"\1\n\n```{{r", md)
-    md = re.sub(r"```\n(?=[A-Za-z#*])", "```\n\n", md)
-    md = re.sub(r"falseALSE", "false", md)
-    md = md.replace("```{{r", "```{r")
+    md = re.sub(r"\n-\`", "\n- `", md)
+    md = re.sub(r"-` ", "- `", md)
+    md = re.sub(r"`data\.fram`\s*e", "`data.frame`", md)
+    md = re.sub(r"data\.fram e", "data.frame", md)
+    md = re.sub(r"\*\*([^*]+)\*\* \*\*", r"**\1**", md)
 
     md = re.sub(r"\n{3,}", "\n\n", md)
     return md.strip() + "\n"

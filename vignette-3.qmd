@@ -22,21 +22,19 @@ toc-title: ""
 :::
 :::
 
-The book Robust Portfolio Construction and Risk Analysis (RPCRA) has a distincti ve reproducibility theme, according to which most Figures and Tables in Chapters 2 through 7, and Chapters xx, yy, zz, are reproducible with R scripts and data sets in the `PCRA` R package companion to the book. This reproducibility theme is conveniently supported by our use of the LXY ( <https://www.lyx.org/> document processor to write the RPCRA book, whereby all code to create figures and tables are contained as LYX document R code chunks that are easily exported in form of single R scripts for each of many chapters.
+The book Robust Portfolio Construction and Risk Analysis (RPCRA) has a distincti ve reproducibility theme, according to which most Figures and Tables in Chapters 2 through 7, and Chapters xx, yy, zz, are reproducible with R scripts and data sets in the `PCRA`R package companion to the book. This reproducibility theme is conveniently supported by our use of the LXY ( <https://www.lyx.org/> document processor to write the RPCRA book, whereby all code to create figures and tables are contained as LYX document R code chunks that are easily exported in form of single R scripts for each of many chapters.
 
 Although it is nice to be able to use these scripts to recreate the figures and tables of various chapter, this in itself is not the primary purpose of providing the reproducibility code. The main reason for doing so is that it facilitates easy experimentation with different portfolio strategies by easily changing one, or a few, parameter s in the scripts, for example changing a smallcap portfolio example in the RPCRA book, to a microcap, or midcap, or largecap portfolio, or changing the number of stocks, in the portfolio, or changing the industry sector of the portfolio, or changing the portfolio optimization constraints or penalties parameters. We believe this considerably enhances a student learning experience, and provides instructors with the ability to easily create portfolio performance and risk homework exercises for their class.
 
 # R and RStudio
 
-This Vignette assumes that you have already installed both R version 4.4.3 or later, and a current version of RStudio. If you have not already done so, you can find out how to install R and RStudio by reading appropriate parts of Appendix A in *Hands on Programming with R* , available online at <https://rstudio-education.github.io/hopr/> . We also assume that you have used RStudio to install the CRAN current version of the `PCRA` package, and have already read the Vignette “ PCRA Package Overview ” that is available at <https://cran.r-project.org/web/packages/PCRA> .
+This Vignette assumes that you have already installed both R version 4.4.3 or later, and a current version of RStudio. If you have not already done so, you can find out how to install R and RStudio by reading appropriate parts of Appendix A in *Hands on Programming with R* , available online at <https://rstudio-education.github.io/hopr/> . We also assume that you have used RStudio to install the CRAN current version of the`PCRA`package, and have already read the Vignette “ PCRA Package Overview ” that is available at <https://cran.r-project.org/web/packages/PCRA> .
 
 # PCRA Reproducibility Code
 
-The R reproducibility scripts are contained in the `demo` folder of the `PCRA` package.
+The R reproducibility scripts are contained in the`demo`folder of the`PCRA`package.
 
-For any package that you have already installed, but have not necessarily loaded, you can get a list of the demo folder R script names by typing the following in the RStudio Console:
-
-` demo(package = “packageName”)`Thus, assuming that you have already installed the` PCRA `package, typing` demo(package = ‘‘ PCRA ’’ )`results in a display of the following list in an RStudio pop-up` R demos `tab:
+For any package that you have already installed, but have not necessarily loaded, you can get a list of the demo folder R script names by typing the following in the RStudio Console:` demo(package = “packageName”)`Thus, assuming that you have already installed the`PCRA`package, typing` demo(package = ‘‘ PCRA ’’ )`results in a display of the following list in an RStudio pop-up`R demos`tab:
 
 Demos in package ‘PCRA’:
 
@@ -70,33 +68,31 @@ Reproduces figures in JPM 2023 paper.
 
 The code for the demo script of a given chapter has comments to label each figure number and table number in the chapter.
 
-We suggest that you install the` PortfolioAnalytics `package, and have a look at the long list of demos in it.
+We suggest that you install the`PortfolioAnalytics`package, and have a look at the long list of demos in it.
 
-For any loaded R package, you can view the code for any R script in the demo folder with the command “??” (but \series bold not \series default with the` help `function!).
+For any loaded R package, you can view the code for any R script in the demo folder with the command “??” (but **not ** with the`help`function!).
 
 For example with the PCRA loaded, use of the command` ?? Ch2_Foundations_Demo`results in an RStudio Help tab display with the following two links, separated considerably side by side:
 
-\color blue PCRA::Ch2_Foundations_Demo \color inherit \color blue (Run demo) \color inherit .
+PCRA::Ch2_Foundations_Demo  (Run demo)  .
 
-Do \series bold not \series default Click on the right-hand link, at least not until you have read the NOTE below. Instead, Click on the left-hand link, upon which you will see a display of the entire` Ch2_Foundations_Demo.R `script in the Help tab. Just copy/paste that script into your own new R file, and save it wherever you like. Then in RStudio make the folder where you have saved the demo script the working directory by selecting:
+Do **not ** Click on the right-hand link, at least not until you have read the NOTE below. Instead, Click on the left-hand link, upon which you will see a display of the entire`Ch2_Foundations_Demo.R`script in the Help tab. Just copy/paste that script into your own new R file, and save it wherever you like. Then in RStudio make the folder where you have saved the demo script the working directory by selecting:
 
 Session \> Set Working Directory \> To Source File Location
 
-You naturally might want to begin by running the entire Demo script for a given chapter, which you can do by highlighting the entire script and clicking the` Run `button, and then confirming that the code actually produces the figures and tables in the RPCRA book chapter. Be forwarned that while many of the code chunks will run quite quickly, e.g., a few seconds, a few of them take longer, sometimes several minutes or more.
+You naturally might want to begin by running the entire Demo script for a given chapter, which you can do by highlighting the entire script and clicking the`Run`button, and then confirming that the code actually produces the figures and tables in the RPCRA book chapter. Be forwarned that while many of the code chunks will run quite quickly, e.g., a few seconds, a few of them take longer, sometimes several minutes or more.
 
 After, or instead of, running all the code, you should run the portion of the demo script code at the beginning, where various R packages are loaded, through the first table or figure. You can then search for the code that creates specific figures or tables, and run just those portions of the script.
 
-NOTE: We do not recommend general use of \color blue (Run demo) \color inherit . This is because it runs the entire demo script, which will sometimes take a long time. Furthermore, some scripts may fail to execute properly when run this way, and will give you little indication of what the problem is. So if you want to run it all, we recommend doing so as suggested above. That said, the \color blue (Run demo) \color inherit link can be handy for quickly running R demo scripts that execute quickly.
+NOTE: We do not recommend general use of (Run demo)  . This is because it runs the entire demo script, which will sometimes take a long time. Furthermore, some scripts may fail to execute properly when run this way, and will give you little indication of what the problem is. So if you want to run it all, we recommend doing so as suggested above. That said, the (Run demo)  link can be handy for quickly running R demo scripts that execute quickly.
 
 Sourcing Files in RStudio
 
-You can also run an entire script using the R` source `function, with the script name as its argument. But even better, RStudio provides a useful way to run an entire script with a single click – just click on the` Source `button at the top right corner of the Source Pane. Unfortunately, while this is convenient, it will fail spectacularly if the Source button is pressed without first changing the working directory to the location of the script, and the` rstudioapi `library addresses this problem.
+You can also run an entire script using the R`source`function, with the script name as its argument. But even better, RStudio provides a useful way to run an entire script with a single click – just click on the`Source`button at the top right corner of the Source Pane. Unfortunately, while this is convenient, it will fail spectacularly if the Source button is pressed without first changing the working directory to the location of the script, and the`rstudioapi`library addresses this problem.
 
-With just two additional lines of code ahead of the start of the script,` rstudioapi `automates the process of setting the working directory to the location of a script when sourcing it. The library and the corresponding lines of code are shown below.
-
-```{r echo=true, warning=false, eval=false}
+With just two additional lines of code ahead of the start of the script,`rstudioapi`automates the process of setting the working directory to the location of a script when sourcing it. The library and the corresponding lines of code are shown below.```{r echo=true, warning=false, eval=false}
 library(rstudioapi) current_path <- rstudioapi::getActiveDocumentContext()$path setwd(dirname(current_path ))
-```This proves most useful when sourcing multiple scripts stored in multiple locations. You may wish to add those lines to your copied/pasted versions of the scripts in the` demo `folder, so that you can run any of the entire scripts by simply clicking on the RStudio source button.
+```This proves most useful when sourcing multiple scripts stored in multiple locations. You may wish to add those lines to your copied/pasted versions of the scripts in the`demo`folder, so that you can run any of the entire scripts by simply clicking on the RStudio source button.
 
 Character of the Reproducibility Demo R Scripts
 
@@ -106,13 +102,11 @@ The R demo scripts are fairly long, with approximately 1000, 900, and 800 lines 
 
 # Devtools and Rtools
 
-The reproducibility code for some chapters of the RPCRA book will require use of the` devtools `R package for installing a few R packages, and you might as well install` devtools `now as follows:
+The reproducibility code for some chapters of the RPCRA book will require use of the`devtools`R package for installing a few R packages, and you might as well install`devtools`now as follows:
 
-In RStudio drop down Tools menu, select Install Packages, and type` devtools `in the blank “ Packages ” field. In the “ Install to Library: ” field you will then see the entry` C:/R/R-4.4.x/library[Default] `, with . Click the “ Install ” button to initiate the installation of the` devtools `package.
+In RStudio drop down Tools menu, select Install Packages, and type`devtools`in the blank “ Packages ” field. In the “ Install to Library: ” field you will then see the entry`C:/R/R-4.4.x/library[Default]`, with . Click the “ Install ” button to initiate the installation of the`devtools`package.
 
-Eventually, you may want to compile one or more packages from source using a Windows operating system, and in that case you will need to install the` Rtools ` package, which you can do in the same manner as above. Keep in mind that each major version of R (e.g. 4.x) has its corresponding version of Rtools.
-
-printbibliography
+Eventually, you may want to compile one or more packages from source using a Windows operating system, and in that case you will need to install the`Rtools` package, which you can do in the same manner as above. Keep in mind that each major version of R (e.g. 4.x) has its corresponding version of Rtools.
 
 
 ```{=html}
