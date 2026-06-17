@@ -1,7 +1,10 @@
 ---
 title: ""
-page-layout: full
-toc: false
+page-layout: article
+toc: true
+toc-location: right
+toc-depth: 2
+toc-title: "On this page"
 ---
 
 ```{=html}
@@ -33,23 +36,6 @@ toc: false
 ::: {.copyright-notice}
 **Copyright Notice.** Material on this site is planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2025.
 :::
-
-```{=html}
-<nav class="home-sidebar-toc" aria-label="Page contents">
-  <div class="home-sidebar-toc-inner">
-    <p class="home-sidebar-title">On this page</p>
-    <ol class="home-sidebar-list">
-      <li><a href="#about-the-book">About the Book</a></li>
-      <li><a href="#preface">Preface</a></li>
-      <li><a href="#chapter-summaries">Chapter Summaries</a></li>
-      <li><a href="#vignettes">Vignettes</a></li>
-      <li><a href="#demo-code">Demo Code</a></li>
-      <li><a href="#appendices">Appendices</a></li>
-      <li><a href="#citation">Citation</a></li>
-    </ol>
-  </div>
-</nav>
-```
 
 ## 1 About the Book {#about-the-book}
 
@@ -164,4 +150,45 @@ Martin, R. D., Philips, T. K., Scherer, B., and Li, K. (2026).
 <br><br>
 © 2025 Martin, Philips, Scherer &amp; Li. All rights reserved.
 </div>
+```
+
+```{=html}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toc = document.querySelector("#quarto-margin-sidebar #TOC, #TOC");
+  if (!toc) return;
+
+  const links = [...toc.querySelectorAll('a[href^="#"]')];
+  const sections = links
+    .map(function (link) {
+      return document.querySelector(link.getAttribute("href"));
+    })
+    .filter(Boolean);
+
+  if (!sections.length) return;
+
+  const setActive = function (id) {
+    links.forEach(function (link) {
+      link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+    });
+  };
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    },
+    { rootMargin: "-15% 0px -65% 0px", threshold: 0 }
+  );
+
+  sections.forEach(function (section) {
+    observer.observe(section);
+  });
+
+  if (sections[0]) setActive(sections[0].id);
+});
+</script>
 ```
