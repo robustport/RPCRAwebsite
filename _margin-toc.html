@@ -1,6 +1,38 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+  const hero = document.querySelector(".hero-outer");
+  const columns = document.querySelector("#quarto-content.page-columns, .page-columns");
+  if (hero && columns && hero.parentElement !== columns) {
+    columns.insertBefore(hero, columns.firstChild);
+    document.body.classList.add("home-hero-page");
+  }
+
   if (!document.querySelector(".margin-toc-page, .hero-outer")) return;
+
+  const sidebar = document.querySelector("#quarto-margin-sidebar");
+
+  function alignMarginToc() {
+    if (!sidebar) return;
+    if (window.innerWidth <= 991) {
+      sidebar.style.marginTop = "";
+      return;
+    }
+    const anchor =
+      document.querySelector("#about-the-book") ||
+      document.querySelector("#overview") ||
+      document.querySelector("#quarto-document-content h2, #quarto-document-content h3");
+    if (!anchor) return;
+    const offset =
+      anchor.getBoundingClientRect().top - sidebar.getBoundingClientRect().top;
+    sidebar.style.marginTop = Math.max(0, Math.round(offset)) + "px";
+  }
+
+  alignMarginToc();
+  window.addEventListener("resize", alignMarginToc);
+  window.addEventListener("load", function () {
+    alignMarginToc();
+    requestAnimationFrame(alignMarginToc);
+  });
 
   const toc = document.querySelector("#quarto-margin-sidebar #TOC, #TOC");
   if (!toc) return;
