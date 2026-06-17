@@ -875,7 +875,7 @@ body:has(.hero-outer) #quarto-margin-sidebar #TOC {
   border: 1px solid #e4e0d8;
   border-left: 3px solid #c4a45a;
   border-radius: 0 10px 10px 0;
-  padding: 1.15rem 1rem 1rem 1.15rem;
+  padding: 0.9rem 1rem 1rem 1.15rem;
   box-shadow: 0 10px 32px rgba(13, 27, 42, 0.1);
   font-family: "Inter", sans-serif;
   font-size: 0.82rem;
@@ -884,15 +884,7 @@ body:has(.hero-outer) #quarto-margin-sidebar #TOC {
 
 body:has(.hero-outer) #quarto-margin-sidebar #TOC .toc-title,
 body:has(.hero-outer) #quarto-margin-sidebar #TOC > h2 {
-  font-family: "Inter", sans-serif;
-  font-size: 0.68rem !important;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: #8a6e3a !important;
-  margin: 0 0 0.8rem !important;
-  padding: 0 !important;
-  border: none !important;
+  display: none !important;
 }
 
 body:has(.hero-outer) #quarto-margin-sidebar #TOC ul {
@@ -939,6 +931,7 @@ body:has(.hero-outer) #quarto-margin-sidebar #TOC a {
     position: static;
     max-height: none;
     overflow: visible;
+    margin-top: 0 !important;
     margin-bottom: 2rem;
   }
 

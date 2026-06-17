@@ -4,7 +4,7 @@ page-layout: article
 toc: true
 toc-location: right
 toc-depth: 2
-toc-title: "On this page"
+toc-title: ""
 ---
 
 ```{=html}
@@ -155,6 +155,24 @@ Martin, R. D., Philips, T. K., Scherer, B., and Li, K. (2026).
 ```{=html}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+  const sidebar = document.querySelector("#quarto-margin-sidebar");
+  const aboutSection = document.querySelector("#about-the-book");
+
+  function alignHomeToc() {
+    if (!sidebar || !aboutSection) return;
+
+    if (window.innerWidth <= 991) {
+      sidebar.style.marginTop = "";
+      return;
+    }
+
+    const offset = aboutSection.getBoundingClientRect().top - sidebar.getBoundingClientRect().top;
+    sidebar.style.marginTop = Math.max(0, Math.round(offset)) + "px";
+  }
+
+  alignHomeToc();
+  window.addEventListener("resize", alignHomeToc);
+
   const toc = document.querySelector("#quarto-margin-sidebar #TOC, #TOC");
   if (!toc) return;
 
