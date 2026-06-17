@@ -5,6 +5,8 @@ toc: true
 toc-location: right
 toc-depth: 2
 toc-title: ""
+execute:
+  eval: false
 ---
 
 ```{=html}
@@ -51,7 +53,7 @@ It is important to keep in mind that there currently exist two versions of the P
 
 Before reading the rest of this document, you should install the CRAN version of `PCRA` using RStudio’s `Tools > Install Packages` menu, entering `PCRA` in the “ Packages ” field, and clicking “ Install ” . After the installation is finished, load the package using R’s `library` function, ignoring any warning messages that might appear.
 
-```{r echo=true, warning=false}
+```{r echo=true, warning=false, eval=false}
 library(PCRA)
 ```
 
@@ -131,7 +133,7 @@ ls("package:PCRA")
 
 The data sets `stocksCRSPmonthly` data, and the `factorsSPGMIr` are `data.table` type objects, and in order to view and manipulate them you need to install and load the `data.table` R package. Install the current version of `data.table` in RStudio the same way you installed the PCRA package. Then load `data.table` by typing `library(data.table)` , and confirm that `stocksCRSPmonthly` and `factorsSPGMIr` are indeed `data.table` objects by typing:
 
-```{r echo=true, warning=false}
+```{r echo=true, warning=false, eval=false}
 library(data.table)
 class(stocksCRSPmonthly)
 class(factorsSPGMIr)
@@ -145,14 +147,14 @@ PCRA uses `data.table` types for the `stocksCRSPmonthly` and `factorsSPGMIr` dat
 
 Note that a `data.table` object is indeed a “ table object ” whose dimensions and column names can be obtained by typing:
 
-```{r echo=true, warning=false}
+```{r echo=true, warning=false, eval=false}
 dim(stocksCRSPmonthly)   # Number of rows and columns
 names(stocksCRSPmonthly) # Names of data items in each column
 ```
 
 You can discover the structure of `stocksCRSPmonthly` by displaying the first and last five rows of its first, second and ninth columns by typing:
 
-```{r echo=true, warning=false}
+```{r echo=true, warning=false, eval=false}
 stocksCRSPmonthly[, c(1:2, 9)]
 ```
 
@@ -160,7 +162,7 @@ The results displayed above indicate that the row structure of `stocksCRSPmonthl
 
 Similarly, you can see the dimensions and column names of `factorsSPGMIr` with:
 
-```{r echo=true, warning=false}
+```{r echo=true, warning=false, eval=false}
 dim(factorsSPGMIr)   # Number of rows and columns
 names(factorsSPGMIr) # Names of data items in each column
 ```
@@ -169,7 +171,7 @@ names(factorsSPGMIr) # Names of data items in each column
 
 You may have wondered why `class(stocksCRSPmonthly)` and `class(factorsSPGMIr)` return both “ data.table ” and “ data.frame ” , the first of which is indeed the class of each these two data sets. The occurrence of “ data.frame ” after “ data.table ” indicates that the `data.table` object *inherits* all the properties of a `data.frame` object, and adds to these a number of features to enhance both its syntax and its performance. In view of the above property of a `data.table` object, it should not be surprising that you can easily convert a `data.table` object to a `data.frame` by applying the `data.frame` function to it:
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 dat.df <- data.frame(stocksCRSPmonthly)
 class(dat.df)
 names(dat.df)
@@ -190,7 +192,7 @@ The rounded data in `factorsSPGMIr` was obtained by rounding the data in `factor
 
 Rounding factors data to four significant digits turns out to make little difference in the precision of the `factorsSPGMIr` data relative to the `factorsSPGMI` . This claim is supported by Figure 2 , which shows that the fractional error in all the factors is always less than about 1% (it is less than 1/2% for four of the fourteen factors). We expect these minor differences in `factorsSPGMIr` relative to `factorsSPGMI` to have a negligible impact on factor model fits.
 
-```{r echo = FALSE, results = FALSE, warning=false}
+```{r echo = FALSE, results = FALSE, warning=false, eval=false}
 #### Compute factorsSPGMIr differences relative to factorsSPGMI
 library(PCRA)
 data(factorsSPGMI)   # A data.table object

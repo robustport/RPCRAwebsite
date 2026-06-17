@@ -5,6 +5,8 @@ toc: true
 toc-location: right
 toc-depth: 2
 toc-title: ""
+execute:
+  eval: false
 ---
 
 ```{=html}
@@ -69,7 +71,7 @@ Most of the contents of this section apply equally well to the weekly and daily 
 
 After installing `the PCRA` and `data.table` packages, the following lines of code can be used to load and extract the class, dimension, and names of the `stocksCRSPmonthly` data:
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 library(PCRA)
 library(data.table)
 class(stocksCRSPmonthly) # Class of stocksCRSPmonthly
@@ -81,7 +83,7 @@ The dimension values 81,144 and 14 are the number of rows and columns, respectiv
 
 The temporal structure of stocksCRSPmonthly is revealed by displaying the first and last five rows of its first four columns using a single line of code :
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 stocksCRSPmonthly[, 1:4]
 ```
 
@@ -91,7 +93,7 @@ The ten `stocksCRSPmonthly` data items “ Date ” , “ Ticker ” , “ Ticke
 
 The “ GICS ” data is based the *Global Industry Classification Standard* six digit code developed by MSCI and Standard and Poor’s (S&P), the details of which are available at <https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard> . The “ Sector ” item indicates which of a number of broad industry groups each Company belongs to, and the following line of code reveals that the stocks in `stocksCRSPmonthly` belong to one of eight sectors:
 
-```{r echo = T, warning = F}
+```{r echo = T, warning = F, eval=false}
 unique(stocksCRSPmonthly[ , Sector])
 ```
 
@@ -111,7 +113,7 @@ Readers are encouraged to familiarize themselves with the detailed descriptions 
 
 Everything discussed in this section applies equally well to the unrounded SPGMI factors data set `factorsSPGMI` . It takes only three lines of code to display the class, dimension, and item names associated with `factorsSPGMIr` in the RStudio Console:
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 class(factorsSPGMIr)
 dim(factorsSPGMIr)
 names(factorsSPGMIr)
@@ -127,7 +129,7 @@ We recommend that readers familiarize themselves with the detailed descriptions 
 
 The following code line displays the first and last five rows of the first four columns of `factorsSPGMIr` and makes clear that it has the same table structure as `stocksCRSPmonthly` :
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 factorsSPGMIr[,c(1, 3, 10:13)]
 ```
 
@@ -137,7 +139,7 @@ Check that `factorsSPGMIr[c(1:3, 81142:81144), c(1, 2, 11, 12)]` results in the 
 
 The simple method of sub-setting the columns of a `data.table` with numeric column values is identical to the method applicable to `data.frames` . But sub-setting columns by their names is done differently for `data.table` and `data.frame` objects. We illustrate this by first converting the `stocksCRSPmonthly` to a `data.frame` object in preparation for comparing sub-setting by column names:
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 dat.df <- data.frame(stocksCRSPmonthly)
 class(dat.df)
 names(dat.df)
@@ -145,7 +147,7 @@ names(dat.df)
 
 Recall that you can subset a `data.frame` by using a character vector of the column names in quotes, and if you subset by two or more columns, the subset will also be a `data.frame` . But if you subset a single column, the result is (somewhat unexpectedly) a *vector* instead of a `data.frame` . We can force R to return a `data.frame` by using the `drop = FALSE` argument when sub-setting a single column as in the example below.
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 dat.Return <- dat.df[ , "Return"]
 class(dat.Return)
 dat.Return <- dat.df[ , "Return", drop = FALSE]
@@ -156,7 +158,7 @@ class(dat.DateAndReturn)
 
 In the case of a `data.table,` we can subset a single column, for example the “ Return ” column, by using its name without quotes, but the result is once again a vector (in this case a numeric vector) instead of a `data.table` . The way to return a `data.table` when sub-setting one or more columns of a `data.table` is to define the subset using a list of column names without quotes, e.g., `list(Return)` instead of `Return` . This is illustrated below, where it is also shown that `.( Return)` is shorthand for `list(Return)` , and that this shorthand also works when selecting two or more columns of a `data.table` .
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 dat <- stocksCRSPmonthly # This is a data.table
 dat.Return <- dat[, Return]
 class(dat.Return)
@@ -172,7 +174,7 @@ There is much to learn about manipulating `data.table` objects, and the interest
 
 Meanwhile, the code below illustrates simple uses of `data.table` sub-setting of a single column, which results in a `numeric` object, first to compute the number of rows of `stocksCRSPmonthly` , and then to determine first and last dates of `stocksCRSPmonthly.`
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 nMonths <- length(unique(stocksCRSPmonthly[,Date]))
 nStocks <- length(unique(stocksCRSPmonthly[,TickerLast]))
 nMonths
@@ -189,7 +191,7 @@ We next discuss use of the `selectCRSPandSPGMI` function to select individual or
 
 The default arguments of `selectCRSPandSPGMI` are:
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 args(selectCRSPandSPGMI)
 ```
 
@@ -213,7 +215,7 @@ In general `stockItems` can be any subset of the 14 `stocksCRSPmonthly` items, a
 
 In the code example below we select 6 of 14 stocksCRSPmonthly items and select no factorsSPGMIr items.
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 stockItems1 <- c("Date","TickerLast","CapGroupLast","Return","MktIndexCRSP",
 "Ret13WkBill")
 dateRange <- c("1997-01-31","2010-12-31")
@@ -232,7 +234,7 @@ Show that the number rows of `stocksSmall` is equal to the number of months time
 
 In the code example below, for which we have in mind studying the relationship between small capitalization stock returns and the Size, Beta and BM factors, we select the SmallCap subset over the same time range as in the example above, but without the MktIndexCRSP and Ret13WkBill `stockItems` , and with the LogMktCap, Beta60M and EP `factorItems` .
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 stockItems2 <- c("Date", "TickerLast", "CapGroupLast", "Return")
 factorItems <- c("LogMktCap", "Beta60M", "EP")
 dateRange <- c("1997-01-31", "2010-12-31")
@@ -250,7 +252,7 @@ names(stocksSmall3Fac)
 
 Here we modify the code of Example 1 by changing `subsetValues = ‘‘ SmallCap ’’` to `subsetValues = ‘‘ MicroCap ’’ ,` and changing `outputType` from `‘‘ data.table ’’` to `‘‘ xts ’’` . This creates the `xts` time series object `stocksMicro` , which consists of the MicroCap stocks in `stocksCRSPmonthly` , along with the return of the market ("MktIndexCRSP"), and the risk-free rate ("Ret13WkBill").
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 dateRange <- c("1997-01-31","2010-12-31")
 stocksMicro <- selectCRSPandSPGMI("monthly",
 dateRange = dateRange,
@@ -268,7 +270,7 @@ We see that stocksMicro is indeed an `xts` time series object, with 168 rows and
 
 For labeling convenience, we replace "MktIndexCRSP" with “ Market ” and "Ret13WkBill" with “ Risk-Free ” , and display in Figure 1 the time series of returns of the first 4 microcap stocks, the Market, and the Risk-Free rate.
 
-```{r label = "stocksMicroAll", echo = 2, warning=false, results = FALSE}
+```{r label = "stocksMicroAll", echo = 2, warning=false, results = FALSE, eval=false}
 png(file = "Plots/stocksMicroAll.png", width = 4, height = 3,
 units = "in", pointsize = 6, res = 600)
 names(stocksMicro)[c(35,36)] <- c("Market", "Risk-Free")
@@ -282,7 +284,7 @@ dev.off()
 
 The package `xts` contains a large set of functions for manipulating and plotting `xts` objects, and you need to have `xts` loaded in order to take advantage of its capabilities. We illustrate here just one such capability here, namely use of the `index` and `range` functions as applied to the `stocksMicro` `xts` object we earlier created .
 
-```{r echo = T, warning = F}
+```{r echo = T, warning = F, eval=false}
 library(xts)
 datesIndex <- index(stocksMicro)
 class(datesIndex)
@@ -298,13 +300,13 @@ To find out more about working with `xts` objects, it is recommended to read the
 
 As we have seen, the function `selectCRSPandSPGMI` has general capabilities for selecting joint and separate subsets of `stockCRSPmonthly` and `factorsSPGMIr` . Sometimes, users of PCRA may wish to create an `xts` time series object from a very simple subset of the stocks in `stocksCRSPmonthly` , e.g., by specifying only a time interval and a subset of the tickers in `TickerLast` . The function `stocksCRSPxts` serves this purpose, and its arguments are:
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 args(stocksCRSPxts)
 ```
 
 Use of `stocksCRSPxts` with the default arguments creates an `xts` object that contains the entire cross-section of 294 CRSP® stocks for the entire 276 month time interval 1993 - 2015:
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 stocksAll <- stocksCRSPxts(stocksCRSPmonthly)
 class(stocksAll)
 dim(stocksAll)
@@ -314,7 +316,7 @@ range(index(stocksAll))
 
 The following is a typical application example where the simple function `stocksCRSPxts` proves convenient. The goal of the application is to compute the excess Kurtosis (eKR) of the cross-section of CRSP® stocks monthly returns for the 6 contiguous time intervals "1993-1995", "1996-1999", "2000-2003", "2004-2007", "2008-2011", "2012-2015", and display the cross-section distributions of the eKR values with 6 boxplots. The code is displayed below and is followed by the display of the boxplots in Figure 2 .
 
-```{r echo=true, warning=false}
+```{r echo=true, warning=false, eval=false}
 # Extract cross-sections of stocksCRSPmonthly returns on 6 time intervals
 dates1 <- c("1993-01-31","1995-12-31")
 dates2 <- c("1996-01-31","1999-12-31")
@@ -339,7 +341,7 @@ eKR <- cbind(eKR1,eKR2,eKR3,eKR4,eKR5,eKR6)
 times <- c("1993-1995","1996-1999","2000-2003","2004-2007","2008-2011","2012-2015")
 ```
 
-```{r label = "eKRstocksMonthly", echo = 2:4, warning=false, results = FALSE}
+```{r label = "eKRstocksMonthly", echo = 2:4, warning=false, results = FALSE, eval=false}
 png(file = "Plots/eKRstocksMonthly.png", width = 5, height = 4, units = "in", pointsize = 8, res = 600)
 boxplot(eKR, xaxt = "n", ylim = c(-2,12), main = "Excess Kutosis stocksCRSPmonthly",
 cex.main = 1.5, col = "cyan")
@@ -356,7 +358,7 @@ The data sets `stocksCRSPweekly` , `stocksCRSPdaily` , and the unrounded SPGMI d
 
 These data sets can be accessed using the `getPCRAdata` function in the `PCRA` package. We next illustrate its use to extract `stocksCRSPweekly` data:
 
-```{r echo = T, warning = F}
+```{r echo = T, warning = F, eval=false}
 stocksCRSPweekly <- getPCRAData(dataset = "stocksCRSPweekly")
 dateRange <- c("2000-01-7","2000-12-31")
 stocksMicroWeekly <- selectCRSPandSPGMI("weekly",
@@ -373,7 +375,7 @@ names(stocksMicroWeekly)[35] <- "Market"
 
 Next, we create a time series plot of the data using:
 
-```{r label = "weeklyStockReturns", echo = 2:4, warning=false, results = FALSE}
+```{r label = "weeklyStockReturns", echo = 2:4, warning=false, results = FALSE, eval=false}
 png(file = "Plots/weeklyStockReturns.png", width = 6,height = 5,units = "in",pointsize = 8, res = 600)
 tsPlotMP(stocksMicroWeekly[, c(1:5,35)], scaleType = "free", stripText.cex = .45,
 yname = "RETURNS", layout = c(1,6), type = "l", axis.cex = 0.7, lwd = 0.6)
@@ -394,7 +396,7 @@ The `data.table` package provides a variety of powerful data manipulation and an
 
 You will have noticed that `stocksCRSPmonthly` and `factorsSPGMIr` `data.table` objects contain “ Sector ” , and “ CapGroupLast ” variables. The following code prints the number of stocks in each sector and capitalization group.
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 lastDate <- tail(factorsSPGMIr[,Date],1)
 factorsSPGMILast <- factorsSPGMIr[Date == lastDate]
 factorsSPGMILast[ , .N, by = Sector]
@@ -407,7 +409,7 @@ Modify the above code to check that the stocks’ sectors are the same in Januar
 
 We typically work with a merged or unmerged subset of the variables in `stocksCRSPmonthly` and `factorsSPGMIr` , and often end up needing only a few of the items in the the subset. For example, we might find that we are interested in only the Date, TickerLast, Return, Beta60M and EP items of the `data.table` object `stocksSmall3Fac` in Example 2 of Section 2. The following code creates the `data.table` we need:
 
-```{r echo=true, warning=false}
+```{r echo=true, warning=false, eval=false}
 colNames <- c("Date", "TickerLast", "Return", "Beta60M", "EP")
 stocksSmall3FacSubset <- stocksSmall3Fac[, .SD , .SDcols = colNames]
 names(stocksSmall3FacSubset)
@@ -419,7 +421,7 @@ In this code, `.SD` represents the subset of columns that is specified by `.SDco
 
 Some of the names of variables in `stocksCRSPmonthly` and `factorsSPGMIr` are long, and it is often convenient to shorten them. We may, for example, wish to replace the names "MktIndexCRSP" and “ Ret13WkBill ” with the shorter common names “ Market ” and "RiskFree". This is easily done using `data.table` ’s `setnames` function, as is done below for the data set `stocksSmall` of Example 1:
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 setnames(stocksSmall, old = c("MktIndexCRSP", "Ret13WkBill"),
 new = c("Market","RiskFree"))
 names(stocksSmall)
@@ -429,7 +431,7 @@ names(stocksSmall)
 
 One sometimes wants to study portfolios whose constituents are all drawn from a single sector and size group, e.g. the Information Technology (IT) sector of the SmallCap group. This is easily done by first obtaining the subset of all SmallCap stocks for the default `dateRange` of 1993 to 2015 and then extracting the Information Technology sector from this subset.
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 stockItems <- c("Date", "TickerLast", "CapGroupLast", "Return", "Sector")
 stocksSmallCap <- selectCRSPandSPGMI("monthly",
 stockItems = stockItems, factorItems = NULL,
@@ -445,7 +447,7 @@ unique(stocksSmallCapIT[,TickerLast])
 
 One may wish to look at stocks, factors, or merged stocks and factors data over a specified subset of a longer timeframe. For example, we can extract the 5 years from 2010 to 2014 of the `stocksSmallCapIT` data with the first line below, and check its time range and length (i.e. the number of months) with the second and third lines:
 
-```{r echo=true,warning=false}
+```{r echo=true,warning=false, eval=false}
 stocksSmallCapIT5Year <- stocksSmallCapIT[stocksSmallCapIT[,Date] >= as.Date("2010-01-31") &
 stocksSmallCapIT[,Date] <= as.Date("2014-12-31"), ]
 range(stocksSmallCapIT5Year[,Date])

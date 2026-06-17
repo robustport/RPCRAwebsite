@@ -167,6 +167,8 @@ def tex_prepare_for_pandoc(tex: str) -> tuple[str, dict[str, str]]:
             .replace("echo=T", "echo=true")
             .replace("warning=F", "warning=false")
         )
+        if "eval=false" not in opts and "eval=true" not in opts:
+            opts = (opts + ", eval=false").lstrip(", ")
         placeholders[key] = f"\n\n```{{r {opts}}}\n{code}\n```\n\n"
         return key
 
@@ -311,6 +313,8 @@ toc: true
 toc-location: right
 toc-depth: 2
 toc-title: ""
+execute:
+  eval: false
 ---
 
 ```{{=html}}
