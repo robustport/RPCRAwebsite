@@ -20,7 +20,7 @@ Sources are read from:
 
 Outputs:
 
-- `vignette-1.qmd`, `vignette-2.qmd`, `vignette-3.qmd`
+- `vignette-1-v2.qmd`, `vignette-2-v2.qmd`, `vignette-3-v2.qmd` (preview conversions; originals remain as `vignette-*.qmd`)
 - `vignette-assets/*.png` (figures extracted from the vignette PDFs)
 
 ## Requirements

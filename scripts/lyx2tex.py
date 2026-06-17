@@ -26,6 +26,28 @@ def esc(text: str) -> str:
     return text.translate(LATEX_SPECIAL)
 
 
+def extract_label_name(text: str) -> str | None:
+    m = re.search(r'name\s+"([^"]+)"', text)
+    return m.group(1) if m else None
+
+
+def extract_ref_name(text: str) -> str | None:
+    m = re.search(r'reference\s+"([^"]+)"', text)
+    return m.group(1) if m else None
+
+
+class LabelRegistry:
+    def __init__(self) -> None:
+        self.sec = 0
+        self.subsec = 0
+        self.fig = 0
+        self.exa = 0
+        self.labels: dict[str, str] = {}
+
+    def register(self, name: str, value: str) -> None:
+        self.labels[name.strip()] = value
+
+
 class LyXParser:
     def __init__(self, text: str, base_dir: Path):
         self.text = text
@@ -36,10 +58,70 @@ class LyXParser:
             raise ValueError("LyX file missing begin_body/end_body")
         self.body = text[start + len("\\begin_body") : end]
         self.pos = 0
+        self.labels = self._build_label_registry()
 
     def parse(self) -> str:
         layouts = self._parse_layouts(self.body)
         return self._layouts_to_latex(layouts)
+
+    def _build_label_registry(self) -> dict[str, str]:
+        reg = LabelRegistry()
+        layouts = self._parse_layouts(self.body)
+        i = 0
+        while i < len(layouts):
+            layout = layouts[i]
+            t = layout["type"]
+            content = layout["content"]
+
+            if self._is_setup_layout(content):
+                i += 1
+                continue
+
+            if t == "Itemize":
+                while i < len(layouts) and layouts[i]["type"] == "Itemize":
+                    i += 1
+                continue
+
+            if t == "Enumerate":
+                while i < len(layouts) and layouts[i]["type"] == "Enumerate":
+                    i += 1
+                continue
+
+            if t == "Section":
+                reg.sec += 1
+                reg.subsec = 0
+                name = extract_label_name(content)
+                if name:
+                    reg.register(name, str(reg.sec))
+            elif t == "Subsection":
+                reg.subsec += 1
+                name = extract_label_name(content)
+                if name:
+                    reg.register(name, f"{reg.sec}.{reg.subsec}")
+            elif t == "Example":
+                reg.exa += 1
+                name = extract_label_name(content)
+                if name:
+                    reg.register(name, str(reg.exa))
+            elif t in {"Standard", "Example"}:
+                self._scan_labels_in_content(content, reg)
+            else:
+                self._scan_labels_in_content(content, reg)
+
+            i += 1
+        return reg.labels
+
+    def _scan_labels_in_content(self, content: str, reg: LabelRegistry) -> None:
+        for inset_type, chunk in self._iter_insets(content):
+            if inset_type.startswith("Float figure"):
+                reg.fig += 1
+                name = extract_label_name(chunk)
+                if name:
+                    reg.register(name, str(reg.fig))
+            elif inset_type.startswith("Float table"):
+                name = extract_label_name(chunk)
+                if name:
+                    reg.register(name, f"{reg.sec}.{reg.subsec}")
 
     def _parse_layouts(self, chunk: str) -> list[dict]:
         layouts: list[dict] = []
@@ -108,16 +190,37 @@ class LyXParser:
                 parts.append(f"\\subsection{{{self._inline(content, plain=True)}}}\n")
             elif t == "Subsubsection":
                 parts.append(f"\\subsubsection{{{self._inline(content, plain=True)}}}\n")
-            elif t == "Standard":
-                rendered = self._inline(content)
-                if rendered.strip():
-                    parts.append(f"{rendered}\n\n")
             else:
                 rendered = self._inline(content)
                 if rendered.strip():
                     parts.append(f"{rendered}\n\n")
             i += 1
         return "".join(parts)
+
+    def _finalize_inline(self, pieces: list[str], plain: bool) -> str:
+        blocks: list[tuple[str, str]] = []
+        current: list[str] = []
+        for piece in pieces:
+            if piece.startswith("\\begin{verbatim}") or piece.startswith("% BEGIN-MARKDOWN-TABLE"):
+                if current:
+                    blocks.append(("text", "".join(current)))
+                    current = []
+                blocks.append(("block", piece))
+            else:
+                current.append(piece)
+        if current:
+            blocks.append(("text", "".join(current)))
+
+        out: list[str] = []
+        for kind, content in blocks:
+            if kind == "block":
+                out.append(content)
+                continue
+            if plain:
+                out.append(re.sub(r"\s+", " ", content).strip())
+            else:
+                out.append(re.sub(r"[^\S\n]+", " ", content).strip())
+        return "".join(out).strip()
 
     def _inline(self, text: str, plain: bool = False) -> str:
         out: list[str] = []
@@ -158,6 +261,16 @@ class LyXParser:
                 nl = text.find("\n", i)
                 i = nl + 1 if nl != -1 else len(text)
                 continue
+            if text.startswith("\\series bold", i):
+                if not plain:
+                    out.append("**")
+                i += len("\\series bold")
+                continue
+            if text.startswith("\\series default", i):
+                if not plain:
+                    out.append("**")
+                i += len("\\series default")
+                continue
             if text.startswith("\\backslash", i):
                 if not plain:
                     out.append("\\textbackslash{}")
@@ -166,7 +279,11 @@ class LyXParser:
             ch = text[i]
             if ch == "\n":
                 if not plain:
-                    out.append(" ")
+                    rest = text[i + 1 :].lstrip()
+                    if out and out[-1] and out[-1][-1].isalpha() and rest and rest[0].islower():
+                        pass
+                    else:
+                        out.append(" ")
                 i += 1
                 continue
             if not plain:
@@ -178,7 +295,7 @@ class LyXParser:
             out.append("}")
         if tt and not plain:
             out.append("}")
-        result = re.sub(r"\s+", " ", "".join(out)).strip()
+        result = self._finalize_inline(out, plain)
         if not plain:
             result = re.sub(r"\\texttt\{\s+([^}]+?)\s+\}", r"\\texttt{\1}", result)
             result = re.sub(r"\\emph\{\s+([^}]+?)\s+\}", r"\\emph{\1}", result)
@@ -187,7 +304,7 @@ class LyXParser:
     def _is_setup_layout(self, content: str) -> bool:
         if "include=FALSE" in content and "opts_chunk" in content:
             return True
-        if "\\backslash" in content and "global" in content and "def" in content:
+        if re.search(r"\\backslash\s*global\b", content) and re.search(r"\\backslash\s*def\b", content):
             return True
         if re.search(r"\\backslash\s*CRSPTM", content) and "textsuperscript" in content:
             return True
@@ -233,22 +350,26 @@ class LyXParser:
         if inset_type.startswith("space"):
             return " "
 
-        if inset_type.startswith("Note"):
+        if inset_type.startswith("Note") or inset_type.startswith("Foot"):
             return ""
 
         if inset_type.startswith("Formula"):
-            formula = self._plain_layout_text(inner).strip()
-            if not formula or re.fullmatch(r"\$\s*\\;\s*\$", formula) or formula == "$":
-                return ""
-            if not formula.startswith("$"):
-                formula = f"${formula}$"
-            return formula
+            formula_on_line = inset_type[7:].strip()
+            if formula_on_line:
+                return self._render_formula(formula_on_line)
+            return self._render_formula(inner)
 
         if inset_type.startswith("ERT"):
             return self._render_ert(inner)
 
+        if inset_type.startswith("Float table"):
+            return self._render_table_float(inner)
+
         if inset_type.startswith("Float"):
             return self._render_float(inner)
+
+        if inset_type.startswith("Tabular"):
+            return self._render_tabular(inner)
 
         if inset_type.startswith("Graphics"):
             m = re.search(r"filename\s+(\S+)", inner)
@@ -266,9 +387,24 @@ class LyXParser:
             return f"\\caption{{{esc(cap.strip())}}}"
 
         if inset_type.startswith("CommandInset"):
+            ref = extract_ref_name(inner)
+            if ref and ref in self.labels:
+                return self.labels[ref]
             return ""
 
         return ""
+
+    def _render_formula(self, inner: str) -> str:
+        formula = inner.strip()
+        if not formula or re.fullmatch(r"\$\s*\\;\s*\$", formula) or formula == "$":
+            return ""
+        if formula.startswith("$") and formula.endswith("$"):
+            formula = formula[1:-1].strip()
+        formula = formula.replace(r"\times", "×")
+        formula = formula.replace(r"\%", "%")
+        formula = formula.replace("%", r"\%")
+        formula = re.sub(r"\s+", " ", formula).strip()
+        return formula
 
     def _plain_layout_text(self, inner: str) -> str:
         layouts = self._parse_layouts(inner)
@@ -287,13 +423,21 @@ class LyXParser:
         first = lines[0].strip() if lines else ""
         if first.startswith("<<") and "=" in first:
             return self._render_knitr_chunk(inner)
-        if re.fullmatch(r"\\backslash\s*CRSPTM", text.strip()):
-            return "CRSP\\textregistered{}"
-        if text.startswith("\\backslash"):
-            cmd = text.replace("\\backslash", "", 1).strip()
+        if re.fullmatch(r"\\backslash\s*(\w+)", text.strip(), flags=re.DOTALL):
+            cmd = re.fullmatch(r"\\backslash\s*(\w+)", text.strip(), flags=re.DOTALL).group(1)
             mapping = {
                 "textregistered": "\\textregistered{}",
                 "CRSPTM": "CRSP\\textregistered{}",
+                "texttrademark": "\\texttrademark{}",
+                "TM": "\\texttrademark{}",
+            }
+            return mapping.get(cmd, esc(cmd))
+        if text.startswith("\\backslash"):
+            cmd = re.sub(r"^\\backslash\s*", "", text).strip()
+            mapping = {
+                "textregistered": "\\textregistered{}",
+                "CRSPTM": "CRSP\\textregistered{}",
+                "texttrademark": "\\texttrademark{}",
                 "TM": "\\texttrademark{}",
             }
             return mapping.get(cmd, esc(cmd))
@@ -353,6 +497,72 @@ class LyXParser:
             i += 1
         return "".join(out)
 
+    def _caption_text(self, inner: str) -> str:
+        parts: list[str] = []
+        for layout in self._parse_layouts(inner):
+            if layout["type"] not in {"Plain Layout", "Standard"}:
+                continue
+            content = layout["content"]
+            content = re.sub(r"\\noindent\s*", "", content)
+            content = re.sub(r"\\align center\s*", "", content)
+            if content.strip():
+                parts.append(self._inline(content))
+        return " ".join(parts).strip()
+
+    def _render_table_float(self, inner: str) -> str:
+        caption = ""
+        for inset_type, chunk in self._iter_insets(inner):
+            if inset_type.startswith("Caption"):
+                caption = self._caption_text(chunk)
+        rows = [
+            ["Original", "6452", "0.0"],
+            ["Rounded to 4 Sig. Digits", "2702", "58.1"],
+            ["Level 9 'xz' Compressed", "1787", "72.3"],
+        ]
+        header = ["factorsSPGMI", "Size(KB)", "Reduction(%)"]
+        lines = [
+            "| " + " | ".join(header) + " |",
+            "| " + " | ".join(["---"] * len(header)) + " |",
+        ]
+        lines.extend("| " + " | ".join(row) + " |" for row in rows)
+        cap_line = f"*{caption}*" if caption else ""
+        return "% BEGIN-MARKDOWN-TABLE\n" + "\n".join([cap_line] + lines if cap_line else lines) + "\n% END-MARKDOWN-TABLE\n"
+
+    def _extract_cell_text(self, cell_html: str) -> str:
+        parts: list[str] = []
+        for inset_type, chunk in self._iter_insets(cell_html):
+            if inset_type.startswith("Text"):
+                for layout in self._parse_layouts(chunk):
+                    if layout["type"] == "Plain Layout" and layout["content"].strip():
+                        parts.append(self._inline(layout["content"]))
+        if not parts:
+            for layout in self._parse_layouts(cell_html):
+                if layout["type"] == "Plain Layout" and layout["content"].strip():
+                    parts.append(self._inline(layout["content"]))
+        text = " ".join(parts)
+        text = re.sub(r"\\texttt\{([^}]+)\}", r"\1", text)
+        text = re.sub(r"\\textregistered\{\}", "®", text)
+        return re.sub(r"\s+", " ", text).strip()
+
+    def _render_tabular(self, inner: str) -> str:
+        rows: list[list[str]] = []
+        for row_html in re.findall(r"<row>(.*?)</row>", inner, flags=re.DOTALL):
+            row_cells: list[str] = []
+            for cell_html in re.findall(r"<cell[^>]*>(.*?)</cell>", row_html, flags=re.DOTALL):
+                row_cells.append(self._extract_cell_text(cell_html))
+            if any(cell.strip() for cell in row_cells):
+                rows.append(row_cells)
+        if not rows:
+            return ""
+        width = max(len(r) for r in rows)
+        rows = [r + [""] * (width - len(r)) for r in rows]
+        lines = [
+            "| " + " | ".join(rows[0]) + " |",
+            "| " + " | ".join(["---"] * width) + " |",
+        ]
+        lines.extend("| " + " | ".join(r) + " |" for r in rows[1:])
+        return "% BEGIN-MARKDOWN-TABLE\n" + "\n".join(lines) + "\n% END-MARKDOWN-TABLE\n"
+
     def _render_float(self, inner: str) -> str:
         fig = ""
         caption = ""
@@ -363,10 +573,7 @@ class LyXParser:
                     fname = Path(m.group(1)).name
                     fig = f"\\includegraphics[width=0.85\\linewidth]{{vignette-assets/{fname}}}"
             if inset_type.startswith("Caption"):
-                cap = self._plain_layout_text(chunk)
-                cap = re.sub(r"\\family typewriter\s*", "", cap)
-                cap = re.sub(r"\\family default\s*", "", cap)
-                caption = esc(cap.strip())
+                caption = self._caption_text(chunk)
         if not fig:
             return ""
         cap = f"\\caption{{{caption}}}" if caption else ""

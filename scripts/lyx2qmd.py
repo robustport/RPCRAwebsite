@@ -17,27 +17,30 @@ LYX_SRC = Path(r"c:\ProfDM_Rproject\Book_Website\PCRA Website\Vignettes")
 VIGNETTES = [
     {
         "lyx": "PCRA Package and Data Overview.lyx",
-        "qmd": ROOT / "vignette-1.qmd",
+        "qmd": ROOT / "vignette-1-v2.qmd",
         "pdf": "pdfs/vignette-1.pdf",
-        "title": "Vignette 1: RPCRA Package and Data Overview",
+        "title": "Vignette 1: RPCRA Package and Data Overview (v2 preview)",
         "authors": "**Authors:** Doug Martin, Tom Philips, Jon Spinney, and Kirk Li",
         "download": "Vignette 1 — RPCRA Package and Data Overview",
+        "original_href": "vignette-1.html",
     },
     {
         "lyx": "CRSP Stocks and SPGMI Factors in PCRA.lyx",
-        "qmd": ROOT / "vignette-2.qmd",
+        "qmd": ROOT / "vignette-2-v2.qmd",
         "pdf": "pdfs/vignette-2.pdf",
-        "title": "Vignette 2: CRSP Stocks and SPGMI Factors in PCRA",
+        "title": "Vignette 2: CRSP Stocks and SPGMI Factors in PCRA (v2 preview)",
         "authors": "**Authors:** Doug Martin and Jon Spinney",
         "download": "Vignette 2 — CRSP Stocks and SPGMI Factors in PCRA",
+        "original_href": "vignette-2.html",
     },
     {
         "lyx": "PCRA Reproducibility.lyx",
-        "qmd": ROOT / "vignette-3.qmd",
+        "qmd": ROOT / "vignette-3-v2.qmd",
         "pdf": "pdfs/vignette-3.pdf",
-        "title": "Vignette 3: RPCRA Reproducibility",
+        "title": "Vignette 3: RPCRA Reproducibility (v2 preview)",
         "authors": None,
         "download": "Vignette 3 — RPCRA Reproducibility",
+        "original_href": "vignette-3.html",
     },
 ]
 
@@ -92,10 +95,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 def clean_caption(text: str) -> str:
-    text = re.sub(r"\\[a-zA-Z]+\{([^}]*)\}", r"\1", text)
+    text = re.sub(r"\\begin_layout Plain Layout\s*", "", text)
+    text = re.sub(r"\\end_layout\s*", "", text)
+    text = re.sub(r"\\textbackslash\{\}", "", text)
+    text = re.sub(r"\\textregistered\{\}", "®", text)
+    text = re.sub(r"\\texttrademark\{\}", "™", text)
+    text = re.sub(r"\\texttt\{([^}]+)\}", r"\1", text)
     text = re.sub(r"\\[a-zA-Z]+", "", text)
     text = re.sub(r"\s+", " ", text).strip()
     return text
+
+
+def extract_brace_content(text: str, open_brace_index: int) -> str:
+    if open_brace_index >= len(text) or text[open_brace_index] != "{":
+        return ""
+    depth = 0
+    for i in range(open_brace_index, len(text)):
+        ch = text[i]
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return text[open_brace_index + 1 : i]
+    return ""
+
+
+def stash_figures(tex: str, placeholders: dict[str, str]) -> str:
+    parts: list[str] = []
+    i = 0
+    while i < len(tex):
+        start = tex.find("\\begin{figure}", i)
+        if start == -1:
+            parts.append(tex[i:])
+            break
+        parts.append(tex[i:start])
+        end = tex.find("\\end{figure}", start)
+        if end == -1:
+            parts.append(tex[start:])
+            break
+        block = tex[start : end + len("\\end{figure}")]
+        fname_match = re.search(r"\\includegraphics\[.*?\]\{vignette-assets/([^\}]+)\}", block)
+        caption = ""
+        cap_marker = block.find("\\caption{")
+        if cap_marker != -1:
+            caption = extract_brace_content(block, cap_marker + len("\\caption"))
+        key = f"ZZZFIG{len(placeholders)}ZZZ"
+        fname = Path(fname_match.group(1)).name if fname_match else "figure.png"
+        cap_clean = clean_caption(caption) if caption else fname
+        placeholders[key] = f"\n\n![{cap_clean}](vignette-assets/{fname})\n\n"
+        parts.append(key)
+        i = end + len("\\end{figure}")
+    return "".join(parts)
 
 
 def tex_prepare_for_pandoc(tex: str) -> tuple[str, dict[str, str]]:
@@ -108,7 +159,11 @@ def tex_prepare_for_pandoc(tex: str) -> tuple[str, dict[str, str]]:
             match.group(2)
             .replace("echo = TRUE", "echo=true")
             .replace("warning = FALSE", "warning=false")
+            .replace("warning=FALSE", "warning=false")
             .replace("eval = FALSE", "eval=false")
+            .replace("eval=FALSE", "eval=false")
+            .replace("echo = TRUE", "echo=true")
+            .replace("echo=TRUE", "echo=true")
             .replace("echo=T", "echo=true")
             .replace("warning=F", "warning=false")
         )
@@ -122,19 +177,18 @@ def tex_prepare_for_pandoc(tex: str) -> tuple[str, dict[str, str]]:
         flags=re.DOTALL,
     )
 
-    def stash_figure(match: re.Match[str]) -> str:
-        key = f"ZZZFIG{len(placeholders)}ZZZ"
-        fname = Path(match.group(1)).name
-        caption = clean_caption(match.group(2).strip() if match.lastindex >= 2 and match.group(2) else fname)
-        placeholders[key] = f'\n\n![{caption}](vignette-assets/{fname})\n\n'
+    def stash_markdown_table(match: re.Match[str]) -> str:
+        key = f"ZZZTABLE{len(placeholders)}ZZZ"
+        placeholders[key] = "\n\n" + match.group(1).strip() + "\n\n"
         return key
 
     tex = re.sub(
-        r"\\begin\{figure\}.*?\\includegraphics\[.*?\]\{vignette-assets/([^\}]+)\}.*?\\caption\{([^\}]*)\}.*?\\end\{figure\}",
-        stash_figure,
+        r"% BEGIN-MARKDOWN-TABLE\n(.*?)\n% END-MARKDOWN-TABLE",
+        stash_markdown_table,
         tex,
         flags=re.DOTALL,
     )
+    tex = stash_figures(tex, placeholders)
     return tex, placeholders
 
 
@@ -173,6 +227,8 @@ def normalize_markdown(md: str) -> str:
     md = re.sub(r"^newpage\s*$", "", md, flags=re.MULTILINE)
     md = re.sub(r"\\series bold\s+", "**", md)
     md = re.sub(r"\\series default", "**", md)
+    md = re.sub(r"\\textbackslash\{\}series bold", "**", md)
+    md = re.sub(r"\\textbackslash\{\}series default", "**", md)
     md = re.sub(r"\\color blue\s+", "", md)
     md = re.sub(r"\\color inherit", "", md)
     md = re.sub(r"\\begin_inset Quotes eld\\end_inset", '"', md)
@@ -203,15 +259,30 @@ def normalize_markdown(md: str) -> str:
     md = re.sub(r"```\n([A-Za-z#*])", r"```\n\n\1", md)
     md = re.sub(r"```([A-Za-z])", r"```\n\n\1", md)
     md = re.sub(r"([.!?])```\{r", r"\1\n\n```{r", md)
+    md = re.sub(
+        r"!\[[^\]]*\{[^\]]*\]\((vignette-assets/[^)]+)\)",
+        lambda m: f"![]({m.group(1)})",
+        md,
+    )
 
-    # Fix spacing inside inline code and broken list items
-    md = re.sub(r"`\s+([^`]+?)\s+`", r"`\1`", md)
+    # Fix spacing inside inline code (single-line only; avoid swallowing ``` fences)
+    md = re.sub(
+        r"`([^`\n]+?)`",
+        lambda m: f"`{re.sub(r'\\s+', ' ', m.group(1)).strip()}`",
+        md,
+    )
     md = re.sub(r"\n-\`", "\n- `", md)
     md = re.sub(r"-` ", "- `", md)
     md = re.sub(r"`data\.fram`\s*e", "`data.frame`", md)
     md = re.sub(r"data\.fram e", "data.frame", md)
     md = re.sub(r"\*\*([^*]+)\*\* \*\*", r"**\1**", md)
 
+    md = md.replace("LXY (", "LyX (")
+    md = md.replace("LYX document", "LyX document")
+    md = re.sub(r"\( (<https://www\.lyx\.org/>) document", r"(\1) document", md)
+
+    md = re.sub(r"\n{3,}", "\n\n", md)
+    md = re.sub(r"\n```!\[", "\n```\n\n![", md)
     md = re.sub(r"\n{3,}", "\n\n", md)
     return md.strip() + "\n"
 
@@ -222,6 +293,14 @@ def wrap_qmd(meta: dict, body: str) -> str:
         authors_block = f"""
 ::: {{.copyright-notice}}
 {meta["authors"]}
+:::
+"""
+
+    preview_note = f"""
+::: {{.callout-warning}}
+## v2 preview — under review
+This page is an automated LyX-to-web conversion being verified against the PDF vignette.
+The [original vignette page]({meta.get("original_href", "vignettes.html")}) remains the default until this version is approved.
 :::
 """
 
@@ -238,6 +317,7 @@ toc-title: ""
 <div class="margin-toc-page">
 ```
 
+{preview_note}
 {authors_block}
 ::: {{.pdf-callout}}
 ::: {{.pdf-icon}}
@@ -332,9 +412,9 @@ def convert_vignette(spec: dict) -> None:
     pdf_src = LYX_SRC / Path(spec["pdf"]).name.replace("pdfs/", "")
     # Map to numbered pdf names in Vignettes folder
     pdf_map = {
-        "vignette-1.qmd": "1. PCRA Package and Data Overview.pdf",
-        "vignette-2.qmd": "2. CRSP Stocks and SPGMI Factors in PCRA.pdf",
-        "vignette-3.qmd": "3. PCRA Reproducibility.pdf",
+        "vignette-1-v2.qmd": "1. PCRA Package and Data Overview.pdf",
+        "vignette-2-v2.qmd": "2. CRSP Stocks and SPGMI Factors in PCRA.pdf",
+        "vignette-3-v2.qmd": "3. PCRA Reproducibility.pdf",
     }
     pdf_name = pdf_map.get(spec["qmd"].name)
     if pdf_name:

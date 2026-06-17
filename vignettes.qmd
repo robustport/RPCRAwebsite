@@ -5,6 +5,8 @@ toc: false
 
 The book is accompanied by three vignettes that provide hands-on documentation for the `PCRA` R package and its data. Click any title below to view the vignette PDF.
 
+## Current vignettes
+
 ```{=html}
 <div class="vignette-list">
 
@@ -37,6 +39,40 @@ The book is accompanied by three vignettes that provide hands-on documentation f
       and tables in the chapters: the <code>demo()</code> command, copy/paste workflow,
       sourcing with <code>rstudioapi</code>, character of the scripts, and setup of
       <code>devtools</code> and Rtools.
+    </p>
+  </div>
+
+</div>
+```
+
+## Vignettes v2 (preview)
+
+Automated LyX-to-web conversions under review. Compare these against the current pages above; once verified, v2 will replace the originals.
+
+```{=html}
+<div class="vignette-list">
+
+  <div class="vignette-item">
+    <div class="vignette-label">Vignette 1 v2</div>
+    <div class="vignette-title"><a href="vignette-1-v2.html">RPCRA Package and Data Overview</a> <span style="font-size:0.85em;color:#b45309;">(preview)</span></div>
+    <p class="vignette-desc">
+      LyX conversion preview — same content as Vignette 1, regenerated from source with improved cross-refs, tables, and figures.
+    </p>
+  </div>
+
+  <div class="vignette-item">
+    <div class="vignette-label">Vignette 2 v2</div>
+    <div class="vignette-title"><a href="vignette-2-v2.html">CRSP Stocks and SPGMI Factors</a> <span style="font-size:0.85em;color:#b45309;">(preview)</span></div>
+    <p class="vignette-desc">
+      LyX conversion preview — includes CRSP item-name mapping table and resolved section/figure references.
+    </p>
+  </div>
+
+  <div class="vignette-item">
+    <div class="vignette-label">Vignette 3 v2</div>
+    <div class="vignette-title"><a href="vignette-3-v2.html">RPCRA Reproducibility</a> <span style="font-size:0.85em;color:#b45309;">(preview)</span></div>
+    <p class="vignette-desc">
+      LyX conversion preview — reproducibility workflow documentation from LyX source.
     </p>
   </div>
 
