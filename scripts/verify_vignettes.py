@@ -44,6 +44,7 @@ BREAK_PATTERNS = {
     "lyx_typo": r"\bLXY\b|LYX document",
     "leaked_layout": r"\\begin_layout|\\end_layout",
     "executable_r_chunk": r"```\{r",
+    "broken_r_fence": r"```\s*\n+r\s*\n",
     "missing_row_count": r"total number of rows of.*is ,",
 }
 

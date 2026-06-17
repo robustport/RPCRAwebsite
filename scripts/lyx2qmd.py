@@ -249,11 +249,10 @@ def normalize_markdown(md: str) -> str:
         md,
     )
 
-    # Ensure blank lines around fenced code blocks
+    # Ensure blank lines around fenced code blocks (legacy ```{r} only)
     md = re.sub(r"([^\n])```\{r", r"\1\n\n```{r", md)
-    md = re.sub(r"```\n([A-Za-z#*])", r"```\n\n\1", md)
-    md = re.sub(r"```([A-Za-z])", r"```\n\n\1", md)
     md = re.sub(r"([.!?])```\{r", r"\1\n\n```{r", md)
+    md = re.sub(r"```\n+r\n", "```r\n", md)
     md = re.sub(
         r"!\[[^\]]*\{[^\]]*\]\((vignette-assets/[^)]+)\)",
         lambda m: f"![]({m.group(1)})",
