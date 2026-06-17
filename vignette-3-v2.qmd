@@ -5,20 +5,10 @@ toc: true
 toc-location: right
 toc-depth: 2
 toc-title: ""
-execute:
-  enabled: true
 ---
 
 ```{=html}
 <div class="margin-toc-page">
-```
-
-```{r}
-#| include: false
-library(PCRA)
-library(data.table)
-library(xts)
-dir.create("vignette-assets", showWarnings = FALSE)
 ```
 
 ::: {.callout-warning}
@@ -119,7 +109,8 @@ You can also run an entire script using the R `source` function, with the script
 
 With just two additional lines of code ahead of the start of the script, `rstudioapi` automates the process of setting the working directory to the location of a script when sourcing it. The library and the corresponding lines of code are shown below.
 
-```{r echo=TRUE, warning=FALSE}
+```r
+
 library(rstudioapi)
 current_path <- rstudioapi::getActiveDocumentContext()$path
 setwd(dirname(current_path ))

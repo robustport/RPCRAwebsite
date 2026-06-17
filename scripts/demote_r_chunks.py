@@ -8,15 +8,18 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TARGETS = [
-    ROOT / "vignette-1.qmd",
-    ROOT / "vignette-2.qmd",
-    ROOT / "vignette-3.qmd",
-]
+TARGETS = sorted(ROOT.glob("vignette*.qmd"))
 
 
 def demote_r_chunks(text: str) -> str:
     text = text.replace("\r\n", "\n")
+    text = re.sub(
+        r"^execute:\s*\n\s*enabled:\s*true\s*\n",
+        "",
+        text,
+        count=1,
+        flags=re.MULTILINE,
+    )
     text = re.sub(r"```\{r[^`]*\}", "\n\n```r\n", text)
     text = re.sub(r"```([A-Z])", r"```\n\n\1", text)
     text = re.sub(

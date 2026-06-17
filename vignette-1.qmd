@@ -13,15 +13,6 @@ execute:
 <div class="margin-toc-page">
 ```
 
-```r
-
-#| include: false
-library(PCRA)
-library(data.table)
-library(xts)
-dir.create("vignette-assets", showWarnings = FALSE)
-```
-
 ::: {.copyright-notice}
 **Authors:** Doug Martin, Tom Philips, Jon Spinney, and Kirk Li
 :::
