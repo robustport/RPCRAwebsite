@@ -26,14 +26,6 @@ toc: false
       <span class="author-name">Kirk Li</span>
     </div>
 
-    <div class="hero-pointers">
-      <a href="preface.html" class="hero-pointer">Preface</a>
-      <a href="chapter-summaries.html" class="hero-pointer">Chapter Summaries</a>
-      <a href="vignettes.html" class="hero-pointer">Vignettes</a>
-      <a href="demo-code.html" class="hero-pointer">Demo Scripts</a>
-      <a href="appendices.html" class="hero-pointer">Appendices</a>
-    </div>
-
   </div>
 </div>
 ```
@@ -42,7 +34,24 @@ toc: false
 **Copyright Notice.** Material on this site is planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2025.
 :::
 
-## 1 About the Book
+```{=html}
+<nav class="home-sidebar-toc" aria-label="Page contents">
+  <div class="home-sidebar-toc-inner">
+    <p class="home-sidebar-title">On this page</p>
+    <ol class="home-sidebar-list">
+      <li><a href="#about-the-book">About the Book</a></li>
+      <li><a href="#preface">Preface</a></li>
+      <li><a href="#chapter-summaries">Chapter Summaries</a></li>
+      <li><a href="#vignettes">Vignettes</a></li>
+      <li><a href="#demo-code">Demo Code</a></li>
+      <li><a href="#appendices">Appendices</a></li>
+      <li><a href="#citation">Citation</a></li>
+    </ol>
+  </div>
+</nav>
+```
+
+## 1 About the Book {#about-the-book}
 
 *Robust Portfolio Construction and Risk Analysis* (RPCRA) provides a comprehensive and rigorous account of the quantitative foundations of modern portfolio management. The book develops the mathematical, statistical, and computational tools needed to construct, evaluate, and manage the risk of investment portfolios in a principled way.
 
@@ -52,7 +61,7 @@ The text integrates classical theory — mean-variance optimization, the Capital
 <div class="section-rule"><span>Preface</span></div>
 ```
 
-## [2 Preface](preface.qmd)
+## 2 Preface {#preface}
 
 The [Preface](preface.qmd) provides an overview of the book's 16 chapters and 5 appendices, describes the reproducibility theme and supporting R packages (`PCRA`, `facmodCS`, `facmodTS`, `robustGarch`), motivates the use of robust estimators, introduces the special focus topics in Chapters 10–16, and includes data use disclaimers for CRSP, SPGMI, ICE, Tradeweb, S&P, and CBOE datasets.
 
@@ -60,7 +69,7 @@ The [Preface](preface.qmd) provides an overview of the book's 16 chapters and 5 
 <div class="section-rule"><span>Chapter Summaries</span></div>
 ```
 
-## [3 Chapter Summaries](chapter-summaries.qmd)
+## 3 Chapter Summaries {#chapter-summaries}
 
 Concise summaries of all 16 chapters in *Robust Portfolio Construction and Risk Analysis*, covering key topics, methods, and results chapter by chapter.
 
@@ -72,7 +81,7 @@ Concise summaries of all 16 chapters in *Robust Portfolio Construction and Risk 
 <div class="section-rule"><span>Vignettes</span></div>
 ```
 
-## [4 Vignettes](vignettes.qmd)
+## 4 Vignettes {#vignettes}
 
 The book is accompanied by three vignettes that provide hands-on documentation for the `PCRA` R package and its data. PDFs are available for download on each vignette page.
 
@@ -120,7 +129,7 @@ The book is accompanied by three vignettes that provide hands-on documentation f
 <div class="section-rule"><span>Demo Code</span></div>
 ```
 
-## [5 Demo Code](demo-code.qmd)
+## 5 Demo Code {#demo-code}
 
 Chapter-by-chapter R scripts that reproduce the figures and tables in the book are provided in the `PCRA` R package. The [Demo Code](demo-code.qmd) page lists all available scripts and instructions for running them.
 
@@ -132,7 +141,7 @@ Chapter-by-chapter R scripts that reproduce the figures and tables in the book a
 <div class="section-rule"><span>Appendices</span></div>
 ```
 
-## [6 Appendices](appendices.qmd)
+## 6 Appendices {#appendices}
 
 This site hosts the five technical appendices to RPCRA. Each appendix provides self-contained background material that underpins the methods and results developed in the main text. Full PDF downloads are available on each appendix page.
 
@@ -146,7 +155,7 @@ This site hosts the five technical appendices to RPCRA. Each appendix provides s
 <div class="section-rule"><span>Citation</span></div>
 ```
 
-## Citation
+## Citation {#citation}
 
 ```{=html}
 <div class="cite-block">
