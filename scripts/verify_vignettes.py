@@ -43,6 +43,7 @@ BREAK_PATTERNS = {
     "hyphenation_break": r"distincti ve|parameter s|constructio n|performan ce",
     "lyx_typo": r"\bLXY\b|LYX document",
     "leaked_layout": r"\\begin_layout|\\end_layout",
+    "executable_r_chunk": r"```\{r",
     "missing_row_count": r"total number of rows of.*is ,",
 }
 

@@ -155,21 +155,14 @@ def tex_prepare_for_pandoc(tex: str) -> tuple[str, dict[str, str]]:
     def stash_verbatim(match: re.Match[str]) -> str:
         key = f"ZZZCODE{len(placeholders)}ZZZ"
         code = match.group(1).strip()
-        opts = (
-            match.group(2)
-            .replace("echo = TRUE", "echo=true")
-            .replace("warning = FALSE", "warning=false")
-            .replace("warning=FALSE", "warning=false")
-            .replace("eval = FALSE", "eval=false")
-            .replace("eval=FALSE", "eval=false")
-            .replace("echo = TRUE", "echo=true")
-            .replace("echo=TRUE", "echo=true")
-            .replace("echo=T", "echo=true")
-            .replace("warning=F", "warning=false")
-        )
-        if "eval=false" not in opts and "eval=true" not in opts:
-            opts = (opts + ", eval=false").lstrip(", ")
-        placeholders[key] = f"\n\n```{{r {opts}}}\n{code}\n```\n\n"
+        opts = match.group(2)
+        if re.search(r"\binclude\s*=\s*FALSE\b", opts, flags=re.I):
+            return ""
+        if re.search(r"\becho\s*=\s*FALSE\b", opts, flags=re.I) and re.search(
+            r"\bresults\s*=\s*FALSE\b", opts, flags=re.I
+        ):
+            return ""
+        placeholders[key] = f"\n\n```r\n{code}\n```\n\n"
         return key
 
     tex = re.sub(
@@ -313,8 +306,6 @@ toc: true
 toc-location: right
 toc-depth: 2
 toc-title: ""
-execute:
-  eval: false
 ---
 
 ```{{=html}}
