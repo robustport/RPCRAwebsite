@@ -1,9 +1,16 @@
 ---
 title: "Preface"
 subtitle: "Robust Portfolio Construction and Risk Analysis"
-page-layout: full
-toc: false
+page-layout: article
+toc: true
+toc-location: right
+toc-depth: 2
+toc-title: ""
 ---
+
+```{=html}
+<div class="margin-toc-page">
+```
 
 ::: {.copyright-notice}
 R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. Springer, planned publication 2026.
@@ -19,12 +26,183 @@ R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. Springer, plan
 :::
 :::
 
+## Overview {#overview}
+
+This Robust Portfolio Construction and Risk Analysis (RPCRA) book, with its unique *reproducibility* code, *robust estimators*, and *special focus* topics, has been written for use in advanced upper level undergraduate, M.S., and PhD level quantitative finance courses. It grew out of our collective experiences as researchers, educators and investors, and is thus supportive of research projects in such programs, as well as in commercial quantitative portfolio management and research.
+
+Much of the content in Chapters 1–9 is suitable for a full academic year M.S. course, and selected portions of these chapters can serve the needs of a one-semester course. The additional material in Chapters 10–16 is well suited to special topics and project oriented courses. The chapters and the topics they cover are:
+
+- **Chapter 1.** Introduction to Portfolio Management
+- **Chapter 2.** Foundations
+- **Chapter 3.** Modeling Asset Returns
+- **Chapter 4.** Covariance Matrices
+- **Chapter 5.** Portfolio Constraints and Penalties
+- **Chapter 6.** Time Series Models
+- **Chapter 7.** Cross Section Factor Models
+- **Chapter 8.** Portfolio Risk Analysis
+- **Chapter 9.** Minimum Downside Risk Portfolios
+- **Chapter 10.** Performance Evaluation
+- **Chapter 11.** Expected Returns
+- **Chapter 12.** Fixed Income Portfolio Management
+- **Chapter 13.** Portfolios With Options
+- **Chapter 14.** Managing Portfolios to Meet Spending Objectives
+- **Chapter 15.** Influence Functions and Standard Errors
+- **Chapter 16.** Robust Estimators
+
+In addition, there are five appendices:
+
+- **Appendix A.** Mathematical Tools For PCRA
+- **Appendix B.** Mathematical Tools For PCRA
+- **Appendix C.** Utility Theory
+- **Appendix D.** Portfolio Theory
+- **Appendix E.** Machine Learning
+
+In addition, we will maintain a companion website for this book at [https://www.robustpcra.org](https://www.robustpcra.org). On this site, we will post articles, provide code and examples, and point to new uses of the datasets included in the `PCRA` package.
+
+## Reproducibility {#reproducibility}
+
+R packages that include R functions and data support reproducibility of figures and tables throughout the book. Specifically, this is the case for most of the figures and tables in Chapters 2–6 and 9–12, as well as the figures and tables in some sections of Chapters 1 and 7–8. These features allow students to get hands-on experience in replicating the figures and tables in RPCRA, and in extending the code to study portfolio performance for different time periods, different portfolio stock groups (such as capitalization groups and sectors), and different returns frequencies. These features also support instructors in creating new computing-oriented portfolio construction and risk analysis exercises.
+
+### R Packages for the RPCRA Book and its Reproducibility Character {#r-packages}
+
+The following R packages were developed specifically for the writing of the RPCRA book and its reproducibility character, and are downloadable from the CRAN website [https://cran.r-project.org](https://cran.r-project.org):
+
+- `PCRA`: Portfolio construction and risk analysis
+- `facmodCS`: Cross-section factor models
+- `facmodTS`: Time series factor models
+- `robustGarch`: Robust Garch(1, 1) models.
+
+### Data for Reproducibility {#data-for-reproducibility}
+
+The `PCRA` package contains data sets that support reproducibility as well as a multitude of exercises at the end of each chapter. They may also be used by course instructors to create new exercises. The datasets include:
+
+- Center for Research of Security Prices (CRSP®) monthly, weekly and daily stocks data for 294 stocks from 1993 to 2015, and Standard and Poors Global Market Intelligence (SPGMI) monthly factors data for the CRSP® stocks data (for reproducibility of results in Chapters 2–9)
+- S&P, CBOE, and Hedge Fund data sets for reproducibility in Chapters 10 and 11.
+- ICE Fixed Income datasets for reproducibility in Chapter 12
+
+An overview of the `PCRA` package and its data sets are provided in the *PCRA Package and Data Overview* vignette that is downloadable from [https://cran.r-project.org/web/packages/PCRA](https://cran.r-project.org/web/packages/PCRA). Detailed information about the CRSP® monthly, weekly and daily stocks data, and `factorsSPGMI` monthly data is provided in the *CRSP Stocks and SPGMI Factors in PCRA* vignette that is also downloadable from the above `PCRA` package link.
+
+## Robust Estimators {#robust-estimators}
+
+Having firsthand experience of the impact of outliers in portfolio management, we were struck by how little attention has been paid to this important problem in portfolio management textbooks, and more generally in quantitative finance books. More often than not, students learn the elegant mathematics of portfolio theory with little appreciation for its fragility in the face of the prodigious levels of noise that permeate most markets. Such noise includes outliers that can have large distorting influences on the classical estimators that are routinely used in risk analysis.
+
+The adverse influence of outliers on these classical estimators can be avoided by using modern robust alternatives that are not much influenced by outliers, and which provide better fits to the bulk of the data than do classical estimators. Chapters 2, 4, 6, and 7 introduce modern robust estimators of returns means and standard errors, covariance matrices, time-series factor models, and cross-section factor models respectively. These chapters provide clear examples of the superior fits afforded by robust estimators relative to classical estimators in the presence of even a few outliers. Chapter 16 provides background mathematical details on robust estimators and provides a bridge to RobStat™, the Maronna et al. (2019) *Robust Statistics: Theory and Methods* book that serves as our primary reference for robust statistical methods.
+
+The robust estimators examples in this book suggest that they may result in better portfolio performance than classical estimators. But this is not guaranteed — extensive studies are needed to determine if and when robust estimators can consistently result in better portfolio performance. That said, robust estimators serve a very useful purpose of diagnosing whether or not outliers are influencing a classical estimator model fit, for, without such comparison, portfolio managers will typically be unaware of whether or not outliers are influencing the classical estimators they typically use. This claim is vividly demonstrated when comparing robust and classical regression model fits in Chapters 6 and 7 (time series and cross-section factor models, respectively).
+
+## Special Focus Topics {#special-focus-topics}
+
+Chapters 10–16 cover a number of special topics that most textbooks either ignore or address with a light touch. We hope in this book to rectify these omissions.
+
+In Chapter 10, we cover performance measurement for public and private funds and the application of statistical process control techniques (the CUSUM algorithm) to rapidly detect underperformance for actively managed portfolios. Chapter 11 develops a powerful accounting-based framework to estimate the expected returns of equity indices and also addresses the identification of business cycles for purposes of conditional forecasting. In addition, it covers the estimation of factor risk premia and touches on the reproducibility and economic viability of the vast universe of reported anomalies. Some of the material in this chapter is well known to economists and electrical engineers, particularly those focused on signal processing, but lacks visibility in finance. We also explore the links between expected returns, corporate finance and corporate valuation, all three of which are joined at the hip intellectually, but are usually treated separately.
+
+Chapter 12 addresses fixed income markets and ends with a discussion of practical techniques for robust fixed income portfolio management and immunization of liabilities. Chapter 13 explores the role of options in portfolios, while Chapter 14 explores end uses of portfolio management — in particular, the management of portfolios to meet spending objectives. More often than not, these topics are treated separately, but it is impossible to think constructively about one without keeping the other in mind. Arguably, re-centering one's thoughts around an asset-liability framework instead of an asset-only framework is the single most important change that an investor can make, and we hope to nudge our readers in this direction.
+
+Finally, in Chapters 15 and 16, we return to robust statistics, and develop ideas presented earlier in the book in greater detail.
+
+## Acknowledgments {#acknowledgments}
+
+This book, and its accompanying `PCRA` package, would not have seen the light of day without help from a vast array of colleagues, friends and well wishers. Some helped with the development and maintenance of one or more R packages that support the book and its associated reproducibility character. Others read chapters and commented on them, and yet others granted us formal rights to include datasets in the `PCRA` package that are not available to the public. These contributors are listed in the following paragraphs; we thank them for their generosity, and apologize in advance to any we might inadvertently have missed.
+
+First, the people who helped develop and maintain the key R packages that support this book and its reproducibility features: Xinran Zhao for `PortfolioAnalytics`, Brian Peterson for `PerformanceAnalytics`, Mahmood (Mido) Shamma for `facmodCS`, Jon Spinney for `PCRA` and `facmodCS`, and Yuhong Liu for `robustGarch`. Additionally, Vinav Singh Sancheti wrote the code for the CUSUM algorithm.
+
+Next, our readers: David Carino, Roland Lochoff, George Mylnikov, Dale Rosenthal, Nikolay Ryabkov, Jon Spinney, Stoyan Stoyanov and Jarrod Wilcox read and commented on multiple chapters. Their inputs proved invaluable and led us to substantially rewrite every single chapter they read. Stoyan, in particular, is a long-time friend and LyX/LaTeX whiz who helped clarify our thinking, and without whose guidance we would have struggled to get the book ready for production. Doug and Tom had the benefit of outstanding Ph. D students and teaching assistants (Yindeng Jiang, Shengyu Zhang, Ercument Cahan, Cheng Xu and Yuchen Han) who corrected their errors with grace. It's fair to say that we learned as much from our readers, students and teaching assistants as they did from us.
+
+Third, the wonderful people who provided us tremendous assistance in obtaining various rights to use data from their companies in this book and its supporting `PCRA` package: Taras Zlupko, Janet Eder, Colin O'Connell, Diane Roman, and Jeffrey Ostrom (all of CRSP®), Joel Nadelman, Kirk Wang, Howard Silverblatt, Guillermo Ruiz-Rico, and Jonathan Campbell (all of S&P, and SPGMI), Mike Cassidy and Elizabeth Weinstein (ICE), Mallory Denney and Namita Kapaley (LSE Group), Geralyn Endo (CBOE), Lisa Schirf and Xinwei Wang (Tradeweb), all helped us obtain data that is provided free for non-commercial use in the `PCRA` package. Their generosity contributed substantially to our efforts in creating this book.
+
+And finally, our families. Our parents, spouses, children and grandchildren (with intra-author variations!) put up with our absences for long stretches of time while we worked on this book. Without their unconditional love and support, this book would not have seen the light of day. One of us (TP) adds a very special thank you to the two strangers who pulled him out of the clutches of a rip tide off the coast of Montauk in September 2009. Were it not for their bravery, it would have been someone else who wrote certain chapters.
+
+## Disclaimers Related to PCRA Datasets {#disclaimers}
+
+Thanks to the generosity of a number of industry sponsors, we have been able to supply historical and market data for a variety of securities, indices and factors. In all cases, the data provided with the `PCRA` package that accompanies this book is *strictly for educational (i.e. non-commercial) use* — anyone who wishes to use the data for commercial purposes must enter into an appropriate licensing agreement with the relevant vendor. Furthermore, the data cannot be redistributed or published elsewhere. Please read the relevant vendor disclosures below.
+
+### CRSP® {#crsp}
+
+The University of Chicago, the Booth School of Business, CRSP®, and its third party suppliers make no warranty of any kind, express or implied, with respect to the merchantability, fitness, condition, use or appropriateness for permittee's purposes of the CRSP® data, or any other purpose, and all CRSP® data is supplied on an "as is" basis. Use of CRSP® data is subject to the disclaimers provided at [https://www.crsp.org/policies-statements/](https://www.crsp.org/policies-statements/).
+
+### SPGMI {#spgmi}
+
+Standard and Poors Global Market Intelligence (SPGMI) is a business unit of Standard and Poors Global that provides multi-asset class and real-time data, research, news and analytics. Use of SPGMI data is subject to the disclaimers provided at [https://www.spglobal.com/market-intelligence/en/legal/disclosures](https://www.spglobal.com/market-intelligence/en/legal/disclosures).
+
+### LSE / FTSE Russell {#lse-ftse-russell}
+
+FTSE Russell is a trading name of certain of the LSE Group companies. "Russell®"/"FTSE Russell®"/"Mergent®", are/is trade mark(s) of the relevant LSE Group companies and is/are used by any other LSE Group company under license. All rights in the FTSE Russell indexes or data vest in the relevant LSE Group company which owns the index or the data. Neither LSE Group nor its licensors accept any liability for any errors or omissions in the indexes or data and no party may rely on any indexes or data contained in this communication. No further distribution of data from the LSE Group is permitted without the relevant LSE Group company's express written consent. The LSE Group does not promote, sponsor or endorse the content of this communication.
+
+### ICE {#ice}
+
+Source: ICE Data Indices, LLC ("ICE Data"), used with permission. THE ICE DATA INDICES ARE PROVIDED BY ICE DATA FOR EDUCATIONAL PURPOSES. ICE DATA, ITS AFFILIATES AND THEIR RESPECTIVE THIRD PARTY SUPPLIERS DISCLAIM ANY AND ALL WARRANTIES AND REPRESENTATIONS, EXPRESS AND/OR IMPLIED, INCLUDING ANY WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE OR USE, INCLUDING THE INDICES, INDEX DATA AND ANY DATA INCLUDED IN, RELATED TO, OR DERIVED THEREFROM. NEITHER ICE DATA, ITS AFFILIATES NOR THEIR RESPECTIVE THIRD PARTY SUPPLIERS SHALL BE SUBJECT TO ANY DAMAGES OR LIABILITY WITH RESPECT TO THE ADEQUACY, ACCURACY, TIMELINESS OR COMPLETENESS OF THE INDICES OR THE INDEX DATA OR ANY COMPONENT THEREOF, AND THE INDICES AND INDEX DATA AND ALL COMPONENTS THEREOF ARE PROVIDED ON AN "AS IS" BASIS AND YOUR USE IS AT YOUR OWN RISK. ICE DATA, ITS AFFILIATES AND THEIR RESPECTIVE THIRD PARTY SUPPLIERS DO NOT SPONSOR, ENDORSE, OR RECOMMEND ANY TEXTBOOKS, PRODUCTS OR SERVICES OF SPRINGER PUBLISHERS, R. DOUGLAS MARTIN, THOMAS K. PHILIPS, BERND SCHERER, OR KIRK LI.
+
+### Tradeweb {#tradeweb}
+
+Tradeweb OTR–OFTR Spread Data is provided by Tradeweb Markets LLC for educational purposes only. Tradeweb Markets LLC makes no representation or warranty of any kind, express or implied, including regarding the accuracy, adequacy, validity, reliability, availability or completeness of the Tradeweb OTR–OFTR Spread Data. All rights reserved.
+
+### S&P {#sp}
+
+S&P® and S&P 500® are registered trademarks of Standard & Poor's Financial Services LLC, and Dow Jones® is a registered trademark of Dow Jones Trademark Holdings LLC. © 2020 S&P Dow Jones Indices LLC, its affiliates and/or its licensors. All rights reserved.
+
+Reproduction of any information, data or material, including ratings ("Content") in any form is prohibited except with the prior written permission of the relevant party. Such party, its affiliates and suppliers ("Content Providers") do not guarantee the accuracy, adequacy, completeness, timeliness or availability of any Content and are not responsible for any errors or omissions (negligent or otherwise), regardless of the cause, or for the results obtained from the use of such Content. In no event shall Content Providers be liable for any damages, costs, expenses, legal fees, or losses (including lost income or lost profit and opportunity costs) in connection with any use of the Content. A reference to a particular investment or security, a rating or any observation concerning an investment that is part of the Content is not a recommendation to buy, sell or hold such investment or security, does not address the suitability of an investment or security and should not be relied on as investment advice. Credit ratings are statements of opinions and are not statements of fact.
+
+### CBOE LIVEVOL {#cboe-livevol}
+
+CBOE LIVEVOL data is provided "as is" without warranty of any kind, either express or implied, including, without limitation, any warranty with respect to accuracy, completeness, timeliness, noninfringement, merchantability, or fitness for a particular purpose. Neither LIVEVOL, nor any provider of data to LIVEVOL, nor any of their respective affiliates, nor their respective directors, officers, employees, contractors, and agents shall have any liability of any kind (including, but not limited to, for any direct, indirect, incidental, special, consequential, or punitive damages or any damages for lost profits or lost opportunities and whether based upon contract, tort, warranty, or otherwise) for any inaccuracies, omissions, human or machine errors, or other irregularities in the data or for any cessation, discontinuance, failure, malfunction, delay, suspension, interruption, or termination of, or with respect to, the provision of the data to subscriber. The data is not, and should not be construed as financial, legal or other advice of any kind, nor should it be regarded as an offer or as a solicitation of an offer to buy, sell or otherwise deal in any investment.
+
 ```{=html}
-<iframe
-  src="pdfs/preface.pdf"
-  width="100%"
-  height="1100px"
-  class="pdf-embed"
-  title="Preface: Robust Portfolio Construction and Risk Analysis">
-</iframe>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const sidebar = document.querySelector("#quarto-margin-sidebar");
+  const firstSection = document.querySelector("#overview");
+
+  function alignMarginToc() {
+    if (!sidebar || !firstSection) return;
+
+    if (window.innerWidth <= 991) {
+      sidebar.style.marginTop = "";
+      return;
+    }
+
+    const offset = firstSection.getBoundingClientRect().top - sidebar.getBoundingClientRect().top;
+    sidebar.style.marginTop = Math.max(0, Math.round(offset)) + "px";
+  }
+
+  alignMarginToc();
+  window.addEventListener("resize", alignMarginToc);
+
+  const toc = document.querySelector("#quarto-margin-sidebar #TOC, #TOC");
+  if (!toc) return;
+
+  const links = [...toc.querySelectorAll('a[href^="#"]')];
+  const sections = links
+    .map(function (link) {
+      return document.querySelector(link.getAttribute("href"));
+    })
+    .filter(Boolean);
+
+  if (!sections.length) return;
+
+  const setActive = function (id) {
+    links.forEach(function (link) {
+      link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+    });
+  };
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    },
+    { rootMargin: "-15% 0px -65% 0px", threshold: 0 }
+  );
+
+  sections.forEach(function (section) {
+    observer.observe(section);
+  });
+
+  if (sections[0]) setActive(sections[0].id);
+});
+</script>
 ```

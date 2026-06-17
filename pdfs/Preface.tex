@@ -1,0 +1,507 @@
+\batchmode
+\makeatletter
+\def\input@path{{"C:/Users/tkpme/Dropbox/BookPCRA/Ch 0 Preface/"}}
+\makeatother
+\documentclass[graybox,envcountchap,sectrefs]{svmono}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\setcounter{tocdepth}{3}
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{float}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%%%%%%%%%%%%%%%%%%%% book.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample root file for the chapters of your "monograph"
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% RECOMMENDED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% choose options for [] as required from the list
+% in the Reference Guide
+
+
+\usepackage[bottom]{footmisc}% places footnotes at page bottom
+
+\usepackage{hyperref}
+\def\UrlBreaks{\do\/\do-}
+
+%\usepackage[ style=authoryear,natbib=true,giveninits=true,backend=biber,maxcitenames=2]{biblatex}
+\usepackage[style=authoryear, natbib=true, firstinits=false, backend=biber, maxcitenames=2]{biblatex}
+
+
+\setlength{\bibitemsep}{0.5\baselineskip}
+\DeclareNameAlias{sortname}{family-given}
+
+\IfFileExists{C:/Users/Doug/Dropbox/BookPCRA/mpslbookCombined.bib}
+{\addbibresource[location=local]{C:/Users/Doug/Dropbox/BookPCRA/mpslbookCombined.bib}}
+{   \IfFileExists{C:/Users/tkpme/Dropbox/BookPCRA/mpslbookCombined.bib}
+    {\addbibresource[location=local]{C:/Users/tkpme/Dropbox/BookPCRA/mpslbookCombined.bib}}
+    {   \IfFileExists{C:/Users/stoya/Dropbox/BookPCRA/mpslbookCombined.bib}
+        {\addbibresource[location=local]{C:/Users/stoya/Dropbox/BookPCRA/mpslbookCombined.bib}}
+        {   \IfFileExists{C:/Users/4thauthor/Dropbox/BookPCRA/mpslbookCombined.bib}
+            {\addbibresource[location=local]{C:/Users/4thauthor/Dropbox/BookPCRA/mpslbookCombined.bib}}
+            {}
+        }
+    }
+}
+\renewcommand\cite{\citet}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[p,osf]{stickstootext}
+\usepackage[stix2,vvarbb]{newtxmath}
+\usepackage[varqu,varl]{inconsolata}
+% \usepackage{txfonts}
+\usepackage{upgreek}
+
+\DeclareMathOperator{\argmax}{arg\,max}
+\DeclareMathOperator{\argmin}{arg\,min}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{threeparttablex}
+
+\usepackage[utf8]{inputenc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{C:/Users/Doug/Dropbox/BookPCRA/macroSP_August_05_2021.tex}
+{\input{C:/Users/Doug/Dropbox/BookPCRA/macroSP_August_05_2021.tex}}
+{   \IfFileExists{C:/Users/tkpme/Dropbox/BookPCRA/macroSP_August_05_2021.tex}
+    {\input{C:/Users/tkpme/Dropbox/BookPCRA/macroSP_August_05_2021.tex}}
+    {   \IfFileExists{C:/Users/stoya/Dropbox/BookPCRA/macroSP_August_05_2021.tex}
+        {\input{C:/Users/stoya/Dropbox/BookPCRA/macroSP_August_05_2021.tex}}
+        {   \IfFileExists{C:/Users/4thAuthor/Dropbox/BookPCRA/macroSP_August_05_2021.tex}
+            {\input{C:/Users/4thAuthor/Dropbox/BookPCRA/macroSP_August_05_2021.tex}}
+            {}
+        }
+    }
+}
+
+%\belowsink=90pt
+
+\hypersetup{pdfstartview={XYZ null null 1.25}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatother
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+\title{Robust Portfolio Construction and Risk Analysis}
+\author{R. Douglas Martin, Thomas K. Philips, Bernd Scherer and Kirk Li}
+\subtitle{Preface}
+
+\maketitle
+\newpage{}
+
+\addcontentsline{toc}{chapter}{PREFACE}
+
+This Robust Portfolio Construction and Risk Analysis (RPCRA) book,
+with its unique \emph{reproducibility} code, \emph{robust estimators},
+and \emph{special focus} topics, has been written for use in advanced
+upper level undergraduate, M.S., and PhD level quantitative finance
+courses. It grew out of our collective experiences as researchers,
+educators and investors, and is thus supportive of research projects
+in such programs, as well as in commercial quantitative portfolio
+management and research.
+
+Much of the content in Chapters 1-9 is suitable for a full academic
+year M.S. course, and selected portions of these chapters can serve
+the needs of a one-semester course. The additional material in Chapters
+10-16 is well suited to special topics and project oriented courses.
+The chapters and the topics they cover are:
+\begin{description}
+\item [{Chapter}] 1. Introduction to Portfolio Management
+\item [{Chapter}] 2. Foundations
+\item [{Chapter}] 3. Modeling Asset Returns
+\item [{Chapter}] 4. Covariance Matrices
+\item [{Chapter}] 5. Portfolio Constraints and Penalties
+\item [{Chapter}] 6. Time Series Models
+\item [{Chapter}] 7. Cross Section Factor Models
+\item [{Chapter}] 8. Portfolio Risk Analysis
+\item [{Chapter}] 9. Minimum Downside Risk Portfolios
+\item [{Chapter}] 10. Performance Evaluation
+\item [{Chapter}] 11. Expected Returns
+\item [{Chapter}] 12. Fixed Income Portfolio Management
+\item [{Chapter}] 13. Portfolios With Options
+\item [{Chapter}] 14. Managing Portfolios to Meet Spending Objectives
+\item [{Chapter}] 15. Influence Functions and Standard Errors
+\item [{Chapter}] 16. Robust Estimators
+\end{description}
+In addition, there are five appendices
+\begin{description}
+\item [{Appendix}] A. Mathematical Tools For PCRA
+\item [{Appendix}] B. Mathematical Tools For PCRA
+\item [{Appendix}] C. Utility Theory
+\item [{Appendix}] D. Portfolio Theory
+\item [{Appendix}] E. Machine Learning
+\end{description}
+In addition, we will maintain a companion website for this book at
+\url{https://www.robustpcra.org}. On this site, we will post articles,
+provide code and examples, and point to new uses of the datasets included
+in the \texttt{PCRA} package.
+
+\section*{Reproducibility}
+
+R packages that include R functions and data support reproducibility
+of figures and tables throughout the book. Specifically, this is the
+case for most of the figures and tables in Chapters 2-6 and 9-12,
+as well as the figures and tables in some sections of Chapters 1 and
+7-8. These features allow students to get hands-on experience in replicating
+the figures and tables in RPCRA, and in extending the code to study
+portfolio performance for different different time periods, different
+portfolio stock groups (such as capitalization groups and sectors),
+and different returns frequencies. These features also support instructors
+in creating new computing-oriented portfolio construction and risk
+analysis exercises.
+
+\subsection*{R Packages for the RPCRA Book and its Reproducibility Character}
+
+The following R packages were developed specifically for the writing
+of the RPCRA book and its reproducibility character, and are downloadable
+from the CRAN website \url{https://cran.r-project.org}:
+\begin{itemize}
+\item \texttt{PCRA}:\quad{}Portfolio construction and risk analysis
+\item \texttt{facmodCS}:\quad{}Cross-section factor models
+\item \texttt{facmodTS}:\quad{}Time series factor models
+\item \texttt{robustGarch}:\quad{}Robust Garch(1,\ 1) models.
+\end{itemize}
+
+\subsection*{Data for Reproducibility}
+
+The \texttt{PCRA} package contains data sets that support reproducibility
+as well as a multitude of exercises at the end of each chapter. They
+may also be used by course intructors to create new exercises. The
+datasets include:
+\begin{itemize}
+\item Center for Research of Security Prices (\CRSPTM) monthly, weekly
+and daily stocks data for 294 stocks from 1993 to 2015, and Standard
+and Poors Global Market Intelligence (SPGMI) monthly factors data
+for the \CRSPTM stocks data (for reproducibility of results in Chapters
+2-9)
+\item S\&P, CBOE, and Hedge Fund data sets for reproducibility in Chapters
+10 and 11.
+\item ICE Fixed Income datasets for reproducibility in Chapter 12
+\end{itemize}
+An overview of the \texttt{PCRA} package and its data sets are provided
+in the \emph{PCRA Package and Data Overview} vignette that is downloadable
+from \url{https://cran.r-project.org/web/packages/PCRA}. Detailed
+information about the \CRSPTM\ monthly, weekly and daily stocks
+data, and \texttt{factorsSPGMI} monthly data is provided in the \emph{CRSP
+Stocks and SPGMI Factors in PCRA} vignette that is also downloadable
+from the above \texttt{PCRA} package link.
+
+\section*{Robust Estimators}
+
+Having firsthand experience of the impact of outliers in portfolio
+management, we were struck by how little attention has been paid to
+this important problem in portfolio management textbooks, and more
+generally in quantitative finance books. More often than not, students
+learn the elegant mathematics of portfolio theory with little appreciation
+for its fragilityin the face of the prodigious levels of noise that
+permeate most markets. Such noise includes outliers that can have
+large distorting influences on the classical estimators that are routinely
+used in risk analysis.
+
+The adverse influence of outliers on these classical estimators can
+be avoided by using modern robust alternatives that are not much influenced
+by outliers, and which provide better fits to the bulk of the data
+than do classical estimators. Chapters 2, 4, 6, and 7 introduce modern
+robust estimators of returns means and standard errors, covariance
+matrices, time-series factor models, and cross-section factor models
+respectively. These chapters provide clear examples of the superior
+fits afforded by robust estimators relative to classical estimators
+in the presence ofeven a few outliers. Chapter 16 provides background
+mathematical details on robust estimators and provides a bridge to
+RobStatTM, the \citet{Maronna2019} \emph{Robust Statistics: Theory
+and Methods} book that serves as our primary reference for robust
+statistical methods.
+
+The robust estimators examples in this book suggest that they may
+result in better portfolio performance than classical estimators.
+But this is not guaranteed -- extensive studies are needed to determine
+if and when robust estimators can consistently result in better portfolio
+performance. That said, robust estimators serve a very useful purpose
+of diagnosing whether or not outliers are influencing a classical
+estimator model fit, for, without such comparison, portfolio mangers
+will typically be unaware of whether or not outliers are influencing
+the classical estimators they typically use. This claim is vividly
+demonstrated when comparing robust and classical regression model
+fits in Chapters 6 and 7 (time series and cross-section factor models,
+respectively).
+
+\section*{Special Focus Topics}
+
+Chapters 10-16 cover a number of special topics that most textbooks
+either ignore or address with a light touch. We hope in this book
+to rectify these omissions.
+
+In Chapter 10, we cover performance measurement for public and private
+funds and the application of statistical process control techniques
+(the CUSUM algorithm) to rapidly detect underperformance for actively
+managed portfolios. Chapter 11 develops a powerful accounting-based
+framework to estimate the expected returns of equity indices and also
+addresses the identification of business cycles for purposes of conditional
+forecasting. In addition, it covers the estimation of factor risk
+premia and touches on the reproducibility and economic viability of
+the vast universe of reported anomalies. Some of the material in this
+chapter is well known to economists and electrical engineers, particularly
+those focused on signal processing, but lacks visibility in finance.
+We also explore the links between expected returns, corporate finance
+and corporate valuation, all three of which are joined at the hip
+intellectually, but are usually treated separately.
+
+Chapter 12 addresses fixed income markets and ends with a discussion
+of practical techniques for robust fixed income portfolio management
+and immunization of liabilities. Chapter 13 explores the role of options
+in portfolios, while Chapter 14 explores end uses of portfolio management
+-- in particular, the management of portfolios to meet spending objectives.
+More often than not, these topics are treated separately, but it is
+impossible to think constructively about one without keeping the other
+in mind. Arguably, re-centering one's thoughts around an asset-liability
+framework instead of an asset-only framework is the single most important
+change that an investor can make, and we hope to nudge our readers
+in this direction.
+
+Finally, in Chapters 15 and 16, we return to robust statistics, and
+develop ideas presented earlier in the book in greater detail.
+
+\section*{Acknowledgments}
+
+This book, and its accompanying \texttt{PCRA} package, would not have
+seen the light of day without help from a vast array of colleagues,
+friends and well wishers. Some helped with the development and maintenance
+of one or more R packages that support the the book and its associated
+reproducibility character. Others read chapters and commented on them,
+and yet others granted us formal rights to include datasets in the
+\texttt{PCRA} package that are not available to the public. These
+contributors are listed in the following paragraphs; we thank them
+for their generosity, and apologize in advance to any we might inadvertently
+have missed.
+
+First, the people who helped develop and maintain the key R packages
+that support this book and its reproducibility features: Xinran Zhao
+for \texttt{PortfolioAnalytics}, Brian Peterson for \texttt{PerformanceAnalytics},
+Mahmood (Mido) Shamma for \texttt{facmodCS}, Jon Spinney for \texttt{PCRA}
+and \texttt{facmodCS}, and Yuhong Liu for \texttt{robustGarch}. Additionally,
+Vinav Singh Sancheti wrote the code for the CUSUM algorithm.
+
+Next, our readers: David Carino, Roland Lochoff, George Mylnikov,
+Dale Rosenthal, Nikolay Ryabkov, Jon Spinney, Stoyan Stoyanov and
+Jarrod Wilcox read and commented on multiple chapters. Their inputs
+proved invaluable and led us to substantially rewrite every single
+chapter they read. Stoyan, in particluar, is a long-time friend and
+LyX/\LaTeX{}\ whiz who helped clarify our thinking, and without
+whose guidance we would have struggled to get the book ready for production.
+Doug and Tom had the benefit of outstanding Ph. D students and teaching
+assistants (Yindeng Jiang, Shengyu Zhang, Ercument Cahan, Cheng Xu
+and Yuchen Han) who corrected their errors with grace. It's fair to
+say that we learned as much from our readers, students and teaching
+assistants as they did from us.
+
+Third, the wonderful people who provided us tremendous assistance
+in obtaining various rights to use data from their companies in this
+book and its supporting \texttt{PCRA} package: Taras Zlupko, Janet
+Eder, Colin O'Connell, Diane Roman, and Jeffrey Ostrom (all of \CRSPTM),
+Joel Nadelman, Kirk Wang, Howard Silverblatt, Guillermo Ruiz-Rico,
+and Jonathan Campbell (all of S\&P, and SPGMI), Mike Cassidy and Elizabeth
+Weinstein (ICE), Mallory Denney and Namita Kapaley (LSE Group), Geralyn
+Endo (CBOE), Lisa Schirf and Xinwei Wang (Tradeweb), all helped us
+obtain data that is provided free for non--commercial use in the
+\texttt{PCRA} package. Their generosity contributed substantially
+to our efforts in creating this book.
+
+And finally, our families. Our parents, spouses, children and grandchildren
+(with intra-author variations!) put up with our absences for long
+stretches of time while we worked on this book. Without their unconditional
+love and support, this book would not have seen the light of day.
+One of us (TP) adds a very special thank you to the two strangers
+who pulled him out of the clutches of a rip tide off the coast of
+Montauk in September 2009. Were it not for their bravery, it would
+have been someone else who wrote certain chapters.
+
+\section*{Disclaimers Related to PCRA Datasets}
+
+Thanks to the generosity of a number of industry sponsors, we have
+been able to supply historical and market data for a variety of securities,
+indices and factors. In all cases, the data provided with the \texttt{PCRA}
+package  that accompanies this book is \emph{strictly for educational
+(i.e. non-commercial) use} -- anyone who wishes to use the data for
+commercial purposes must enter into an appropriate licensing agreement
+with the relevant vendor. Furthermore, the data cannot be redistributed
+or published elsewhere. Please read the relevant vendor disclosures
+below.
+
+\subsection*{CRSP®}
+
+The University of Chicago, the Booth School of Business, CRSP ® ,
+and its third party suppliers make no warranty of any kind, express
+or implied, with respect to the merchantability, fitness, condition,
+use or appropriateness for permittee’s purposes of the CRSP® data,
+or any other purpose, and all CRSP® data is supplied on an “as is”
+basis. Use of CRSP® data is subject to the disclaimers provided at
+\url{https://www.crsp.org/policies-statements/}.
+
+\subsection*{SPGMI}
+
+Standard and Poors Global Market Intelligence (SPGMI) is a business
+unit of Standard and Poors Global that provides multi-asset class
+and real-time data, research, news and analytics. Use of SPGMI data
+is subject to the disclaimers provided at \url{https://www.spglobal.com/market-intelligence/en/legal/disclosures}.
+
+\subsection*{LSE / FTSE Russell}
+
+FTSE Russell is a trading name of certain of the LSE Group companies.
+“Russell®”/“FTSE Russell®”/“Mergent®”, are/is trade mark(s) of the
+relevant LSE Group companies and is/are used by any other LSE Group
+company under license. All rights in the FTSE Russell indexes or data
+vest in the relevant LSE Group company which owns the index or the
+data. Neither LSE Group nor its licensors accept any liability for
+any errors or omissions in the indexes or data and no party may rely
+on any indexes or data contained in this communication. No further
+distribution of data from the LSE Group is permitted without the relevant
+LSE Group company’s express written consent. The LSE Group does not
+promote, sponsor or endorse the content of this communication.
+
+\subsection*{ICE}
+
+Source: ICE Data Indices, LLC (\textquotedbl ICE Data\textquotedbl ),
+used with permission. THE ICE DATA INDICES ARE PROVIDED BY ICE DATA
+FOR EDUCATIONAL PURPOSES. ICE DATA, ITS AFFILIATES AND THEIR RESPECTIVE
+THIRD PARTY SUPPLIERS DISCLAIM ANY AND ALL WARRANTIES AND REPRESENTATIONS,
+EXPRESS AND/OR IMPLIED, INCLUDING ANY WARRANTIES OF MERCHANTABILITY
+OR FITNESS FOR A PARTICULAR PURPOSE OR USE, INCLUDING THE INDICES,
+INDEX DATA AND ANY DATA INCLUDED IN, RELATED TO, OR DERIVED THEREFROM.
+NEITHER ICE DATA, ITS AFFILIATES NOR THEIR RESPECTIVE THIRD PARTY
+SUPPLIERS SHALL BE SUBJECT TO ANY DAMAGES OR LIABILITY WITH RESPECT
+TO THE ADEQUACY, ACCURACY, TIMELINESS OR COMPLETENESS OF THE INDICES
+OR THE INDEX DATA OR ANY COMPONENT THEREOF, AND THE INDICES AND INDEX
+DATA AND ALL COMPONENTS THEREOF ARE PROVIDED ON AN \textquotedbl AS
+IS\textquotedbl{} BASIS AND YOUR USE IS AT YOUR OWN RISK. ICE DATA,
+ITS AFFILIATES AND THEIR RESPECTIVE THIRD PARTY SUPPLIERS DO NOT SPONSOR,
+ENDORSE, OR RECOMMEND ANY TEXTBOOKS, PRODUCTS OR SERVICES OF SPRINGER
+PUBLISHERS, R. DOUGLAS MARTIN, THOMAS K. PHILIPS, BERND SCHERER, OR
+KIRK LI.
+
+\subsection*{Tradeweb}
+
+Tradeweb OTR--OFTR Spread Data is provided by Tradeweb Markets LLC
+for educational purposes. only. Tradeweb Markets LLC makes no representation
+or warranty of any kind, express or implied, including regarding the
+accuracy, adequacy, validity, reliability, availability or completeness
+of the Tradeweb OTR--OFTR Spread Data. All rights reserved.
+
+\subsection*{S\&P}
+
+S\&P® and S\&P 500® are registered trademarks of Standard \& Poor's
+Financial Services LLC, and Dow Jones® is a registered trademark of
+Dow Jones Trademark Holdings LLC. © 2020 S\&P Dow Jones Indices LLC,
+its affiliates and/or its licensors. All rights reserved.
+
+Reproduction of any information, data or material, including ratings
+(\textquotedbl Content\textquotedbl ) in any form is prohibited
+except with the prior written permission of the relevant party. Such
+party, its affiliates and suppliers (\textquotedbl Content Providers\textquotedbl )
+do not guarantee the accuracy, adequacy, completeness, timeliness
+or availability of any Content and are not responsible for any errors
+or omissions (negligent or otherwise), regardless of the cause, or
+for the results obtained from the use of such Content. In no event
+shall Content Providers be liable for any damages, costs, expenses,
+legal fees, or losses (including lost income or lost profit and opportunity
+costs) in connection with any use of the Content. A reference to a
+particular investment or security, a rating or any observation concerning
+an investment that is part of the Content is not a recommendation
+to buy, sell or hold such investment or security, does not address
+the suitability of an investment or security and should not be relied
+on as investment advice. Credit ratings are statements of opinions
+and are not statements of fact.
+
+\subsection*{CBOE LIVEVOL}
+
+CBOE LIVEVOL data is provided \textquotedbl as is\textquotedbl{}
+without warranty of any kind, either express or implied, including,
+without limitation, any warranty with respect to accuracy, completeness,
+timeliness, noninfringement, merchantability, or fitness for a particular
+purpose. Neither LIVEVOL, nor any provider of data to LIVEVOL, nor
+any of their respective affiliates, nor their respective directors,
+officers, employees, contractors, and agents shall have any liability
+of any kind (including, but not limited to, for any direct, indirect,
+incidental, special, consequential, or punitive damages or any damages
+for lost profits or lost opportunities and whether based upon contract,
+tort, warranty, or otherwise) for any inaccuracies, omissions, human
+or machine errors, or other irregularities in the data or for any
+cessation, discontinuance, failure, malfunction, delay, suspension,
+interruption, or termination of, or with respect to, the provision
+of the data to subscriber. The data is not, and should not be construed
+as financial, legal or other advice of any kind, nor should it be
+regarded as an offer or as a solicitation of an offer to buy, sell
+or otherwise deal in any investment.
+
+\printbibliography
+\end{document}

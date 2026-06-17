@@ -845,10 +845,11 @@ figcaption,
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// 11b. HOME PAGE — MARGIN TOC PANE & FULL-BLEED HERO
+// 11b. MARGIN TOC PANE (HOME + ARTICLE PAGES) & FULL-BLEED HERO
 // ═══════════════════════════════════════════════════════════════════════════════
 
-body:has(.hero-outer) #quarto-document-content h2 {
+body:has(.hero-outer) #quarto-document-content h2,
+body:has(.margin-toc-page) #quarto-document-content h2 {
   scroll-margin-top: 5.5rem;
 }
 
@@ -860,7 +861,8 @@ body:has(.hero-outer) .hero-outer {
   margin-right: calc(50% - 50vw);
 }
 
-body:has(.hero-outer) #quarto-margin-sidebar {
+body:has(.hero-outer) #quarto-margin-sidebar,
+body:has(.margin-toc-page) #quarto-margin-sidebar {
   position: sticky;
   top: 5.5rem;
   align-self: flex-start;
@@ -870,7 +872,8 @@ body:has(.hero-outer) #quarto-margin-sidebar {
   scrollbar-width: thin;
 }
 
-body:has(.hero-outer) #quarto-margin-sidebar #TOC {
+body:has(.hero-outer) #quarto-margin-sidebar #TOC,
+body:has(.margin-toc-page) #quarto-margin-sidebar #TOC {
   background: #ffffff;
   border: 1px solid #e4e0d8;
   border-left: 3px solid #c4a45a;
@@ -883,21 +886,26 @@ body:has(.hero-outer) #quarto-margin-sidebar #TOC {
 }
 
 body:has(.hero-outer) #quarto-margin-sidebar #TOC .toc-title,
-body:has(.hero-outer) #quarto-margin-sidebar #TOC > h2 {
+body:has(.hero-outer) #quarto-margin-sidebar #TOC > h2,
+body:has(.margin-toc-page) #quarto-margin-sidebar #TOC .toc-title,
+body:has(.margin-toc-page) #quarto-margin-sidebar #TOC > h2 {
   display: none !important;
 }
 
-body:has(.hero-outer) #quarto-margin-sidebar #TOC ul {
+body:has(.hero-outer) #quarto-margin-sidebar #TOC ul,
+body:has(.margin-toc-page) #quarto-margin-sidebar #TOC ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-body:has(.hero-outer) #quarto-margin-sidebar #TOC li {
+body:has(.hero-outer) #quarto-margin-sidebar #TOC li,
+body:has(.margin-toc-page) #quarto-margin-sidebar #TOC li {
   margin: 0;
 }
 
-body:has(.hero-outer) #quarto-margin-sidebar #TOC a {
+body:has(.hero-outer) #quarto-margin-sidebar #TOC a,
+body:has(.margin-toc-page) #quarto-margin-sidebar #TOC a {
   display: block;
   padding: 0.48rem 0.55rem;
   margin-bottom: 0.12rem;
@@ -927,7 +935,8 @@ body:has(.hero-outer) #quarto-margin-sidebar #TOC a {
 }
 
 @media (max-width: 991px) {
-  body:has(.hero-outer) #quarto-margin-sidebar {
+  body:has(.hero-outer) #quarto-margin-sidebar,
+  body:has(.margin-toc-page) #quarto-margin-sidebar {
     position: static;
     max-height: none;
     overflow: visible;
@@ -935,7 +944,8 @@ body:has(.hero-outer) #quarto-margin-sidebar #TOC a {
     margin-bottom: 2rem;
   }
 
-  body:has(.hero-outer) #quarto-margin-sidebar #TOC {
+  body:has(.hero-outer) #quarto-margin-sidebar #TOC,
+  body:has(.margin-toc-page) #quarto-margin-sidebar #TOC {
     border-radius: 10px;
   }
 }
