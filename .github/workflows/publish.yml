@@ -36,6 +36,7 @@ jobs:
           packages: |
             any::PCRA
             any::knitr
+            any::rmarkdown
           cache: true
 
       - name: Set up Quarto
