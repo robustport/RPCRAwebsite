@@ -18,8 +18,13 @@ TARGETS = [
 def demote_r_chunks(text: str) -> str:
     text = text.replace("\r\n", "\n")
     text = re.sub(r"```\{r[^`]*\}", "\n\n```r\n", text)
-    # Close fences glued to following prose (e.g. ```The dimension...)
     text = re.sub(r"```([A-Z])", r"```\n\n\1", text)
+    text = re.sub(
+        r"```\{=html\}\s*</div>\s*<script>.*?</script>\s*```",
+        "```{=html}\n</div>\n```",
+        text,
+        flags=re.DOTALL,
+    )
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text
 

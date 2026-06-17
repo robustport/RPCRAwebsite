@@ -39,6 +39,9 @@ jobs:
             any::rmarkdown
           cache: true
 
+      - name: Verify R render packages
+        run: Rscript -e 'stopifnot(requireNamespace("rmarkdown", quietly=TRUE), requireNamespace("knitr", quietly=TRUE))'
+
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 

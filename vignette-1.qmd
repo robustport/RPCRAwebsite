@@ -6,14 +6,15 @@ toc-location: right
 toc-depth: 2
 toc-title: ""
 execute:
-  enabled: true
+  enabled: false
 ---
 
 ```{=html}
 <div class="margin-toc-page">
 ```
 
-```{r}
+```r
+
 #| include: false
 library(PCRA)
 library(data.table)
@@ -53,7 +54,8 @@ It is important to keep in mind that there currently exist two versions of the P
 
 Before reading the rest of this document, you should install the CRAN version of`PCRA`using RStudio’s`Tools > Install Packages`menu, entering`PCRA`in the “ Packages ” field, and clicking “ Install ” . After the installation is finished, load the package using R’s`library`function, ignoring any warning messages that might appear.
 
-```{r echo=TRUE, warning=FALSE}
+```r
+
 library(PCRA)
 ```
 
@@ -61,7 +63,8 @@ Both PCRA versions have identical functionality except for new features and data
 
 - ` stocksCRSPmonthly`- `factorsSPGMIr.`For details of the above two data sets, use the use the R`help`function:
 
-```{r eval=FALSE, echo=TRUE, warning=FALSE}
+```r
+
 help(stocksCRSPmonthly) help(factorsSPGMIr)
 ```
 
@@ -75,13 +78,15 @@ The R code chunks used for creating this vignette are provided in the`PCRA Overv
 
 In addition to the relatively large CRSP® and SPGMI data sets, the`PCRA`package contains a large number of other data sets that are used throughout various chapters of the RPCRA book, and which may be used for a wide variety of computing exercises, *though strictly for academic (i.e. non-commercial) purposes* . The following use of the R`data`function results in the Figure display of the data set names as well as their corresponding brief descriptions :
 
-```{r echo=TRUE, warning=FALSE, fig.cap="PCRA package data sets and their corresponding descriptions"}
+```r
+
 data(package = "PCRA")
 ```
 
 Detailed descriptions of each of the`PCRA`data sets can be obtained using R’s`help`function, e.g., to see the details of the SP500 index data, type:
 
-```{r eval=FALSE, echo=TRUE, warning=FALSE}
+```r
+
 help(SP500)
 ```
 
@@ -111,13 +116,15 @@ The PCRA data set`USTreasuryTradeweb`is a`data.frame` with the daily bid and ask
 
 Here we focus on a few basic aspects of the`stocksCRSPmonthly`and the`factorsSPGMIr`data sets in the CRAN version of`PCRA`, and defer more detailed discussion to the vignette “ CRSP Stocks and SPGMI Factors in PCRA ” . The`PCRA`package contains many R functions and datasets, a list of which can be viewed by typing`ls`in the RStudio Console:
 
-```{r echo=TRUE, warning=FALSE}
+```r
+
 library(PCRA) ls("package:PCRA")
 ```
 
 The data sets`stocksCRSPmonthly`data, and the`factorsSPGMIr`are`data.table`type objects, and in order to view and manipulate them you need to install and load the`data.table`R package. Install the current version of`data.table`in RStudio the same way you installed the PCRA package. Then load`data.table`by typing`library(data.table)`, and confirm that`stocksCRSPmonthly`and`factorsSPGMIr`are indeed`data.table`objects by typing:
 
-```{r echo=TRUE, warning=FALSE}
+```r
+
 library(data.table) class(stocksCRSPmonthly) class(factorsSPGMIr)
 ```
 
@@ -129,13 +136,15 @@ PCRA uses`data.table`types for the`stocksCRSPmonthly`and`factorsSPGMIr`data sets
 
 Note that a`data.table`object is indeed a “ table object ” whose dimensions and column names can be obtained by typing:
 
-```{r echo=TRUE, warning=FALSE}
+```r
+
 dim(stocksCRSPmonthly) # Number of rows and columns names(stocksCRSPmonthly) # Names of data items in each column
 ```
 
 You can discover the structure of`stocksCRSPmonthly`by displaying the first and last five rows of its first, second and ninth columns by typing:
 
-```{r echo=TRUE, warning=FALSE}
+```r
+
 stocksCRSPmonthly[, c(1:2, 9)]
 ```
 
@@ -143,13 +152,15 @@ The results displayed above indicate that the row structure of`stocksCRSPmonthly
 
 Similarly, you can see the dimensions and column names of`factorsSPGMIr`with:
 
-```{r echo=TRUE, warning=FALSE}
+```r
+
 dim(factorsSPGMIr) # Number of rows and columns names(factorsSPGMIr) # Names of data items in each column
 ```## Data Table Objects Versus Data Frame Objects
 
 You may have wondered why`class(stocksCRSPmonthly)`and`class(factorsSPGMIr)`return both “ data.table ” and “ data.frame ” , the first of which is indeed the class of each these two data sets. The occurrence of “ data.frame ” after “ data.table ” indicates that the`data.table`object *inherits* all the properties of a`data.frame`object, and adds to these a number of features to enhance both its syntax and its performance. In view of the above property of a`data.table`object, it should not be surprising that you can easily convert a`data.table`object to a`data.frame`by applying the`data.frame`function to it:
 
-```{r echo=TRUE, warning=FALSE}
+```r
+
 dat.df <- data.frame(stocksCRSPmonthly) class(dat.df) names(dat.df)
 ```
 
@@ -161,7 +172,8 @@ The rounded data in`factorsSPGMIr`was obtained by rounding the data in`factorsSP
 
 Rounding factors data to four significant digits turns out to make little difference in the precision of the`factorsSPGMIr`data relative to the`factorsSPGMI`. This claim is supported by Figure , which shows that the fractional error in all the factors is always less than about (it is less than for four of the fourteen factors). We expect these minor differences in`factorsSPGMIr`relative to`factorsSPGMI`to have a negligible impact on factor model fits.
 
-```{r echo=2, warning=FALSE, results="hide"}
+```r
+
 names(relDiff) <- names(factorsSPGMI) png(file = "vignette-assets/factorsRelativeDiff.png", width = 6, height = 4, units = "in", pointsize = 6, res = 600) bp <- boxplot(relDiff,xlab = NULL, ylab = "Relative Differences", ylim = c(-0.01, +0.01), xaxt = "n", cex.lab = 1.5) tick <- seq_along(bp$names) axis(1, at = tick, labels = FALSE) text(tick, par("usr")[3] - 0.0015, bp$names, srt = 45, xpd = TRUE) dev.off()
 ```
 
@@ -181,7 +193,8 @@ The development version of`PCRA`(currently`PCRA-1.3.1`) can be installed from it
 
 In order to install the development version of`PCRA`one needs to have installed the R package`devtools`, which can be done in the RStudio console following the procedure used to install the`data.table`and`PCRA`packages. Once`devtools`has been installed, the development version of`PCRA`can be loaded and installed using the following commands in the RStudio console:
 
-```{r echo=TRUE, warning=FALSE}
+```r
+
 library(devtools) devtools::install_github("robustport/PCRA")
 ```
 
