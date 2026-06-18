@@ -1207,6 +1207,97 @@ body:has(.margin-toc-page) #quarto-margin-sidebar #TOC a {
   }
 }
 
+// ── TOC Accordion – Disclaimers ───────────────────────────────────────────────
+
+body:has(.margin-toc-page) #quarto-margin-sidebar #TOC .toc-disclaimer-summary {
+  display: flex !important;
+  align-items: center;
+  padding: 0.48rem 0.55rem;
+  margin-bottom: 0.12rem;
+  border-radius: 6px;
+  cursor: pointer;
+  list-style: none;
+
+  &::-webkit-details-marker { display: none; }
+  &::marker { display: none; }
+
+  > a {
+    display: inline !important;
+    flex: 1;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    color: #3a3530;
+    font-family: "Inter", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+
+  &:hover {
+    background: #f5f2eb;
+    padding-left: 0.7rem;
+    > a { color: #1b3a5c; }
+  }
+
+  > a.active {
+    color: #1b3a5c;
+    font-weight: 600;
+  }
+}
+
+body:has(.margin-toc-page) #quarto-margin-sidebar #TOC .toc-accordion-chevron {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 0.42rem;
+  height: 0.42rem;
+  margin-left: 0.35rem;
+  border-right: 1.5px solid #a09890;
+  border-bottom: 1.5px solid #a09890;
+  transform: rotate(-45deg) translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+body:has(.margin-toc-page) #quarto-margin-sidebar #TOC .toc-disclaimer-accordion[open] .toc-accordion-chevron {
+  transform: rotate(45deg) translateY(-2px);
+}
+
+body:has(.margin-toc-page) #quarto-margin-sidebar #TOC .toc-disclaimer-sublist {
+  padding-left: 0 !important;
+  border-left: 1px solid #e4e0d8;
+  margin: 0.15rem 0 0.15rem 0.7rem;
+
+  li { margin: 0; }
+
+  a {
+    display: block;
+    padding: 0.28rem 0.5rem;
+    margin-bottom: 0.04rem;
+    border-radius: 5px;
+    font-size: 0.76rem;
+    font-weight: 400;
+    color: #5a5550;
+    text-decoration: none;
+    border: none;
+    transition: color 0.15s, background 0.15s, padding-left 0.15s;
+
+    &:hover {
+      color: #1b3a5c;
+      background: #f5f2eb;
+      padding-left: 0.65rem;
+    }
+
+    &.active {
+      color: #1b3a5c;
+      font-weight: 600;
+      background: #f5f2eb;
+      border-left: 2px solid #c4a45a;
+      padding-left: 0.45rem;
+    }
+  }
+}
+
 // ═══════════════════════════════════════════════════════════════════════════════
 // 12. AUTHOR CARDS (ABOUT PAGE)
 // ═══════════════════════════════════════════════════════════════════════════════
