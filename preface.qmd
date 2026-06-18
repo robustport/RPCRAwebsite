@@ -6,6 +6,7 @@ toc: true
 toc-location: right
 toc-depth: 2
 toc-title: ""
+include-after-body: _preface-accordion.html
 ---
 
 ```{=html}
@@ -147,110 +148,5 @@ Reproduction of any information, data or material, including ratings ("Content")
 CBOE LIVEVOL data is provided "as is" without warranty of any kind, either express or implied, including, without limitation, any warranty with respect to accuracy, completeness, timeliness, noninfringement, merchantability, or fitness for a particular purpose. Neither LIVEVOL, nor any provider of data to LIVEVOL, nor any of their respective affiliates, nor their respective directors, officers, employees, contractors, and agents shall have any liability of any kind (including, but not limited to, for any direct, indirect, incidental, special, consequential, or punitive damages or any damages for lost profits or lost opportunities and whether based upon contract, tort, warranty, or otherwise) for any inaccuracies, omissions, human or machine errors, or other irregularities in the data or for any cessation, discontinuance, failure, malfunction, delay, suspension, interruption, or termination of, or with respect to, the provision of the data to subscriber. The data is not, and should not be construed as financial, legal or other advice of any kind, nor should it be regarded as an offer or as a solicitation of an offer to buy, sell or otherwise deal in any investment.
 
 ```{=html}
-<script>
-(function () {
-  function init() {
-    var toc = document.getElementById('TOC');
-    if (!toc) return;
-
-    var tocLink = toc.querySelector('a[href="#disclaimers"]');
-    if (!tocLink) return;
-
-    var tocLi = tocLink.closest('li');
-    if (!tocLi) return;
-
-    // Determine sub-items: use existing nested <ul> if toc-depth included h3s,
-    // otherwise discover h3 headings in the disclaimers section dynamically.
-    var subItems = [];
-    var existingSubUl = tocLi.querySelector('ul');
-
-    if (existingSubUl) {
-      existingSubUl.querySelectorAll('a').forEach(function (a) {
-        subItems.push({ id: a.getAttribute('href').replace('#', ''), text: a.textContent.trim() });
-      });
-    } else {
-      // Walk headings to find h3s after #disclaimers and before the next h2
-      var inDisclaimer = false;
-      document.querySelectorAll('h2[id], h3[id]').forEach(function (el) {
-        if (el.id === 'disclaimers') { inDisclaimer = true; return; }
-        if (el.tagName === 'H2') { inDisclaimer = false; return; }
-        if (inDisclaimer) subItems.push({ id: el.id, text: el.textContent.trim() });
-      });
-    }
-
-    // Fallback to hard-coded list if page structure wasn't found
-    if (subItems.length === 0) {
-      subItems = [
-        { id: 'crsp',             text: 'CRSP®' },
-        { id: 'spgmi',            text: 'SPGMI' },
-        { id: 'lse-ftse-russell', text: 'LSE / FTSE Russell' },
-        { id: 'ice',              text: 'ICE' },
-        { id: 'tradeweb',         text: 'Tradeweb' },
-        { id: 'sp',               text: 'S&P' },
-        { id: 'cboe-livevol',     text: 'CBOE LIVEVOL' }
-      ];
-    }
-
-    // Build <details> / <summary> wrapper
-    var details = document.createElement('details');
-    details.className = 'toc-disclaimer-accordion';
-
-    var summary = document.createElement('summary');
-    summary.className = 'toc-disclaimer-summary';
-
-    tocLi.removeChild(tocLink);
-    if (existingSubUl) tocLi.removeChild(existingSubUl);
-
-    summary.appendChild(tocLink);
-
-    var chevron = document.createElement('span');
-    chevron.className = 'toc-accordion-chevron';
-    chevron.setAttribute('aria-hidden', 'true');
-    summary.appendChild(chevron);
-
-    details.appendChild(summary);
-
-    // Build sub-list
-    var ul = document.createElement('ul');
-    ul.className = 'toc-disclaimer-sublist';
-    subItems.forEach(function (item) {
-      var li = document.createElement('li');
-      var a = document.createElement('a');
-      a.href = '#' + item.id;
-      a.textContent = item.text;
-      li.appendChild(a);
-      ul.appendChild(li);
-    });
-    details.appendChild(ul);
-    tocLi.appendChild(details);
-
-    // Open accordion when the disclaimers heading or any sub-section is active
-    new MutationObserver(function () {
-      if (tocLink.classList.contains('active')) details.open = true;
-    }).observe(tocLink, { attributes: true, attributeFilter: ['class'] });
-
-    // Highlight sub-links on scroll and keep accordion open
-    var subIds = subItems.map(function (x) { return x.id; });
-    document.addEventListener('scroll', function () {
-      var current = null;
-      subIds.forEach(function (id) {
-        var el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= 120) current = id;
-      });
-      ul.querySelectorAll('a').forEach(function (a) {
-        var id = a.getAttribute('href').slice(1);
-        a.classList.toggle('active', id === current);
-      });
-      if (current) details.open = true;
-    }, { passive: true });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-</script>
 </div>
 ```

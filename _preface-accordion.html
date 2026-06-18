@@ -1,0 +1,95 @@
+<script>
+(function () {
+  var SUB_ITEMS = [
+    { id: 'crsp',             text: 'CRSP®' },
+    { id: 'spgmi',            text: 'SPGMI' },
+    { id: 'lse-ftse-russell', text: 'LSE / FTSE Russell' },
+    { id: 'ice',              text: 'ICE' },
+    { id: 'tradeweb',         text: 'Tradeweb' },
+    { id: 'sp',               text: 'S&P' },
+    { id: 'cboe-livevol',     text: 'CBOE LIVEVOL' }
+  ];
+
+  function init() {
+    // Try both possible TOC container selectors
+    var toc = document.querySelector('#quarto-margin-sidebar #TOC') ||
+              document.getElementById('TOC');
+    if (!toc) return;
+
+    var tocLink = toc.querySelector('a[href="#disclaimers"]');
+    if (!tocLink) return;
+
+    var tocLi = tocLink.closest('li');
+    if (!tocLi) return;
+
+    // If toc-depth already included h3s, reuse the existing sub-list
+    var subItems = SUB_ITEMS;
+    var existingSubUl = tocLi.querySelector('ul');
+    if (existingSubUl) {
+      var extracted = [];
+      existingSubUl.querySelectorAll('a').forEach(function (a) {
+        extracted.push({ id: a.getAttribute('href').replace('#', ''), text: a.textContent.trim() });
+      });
+      if (extracted.length) subItems = extracted;
+      tocLi.removeChild(existingSubUl);
+    }
+
+    // Build <details>/<summary> wrapper
+    var details = document.createElement('details');
+    details.className = 'toc-disclaimer-accordion';
+
+    var summary = document.createElement('summary');
+    summary.className = 'toc-disclaimer-summary';
+
+    tocLi.removeChild(tocLink);
+    summary.appendChild(tocLink);
+
+    var chevron = document.createElement('span');
+    chevron.className = 'toc-accordion-chevron';
+    chevron.setAttribute('aria-hidden', 'true');
+    summary.appendChild(chevron);
+    details.appendChild(summary);
+
+    // Build sub-link list
+    var ul = document.createElement('ul');
+    ul.className = 'toc-disclaimer-sublist';
+    subItems.forEach(function (item) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + item.id;
+      a.textContent = item.text;
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+    details.appendChild(ul);
+    tocLi.appendChild(details);
+
+    // Open accordion when the parent link becomes active (set by _margin-toc.html)
+    new MutationObserver(function () {
+      if (tocLink.classList.contains('active')) details.open = true;
+    }).observe(tocLink, { attributes: true, attributeFilter: ['class'] });
+
+    // Highlight sub-links on scroll and keep accordion open while in section
+    var subIds = subItems.map(function (x) { return x.id; });
+    document.addEventListener('scroll', function () {
+      var current = null;
+      subIds.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 120) current = id;
+      });
+      ul.querySelectorAll('a').forEach(function (a) {
+        a.classList.toggle('active', a.getAttribute('href').slice(1) === current);
+      });
+      if (current) details.open = true;
+    }, { passive: true });
+  }
+
+  // Run after everything else has initialised
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    // Use setTimeout so Quarto's own TOC scripts finish first
+    setTimeout(init, 0);
+  }
+})();
+</script>
