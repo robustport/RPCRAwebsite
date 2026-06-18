@@ -505,6 +505,8 @@ The following table provides table provides CRSP® database Names and Descriptio
 
 \*Total Return of the CRSP® NYSE/NYSEMKT/NASDAQ/Arca Value-Weighted Market Index.
 
+{{< include _copyright.qmd >}}
+
 ```{=html}
 </div>
 ```

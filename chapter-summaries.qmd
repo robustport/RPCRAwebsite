@@ -6,10 +6,6 @@ toc-depth: 2
 classes: chapter-summaries-page
 ---
 
-::: {.copyright-notice}
-**Copyright Notice.** Planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2026.
-:::
-
 ::: {.pdf-callout}
 ::: {.pdf-icon}
 &#128196;
@@ -225,3 +221,6 @@ The main alternative to the IF method of computing standard errors is the *boots
 This chapter complements and extends the discussions of robust estimators in a number of earlier chapters of the book, and does so in the following ways. First, the chapter discusses basic concepts of robust estimation, including both data orient robustness and statistical robustness. Data oriented robustness is characterized in terms estimator breakdown points and influence functions, and statistical robustness is characterized in terms of qualitative stability features of estimator bias and variance. The basic idea concerning the latter is a strong form of continuity according to which small deviations of data distributions from a nominal normal distribution result in only small increases in estimator bias and variance. Particularly attractive versions of such robust estimators are those that minimize the maximum variance, or minimize the maximum bias, over mixture distribution neighborhoods of a normal distribution
 
 Then the chapter provides a variety of additional mathematical aspects of the robust estimators of means and variances, robust covariance matrix estimators, and robust regression estimators, that were introduced in earlier chapters. It is anticipated that this chapter will serve as a helpful bridge from the minimal descriptions of the robust estimators in earlier chapters to the more complete mathematical treatment of robust statistics theory and methods in the Maronna et al. (2019).
+
+
+{{< include _copyright.qmd >}}

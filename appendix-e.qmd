@@ -5,10 +5,6 @@ page-layout: full
 toc: false
 ---
 
-::: {.copyright-notice}
-**Copyright Notice.** Planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2026.
-:::
-
 ::: {.pdf-callout}
 ::: {.pdf-icon}
 &#128196;
@@ -28,3 +24,5 @@ toc: false
   title="Appendix E: Machine Learning">
 </iframe>
 ```
+
+{{< include _copyright.qmd >}}

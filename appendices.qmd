@@ -91,3 +91,5 @@ This site hosts the five technical appendices to RPCRA. Each appendix provides s
 
 </div>
 ```
+
+{{< include _copyright.qmd >}}

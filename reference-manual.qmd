@@ -19,3 +19,5 @@ Complete function and dataset reference for the `PCRA` R package. Documents all 
   title="PCRA Reference Manual">
 </iframe>
 ```
+
+{{< include _copyright.qmd >}}

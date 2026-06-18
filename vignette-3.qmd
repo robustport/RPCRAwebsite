@@ -114,6 +114,8 @@ In RStudio drop down Tools menu, select Install Packages, and type`devtools`in t
 
 Eventually, you may want to compile one or more packages from source using a Windows operating system, and in that case you will need to install the`Rtools` package, which you can do in the same manner as above. Keep in mind that each major version of R (e.g. 4.x) has its corresponding version of Rtools.
 
+{{< include _copyright.qmd >}}
+
 ```{=html}
 </div>
 ```

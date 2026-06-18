@@ -195,6 +195,8 @@ The main advantages of the development version of`PCRA`are:
 
 The primary disadvantage of using the`PCRA` development version is that some new features or data sets may not yet be fully tested or documented.
 
+{{< include _copyright.qmd >}}
+
 ```{=html}
 </div>
 ```

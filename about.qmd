@@ -85,8 +85,4 @@ BibTeX:
 }
 ```
 
----
-
-## Copyright
-
-All material on this site is planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. **All rights reserved. © Copyright 2026.** No part of this material may be reproduced, distributed, or transmitted in any form without prior written permission from the authors.
+{{< include _copyright.qmd >}}

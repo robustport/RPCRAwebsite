@@ -78,3 +78,5 @@ Automated LyX-to-web conversions under review. Compare these against the current
 
 </div>
 ```
+
+{{< include _copyright.qmd >}}

@@ -32,10 +32,6 @@ toc-title: ""
 <div class="margin-toc-page">
 ```
 
-::: {.copyright-notice}
-**Copyright Notice.** Material on this site is planned for publication in 2026 by R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. All rights reserved. © Copyright 2026.
-:::
-
 ## 1 About this Book {#about-the-book}
 
 *Robust Portfolio Construction and Risk Analysis* (RPCRA) provides a comprehensive and rigorous account of the quantitative foundations of modern portfolio management. The book develops the mathematical, statistical, and computational tools needed to construct, evaluate, and manage the risk of investment portfolios in a principled way.
@@ -150,6 +146,8 @@ Martin, R. D., Philips, T. K., Scherer, B., and Li, K. (2026).
 © 2026 Martin, Philips, Scherer &amp; Li. All rights reserved.
 </div>
 ```
+
+{{< include _copyright.qmd >}}
 
 ```{=html}
 </div>

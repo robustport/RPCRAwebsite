@@ -20,3 +20,5 @@ Download any script directly. Each script reproduces all figures and tables for 
 ::: {.callout-warning appearance="minimal"}
 Some scripts take several minutes to run in full. It is better to run the code for selected Figures and Tables.
 :::
+
+{{< include _copyright.qmd >}}

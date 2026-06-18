@@ -13,10 +13,6 @@ toc-title: ""
 <div class="margin-toc-page">
 ```
 
-::: {.copyright-notice}
-R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. Springer, planned publication 2026.
-:::
-
 ::: {.pdf-callout}
 ::: {.pdf-icon}
 &#128196;
@@ -146,6 +142,8 @@ Reproduction of any information, data or material, including ratings ("Content")
 ### CBOE LIVEVOL {#cboe-livevol}
 
 CBOE LIVEVOL data is provided "as is" without warranty of any kind, either express or implied, including, without limitation, any warranty with respect to accuracy, completeness, timeliness, noninfringement, merchantability, or fitness for a particular purpose. Neither LIVEVOL, nor any provider of data to LIVEVOL, nor any of their respective affiliates, nor their respective directors, officers, employees, contractors, and agents shall have any liability of any kind (including, but not limited to, for any direct, indirect, incidental, special, consequential, or punitive damages or any damages for lost profits or lost opportunities and whether based upon contract, tort, warranty, or otherwise) for any inaccuracies, omissions, human or machine errors, or other irregularities in the data or for any cessation, discontinuance, failure, malfunction, delay, suspension, interruption, or termination of, or with respect to, the provision of the data to subscriber. The data is not, and should not be construed as financial, legal or other advice of any kind, nor should it be regarded as an offer or as a solicitation of an offer to buy, sell or otherwise deal in any investment.
+
+{{< include _copyright.qmd >}}
 
 ```{=html}
 </div>
