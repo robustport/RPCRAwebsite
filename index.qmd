@@ -38,7 +38,7 @@ toc-title: ""
 
 The text integrates classical theory — mean-variance optimization, the construction of cross-section and time-series factor models, the estimation of expected returns and risk, and the measurement of portfolio performance — with modern statistical methodology including robust estimators that are not much influenced by outliers and influence function-based analyses of risk and performance estimators.
 
-These techiques are then applied to the construction of specialized portfolios that are of immense practical importance: miminimum downside risk portfolios, portfolios designed to defease liabililities and to meet spending objectives, fixed-income portfolios and portfolios with options. Throughout, the authors emphasize the computational aspects of portfolio management and make available the open-source companion PCRA package and R code to reproduce the exhibits in the book and related *non-commercial* use by readers.
+These techiques are then applied to active equity and fixed income portfolios, as well as to the construction of specialized portfolios that are of immense practical importance: miminimum downside risk portfolios, portfolios designed to defease liabililities and to meet spending objectives and portfolios with options. Throughout, the authors emphasize the computational aspects of portfolio management and make available the open-source companion PCRA package and R code to reproduce the exhibits in the book and for *non-commercial* use by readers.
 
 ```{=html}
 <div class="section-rule"><span>Preface</span></div>
@@ -46,7 +46,7 @@ These techiques are then applied to the construction of specialized portfolios t
 
 ## 2 Preface {#preface}
 
-The [Preface](preface.qmd) provides an overview of the book's 16 chapters and 5 appendices, describes the reproducibility theme and supporting R packages (`PCRA`, `facmodCS`, `facmodTS`, `robustGarch`), motivates the use of robust estimators, introduces the special focus topics in Chapters 10–16, and includes data use disclaimers for CRSP, SPGMI, ICE, Tradeweb, S&P, and CBOE datasets.
+The [Preface](preface.qmd) provides an overview of the book's 16 chapters and 5 appendices, describes the reproducibility theme and supporting R packages (`PCRA`, `facmodCS`, `facmodTS`, `robustGarch`), motivates the use of robust estimators, introduces the special focus topics in Chapters 10–16, and includes disclaimers and conditions for the use of CRSP, SPGMI, ICE, Tradeweb, S&P and CBOE datasets.
 
 ```{=html}
 <div class="section-rule"><span>Chapter Summaries</span></div>
