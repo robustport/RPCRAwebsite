@@ -154,7 +154,9 @@ Similarly, you can see the dimensions and column names of `factorsSPGMIr` using:
 
 dim(factorsSPGMIr)   # Number of rows and columns in factorsSPGMIr
 names(factorsSPGMIr) # Names of data items in each column of factorsSPGMIr
-```## Data Table Objects Versus Data Frame Objects
+```
+
+## Data Table Objects Versus Data Frame Objects
 
 You may have wondered why `class(stocksCRSPmonthly)` and `class(factorsSPGMIr)` return both “data.table” and “data.frame”, the first of which is indeed the class of each these two data sets. The occurrence of “data.frame” after “data.table” indicates that the `data.table` object *inherits* all the properties of a `data.frame` object, and adds to these a number of features to enhance both its syntax and its performance. In view of the above property of a `data.table` object, it should not be surprising that you can easily convert a `data.table` object to a `data.frame` by applying the `data.frame` function to it:
 
