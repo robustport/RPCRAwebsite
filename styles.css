@@ -1,7 +1,7 @@
 /*-- scss:defaults --*/
 
 // ── Core Typography ───────────────────────────────────────────────────────────
-$headings-font-family:    "Playfair Display", "Georgia", "Times New Roman", serif;
+$headings-font-family:    "Playfair Display", "Georgia", "Palatino Linotype", serif;
 $font-family-sans-serif:  "Inter", system-ui, -apple-system, sans-serif;
 $font-family-monospace:   "JetBrains Mono", "Fira Code", "Courier New", monospace;
 $font-size-base:          1.0625rem;

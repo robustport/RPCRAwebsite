@@ -38,7 +38,7 @@ toc-title: ""
 
 The text integrates classical theory — mean-variance optimization, the construction of cross-section and time-series factor models, the estimation of expected returns and risk, and the measurement of portfolio performance — with modern statistical methodology including robust estimators that are not much influenced by outliers and influence function-based analyses of risk and performance estimators.
 
-These techiques are then applied to active equity and fixed income portfolios, as well as to the construction of specialized portfolios that are of immense practical importance: miminimum downside risk portfolios, portfolios designed to defease liabililities and to meet spending objectives and portfolios with options. Throughout, the authors emphasize the computational aspects of portfolio management and make available the open-source companion PCRA package and R code to reproduce the exhibits in the book and for *non-commercial* use by readers.
+These techiques are then applied to active equity and fixed income portfolios, as well as to the construction of specialized portfolios that are of great practical importance: miminimum downside risk portfolios, portfolios designed to defease liabililities and to meet spending objectives, and portfolios with options. Throughout, the authors emphasize the computational aspects of portfolio management and make available the companion open-source PCRA package and R code to reproduce many of the exhibits in the book as well as for *non-commercial* use by readers.
 
 ```{=html}
 <div class="section-rule"><span>Preface</span></div>
@@ -114,7 +114,7 @@ The book is accompanied by three vignettes that provide hands-on documentation f
 
 ## 5 Demo Code {#demo-code}
 
-Chapter-by-chapter R scripts that reproduce the figures and tables in the book are provided in the `PCRA` R package. The [Demo Code](demo-code.qmd) page lists all available scripts and instructions for running them.
+Chapter-by-chapter R scripts that reproduce the figures and tables in the book are provided in the `PCRA` R package. The [Demo Code](demo-code.qmd) page lists all the available scripts and instructions for running them.
 
 ```{=html}
 <a href="demo-code.html" class="card-link" style="display:inline-flex;margin-top:0.5rem;">View Demo Code</a>
@@ -138,7 +138,7 @@ This site hosts the five technical appendices to RPCRA. Each appendix provides s
 <div class="section-rule"><span>Citation</span></div>
 ```
 
-## Citation {#citation}
+## Citing the Book {#citation}
 
 ```{=html}
 <div class="cite-block">
