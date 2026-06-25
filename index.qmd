@@ -34,11 +34,11 @@ toc-title: ""
 
 ## 1 About this Book {#about-the-book}
 
-*Robust Portfolio Construction and Risk Analysis* (RPCRA) is a graduate level textbook that provides a comprehensive and rigorous account of the mathematical foundations of modern portfolio theory viewed through the immensely practical lens of Robust Statistical Methods. The book develops the mathematical, statistical, and computational tools and techniques needed to construct, evaluate, and manage investment portfolios in spite of the noise that .
+*Robust Portfolio Construction and Risk Analysis* (RPCRA) is a graduate level textbook that provides a comprehensive and rigorous account of the mathematical foundations of modern portfolio theory viewed through the immensely practical lens of Robust Statistical Methods. The book develops the mathematical, statistical, and computational tools and techniques needed to construct, evaluate, and manage investment portfolios in the presence of noise.
 
-The text integrates classical theory — mean-variance optimization, the construction of cross-section and time-series factor models, the estimation of expected returns and risk, and the measurement of portfolio performance — with modern statistical methodology including robust estimators that are not much influenced by outliers and influence function-based analyses of risk and performance estimators.
+The text integrates classical mean-variance portfolio theory — the estimation of expected returns and modeling risk, cross-section and time-series factor models, the construction of optimal portfolios and the measurement of their performance — with modern statistical methodology including robust estimators that are not much influenced by outliers, influence function-based analyses of risk and performance estimators, and statistical process control-based monitoring of portfolio performance.
 
-These techiques are then applied to active equity and fixed income portfolios, as well as to the construction of specialized portfolios that are of great practical importance: miminimum downside risk portfolios, portfolios designed to defease liabililities and to meet spending objectives, and portfolios with options. Throughout, the authors emphasize the computational aspects of portfolio management and make available the companion open-source PCRA package and R code to reproduce many of the exhibits in the book as well as for *non-commercial* use by readers.
+These techiques are applied to active equity and fixed income portfolios, as well as to the construction of specialized portfolios that are of great practical importance: miminimum downside risk portfolios, portfolios designed to defease liabililities and to meet spending objectives, and portfolios with options. Throughout, the authors emphasize the computational aspects of portfolio management and make available the companion open-source PCRA package and R code to reproduce many of the exhibits in the book as well as for *non-commercial* use by readers.
 
 ```{=html}
 <div class="section-rule"><span>Preface</span></div>
@@ -46,7 +46,7 @@ These techiques are then applied to active equity and fixed income portfolios, a
 
 ## 2 Preface {#preface}
 
-The [Preface](preface.qmd) provides an overview of the book's 16 chapters and 5 appendices, describes the reproducibility theme and supporting R packages (`PCRA`, `facmodCS`, `facmodTS`, `robustGarch`), motivates the use of robust estimators, introduces the special focus topics in Chapters 10–16, and includes disclaimers and conditions for the use of CRSP, SPGMI, ICE, Tradeweb, S&P and CBOE datasets.
+The [Preface](preface.qmd) provides an overview of the book's sixteen chapters and five appendices, describes its reproducibility theme as well as its supporting R packages (`PCRA`, `facmodCS`, `facmodTS`, `robustGarch`), motivates the use of robust estimators, introduces its special focus topics in Chapters 10–16, and includes disclaimers and conditions for the *non-commercial* use of CRSP, SPGMI, ICE, Tradeweb, S&P and CBOE datasets.
 
 ```{=html}
 <div class="section-rule"><span>Chapter Summaries</span></div>
