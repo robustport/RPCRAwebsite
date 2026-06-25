@@ -34,9 +34,11 @@ toc-title: ""
 
 ## 1 About this Book {#about-the-book}
 
-*Robust Portfolio Construction and Risk Analysis* (RPCRA) provides a comprehensive and rigorous account of the quantitative foundations of modern portfolio management. The book develops the mathematical, statistical, and computational tools needed to construct, evaluate, and manage the risk of investment portfolios in a principled way.
+*Robust Portfolio Construction and Risk Analysis* (RPCRA) is a graduate level textbook that provides a comprehensive and rigorous account of the mathematical foundations of modern portfolio theory viewed through the immensely practical lens of Robust Statistical Methods. The book develops the mathematical, statistical, and computational tools and techniques needed to construct, evaluate, and manage investment portfolios in spite of the noise that .
 
-The text integrates classical theory — mean-variance optimization, the Capital Asset Pricing Model, the Arbitrage Pricing Theory — with modern statistical methodology including robust estimators that are not much influenced by outliers, influence function analysis of risk and performance estimators, minimum downside risk portfolios, portfolios that meet spending objectives, and portfolios with options. Throughout, the authors emphasize computation with R packages alongside theoretical justification.
+The text integrates classical theory — mean-variance optimization, the construction of cross-section and time-series factor models, the estimation of expected returns and risk, and the measurement of portfolio performance — with modern statistical methodology including robust estimators that are not much influenced by outliers and influence function-based analyses of risk and performance estimators.
+
+These techiques are then applied to the construction of specialized portfolios that are of immense practical importance: miminimum downside risk portfolios, portfolios designed to defease liabililities and to meet spending objectives, fixed-income portfolios and portfolios with options. Throughout, the authors emphasize the computational aspects of portfolio management and make available the open-source companion PCRA package and R code to reproduce the exhibits in the book and related *non-commercial* use by readers.
 
 ```{=html}
 <div class="section-rule"><span>Preface</span></div>
