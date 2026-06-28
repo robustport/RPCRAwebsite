@@ -191,12 +191,38 @@ The rounded data in `factorsSPGMIr` was obtained by rounding the data in `factor
 **Table 1:** Reduction in size of the `factorsSPGMI` data set from rounding and data compression.
 
 | `factorsSPGMI`           | Size(KB) | Reduction(%) |
-| Left                     | Center   | Right        |
-| :----------------------: | :------: | :----------: |
+| :----------------------- | :------: |  ----------: |
 | Original                 |   6452   |     0.0      |
 | Rounded to 4 Sig. Digits |   2702   |     58.1     |
 | Level 9 'xz' Compressed  |   1787   |     72.3     |
 
+**Table 1:** Pure html.
+<table>
+  <thead>
+    <tr>
+      <th align="center"><code>factorsSPGMI</code></th>
+      <th align="center">Size(KB)</th>
+      <th align="center">Reduction(%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="left">Original</td>
+      <td align="center">6452</td>
+      <td align="right">0.0</td>
+    </tr>
+    <tr>
+      <td align="left">Rounded to 4 Sig. Digits</td>
+      <td align="center">2702</td>
+      <td align="right">58.1</td>
+    </tr>
+    <tr>
+      <td align="left">Level 9 'xz' Compressed</td>
+      <td align="center">1787</td>
+      <td align="right">72.3</td>
+    </tr>
+  </tbody>
+</table>
 Rounding factors data to four significant digits turns out to make little difference to the precision of the `factorsSPGMIr` data relative to `factorsSPGMI`. This claim is supported by Figure 2, which shows that the fractional error in all the factors is always less than about 1% (it is less than 1/2% for four of the fourteen factors). We expect these minor differences in `factorsSPGMIr` relative to `factorsSPGMI` to have a negligible impact on factor model fits.
 
 ```r
