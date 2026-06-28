@@ -188,41 +188,15 @@ Users who are familiar with manipulating `data.frame` objects will find the abov
 
 The rounded data in `factorsSPGMIr` was obtained by rounding the data in `factorsSPGMI` to 4 significant digits, and then compressing it with level 9 “xz” compression. The results of these steps are displayed in Table 1. The compression reduces the 6.452 MB `factorsSPGMI` data set by 72.3% to about 1.787 MB for `factorsSPGMIr`. This overall data compression process was required so that the `PCRA` package, which also contains the 1MB sized `stocksCRSPmonthly` data and other miscellaneous data sets totaling about 2MB in size satisfies CRAN’s maximum package data size of 5MB.
 
-**Table 1:** Reduction in size of the `factorsSPGMI` data set from rounding and data compression.
+**Table 1.** Reduction in size of the `factorsSPGMI` data set from rounding and data compression.
 
 | `factorsSPGMI`           | Size(KB) | Reduction(%) |
-| :----------------------- | :------: |  ----------: |
-| Original                 |   6452   |     0.0      |
+| :----------------------- | :------: |  :----------: |
+| Original                 |   6452   |      0.0      |
 | Rounded to 4 Sig. Digits |   2702   |     58.1     |
 | Level 9 'xz' Compressed  |   1787   |     72.3     |
 
-**Table 1:** Pure html.
-<table>
-  <thead>
-    <tr>
-      <th align="center"><code>factorsSPGMI</code></th>
-      <th align="center">Size(KB)</th>
-      <th align="center">Reduction(%)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td align="left">Original</td>
-      <td align="center">6452</td>
-      <td align="right">0.0</td>
-    </tr>
-    <tr>
-      <td align="left">Rounded to 4 Sig. Digits</td>
-      <td align="center">2702</td>
-      <td align="right">58.1</td>
-    </tr>
-    <tr>
-      <td align="left">Level 9 'xz' Compressed</td>
-      <td align="center">1787</td>
-      <td align="right">72.3</td>
-    </tr>
-  </tbody>
-</table>
+
 Rounding factors data to four significant digits turns out to make little difference to the precision of the `factorsSPGMIr` data relative to `factorsSPGMI`. This claim is supported by Figure 2, which shows that the fractional error in all the factors is always less than about 1% (it is less than 1/2% for four of the fourteen factors). We expect these minor differences in `factorsSPGMIr` relative to `factorsSPGMI` to have a negligible impact on factor model fits.
 
 ```r
