@@ -191,6 +191,7 @@ The rounded data in `factorsSPGMIr` was obtained by rounding the data in `factor
 **Table 1:** Reduction in size of the `factorsSPGMI` data set from rounding and data compression.
 
 | `factorsSPGMI`           | Size(KB) | Reduction(%) |
+| Left                     | Center   | Right        |
 | :----------------------: | :------: | :----------: |
 | Original                 |   6452   |     0.0      |
 | Rounded to 4 Sig. Digits |   2702   |     58.1     |
@@ -218,13 +219,13 @@ The authors wish to express their gratitude to CRSP® , SPGMI, S&P Dow Jones Ind
 
 # Development Version of PCRA
 
-The development version of `PCRA` (currently `PCRA-1.3.1`) can be installed from its github repository (repo) at <https://github.com/robustport/PCRA>. It contains new features that will be included in the next `PCRA` CRAN release (currently `PCRA`-1.4). Furthermore, an important convenience feature of `PCRA` development versions is that they contain all the CRSP® stocks data and SPGMI factors data sets, namely:
+The development version of `PCRA` (currently `PCRA-1.3.1`) can be installed from its github repository (repo) at <https://github.com/robustport/PCRA>. It contains new features that will be included in the next `PCRA` CRAN release (currently `PCRA-1.4`). Furthermore, an important convenience feature of `PCRA` development versions is that they contain all the CRSP® stocks data and SPGMI factors data sets, namely:
 
-- ` stocksCRSPmonthly` 
+- `stocksCRSPmonthly` 
 - `stocksCRSPweekly` 
 - `stocksCRSPdaily` 
 - `factorsSPGMI` 
-`factorsSPGMIr` 
+- `factorsSPGMIr` 
 
 However, PCRA development version users will need only the `factorsSPGMIr` rounded data in case they want to confirm that its use in portfolio construction does not result in any significant differences between a portfolio’s performance based on the rounded factors in `factorsSPGMIr` and its performance based on the as-reported factors in `factorsSPGMI`.
 
