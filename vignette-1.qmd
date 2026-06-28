@@ -69,7 +69,9 @@ The `PCRA-1.3.1` development version contains daily and weekly CRSP® stocks dat
 - `stocksCRSPdaily` 
 - `factorsSPGMI`. 
 
-This vignette provides [Jump to details](#the-rounded-spgmi-factors-data) concerning the rounding used to create the `factorsSPGMIr` data from the `factorsSPGMI` data, and shows that there are only minor differences (on the order of 1%, and typically much less) in `factorsSPGMIr` data values relative to their `factorsSPGMI` counterparts. This suggest that one will see minimal differences in portfolio performance when using `factorsSPGMIr` in place of `factorsSPGMI`. Nonetheless, users of the `PCRA-1.3` package who prefer to use the unrounded  `factorsSPGMI` data can do so in a manner described in the document “CRSP Stocks and SPGMI Factors in PCRA” , which is downloadable from CRAN at <https://cran.r-project.org/web/packages/PCRA>, or can switch to the development version.
+This vignette provides [details](#the-rounded-spgmi-factors-data) concerning the rounding used to create the `factorsSPGMIr` data from the `factorsSPGMI` data, and shows that there are only minor differences (on the order of 1%, and typically much less) in `factorsSPGMIr` data values relative to their `factorsSPGMI` counterparts. This suggest that one will see minimal differences in portfolio performance when using `factorsSPGMIr` in place of `factorsSPGMI`. 
+
+Nonetheless, users of the `PCRA-1.3` package who prefer to use the unrounded  `factorsSPGMI` data can do so in a manner described in the document “CRSP Stocks and SPGMI Factors in PCRA” , which is downloadable from CRAN at <https://cran.r-project.org/web/packages/PCRA>, or can switch to the development version.
 
 The R code chunks used to creating this vignette are provided in the `PCRA Overview Demo.R` script in the `demo` folder of the `PCRA` package. Instructions for accessing and running such scripts are provided in the vignette “PCRA Reproducibility Code”, which we recommend reading in conjunction with this vignette.
 
@@ -93,7 +95,10 @@ help(SP500)
 
 ### The S&P Datasets
 
-Standard and Poor’s has graciously consented to the inclusion of five datasets in the`PCRA`package, one of which (`SP500`) is updated annually as new year-end data on the S&P 500 ® Index becomes available. The other four datasets are historical and are copied from paper copies of the S&P Analysts’ Handbook. All five data sets are of type `data.frame`.
+Standard and Poor’s has graciously consented to the inclusion of five datasets in the`PCRA`package, one of which (`SP500`) is updated annually as new year-end data on the S&P 500 ® Index becomes publicly available. The other four datasets are historical and are copied from paper copies of the S&P Analysts’ Handbook. All five data sets are of type `data.frame`.
+
+S&P provides investors with a great deal of information on the S&P 500 ® at <https://www.spglobal.com/spdji/en/indices/equity/sp-500/>, and some (but not all) of this information can be found in `SP500`, which has (among other items), the per-share earnings, revenues, and price level of the S&P 500 ® Index from 1925 to 2025. It is updated once a year, typically in April, after S&P’s analysts finalize all the year-end data for the index and release it to the public. In addition, it provides year-end CPI and Nominal GDP levels
+sourced from the Federal Reserve’s FRED database at <https://fred.stlouisfed.org/>.
 
 It is instructive to compare `SP500` with `SP500from1967to2007`, `SPIndustrials`, `SP400Industrials` and `SP425Industrials`. The first is updated once a year, and a superset of the data that is added to it each year can be viewed at <https://www.spglobal.com/spdji/en/documents/additional-material/sp-500-eps-est.xlsx> . The latter four data sets are, in contrast, derived from scans of old paper copies of the S&P Analysts’ Handbook. Some columns that were provided in the past (e.g. `Cash_Flow`, `Depreciation` and `TotalReturnIndex`) are no longer provided, while other columns that were not provided in the past (e.g. `SP500CapEx`) are now provided.
 
@@ -103,7 +108,8 @@ The PCRA data set `CboeOptionStrategies` is a `data.frame` with total return ind
 
 ### The Conference Board Dataset
 
-The PCRA dataset `ConferenceBoardETI` is a `data.frame` a monthly time series of The Conference Board's Employment Trend Index from November 1973 to September 2023.
+The PCRA dataset `ConferenceBoardETI` is a `data.frame` with the values of the Conference Board’s
+Employment Trends Index&trade from November 1973 to September 2023. The Employment Trends Index&trad is a proprietary composite of eight employment indicators, and information on it can be found at <https://www.conference-board.org/topics/employment-trends-index>. The Conference Board publishes a number of indicators of the health of the U.S. and global economies, including the Leading Economic Index ® (<https://www.conference-board.org/topics/us-leading-indicators>) and the Total Economy Database&trade (<https://www.conference-board.org/topics/total-economy-database>), but these are made available only to subscribers to their service.
 
 ### The ICE Dataset
 
