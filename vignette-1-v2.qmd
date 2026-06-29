@@ -33,7 +33,7 @@ The [original vignette page](vignette-1.html) remains the default until this ver
 
 # The PCRA Package
 
-This vignette is intended primarily as an overview of the structure and contents of the `PCRA` package (other vignettes and help material will go into greater depth on the actual functionality and use of `PCRA` and its related packages), and assumes that you have already installed R version 4.4.3 or later, as well as a current version of RStudio, on your computer, or will do so before reading the following material. To find out how to install R and RStudio, we recommend reading the appropriate parts of Appendix A in *Hands on Programming with R* , available online at <https://rstudio-education.github.io/hopr/> .
+This vignette is intended primarily as an overview of the structure and contents of the `PCRA` package (other vignettes and help material will go into greater depth on the actual functionality and use of `PCRA` and its related packages), and assumes that you have already installed R version 4.4.3 or later, as well as a current version of RStudio, on your computer, or will do so before reading the following material. To find out how to install R and RStudio, we recommend reading the appropriate parts of Appendix A in *Hands on Programming with R* , available online at <https://rstudio-education.github.io/hopr/>.
 
 The `PCRA` package was created to provide data-oriented computational support for the book *Robust Portfolio Construction and Risk Analysis* (RPCRA), co-authored by Doug Martin, Thomas Philips, Bernd Scherer and Kirk Li. The book’s publication by Springer is planned for 2026.
 
@@ -45,9 +45,9 @@ It is important to keep in mind that there currently exist two versions of the P
 
 - `PCRA-1.3` (the production version), which is available on CRAN at <https://cran.r-project.org/web/packages/PCRA>
 
-- `PCRA-1.3.1` (the development version), which is available at <https://github.com/robustport/PCRA> .
+- `PCRA-1.3.1` (the development version), which is available at <https://github.com/robustport/PCRA>.
 
-Before reading the rest of this document, you should install the CRAN version of `PCRA` using RStudio’s `Tools > Install Packages` menu, entering `PCRA` in the “ Packages ” field, and clicking “ Install ” . After the installation is finished, load the package using R’s `library` function, ignoring any warning messages that might appear.
+Before reading the rest of this document, you should install the CRAN version of `PCRA` using RStudio’s `Tools > Install Packages` menu, entering `PCRA` in the “Packages” field, and clicking “Install”. After the installation is finished, load the package using R’s `library` function, ignoring any warning messages that might appear.
 
 ```r
 
@@ -58,7 +58,7 @@ Both PCRA versions have identical functionality except for new features and data
 
 - `stocksCRSPmonthly`
 
-- `factorsSPGMIr.`
+- `factorsSPGMIr`.
 
 For details of the above two data sets, use the use the R `help` function:
 
@@ -68,21 +68,23 @@ help(stocksCRSPmonthly)
 help(factorsSPGMIr)
 ```
 
-The `PCRA-1.3.1` development version contains daily and weekly CRSP® stocks data and unrounded SPGMI factors data in addition to the monthly CRSP® stocks data and rounded SPGMI factors data contained in `PCRA-1.3` . The additional data sets are:
+The `PCRA-1.3.1` development version contains daily and weekly CRSP® stocks data and unrounded SPGMI factors data in addition to the monthly CRSP® stocks data and rounded SPGMI factors data contained in `PCRA-1.3`. The additional data sets are:
 
 - `stocksCRSPweekly`
 
 - `stocksCRSPdaily`
 
-- `factorsSPGMI.`
+- `factorsSPGMI`.
 
-Section 2.2 provides details concerning the rounding used to create the `factorsSPGMIr` data from the `factorsSPGMI` data, and shows that there are only minor differences on the order of 1% (and typically much less than 1%) in `factorsSPGMIr` data values relative to their `factorsSPGMI` counterparts. This suggest that one will see minimal differences in portfolio performance when using `factorsSPGMIr` in place of `factorsSPGMI` . None the less, users of the `PCRA-1.3` package who prefer to use the unrounded `factorsSPGMI` data can do so in a manner described in the document “ CRSP Stocks and SPGMI Factors in PCRA ” , which is downloadable from CRAN at <https://cran.r-project.org/web/packages/PCRA> , or can switch to the development version.
+This vignette provides [`details`](#the-rounded-spgmi-factors-data) concerning the rounding used to create the `factorsSPGMIr` data from the `factorsSPGMI` data, and shows that there are only minor differences on the order of 1% (and typically much less than 1%) in `factorsSPGMIr` data values relative to their `factorsSPGMI` counterparts. This suggest that one will see minimal differences in portfolio performance when using `factorsSPGMIr` in place of `factorsSPGMI`.
+ 
+Nonetheless, users of the `PCRA-1.3` package who prefer to use the unrounded `factorsSPGMI` data can do so in a manner described in the document “CRSP Stocks and SPGMI Factors in PCRA” , which is downloadable from CRAN at <https://cran.r-project.org/web/packages/PCRA> , or can switch to the development version.
 
-The R code chunks used for creating this vignette are provided in the `PCRA Overview Demo.R` script in the `demo` folder of the `PCRA` package. Instructions for accessing and running such scripts are provided in the vignette “ PCRA Reproducibility Code ” , which we recommend reading in conjunction with this vignette.
+The R code chunks used for creating this vignette are provided in the `PCRA Overview Demo.R` script in the `demo` folder of the `PCRA` package. Instructions for accessing and running such scripts are provided in the vignette “PCRA Reproducibility Code” , which we recommend reading in conjunction with this vignette.
 
 ## Other Data in the PCRA Package
 
-In addition to the relatively large CRSP® and SPGMI data sets, the `PCRA` package contains a large number of other data sets that are used throughout various chapters of the RPCRA book, and which may be used for a wide variety of computing exercises, *though strictly for academic (i.e. non-commercial) purposes* . The following use of the R `data` function results in the Figure 1 display of the data set names as well as their corresponding brief descriptions :
+In addition to the relatively large CRSP® and SPGMI data sets, the `PCRA` package contains a large number of other data sets that are used throughout various chapters of the RPCRA book, and which may be used for a wide variety of computing exercises, ***though strictly for academic (i.e. non-commercial) purposes***. The following use of the R `data` function results in the Figure 1 display of the data set names as well as their corresponding brief descriptions :
 
 ```r
 
@@ -96,23 +98,23 @@ Detailed descriptions of each of the `PCRA` data sets can be obtained using R’
 help(SP500)
 ```
 
-![PCRA package data sets and their corresponding descriptions](vignette-assets/dataNamesPCRA.png)
+![Figure 1. PCRA package data sets and their corresponding descriptions](vignette-assets/dataNamesPCRA.png)
 
 ### The S&P Datasets
 
-Standard and Poor’s has graciously consented to the inclusion of five datasets in the `PCRA` package, one of which ( `SP500` ) is updated annually as new year-end data on the S&P 500 ® Index becomes available. The other four datasets are historical and are copied from paper copies of the S&P Analysts’ Handbook. All five data sets are of type `data.frame` .
+Standard and Poor’s has graciously consented to the inclusion of five datasets in the `PCRA` package, one of which ( `SP500` ) is updated annually as new year-end data on the S&P 500 ® Index becomes available. The other four datasets are historical and are copied from paper copies of the S&P Analysts’ Handbook. All five data sets are of type `data.frame`.
 
-S&P provides investors with a great deal of information on the S&P 500 ® at <https://www.spglobal.com/spdji/en/indices/equity/sp-500/> , and some (but not all) of this information can be found in `SP500,` which has (among other items), the per-share earnings, revenues, and price level of the S&P 500 ® Index from 1925 to the most recent year-end. It is updated once a year, typically in April, after S&P’s analysts finalize all the year-end data for the index. In addition, it provides year-end CPI and Nominal GDP levels sourced from the Federal Reserve’s FRED database at <https://fred.stlouisfed.org/> .
+S&P provides investors with a great deal of information on the S&P 500 ® at <https://www.spglobal.com/spdji/en/indices/equity/sp-500/> , and some (but not all) of this information can be found in `SP500,` which has (among other items), the per-share earnings, revenues, and price level of the S&P 500 ® Index from 1925 to the most recent year-end. It is updated once a year, typically in April, after S&P’s analysts finalize all the year-end data for the index. In addition, it provides year-end CPI and Nominal GDP levels sourced from the Federal Reserve’s FRED database at <https://fred.stlouisfed.org/>.
 
-It is instructive to compare `SP500` with `SP500from1967to2007` , `SPIndustrials` , `SP400Industrials` and `SP425Industrials` . The first is updated once a year, and a superset of the data that is added to it each year can be viewed at <https://www.spglobal.com/spdji/en/documents/additional-material/sp-500-eps-est.xlsx> . The latter four data sets are, in contrast, derived from scans of old paper copies of the S&P Analysts’ Handbook. Some columns that were provided in the past (e.g. `Cash_Flow` , `Depreciation` and `TotalReturnIndex` ) are no longer provided, while other columns that were not provided in the past (e.g. `SP500CapEx` ) are now provided.
+It is instructive to compare `SP500` with `SP500from1967to2007` , `SPIndustrials` , `SP400Industrials` and `SP425Industrials`. The first is updated once a year, and a superset of the data that is added to it each year can be viewed at <https://www.spglobal.com/spdji/en/documents/additional-material/sp-500-eps-est.xlsx>. The latter four data sets are, in contrast, derived from scans of old paper copies of the S&P Analysts’ Handbook. Some columns that were provided in the past (e.g. `Cash_Flow` , `Depreciation` and `TotalReturnIndex` ) are no longer provided, while other columns that were not provided in the past (e.g. `SP500CapEx` ) are now provided.
 
 ### The CBOE Dataset
 
-The PCRA data set `CboeOptionStrategies` is a `data.frame` with total return indices for ten options-related strategies as well as price and total return indices for the S&P 500 ® Index, the yield on 3-month T-bills and two equity volatility indices (VIX and VXO) from June 1986 to December 2021. Information on these ten strategies, as well as many others, can be found at <https://www.cboe.com/us/indices/indicessearch/> .
+The PCRA data set `CboeOptionStrategies` is a `data.frame` with total return indices for ten options-related strategies as well as price and total return indices for the S&P 500 ® Index, the yield on 3-month T-bills and two equity volatility indices (VIX and VXO) from June 1986 to December 2021. Information on these ten strategies, as well as many others, can be found at <https://www.cboe.com/us/indices/indicessearch/>.
 
 ### The Conference Board Dataset
 
-The PCRA data set `ConferenceBoardETI` is a `data.frame` with the values of the Conference Board’s Employment Trends Index from November 1973 to September 2023. The Employment Trends Index is a proprietary composite of eight employment indicators, and information on it can be found at <https://www.conference-board.org/topics/employment-trends-index> . The Conference Board publishes a number of indicators of the health of the U.S. and global economies, including the Leading Economic Index ® ( <https://www.conference-board.org/topics/us-leading-indicators> ) and the Total Economy Database ( <https://www.conference-board.org/topics/total-economy-database> ), but these are available only to subscribers to their service.
+The PCRA data set `ConferenceBoardETI` is a `data.frame` with the values of the Conference Board’s Employment Trends Index from November 1973 to September 2023. The Employment Trends Index is a proprietary composite of eight employment indicators, and information on it can be found at <https://www.conference-board.org/topics/employment-trends-index>. The Conference Board publishes a number of indicators of the health of the U.S. and global economies, including the Leading Economic Index ® ( <https://www.conference-board.org/topics/us-leading-indicators> ) and the Total Economy Database ( <https://www.conference-board.org/topics/total-economy-database> ), but these are available only to subscribers to their service.
 
 ### The ICE Dataset
 
@@ -124,7 +126,7 @@ The PCRA data set `USTreasuryTradeweb` is a `data.frame` with the daily bid and 
 
 # CRAN PCRA Basics
 
-Here we focus on a few basic aspects of the `stocksCRSPmonthly` and the `factorsSPGMIr` data sets in the CRAN version of `PCRA` , and defer more detailed discussion to the vignette “ CRSP Stocks and SPGMI Factors in PCRA ” . The `PCRA` package contains many R functions and datasets, a list of which can be viewed by typing `ls` in the RStudio Console:
+Here we focus on a few basic aspects of the `stocksCRSPmonthly` and the `factorsSPGMIr` data sets in the CRAN version of `PCRA` , and defer more detailed discussion to the vignette “CRSP Stocks and SPGMI Factors in PCRA”. The `PCRA` package contains many R functions and datasets, a list of which can be viewed by typing `ls` in the RStudio Console:
 
 ```r
 
@@ -147,7 +149,7 @@ PCRA uses `data.table` types for the `stocksCRSPmonthly` and `factorsSPGMIr` dat
 
 2.  The `data.table` package can handle large data sets without its performance becoming degraded.
 
-Note that a `data.table` object is indeed a “ table object ” whose dimensions and column names can be obtained by typing:
+Note that a `data.table` object is indeed a “table object” whose dimensions and column names can be obtained by typing:
 
 ```r
 
@@ -174,7 +176,7 @@ names(factorsSPGMIr) # Names of data items in each column
 
 ## Data Table Objects Versus Data Frame Objects
 
-You may have wondered why `class(stocksCRSPmonthly)` and `class(factorsSPGMIr)` return both “ data.table ” and “ data.frame ” , the first of which is indeed the class of each these two data sets. The occurrence of “ data.frame ” after “ data.table ” indicates that the `data.table` object *inherits* all the properties of a `data.frame` object, and adds to these a number of features to enhance both its syntax and its performance. In view of the above property of a `data.table` object, it should not be surprising that you can easily convert a `data.table` object to a `data.frame` by applying the `data.frame` function to it:
+You may have wondered why `class(stocksCRSPmonthly)` and `class(factorsSPGMIr)` return both “data.table” and “data.frame” , the first of which is indeed the class of each these two data sets. The occurrence of “data.frame” after “data.table” indicates that the `data.table` object *inherits* all the properties of a `data.frame` object, and adds to these a number of features to enhance both its syntax and its performance. In view of the above property of a `data.table` object, it should not be surprising that you can easily convert a `data.table` object to a `data.frame` by applying the `data.frame` function to it:
 
 ```r
 
@@ -187,28 +189,31 @@ Users who are familiar with manipulating `data.frame` objects will find the abov
 
 ## The Rounded SPGMI Factors Data
 
-The rounded data in `factorsSPGMIr` was obtained by rounding the data in `factorsSPGMI` to 4 significant digits, and then compressing it with level 9 “ xz ” compression. The results of these steps are displayed in Table 2.2 . The compression reduces the 6.452 MB `factorsSPGMI` data set by 72.3% to about 1.787 MB for `factorsSPGMIr` . This overall data compression process was required so that the `PCRA` package, which also contains the 1MB sized `stocksCRSPmonthly` data and other miscellaneous data sets totaling about 2MB in size satisfies CRAN’s maximum package data size of 5MB.
+The rounded data in `factorsSPGMIr` was obtained by rounding the data in `factorsSPGMI` to 4 significant digits, and then compressing it with level 9 “xz” compression. The results of these steps are displayed in Table 2.2. The compression reduces the 6.452 MB `factorsSPGMI` data set by 72.3% to about 1.787 MB for `factorsSPGMIr`. This overall data compression process was required so that the `PCRA` package, which also contains the 1MB sized `stocksCRSPmonthly` data and other miscellaneous data sets totaling about 2MB in size satisfies CRAN’s maximum package data size of 5MB.
 
-*Reduction in size of the \texttt{factorsSPGMI} data set from rounding and data compression.*
-| factorsSPGMI | Size(KB) | Reduction(%) |
-| --- | --- | --- |
-| Original | 6452 | 0.0 |
-| Rounded to 4 Sig. Digits | 2702 | 58.1 |
-| Level 9 'xz' Compressed | 1787 | 72.3 |
+**Table 1.** Reduction in size of the `factorsSPGMI` data set from rounding and data compression.
 
-Rounding factors data to four significant digits turns out to make little difference in the precision of the `factorsSPGMIr` data relative to the `factorsSPGMI` . This claim is supported by Figure 2 , which shows that the fractional error in all the factors is always less than about 1% (it is less than 1/2% for four of the fourteen factors). We expect these minor differences in `factorsSPGMIr` relative to `factorsSPGMI` to have a negligible impact on factor model fits.
+| `factorsSPGMI`           | Size(KB) | Reduction(%) |
+| :----------------------- | :------: | :----------: |
+| Original                 |   6452   |      0.0     |
+| Rounded to 4 Sig. Digits |   2702   |     58.1     |
+| Level 9 'xz' Compressed  |   1787   |     72.3     |
 
-![Fractional differences in factorsSPGMIr relative to factorsSPGMI for each of the 14 factors.](vignette-assets/factorsRelativeDiff.png)
+Rounding factors data to four significant digits turns out to make little difference in the precision of the `factorsSPGMIr` data relative to the `factorsSPGMI`. This claim is supported by Figure 2 , which shows that the fractional error in all the factors is always less than about 1% (it is less than 1/2% for four of the fourteen factors). We expect these minor differences in `factorsSPGMIr` relative to `factorsSPGMI` to have a negligible impact on factor model fits.
 
-As is explained in the vignette “ Introduction to CRSP Stocks and SPGMI Factors in PCRA ” , users of the CRAN `PCRA-1.3` package actually have access to the non-rounded `factorsSPGMI` data in a special `DataPlus` folder of the `PCRA` github repository at <https://github.com/robustport/PCRA> . Our recommendation to users of the CRAN version of PCRA is to first fit factor models using `factorsSPGMIr` , and then, if there is any concern about the adverse impact of rounding, to check the model fit by refitting it using `factorsSPGMI` .
+!Figure 2. Fractional differences in factorsSPGMIr relative to factorsSPGMI for each of the 14 factors.](vignette-assets/factorsRelativeDiff.png)
 
-## PCRA Data Sets are NOT Open Source!
+As is explained in the vignette “Introduction to CRSP Stocks and SPGMI Factors in PCRA” , users of the CRAN `PCRA-1.3` package actually have access to the non-rounded `factorsSPGMI` data in a special `DataPlus` folder of the `PCRA` github repository at <https://github.com/robustport/PCRA>. Our recommendation to users of the CRAN version of PCRA is to first fit factor models using `factorsSPGMIr` , and then, if there is any concern about the adverse impact of rounding, to check the model fit by refitting it using `factorsSPGMI`.
 
-While the `PCRA` package contains a number of open source R functions and scripts, the `stocksCRSPmonthly` , `stocksCRSPweekly` , `stocksCRSPdaily,` `factorsSPGMIr` , `factorsSPGMI,` `SP500` , `SP500from1967to2007` , `SPIndustrials` , `SP400Industrials, SP425Industrials, CboeOptionStrategies, ConferenceBoardETI,` `ShortDurationCredit` and `USTreasuryTradeweb` datasets supplied with it *are not open source* , and *may not be redistributed in any way or form or used for any commercial (i.e. non-educational) purpose* . The authors wish to express their gratitude to CRSP® , SPGMI, S&P Dow Jones Indices, CBOE LiveVol LLC, ICE Data Indices LLC and Tradeweb Markets LLC for allowing us to provide these data sets in the PCRA package. Their generosity will greatly enhance students’ understanding of portfolio construction and risk analysis methods through the use of these data sets in reproducing the examples and doing the various computational exercises provided in the book, as well as by solving problems assigned by their course instructors.
+## PCRA Data Sets are *NOT* Open Source!
+
+While the `PCRA` package contains a number of open source R functions and scripts, the `stocksCRSPmonthly` , `stocksCRSPweekly` , `stocksCRSPdaily,` `factorsSPGMIr` , `factorsSPGMI,` `SP500` , `SP500from1967to2007` , `SPIndustrials` , `SP400Industrials, SP425Industrials, CboeOptionStrategies, ConferenceBoardETI,` `ShortDurationCredit` and `USTreasuryTradeweb` datasets supplied with it ***are not open source*** , and ***may not be redistributed in any way or form or used for any commercial (i.e. non-educational) purpose***. 
+
+The authors wish to express their gratitude to CRSP® , SPGMI, S&P Dow Jones Indices, CBOE LiveVol LLC, ICE Data Indices LLC and Tradeweb Markets LLC for allowing us to provide these data sets in the PCRA package. Their generosity will greatly enhance students’ understanding of portfolio construction and risk analysis methods through the use of these data sets in reproducing the examples and doing the various computational exercises provided in the book, as well as by solving problems assigned by their course instructors.
 
 # Development Version of PCRA
 
-The development version of `PCRA` (currently `PCRA-1.3.1` ) can be installed from its github repository (repo) at <https://github.com/robustport/PCRA> . It contains new features that will be included in the next `PCRA` CRAN release (currently `PCRA` -1.4). Furthermore, an important convenience feature of `PCRA` development versions is that they contain all the CRSP® stocks data and SPGMI factors data sets, namely:
+The development version of `PCRA` (currently `PCRA-1.3.1` ) can be installed from its github repository (repo) at <https://github.com/robustport/PCRA>. It contains new features that will be included in the next `PCRA` CRAN release (currently `PCRA` -1.4). Furthermore, an important convenience feature of `PCRA` development versions is that they contain all the CRSP® stocks data and SPGMI factors data sets, namely:
 
 - `stocksCRSPmonthly`
 
@@ -220,7 +225,7 @@ The development version of `PCRA` (currently `PCRA-1.3.1` ) can be installed fro
 
 - `factorsSPGMIr`
 
-However, PCRA development version users will need only the `factorsSPGMIr` rounded data in case they want to confirm that its use in portfolio construction does not result in any significant differences between a portfolio’s performance based on `factorsSPGMIr` and its performance based on the `factorsSPGMI` .
+However, PCRA development version users will need only the `factorsSPGMIr` rounded data in case they want to confirm that its use in portfolio construction does not result in any significant differences between a portfolio’s performance based on `factorsSPGMIr` and its performance based on the `factorsSPGMI`.
 
 In order to install the development version of `PCRA` one needs to have installed the R package `devtools` , which can be done in the RStudio console following the procedure used to install the `data.table` and `PCRA` packages. Once `devtools` has been installed, the development version of `PCRA` can be loaded and installed using the following commands in the RStudio console:
 

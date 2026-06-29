@@ -53,7 +53,7 @@ library(PCRA)
 Both PCRA versions have identical functionality except for new features and data sets in the development version, and differences in their CRSP® stocks and SPGMI factors data. Specifically, due to data storage space constraints, the `PCRA-1.3` package hosted on CRAN contains CRSP® stocks data only at a monthly frequency and slightly rounded SPGMI factors in the data sets
 
 - `stocksCRSPmonthly`  
-- `factorsSPGMIr.` 
+- `factorsSPGMIr` 
 
 For details of the above two data sets,  use R's `help` function:
 
@@ -65,11 +65,13 @@ help(factorsSPGMIr)
 
 The `PCRA-1.3.1` development version contains daily and weekly CRSP® stocks data and unrounded SPGMI factors data in addition to the monthly CRSP® stocks data and rounded SPGMI factors data contained in `PCRA-1.3`. The additional data sets are:
 
-- `stocksCRSPweekly`  
-- `stocksCRSPdaily` 
-- `factorsSPGMI`. 
+- `stocksCRSPweekly`
+  
+- `stocksCRSPdaily`
 
-This vignette provides [details](#the-rounded-spgmi-factors-data) concerning the rounding used to create the `factorsSPGMIr` data from the `factorsSPGMI` data, and shows that there are only minor differences (on the order of 1%, and typically much less) in `factorsSPGMIr` data values relative to their `factorsSPGMI` counterparts. This suggest that one will see minimal differences in portfolio performance when using `factorsSPGMIr` in place of `factorsSPGMI`. 
+- `factorsSPGMI` 
+
+This vignette provides [`details`](#the-rounded-spgmi-factors-data) concerning the rounding used to create the `factorsSPGMIr` data from the `factorsSPGMI` data, and shows that there are only minor differences (on the order of 1%, and typically much less) in `factorsSPGMIr` data values relative to their `factorsSPGMI` counterparts. This suggest that one will see minimal differences in portfolio performance when using `factorsSPGMIr` in place of `factorsSPGMI`. 
 
 Nonetheless, users of the `PCRA-1.3` package who prefer to use the unrounded  `factorsSPGMI` data can do so in a manner described in the document “CRSP Stocks and SPGMI Factors in PCRA” , which is downloadable from CRAN at <https://cran.r-project.org/web/packages/PCRA>, or can switch to the development version.
 
@@ -191,8 +193,8 @@ The rounded data in `factorsSPGMIr` was obtained by rounding the data in `factor
 **Table 1.** Reduction in size of the `factorsSPGMI` data set from rounding and data compression.
 
 | `factorsSPGMI`           | Size(KB) | Reduction(%) |
-| :----------------------- | :------: |  :----------: |
-| Original                 |   6452   |      0.0      |
+| :----------------------- | :------: | :----------: |
+| Original                 |   6452   |      0.0     |
 | Rounded to 4 Sig. Digits |   2702   |     58.1     |
 | Level 9 'xz' Compressed  |   1787   |     72.3     |
 
@@ -229,14 +231,15 @@ The development version of `PCRA` (currently `PCRA-1.3.1`) can be installed from
 
 However, PCRA development version users will need only the `factorsSPGMIr` rounded data in case they want to confirm that its use in portfolio construction does not result in any significant differences between a portfolio’s performance based on the rounded factors in `factorsSPGMIr` and its performance based on the as-reported factors in `factorsSPGMI`.
 
-In order to install the development version of `PCRA` one needs to have installed the R packages `devtools` or `pak`, which can be done in the RStudio console following the procedure used to install the `data.table` and `PCRA` packages. Once `devtools` or `pak` has been installed (`pak` is the modern replacement for a number of `devtools` functions including `install_github()`, `install_git()`, `install_version()`, and `install_local()` among others, the development version of `PCRA` can be loaded and installed using the following commands in the RStudio console:
+In order to install the development version of `PCRA` one needs to have installed the R packages `devtools` or `pak`, which can be done in the RStudio console following the procedure used to install the `data.table` and `PCRA` packages. Once `devtools` or `pak` has been installed (`pak` is a modern package installer, and has drop-in replacements for a number of `devtools` functions including `install_github()`, `install_git()`, `install_version()`, and `install_local()` among others), the development version of `PCRA` can be loaded and installed using the following commands in the RStudio console:
 
 ```r
-
+# Using devtools
 library(devtools) 
 devtools::install_github("robustport/PCRA")
-# Alternatively
-# GitHub, no separate function needed
+
+# Modern approach using pak
+# Install directly from GitHub, separate function not needed
 pak::pkg_install("robustport/PCRA")
 ```
 
