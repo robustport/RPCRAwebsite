@@ -505,8 +505,9 @@ One may wish to look at stocks, factors, or merged stocks and factors data over 
 
 stocksSmallCapIT5Year <- stocksSmallCapIT[stocksSmallCapIT[ , Date] >= as.Date("2010-01-31") &
 										  stocksSmallCapIT[ , Date] <= as.Date("2014-12-31"), ]
-range(stocksSmallCapIT5Year[ ,Date])
-length(unique(stocksSmallCapIT5Year[ ,Date]))
+										  
+range(stocksSmallCapIT5Year[ , Date])
+length(unique(stocksSmallCapIT5Year[ , Date]))
 ```
 
 # CRSP® Stocks Market Capitalization Break Points
