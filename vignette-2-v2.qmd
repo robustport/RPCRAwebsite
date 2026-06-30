@@ -393,14 +393,16 @@ These data sets can be accessed using the `getPCRAdata` function in the `PCRA` p
 stocksCRSPweekly <- getPCRAData(dataset = "stocksCRSPweekly")
 dateRange <- c("2000-01-7","2000-12-31")
 stocksMicroWeekly <- selectCRSPandSPGMI("weekly",
-dateRange = dateRange,
-stockItems = stockItems1,
-factorItems = NULL,
-subsetType = "CapGroupLast",
-subsetValues = "MicroCap",
-outputType = "xts")
+										dateRange = dateRange,
+										stockItems = stockItems1,
+										factorItems = NULL,
+										subsetType = "CapGroupLast",
+										subsetValues = "MicroCap",
+										outputType = "xts")
+
 class(stocksMicroWeekly)
 dim(stocksMicroWeekly)
+
 names(stocksMicroWeekly)[35] <- "Market"
 ```
 
@@ -440,7 +442,7 @@ Modify the above code to check that the stocks’ sectors are the same in Januar
 
 ## Extracting a Subset of the Variables
 
-We typically work with a merged or unmerged subset of the variables in `stocksCRSPmonthly` and `factorsSPGMIr`, and often end up needing only a few of the items in the the subset. For example, we might find that we are interested in only the Date, TickerLast, Return, Beta60M and EP items of the `data.table` object `stocksSmall3Fac` in Example 2 of Section 2. The following code creates the `data.table` we need:
+We typically work with a merged or unmerged subset of the variables in `stocksCRSPmonthly` and `factorsSPGMIr`, and often end up needing only a few of the items in the subset. For example, we might find that we are interested in only the Date, TickerLast, Return, Beta60M and EP items of the `data.table` object `stocksSmall3Fac` in Example 2 of Section 2. The following code creates the `data.table` we need:
 
 ```r
 
@@ -493,27 +495,27 @@ length(unique(stocksSmallCapIT5Year[,Date]))
 
 # CRSP® Stocks Market Capitalization Break Points
 
-We use a methodology similar to both the CRSP® method ( <https://www.crsp.org/indexes/breakpoints-chart/> ) and and the MSCI method to allocate the 294 firms in the `stocksCRSPmonthly` universe into four disjoint groups. To do so, we first sort the universe of stocks in each month by their market capitalization and then separate them into four disjoint groups using capitalization breakpoints.
+We use a methodology similar to both the CRSP® method ( <https://www.crsp.org/indexes/breakpoints-chart/> ) and the MSCI method to allocate the 294 firms in the `stocksCRSPmonthly` universe into four disjoint groups. To do so, we first sort the universe of stocks in each month by their market capitalization and then separate them into four disjoint groups using capitalization breakpoints.
 
 Specifically, we separate companies into Large-, Mid-, Small-, and Micro-cap groups, where Large-cap companies are those that cumulatively comprise the largest 70% of the total market capitalization of our universe. Mid-cap companies are those that account for the next 15% of the market capitalization of our universe. Small-Cap firms account for a further 13% of the market capitalization of our universe and Micro-cap firms account for the remaining 2%. We use a point-in-time methodology to estimate dollar breakpoints at each month end from 1993 to 2015.
 
-Expressed in dollars, the January 1993 Large-, Mid-, and Small-Cap breakpoints were \$4,257,427,625, \$1,518,241,542, and \$138,749,166, respectively, meaning that Large-cap companies had market capitalizations in excess of \$4.257B, while Micro-cap companies had market capitalizations smaller than \$138.7Mh. By December 2015, these breakpoints had grown to \$15,632,448,677, \$5,418,935,67 5, and \$604,640,580, respectively.
+Expressed in dollars, the January 1993 Large-, Mid-, and Small-Cap breakpoints were \$4,257,427,625, \$1,518,241,542, and \$138,749,166, respectively, meaning that Large-cap companies had market capitalizations in excess of \$4.257B, while Micro-cap companies had market capitalizations smaller than \$138.7M. By December 2015, these breakpoints had grown to \$15,632,448,677, \$5,418,935,67 5, and \$604,640,580, respectively.
 
 # Names of CRSP® Items in stocksCRSPmonthly Data Set
 
-The following table provides table provides CRSP® database Names and Descriptions that correspond to our `PCRA` package `stocksCRSPmonthly` item names.
+The following table provides table provides CRSP® database names and descriptions that correspond to our `PCRA` package `stocksCRSPmonthly` item names.
 
-| stocksCRSPmonthly Name | CRSP® Names Monthly | CRSP® Description |
-| --- | --- | --- |
-| Ticker | Ticker | Ticker |
-| TickerLast | Tickerl | Ticker on Last Date |
-| Company | Company | Company on Last Date |
-| Return | mret | Total Returns |
-| RetExDiv | mretx | Returns Without Dividends |
-| Price | mprc | Closing Price |
-| PrcSplitAdj | madjprc | Adjusted Closing Price |
-| Ret13WkBill | kyindno 1000707 | CRSP® CTI Indexes 90-Day |
-| MktIndexCRSP | kyindno 1000200 | Value-Weighted Market Index* |
+| stocksCRSPmonthly Name | CRSP® Names Monthly | CRSP® Description           |
+| :--------------------- | :------------------ | :-------------------------  |
+| Ticker                 | Ticker              | Ticker                      |
+| TickerLast             | Tickerl             | Ticker on Last Date         |
+| Company                | Company             | Company on Last Date        |
+| Return                 | mret                | Total Returns               |
+| RetExDiv               | mretx               | Returns Without Dividends   |
+| Price                  | mprc                | Closing Price               |
+| PrcSplitAdj            | madjprc             | Adjusted Closing Price      |
+| Ret13WkBill            | kyindno 1000707     | CRSP® CTI Indexes 90-Day    | 
+| MktIndexCRSP           | kyindno 1000200     | Value-Weighted Market Index*|
 
 \*Total Return of the CRSP® NYSE/NYSEMKT/NASDAQ/Arca Value-Weighted Market Index.
 
