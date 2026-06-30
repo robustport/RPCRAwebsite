@@ -207,7 +207,7 @@ As is explained in the vignette “Introduction to CRSP Stocks and SPGMI Factors
 
 ## PCRA Data Sets are *NOT* Open Source!
 
-While the `PCRA` package contains a number of open source R functions and scripts, the `stocksCRSPmonthly`, `stocksCRSPweekly`, `stocksCRSPdaily,` `factorsSPGMIr`, `factorsSPGMI,` `SP500`, `SP500from1967to2007`, `SPIndustrials`, `SP400Industrials, SP425Industrials, CboeOptionStrategies, ConferenceBoardETI,` `ShortDurationCredit` and `USTreasuryTradeweb` datasets supplied with it ***are not open source***, and ***may not be redistributed in any way or form or used for any commercial (i.e. non-educational) purpose***. 
+While the `PCRA` package contains a number of open source R functions and scripts, the `stocksCRSPmonthly`, `stocksCRSPweekly`, `stocksCRSPdaily,` `factorsSPGMIr`, `factorsSPGMI,` `SP500`, `SP500from1967to2007`, `SPIndustrials`, `SP400Industrials, SP425Industrials, CboeOptionStrategies, ConferenceBoardETI,` `ShortDurationCredit` and `USTreasuryTradeweb` datasets supplied with it ***are not open source, and may not be redistributed in any way or form or used for any commercial (i.e. non-educational) purpose***. 
 
 The authors wish to express their gratitude to CRSP®, SPGMI, S&P Dow Jones Indices, CBOE LiveVol LLC, ICE Data Indices LLC and Tradeweb Markets LLC for allowing us to provide these data sets in the PCRA package. Their generosity will greatly enhance students’ understanding of portfolio construction and risk analysis methods through the use of these data sets in reproducing the examples and doing the various computational exercises provided in the book, as well as by solving problems assigned by their course instructors.
 
@@ -227,12 +227,16 @@ The development version of `PCRA` (currently `PCRA-1.3.1` ) can be installed fro
 
 However, PCRA development version users will need only the `factorsSPGMIr` rounded data in case they want to confirm that its use in portfolio construction does not result in any significant differences between a portfolio’s performance based on `factorsSPGMIr` and its performance based on the `factorsSPGMI`.
 
-In order to install the development version of `PCRA` one needs to have installed the R package `devtools`, which can be done in the RStudio console following the procedure used to install the `data.table` and `PCRA` packages. Once `devtools` has been installed, the development version of `PCRA` can be loaded and installed using the following commands in the RStudio console:
+In order to install the development version of `PCRA` one needs to have installed the R packages `devtools` or `pak`, which can be done in the RStudio console following the procedure used to install the `data.table` and `PCRA` packages. Once `devtools` or `pak` has been installed (`pak` is a modern package installer, and has drop-in replacements for a number of `devtools` functions including `install_github()`, `install_git()`, `install_version()`, and `install_local()` among others), the development version of `PCRA` can be loaded and installed using the following commands in the RStudio console:
 
 ```r
-
-library(devtools)
+# Using devtools
+library(devtools) 
 devtools::install_github("robustport/PCRA")
+
+# Modern approach using pak
+# Install directly from GitHub, separate function not needed
+pak::pkg_install("robustport/PCRA")
 ```
 
 The main advantages of the development version of `PCRA` are:
