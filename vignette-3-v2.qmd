@@ -27,21 +27,25 @@ The [original vignette page](vignette-3.html) remains the default until this ver
 :::
 :::
 
-The book Robust Portfolio Construction and Risk Analysis (RPCRA) has a distinctive reproducibility theme, according to which most Figures and Tables in Chapters 1 through 6 as well as in Chapters 10, 11, 12 and 15 are reproducible with R scripts and data sets in the `PCRA` R package companion to the book. This reproducibility theme is conveniently supported by our use of the LyX (<https://www.lyx.org/>) document processor to write the RPCRA book. The code to create figures and tables are embedded as R code chunks in the LyX file, and are easily exported in form of single R scripts for each chapter.
+The book Robust Portfolio Construction and Risk Analysis (RPCRA) has a distinctive reproducibility theme, according to which most Figures and Tables in Chapters 1 through 6 as well as in Chapters 10, 11, 12 and 15 are reproducible with R scripts and data sets in the `PCRA` R package companion to the book. 
+
+This reproducibility theme is conveniently supported by our use of the LyX (<https://www.lyx.org/>) document processor to write the RPCRA book. The code to create figures and tables are embedded as R code chunks in the LyX file, and are easily exported in form of single R scripts for each chapter.
 
 Although it is nice to be able to use these scripts to recreate the figures and tables of various chapter, this is not in itself the primary purpose of providing reproducibility code. The main reason for doing so is that it facilitates easy experimentation with different portfolio strategies by allowing the user to change one or more of the parameters in the scripts. 
 
-One might, for example, rerun a smallcap portfolio example using microcap, midcap, or largecap stocks, or change the number of stocks in a portfolio or its industry sector. It is just as easy to change the portfolio optimization constraints or penalties used. We believe this ability to experiment considerably enhances a student's learning experience, and allows instructors to easily create portfolio optimization, performance evaluation, and risk-related homework exercises for their classes.
+One might, for example, rerun a smallcap portfolio example using microcap, midcap, or largecap stocks, or change the number of stocks in a portfolio or its industry sector. It is just as easy to change the portfolio optimization constraints or penalties used. 
+
+We believe this ability to experiment considerably enhances a student's learning experience, and allows instructors to easily create portfolio optimization, performance evaluation, and risk-related homework exercises for their classes.
 
 # R and RStudio {#sec-r-and-r-studio}
 
-This Vignette assumes that you have already installed  R version 4.4.3 or later as well as a current version of RStudio. If you have not already done so, you can find out how to install R and RStudio by reading the appropriate parts of Appendix A in *Hands on Programming with R* , available online at <https://rstudio-education.github.io/hopr/> . We also assume that you have used RStudio to install the current CRAN version of the `PCRA` package, and have already read the Vignette “ PCRA Package Overview ” that is available at <https://cran.r-project.org/web/packages/PCRA> .
+This Vignette assumes that you have already installed  R version 4.4.3 or later as well as a current version of RStudio. If you have not already done so, you can find out how to install R and RStudio by reading the appropriate parts of Appendix A in *Hands on Programming with R* , available online at <https://rstudio-education.github.io/hopr/> . 
+
+We also assume that you have used RStudio to install the current CRAN version of the `PCRA` package, and have already read the Vignette “ PCRA Package Overview ” that is available at <https://cran.r-project.org/web/packages/PCRA> .
 
 # PCRA Reproducibility Code {#sec-pcra-reproducibility-code}
 
-The R reproducibility scripts are contained in the `demo` folder of the `PCRA` package.
-
-For any package that you have already installed, but have not necessarily loaded, you can get a list of the demo folder R script names by typing the following in the RStudio Console:
+The R reproducibility scripts are contained in the `demo` folder of the `PCRA` package. For any package that you have already installed, but have not necessarily loaded, you can get a list of the demo folder R script names by typing the following in the RStudio Console:
 
 `demo(package = “packageName”)`
 
@@ -75,31 +79,29 @@ results in a display of the following list in an RStudio pop-up `R demos` tab:
 
 - `IntroductionCRSPstocksAndSPGMIfactors`: Code for Vignette with same name.
 
-- `RobustStatisticsForPortfoliosJPM2023`: Reproduces figures in JPM 2023 paper.
+- `RobustStatisticsForPortfoliosJPM2023`: Reproduces figures in the 2023 JPM paper.
 
 The code for the demo script of a given chapter has comments to label each figure number and table number in the chapter.
 
 We suggest that you install the `PortfolioAnalytics` package, and have a look at the long list of demos in it.
 
-For any loaded R package, you can view the code for any R script in the demo folder with the command “??” (but ** not ** with the `help` function!).
-
-For example with the PCRA loaded, use of the command
+For any loaded R package, you can view the code for any R script in the demo folder with the command “??” (but ** not ** with the `help` function!). For example with the PCRA loaded, use of the command
 
 `?? "Ch 2 Foundations Demo"`
 
 results in an RStudio Help tab display with the following two links side by side, but with considerable space between them:
 
-PCRA::Ch2_Foundations_Demo                   (Run demo).
+`PCRA::Ch2_Foundations_Demo                   (Run demo)`.
 
 Do **not** click on the right-hand link, at least not until you have read the `NOTE` below. Instead, click on the left-hand link, upon which you will see a display of the entire `Ch 2 Foundations Demo.R` script in the Help tab. Just copy and paste that script into a new R file, and save it wherever you like. Then make the folder where you have saved the demo script the working directory in RStudio by selecting:
 
-Session \> Set Working Directory \> To Source File Location
+`Session \> Set Working Directory \> To Source File Location`
 
 You naturally might want to begin by running the entire Demo script for a given chapter, which you can do by highlighting the entire script and clicking the `Run` button, and then confirming that the code actually produces the figures and tables in the RPCRA book chapter. Be forwarned that while many of the code chunks will run quite quickly, i.e. a few seconds, some of them take longer, sometimes several minutes or more.
 
 After, or instead of, running all the code, you should run the portion of the demo script code at the beginning, where various R packages are loaded, through the first table or figure. You can then search for the code that creates specific figures or tables, and run just those portions of the script that you are interested in.
 
-`NOTE`: We do not recommend general use of (Run demo)  . This is because it runs the entire demo script, which will sometimes take a long time. Furthermore, some scripts may fail to execute properly when run this way, and will give you little indication of what the problem is. So if you want to run it all, we recommend doing so as suggested above. That said, the (Run demo) link can be handy for quickly running R demo scripts that execute quickly.
+`NOTE`: We do not recommend general use of `(Run demo)`. This is because it runs the entire demo script, which will sometimes take a long time. Furthermore, some scripts may fail to execute properly when run this way, and will give you little indication of what the problem is. So if you want to run it all, we recommend doing so as suggested above. That said, the (Run demo) link can be handy for quickly running R demo scripts that execute quickly.
 
 ## Sourcing Files in RStudio {#sec-sourcing-files-in-rstudio}
 
@@ -126,7 +128,7 @@ The R demo scripts are fairly long, with approximately 1000, 900, and 800 lines 
 
 The reproducibility code for some chapters of the RPCRA book will require use of the `devtools` and `pak` R packages for installing packages, and you might as well install them now as follows:
 
-In RStudio drop down Tools menu, select Install Packages, and type `devtools` in the blank “Packages” field. In the “ Install to Library: ” field you will then see the entry `<path>/R-x.y/library[Default]`, with “Install dependencies” checked. Click the “Install” button to initiate the installation of the `devtools` package. Repeat this process for `pak`.
+In RStudio drop down Tools menu, select `Install Packages`, and type `devtools` in the blank “Packages” field. In the “Install to Library:” field you will then see the entry `<path>/R-x.y/library[Default]`, with `Install dependencies` checked. Click the “Install” button to initiate the installation of the `devtools` package. Repeat this process for `pak`.
 
 Eventually, you may want to compile one or more packages from its source, and in that case you will need to install the `Rtools` package, which you can do in the same manner as above. Keep in mind that each major version of R (e.g. 4.x) has its corresponding version of Rtools.
 
