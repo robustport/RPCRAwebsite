@@ -313,7 +313,9 @@ png(file = "vignette-assets/stocksMicroAll.png", width = 4, height = 3,
 dev.off()
 ```
 
+::: {#fig-microcap-mkt-rf-returns}
 ![Returns of the first 4 CRSP® microcap stocks, the Market, and the Risk-Free rate from 1997 to 2010](vignette-assets/stocksMicroAll.png)
+:::
 
 ## Manipulation of xts Objects {#sec-manipulation-of-xts-objects}
 
@@ -396,7 +398,9 @@ png(file = "vignette-assets/eKRstocksMonthly.png", width = 5, height = 4, units 
 dev.off()
 ```
 
+::: {#fig-microcap-mkt-rf-returns}
 ![Boxplots of cross-sections of CRSP® stock returns excess kurtosis (eKR) for 6 contiguous time intervals](vignette-assets/eKRstocksMonthly.png)
+:::
 
 # Using Weekly and Daily CRSP® Data and Unrounded SPGMI Data {#sec-using-weekly-and-daily-crsp-data-and-unrounded-spgmi-data}
 
