@@ -7,13 +7,27 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.add("home-hero-page");
   }
 
-  if (!document.querySelector(".margin-toc-page, .hero-outer")) return;
-
   const sidebar = document.querySelector("#quarto-margin-sidebar");
+
+  // Auto-enable the styled/sticky margin TOC on any page that actually has
+  // one, instead of relying on a class that nothing was adding.
+  if (sidebar && sidebar.querySelector("#TOC")) {
+    document.body.classList.add("margin-toc-page");
+  }
+
+  if (!document.querySelector(".margin-toc-page, .hero-outer")) return;
 
   function alignMarginToc() {
     if (!sidebar) return;
     if (window.innerWidth <= 991) {
+      sidebar.style.marginTop = "";
+      return;
+    }
+    // Only nudge the TOC down to meet a specific anchor on hero pages,
+    // where it needs to skip past the banner. On regular article/vignette
+    // pages, leave it alone so it stays at the CSS sticky `top` offset,
+    // near the top of the viewport.
+    if (!hero) {
       sidebar.style.marginTop = "";
       return;
     }
