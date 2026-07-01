@@ -76,7 +76,7 @@ The `PCRA-1.3.1` development version contains daily and weekly CRSP® stocks dat
 
 - `factorsSPGMI`.
 
-This vignette provides [<u>details</u>](#the-rounded-spgmi-factors-data) concerning the rounding used to create the `factorsSPGMIr` data from the `factorsSPGMI` data, and shows that there are only minor differences on the order of 1% (and typically much less than 1%) in `factorsSPGMIr` data values relative to their `factorsSPGMI` counterparts. This suggest that one will see minimal differences in portfolio performance when using `factorsSPGMIr` in place of `factorsSPGMI`.
+This vignette provides details in @sec-rounded-spgmi-factors-data concerning the rounding used to create the `factorsSPGMIr` data from the `factorsSPGMI` data, and shows that there are only minor differences on the order of 1% (and typically much less than 1%) in `factorsSPGMIr` data values relative to their `factorsSPGMI` counterparts. This suggest that one will see minimal differences in portfolio performance when using `factorsSPGMIr` in place of `factorsSPGMI`.
  
 Nonetheless, users of the `PCRA-1.3` package who prefer to use the unrounded `factorsSPGMI` data can do so in a manner described in the document “CRSP Stocks and SPGMI Factors in PCRA”, which is downloadable from CRAN at <https://cran.r-project.org/web/packages/PCRA>, or can switch to the development version.
 
@@ -187,7 +187,7 @@ colnames(dat.df)
 
 Users who are familiar with manipulating `data.frame` objects will find the above conversion method handy.
 
-## The Rounded SPGMI Factors Data {#rounded-spgmi-datasets}
+## The Rounded SPGMI Factors Data {#sec-rounded-spgmi-factors-data}
 
 The rounded data in `factorsSPGMIr` was obtained by rounding the data in `factorsSPGMI` to 4 significant digits, and then compressing it with level 9 “xz” compression. The results of these steps are displayed in Table 2.2. The compression reduces the 6.452 MB `factorsSPGMI` data set by 72.3% to about 1.787 MB for `factorsSPGMIr`. This overall data compression process was required so that the `PCRA` package, which also contains the 1MB sized `stocksCRSPmonthly` data and other miscellaneous data sets totaling about 2MB in size satisfies CRAN’s maximum package data size of 5MB.
 
