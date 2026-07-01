@@ -23,7 +23,7 @@ toc-title: ""
 :::
 :::
 
-## Overview {#overview}
+# Overview {#overview}
 
 This Robust Portfolio Construction and Risk Analysis (RPCRA) book, with its unique *reproducibility* code, *robust estimators*, and *special focus* topics, has been written for use in advanced upper level undergraduate, M.S., and PhD level quantitative finance courses. It grew out of our collective experiences as researchers, educators and investors, and is thus supportive of research projects in such programs, as well as in commercial quantitative portfolio management and research.
 
@@ -56,11 +56,11 @@ In addition, there are five appendices:
 
 In addition, we will maintain a companion website for this book at [https://www.robustpcra.org](https://www.robustpcra.org). On this site, we will post articles, provide code and examples, and point to new uses of the datasets included in the `PCRA` package.
 
-## Reproducibility {#reproducibility}
+# Reproducibility {#reproducibility}
 
 R packages that include R functions and data support reproducibility of figures and tables throughout the book. Specifically, this is the case for most of the figures and tables in Chapters 2–6 and 9–12, as well as the figures and tables in some sections of Chapters 1 and 7–8. These features allow students to get hands-on experience in replicating the figures and tables in RPCRA, and in extending the code to study portfolio performance for different time periods, different portfolio stock groups (such as capitalization groups and sectors), and different returns frequencies. These features also support instructors in creating new computing-oriented portfolio construction and risk analysis exercises.
 
-### R Packages for the RPCRA Book and its Reproducibility Character {#r-packages}
+## R Packages for the RPCRA Book and its Reproducibility Character {#r-packages}
 
 The following R packages were developed specifically for the writing of the RPCRA book and its reproducibility character, and are downloadable from the CRAN website [https://cran.r-project.org](https://cran.r-project.org):
 
@@ -69,7 +69,7 @@ The following R packages were developed specifically for the writing of the RPCR
 - `facmodTS`: Time series factor models
 - `robustGarch`: Robust Garch(1, 1) models.
 
-### Data for Reproducibility {#data-for-reproducibility}
+## Data for Reproducibility {#data-for-reproducibility}
 
 The `PCRA` package contains data sets that support reproducibility as well as a multitude of exercises at the end of each chapter. They may also be used by course instructors to create new exercises. The datasets include:
 
@@ -79,7 +79,7 @@ The `PCRA` package contains data sets that support reproducibility as well as a 
 
 An overview of the `PCRA` package and its data sets are provided in the *PCRA Package and Data Overview* vignette that is downloadable from [https://cran.r-project.org/web/packages/PCRA](https://cran.r-project.org/web/packages/PCRA). Detailed information about the CRSP® monthly, weekly and daily stocks data, and `factorsSPGMI` monthly data is provided in the *CRSP Stocks and SPGMI Factors in PCRA* vignette that is also downloadable from the above `PCRA` package link.
 
-## Robust Estimators {#robust-estimators}
+# Robust Estimators {#robust-estimators}
 
 Having firsthand experience of the impact of outliers in portfolio management, we were struck by how little attention has been paid to this important problem in portfolio management textbooks, and more generally in quantitative finance books. More often than not, students learn the elegant mathematics of portfolio theory with little appreciation for its fragility in the face of the prodigious levels of noise that permeate most markets. Such noise includes outliers that can have large distorting influences on the classical estimators that are routinely used in risk analysis.
 
@@ -87,7 +87,7 @@ The adverse influence of outliers on these classical estimators can be avoided b
 
 The robust estimators examples in this book suggest that they may result in better portfolio performance than classical estimators. But this is not guaranteed — extensive studies are needed to determine if and when robust estimators can consistently result in better portfolio performance. That said, robust estimators serve a very useful purpose of diagnosing whether or not outliers are influencing a classical estimator model fit, for, without such comparison, portfolio managers will typically be unaware of whether or not outliers are influencing the classical estimators they typically use. This claim is vividly demonstrated when comparing robust and classical regression model fits in Chapters 6 and 7 (time series and cross-section factor models, respectively).
 
-## Special Focus Topics {#special-focus-topics}
+# Special Focus Topics {#special-focus-topics}
 
 Chapters 10–16 cover a number of special topics that most textbooks either ignore or address with a light touch. We hope in this book to rectify these omissions.
 
@@ -97,7 +97,7 @@ Chapter 12 addresses fixed income markets and ends with a discussion of practica
 
 Finally, in Chapters 15 and 16, we return to robust statistics, and develop ideas presented earlier in the book in greater detail.
 
-## Acknowledgments {#acknowledgments}
+# Acknowledgments {#acknowledgments}
 
 This book, and its accompanying `PCRA` package, would not have seen the light of day without help from a vast array of colleagues, friends and well wishers. Some helped with the development and maintenance of one or more R packages that support the book and its associated reproducibility character. Others read chapters and commented on them, and yet others granted us formal rights to include datasets in the `PCRA` package that are not available to the public. These contributors are listed in the following paragraphs; we thank them for their generosity, and apologize in advance to any we might inadvertently have missed.
 
@@ -109,37 +109,37 @@ Third, the wonderful people who provided us tremendous assistance in obtaining v
 
 And finally, our families. Our parents, spouses, children and grandchildren (with intra-author variations!) put up with our absences for long stretches of time while we worked on this book. Without their unconditional love and support, this book would not have seen the light of day. One of us (TP) adds a very special thank you to the two strangers who pulled him out of the clutches of a rip tide off the coast of Montauk in September 2009. Were it not for their bravery, it would have been someone else who wrote certain chapters.
 
-## Disclaimers Related to PCRA Datasets {#disclaimers}
+# Disclaimers Related to PCRA Datasets {#disclaimers}
 
 Thanks to the generosity of a number of industry sponsors, we have been able to supply historical and market data for a variety of securities, indices and factors. In all cases, the data provided with the `PCRA` package that accompanies this book is *strictly for educational (i.e. non-commercial) use* — anyone who wishes to use the data for commercial purposes must enter into an appropriate licensing agreement with the relevant vendor. Furthermore, the data cannot be redistributed or published elsewhere. Please read the relevant vendor disclosures below.
 
-### CRSP® {#crsp}
+## CRSP® {#crsp}
 
 The University of Chicago, the Booth School of Business, CRSP®, and its third party suppliers make no warranty of any kind, express or implied, with respect to the merchantability, fitness, condition, use or appropriateness for permittee's purposes of the CRSP® data, or any other purpose, and all CRSP® data is supplied on an "as is" basis. Use of CRSP® data is subject to the disclaimers provided at [https://www.crsp.org/policies-statements/](https://www.crsp.org/policies-statements/).
 
-### SPGMI {#spgmi}
+## SPGMI {#spgmi}
 
 Standard and Poors Global Market Intelligence (SPGMI) is a business unit of Standard and Poors Global that provides multi-asset class and real-time data, research, news and analytics. Use of SPGMI data is subject to the disclaimers provided at [https://www.spglobal.com/market-intelligence/en/legal/disclosures](https://www.spglobal.com/market-intelligence/en/legal/disclosures).
 
-### LSE / FTSE Russell {#lse-ftse-russell}
+## LSE / FTSE Russell {#lse-ftse-russell}
 
 FTSE Russell is a trading name of certain of the LSE Group companies. "Russell®"/"FTSE Russell®"/"Mergent®", are/is trade mark(s) of the relevant LSE Group companies and is/are used by any other LSE Group company under license. All rights in the FTSE Russell indexes or data vest in the relevant LSE Group company which owns the index or the data. Neither LSE Group nor its licensors accept any liability for any errors or omissions in the indexes or data and no party may rely on any indexes or data contained in this communication. No further distribution of data from the LSE Group is permitted without the relevant LSE Group company's express written consent. The LSE Group does not promote, sponsor or endorse the content of this communication.
 
-### ICE {#ice}
+## ICE {#ice}
 
 Source: ICE Data Indices, LLC ("ICE Data"), used with permission. THE ICE DATA INDICES ARE PROVIDED BY ICE DATA FOR EDUCATIONAL PURPOSES. ICE DATA, ITS AFFILIATES AND THEIR RESPECTIVE THIRD PARTY SUPPLIERS DISCLAIM ANY AND ALL WARRANTIES AND REPRESENTATIONS, EXPRESS AND/OR IMPLIED, INCLUDING ANY WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE OR USE, INCLUDING THE INDICES, INDEX DATA AND ANY DATA INCLUDED IN, RELATED TO, OR DERIVED THEREFROM. NEITHER ICE DATA, ITS AFFILIATES NOR THEIR RESPECTIVE THIRD PARTY SUPPLIERS SHALL BE SUBJECT TO ANY DAMAGES OR LIABILITY WITH RESPECT TO THE ADEQUACY, ACCURACY, TIMELINESS OR COMPLETENESS OF THE INDICES OR THE INDEX DATA OR ANY COMPONENT THEREOF, AND THE INDICES AND INDEX DATA AND ALL COMPONENTS THEREOF ARE PROVIDED ON AN "AS IS" BASIS AND YOUR USE IS AT YOUR OWN RISK. ICE DATA, ITS AFFILIATES AND THEIR RESPECTIVE THIRD PARTY SUPPLIERS DO NOT SPONSOR, ENDORSE, OR RECOMMEND ANY TEXTBOOKS, PRODUCTS OR SERVICES OF SPRINGER PUBLISHERS, R. DOUGLAS MARTIN, THOMAS K. PHILIPS, BERND SCHERER, OR KIRK LI.
 
-### Tradeweb {#tradeweb}
+## Tradeweb {#tradeweb}
 
 Tradeweb OTR–OFTR Spread Data is provided by Tradeweb Markets LLC for educational purposes only. Tradeweb Markets LLC makes no representation or warranty of any kind, express or implied, including regarding the accuracy, adequacy, validity, reliability, availability or completeness of the Tradeweb OTR–OFTR Spread Data. All rights reserved.
 
-### S&P {#sp}
+## S&P {#sp}
 
 S&P® and S&P 500® are registered trademarks of Standard & Poor's Financial Services LLC, and Dow Jones® is a registered trademark of Dow Jones Trademark Holdings LLC. © 2020 S&P Dow Jones Indices LLC, its affiliates and/or its licensors. All rights reserved.
 
 Reproduction of any information, data or material, including ratings ("Content") in any form is prohibited except with the prior written permission of the relevant party. Such party, its affiliates and suppliers ("Content Providers") do not guarantee the accuracy, adequacy, completeness, timeliness or availability of any Content and are not responsible for any errors or omissions (negligent or otherwise), regardless of the cause, or for the results obtained from the use of such Content. In no event shall Content Providers be liable for any damages, costs, expenses, legal fees, or losses (including lost income or lost profit and opportunity costs) in connection with any use of the Content. A reference to a particular investment or security, a rating or any observation concerning an investment that is part of the Content is not a recommendation to buy, sell or hold such investment or security, does not address the suitability of an investment or security and should not be relied on as investment advice. Credit ratings are statements of opinions and are not statements of fact.
 
-### CBOE LIVEVOL {#cboe-livevol}
+## CBOE LIVEVOL {#cboe-livevol}
 
 CBOE LIVEVOL data is provided "as is" without warranty of any kind, either express or implied, including, without limitation, any warranty with respect to accuracy, completeness, timeliness, noninfringement, merchantability, or fitness for a particular purpose. Neither LIVEVOL, nor any provider of data to LIVEVOL, nor any of their respective affiliates, nor their respective directors, officers, employees, contractors, and agents shall have any liability of any kind (including, but not limited to, for any direct, indirect, incidental, special, consequential, or punitive damages or any damages for lost profits or lost opportunities and whether based upon contract, tort, warranty, or otherwise) for any inaccuracies, omissions, human or machine errors, or other irregularities in the data or for any cessation, discontinuance, failure, malfunction, delay, suspension, interruption, or termination of, or with respect to, the provision of the data to subscriber. The data is not, and should not be construed as financial, legal or other advice of any kind, nor should it be regarded as an offer or as a solicitation of an offer to buy, sell or otherwise deal in any investment.
 
