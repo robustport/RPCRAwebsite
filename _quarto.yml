@@ -57,7 +57,8 @@ format:
     toc-depth: 3
     toc-title: "On this page"
     toc-expand: 2
-    number-sections: false
+    number-sections: true
+    number-depth: 2
     html-math-method: mathjax
     smooth-scroll: true
     link-external-newpage: true
