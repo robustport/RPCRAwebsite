@@ -11,10 +11,12 @@ toc-title: ""
 <div class="margin-toc-page">
 ```
 
+::: {.content-hidden}
 ::: {.callout-warning}
 ## v2 preview — under review
 This page is an automated LyX-to-web conversion being verified against the PDF vignette.
 The [original vignette page](vignette-1.html) remains the default until this version is approved.
+:::
 :::
 
 ::: {.copyright-notice}

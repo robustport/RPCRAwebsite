@@ -1,10 +1,16 @@
 ---
 title: "Vignettes"
+page-layout: article
 toc: true
 toc-location: right
 toc-depth: 2
 toc-title: ""
 ---
+
+```{=html}
+<div class="margin-toc-page">
+```
+
 
 The book is accompanied by three vignettes that provide hands-on documentation for the `PCRA` R package and its data. Click any title below to view the vignette PDF.
 
