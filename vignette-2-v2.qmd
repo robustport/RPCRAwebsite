@@ -313,7 +313,7 @@ png(file = "vignette-assets/stocksMicroAll.png", width = 4, height = 3,
 dev.off()
 ```
 
-![Returns of the first 4 CRSP® microcap stocks, the Market, and the Risk-Free rate from 1997 to 2010](vignette-assets/stocksMicroAll.png){#fig-microcap-mkt-rf-returns}
+![Returns of the first 4 CRSP® microcap stocks, the Market, and the Risk-Free rate from 1997 to 2010](vignette-assets/stocksMicroAll.png){#fig-microcapmktrfreturns}
 
 ## Manipulation of xts Objects {#sec-manipulation-of-xts-objects}
 
