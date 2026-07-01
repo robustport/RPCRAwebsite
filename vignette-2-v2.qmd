@@ -396,7 +396,7 @@ dev.off()
 
 ![Boxplots of cross-sections of CRSP® stock returns excess kurtosis (eKR) for 6 contiguous time intervals](vignette-assets/eKRstocksMonthly.png)
 
-# Using Weekly and Daily CRSP® Data and Unrounded SPGMI Data {using-weekly-and-daily-crsp-data-and-unrounded-spgmi-data}
+# Using Weekly and Daily CRSP® Data and Unrounded SPGMI Data {#using-weekly-and-daily-crsp-data-and-unrounded-spgmi-data}
 
 The data sets `stocksCRSPweekly`, `stocksCRSPdaily`, and the unrounded SPGMI data set `factorsSPGMI`, do not exist in the `PCRA` package on CRAN. Instead they are contained in the `DataPlus` folder of the `PCRA` package repository (repo) at <https://github.com/robustport>.
 
