@@ -31,7 +31,7 @@ The [original vignette page](vignette-2.html) remains the default until this ver
 :::
 :::
 
-# Introduction
+# Introduction {#introduction}
 
 The `PCRA` package, with its included CRSP® stocks data and SPGMI factors data, provides important computational support for the book *Robust Portfolio Construction and Risk Analysis* (RPCRA), co-authored by Doug Martin, Thomas Philips, Bernd Scherer and Kirk Li. CRSP® stands for the Center for Research in Security Prices, LLC, an Affiliate of the University of Chicago Booth School of Businsess, and SPGMI is an acronym for S&P Global Market Intelligence.
 
@@ -71,9 +71,9 @@ devtools::install_github("robustport/PCRA")
 pak::pkg_install("robustport/PCRA")
 ```
 
-# The CRSP® Stocks and SPGMI Factors Data Sets
+# The CRSP® Stocks and SPGMI Factors Data Sets {#the-crsp-stocks-and-spgmi-factors-data-sets}
 
-## The stocksCRSPmonthly Data Set
+## The stocksCRSPmonthly Data Set {the-stocks-crsp-monthly-data-set}
 
 Most of the contents of this section apply equally well to the weekly and daily CRSP® data.  After installing the `PCRA` and `data.table` packages, the following lines of code can be used to load and extract the class, dimension, and names of the `stocksCRSPmonthly` data:
 
@@ -120,7 +120,7 @@ help(stocksCRSPmonthly)
 
 Readers are encouraged to familiarize themselves with the detailed descriptions of the data in the columns of `stocksCRSPmonthly`.
 
-## The factorsSPGMIr Data Set
+## The factorsSPGMIr Data Set {the-factors-spgmir-data-set}
 
 Everything discussed in this section applies equally well to the unrounded SPGMI factors data set `factorsSPGMI`. It takes only three lines of code to display the class, dimension, and item names associated with `factorsSPGMIr` in the RStudio Console:
 
@@ -149,7 +149,7 @@ factorsSPGMIr[ , c(1, 3, 10:13)]
 
 Check that `factorsSPGMIr[c(1:3, 81142:81144), c(1, 2, 11, 12)]` results in the first and last three rows of the “Date”, “Ticker”, “BP”, and “EP” columns of `factorsSPGMIr` being printed and that `factorsSPGMIr[1, 17:22]` results in the last six rows of its first column being printed.
 
-## Manipulating a data.table
+## Manipulating a data.table {manipulating-a-data-table}
 
 The simple method of sub-setting the columns of a `data.table` with numeric column values is identical to the method applicable to `data.frames`. But sub-setting columns by their names is done differently for `data.table` and `data.frame` objects. We illustrate this by first converting the `stocksCRSPmonthly` to a `data.frame` object in preparation for comparing sub-setting by column names:
 
@@ -210,7 +210,7 @@ range(stocksCRSPmonthly[ , Date]) # First and last date
 
 We suggest the reader create the data set `datBP` with `datBP <- factorsSPGMIr[ , .(Date, TickerLast, BP)]`, and, without looking at `datBP`, estimate its dimension. It is a simple matter to then confirm whether or not one’s estimate is correct.
 
-# Selecting CRSP® Stocks and SPGMI Factors Data
+# Selecting CRSP® Stocks and SPGMI Factors Data {selecting-crsp-stocks-and-spgmi-factors-data}
 
 We next discuss use of the `selectCRSPandSPGMI` function to select individual or merged subsets of CRSP® stocks in `stocksCRSPmonthly` and SPGMI factors in `factorsSPGMIr`, returning either a `data.table` or a time series `xts` object. This capability will be particularly useful for creating cross-section factor model data sets for use in the cross-section factor models package `facmodCS`.
 
@@ -315,7 +315,7 @@ dev.off()
 
 ![Returns of the first 4 CRSP® microcap stocks, the Market, and the Risk-Free rate from 1997 to 2010](vignette-assets/stocksMicroAll.png)
 
-## Manipulation of xts Objects
+## Manipulation of xts Objects {manipulation-of-xts-objects}
 
 The package `xts` contains a large set of functions for manipulating and plotting `xts` objects, and you need to have `xts` loaded in order to take advantage of its capabilities. We illustrate here just one such capability here, namely use of the `index` and `range` functions as applied to the `stocksMicro` `xts` object we earlier created.
 
@@ -332,7 +332,7 @@ range(datesIndex)
 
 To find out more about working with `xts` objects, it is recommended to read the vignettes “xts: Extensible Time Series” and “xts FAQ”, both of which are available at <https://CRAN.R-project.org/package=xts>. A number of online tutorials for `xts` are also available.
 
-## A Simple Selection Function for CRSP® Stocks Data
+## A Simple Selection Function for CRSP® Stocks Data {a-simple-selection-function-for-crsp-stocks-data}
 
 As we have seen, the function `selectCRSPandSPGMI` has general capabilities for selecting joint and separate subsets of `stockCRSPmonthly` and `factorsSPGMIr`. Sometimes, users of PCRA may wish to create an `xts` time series object from a very simple subset of the stocks in `stocksCRSPmonthly`, e.g., by specifying only a time interval and a subset of the tickers in `TickerLast`. The function `stocksCRSPxts` serves this purpose, and its arguments are:
 
@@ -396,7 +396,7 @@ dev.off()
 
 ![Boxplots of cross-sections of CRSP® stock returns excess kurtosis (eKR) for 6 contiguous time intervals](vignette-assets/eKRstocksMonthly.png)
 
-# Using Weekly and Daily CRSP® Data and Unrounded SPGMI Data
+# Using Weekly and Daily CRSP® Data and Unrounded SPGMI Data {using-weekly-and-daily-crsp-data-and-unrounded-spgmi-datat}
 
 The data sets `stocksCRSPweekly`, `stocksCRSPdaily`, and the unrounded SPGMI data set `factorsSPGMI`, do not exist in the `PCRA` package on CRAN. Instead they are contained in the `DataPlus` folder of the `PCRA` package repository (repo) at <https://github.com/robustport>.
 
@@ -438,11 +438,11 @@ To obtain returns and related data for daily CRSP® stocks, we need only replace
 
 N.B. Since `stocksCRSPmonthly` is already contained in the CRAN version of `PCRA`, \*\* it is not contained \*\* in the `DataPlus` folder in the `PCRA` repository ( “repo” ) at <https://github.com/robustport>. Using `stocksCRSPmonthly` as the argument to `getPCRAData` you will result in an error.
 
-# Basic Data.Table Manipulations
+# Basic Data.Table Manipulations {basic-data-table-manipulations}
 
 The `data.table` package provides a variety of powerful data manipulation and analysis tools, some of which are quite simple, as we illustrate here.
 
-## Sector and Capitalization Group Counts
+## Sector and Capitalization Group Counts {sector-and-capitalization-group-counts}
 
 You will have noticed that `stocksCRSPmonthly` and `factorsSPGMIr` `data.table` objects contain “Sector”, and “CapGroupLast” variables. The following code prints the number of stocks in each sector and capitalization group.
 
@@ -456,7 +456,7 @@ factorsSPGMILast[ , .N, by = CapGroup]
 
 Modify the above code to check that the stocks’ sectors are the same in January 1993 as they are in December 2015, but their capitalization groups are not always the same in these two months (some small companies will grow much faster than their peers while others, in constrast, will decline).
 
-## Extracting a Subset of the Variables
+## Extracting a Subset of the Variables {extracting-a-subset-of-the-variables}
 
 We typically work with a merged or unmerged subset of the variables in `stocksCRSPmonthly` and `factorsSPGMIr`, and often end up needing only a few of the items in the subset. For example, we might find that we are interested in only the Date, TickerLast, Return, Beta60M and EP items of the `data.table` object `stocksSmall3Fac` in Example 2 of [<u>The CRSP® Stocks and SPGMI Factors Data Sets</u>](#the-crsp-stocks-and-spgmi-factors-data-sets). The following code creates the `data.table` we need:
 
@@ -469,7 +469,7 @@ colnames(stocksSmall3FacSubset)
 
 In this code, `.SD` represents the subset of columns that is specified by `.SDcols`. For further details on `.SD,` see the “Using .SD for Data Analysis” Vignette at <https://CRAN.R-project.org/package=data.table>.
 
-## Renaming Variables
+## Renaming Variables {renaming-variables}
 
 Some of the names of variables in `stocksCRSPmonthly` and `factorsSPGMIr` are long, and it is often convenient to shorten them. We may, for example, wish to replace the names "MktIndexCRSP" and “Ret13WkBill” with the shorter common names “Market” and "RiskFree". This is easily done using `data.table` ’s `setnames` function, as is done below for the data set `stocksSmall` of Example 1:
 
@@ -480,7 +480,7 @@ setnames(stocksSmall, old = c("MktIndexCRSP", "Ret13WkBill"),
 colnames(stocksSmall)
 ```
 
-## Intersecting Sector and Size Groupings
+## Intersecting Sector and Size Groupings {intersecting-sector-and-size-groupings}
 
 One sometimes wants to study portfolios whose constituents are all drawn from a single sector and size group, e.g. the Information Technology (IT) sector of the SmallCap group. This is easily done by first obtaining the subset of all SmallCap stocks for the default `dateRange` of 1993 to 2015 and then extracting the Information Technology sector from this subset.
 
@@ -498,7 +498,7 @@ stocksSmallCapIT <- stocksSmallCap[Sector == "Information Technology"]
 unique(stocksSmallCapIT[ , TickerLast])
 ```
 
-## Selecting a Time Range for a Set of Stocks and Factors
+## Selecting a Time Range for a Set of Stocks and Factors {selecting-a-time-range}
 
 One may wish to look at stocks, factors, or merged stocks and factors data over a specified subset of a longer timeframe. For example, we can extract the 5 years from 2010 to 2014 of the `stocksSmallCapIT` data with the first line below, and check its time range and length (i.e. the number of months) with the second and third lines:
 
@@ -511,7 +511,7 @@ range(stocksSmallCapIT5Year[ , Date])
 length(unique(stocksSmallCapIT5Year[ , Date]))
 ```
 
-# CRSP® Stocks Market Capitalization Break Points
+# CRSP® Stocks Market Capitalization Break Points {crsp-stocks-market-capitalization-break-points}
 
 We use a methodology similar to both the CRSP® method ( <https://www.crsp.org/indexes/breakpoints-chart/> ) and the MSCI method to allocate the 294 firms in the `stocksCRSPmonthly` universe into four disjoint groups. To do so, we first sort the universe of stocks in each month by their market capitalization and then separate them into four disjoint groups using capitalization breakpoints.
 
@@ -519,7 +519,7 @@ Specifically, we separate companies into Large-, Mid-, Small-, and Micro-cap gro
 
 Expressed in dollars, the January 1993 Large-, Mid-, and Small-Cap breakpoints were \$4,257,427,625, \$1,518,241,542, and \$138,749,166, respectively, meaning that Large-cap companies had market capitalizations in excess of \$4.257B, while Micro-cap companies had market capitalizations smaller than \$138.7M. By December 2015, these breakpoints had grown to \$15,632,448,677, \$5,418,935,67 5, and \$604,640,580, respectively.
 
-# Names of CRSP® Items in stocksCRSPmonthly Data Set
+# Names of CRSP® Items in stocksCRSPmonthly Data Set {names-of-crsp-items-in-stockscrspmonthly-data-set}
 
 The following table provides table provides CRSP® database names and descriptions that correspond to our `PCRA` package `stocksCRSPmonthly` item names.
 
