@@ -21,6 +21,7 @@ website:
     background: "#0d1b2a"
     foreground: light
     title: "RPCRA"
+    pinned: true
     left:
       - text: "Home"
         href: index.qmd
