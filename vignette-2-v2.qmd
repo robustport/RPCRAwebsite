@@ -313,7 +313,11 @@ png(file = "vignette-assets/stocksMicroAll.png", width = 4, height = 3,
 dev.off()
 ```
 
-![Returns of the first 4 CRSP® microcap stocks, the Market, and the Risk-Free rate from 1997 to 2010](vignette-assets/stocksMicroAll.png){#fig-microcapmktrfreturns}
+::: {#fig-microcapmktrfreturns}
+![](vignette-assets/stocksMicroAll.png)
+
+Returns of the first 4 CRSP® microcap stocks, the Market, and the Risk-Free rate from 1997 to 2010
+:::
 
 ## Manipulation of xts Objects {#sec-manipulation-of-xts-objects}
 
@@ -396,7 +400,11 @@ png(file = "vignette-assets/eKRstocksMonthly.png", width = 5, height = 4, units 
 dev.off()
 ```
 
-![Boxplots of cross-sections of CRSP® stock returns excess kurtosis (eKR) for 6 contiguous time intervals](vignette-assets/eKRstocksMonthly.png){#fig-microcap-mkt-rf-returns}
+::: {#fig-microcap-mkt-rf-returns}
+![](vignette-assets/eKRstocksMonthly.png)
+
+Boxplots of cross-sections of CRSP® stock returns excess kurtosis (eKR) for 6 contiguous time intervals
+:::
 
 
 # Using Weekly and Daily CRSP® Data and Unrounded SPGMI Data {#sec-using-weekly-and-daily-crsp-data-and-unrounded-spgmi-data}
@@ -435,7 +443,11 @@ png(file = "vignette-assets/weeklyStockReturns.png", width = 6,height = 5,units 
 dev.off()
 ```
 
-![Time series of weekly returns for the first 5 of the 34 MicroCap CRSP® stocks, and the CRSP® Market returns](vignette-assets/weeklyStockReturns.png){#fig-weekly-returns-5-microcap-stocks}
+::: {#fig-weekly-returns-5-microcap-stocks}
+![](vignette-assets/weeklyStockReturns.png)
+
+Time series of weekly returns for the first 5 of the 34 MicroCap CRSP® stocks, and the CRSP® Market returns
+:::
 
 To obtain returns and related data for daily CRSP® stocks, we need only replace `"stocksCRSPweekly"` with `"stocksCRSPdaily"` in the `getPCRAData` function, and the argument `‘‘ weekly ’’` with `‘‘ daily ’’` in the `selectCRSPandSPGMI` function.
 

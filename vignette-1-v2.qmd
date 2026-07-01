@@ -98,7 +98,11 @@ Detailed descriptions of each of the `PCRA` data sets can be obtained using R’
 help(SP500)
 ```
 
-![PCRA package data sets and their descriptions](vignette-assets/dataNamesPCRA.png){#fig-datasets}
+::: {#fig-datasets}
+![](vignette-assets/dataNamesPCRA.png)
+
+PCRA package data sets and their descriptions
+:::
 
 
 ### The S&P Datasets {#sec-sandp-datasets}
@@ -202,7 +206,11 @@ The rounded data in `factorsSPGMIr` was obtained by rounding the data in `factor
 
 Rounding factors data to four significant digits turns out to make little difference in the precision of the `factorsSPGMIr` data relative to the `factorsSPGMI`. This claim is supported by Figure 2, which shows that the fractional error in all the factors is always less than about 1% (it is less than 1/2% for four of the fourteen factors). We expect these minor differences in `factorsSPGMIr` relative to `factorsSPGMI` to have a negligible impact on factor model fits.
 
- ![Fractional differences in factorsSPGMIr relative to factorsSPGMI for each of the 14 factors](vignette-assets/factorsRelativeDiff.png){#fig-differences}
+::: {#fig-differences}
+![](vignette-assets/factorsRelativeDiff.png)
+
+Fractional differences in factorsSPGMIr relative to factorsSPGMI for each of the 14 factors
+:::
 
 As is explained in the vignette “Introduction to CRSP Stocks and SPGMI Factors in PCRA”, users of the CRAN `PCRA-1.3` package actually have access to the non-rounded `factorsSPGMI` data in a special `DataPlus` folder of the `PCRA` github repository at <https://github.com/robustport/PCRA>. Our recommendation to users of the CRAN version of PCRA is to first fit factor models using `factorsSPGMIr`, and then, if there is any concern about the adverse impact of rounding, to check the model fit by refitting it using `factorsSPGMI`.
 
