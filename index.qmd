@@ -32,7 +32,7 @@ toc-title: ""
 <div class="margin-toc-page">
 ```
 
-## 1 About this Book {#about-the-book}
+# 1 About this Book {#about-the-book}
 
 *Robust Portfolio Construction and Risk Analysis* (RPCRA) is a graduate level textbook that provides a comprehensive and rigorous account of the mathematical foundations of modern portfolio theory viewed through the immensely practical lens of Robust Statistical Methods. The book develops the mathematical, statistical, and computational tools and techniques needed to construct, evaluate, and manage investment portfolios in the presence of noise.
 
@@ -44,7 +44,7 @@ These techiques are applied to active equity and fixed income portfolios, as wel
 <div class="section-rule"><span>Preface</span></div>
 ```
 
-## 2 Preface {#preface}
+# 2 Preface {#preface}
 
 The [Preface](preface.qmd) provides an overview of the book's sixteen chapters and five appendices, describes its reproducibility theme as well as its supporting R packages (`PCRA`, `facmodCS`, `facmodTS`, `robustGarch`), motivates the use of robust estimators, introduces its special focus topics in Chapters 10–16, and includes disclaimers and conditions for the *non-commercial* use of CRSP, SPGMI, ICE, Tradeweb, S&P and CBOE datasets.
 
@@ -52,7 +52,7 @@ The [Preface](preface.qmd) provides an overview of the book's sixteen chapters a
 <div class="section-rule"><span>Chapter Summaries</span></div>
 ```
 
-## 3 Chapter Summaries {#chapter-summaries}
+# 3 Chapter Summaries {#chapter-summaries}
 
 Concise summaries of all 16 chapters in *Robust Portfolio Construction and Risk Analysis*, covering key topics, methods, and results chapter by chapter.
 
@@ -64,7 +64,7 @@ Concise summaries of all 16 chapters in *Robust Portfolio Construction and Risk 
 <div class="section-rule"><span>Vignettes</span></div>
 ```
 
-## 4 Vignettes {#vignettes}
+# 4 Vignettes {#vignettes}
 
 The book is accompanied by three vignettes that provide hands-on documentation for the `PCRA` R package and its data. PDFs are available for download on each vignette page.
 
@@ -112,7 +112,7 @@ The book is accompanied by three vignettes that provide hands-on documentation f
 <div class="section-rule"><span>Demo Code</span></div>
 ```
 
-## 5 Demo Code {#demo-code}
+# 5 Demo Code {#demo-code}
 
 Chapter-by-chapter R scripts that reproduce the figures and tables in the book are provided in the `PCRA` R package. The [Demo Code](demo-code.qmd) page lists all the available scripts and instructions for running them.
 
@@ -124,7 +124,7 @@ Chapter-by-chapter R scripts that reproduce the figures and tables in the book a
 <div class="section-rule"><span>Appendices</span></div>
 ```
 
-## 6 Appendices {#appendices}
+# 6 Appendices {#appendices}
 
 This site hosts the five technical appendices to RPCRA. Each appendix provides self-contained background material that underpins the methods and results developed in the main text. Full PDF downloads are available on each appendix page.
 
@@ -138,7 +138,7 @@ This site hosts the five technical appendices to RPCRA. Each appendix provides s
 <div class="section-rule"><span>Citation</span></div>
 ```
 
-## Citing the Book {#citation}
+# 7 Citing the Book {#citation}
 
 ```{=html}
 <div class="cite-block">

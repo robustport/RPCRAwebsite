@@ -227,7 +227,7 @@ It is important to keep in mind that:
 
 2.  When the `factorItems =` argument *is not set* to `factorItems = NULL`, the `factorsSPGMIr` data is used,
 
-3.  When the parameter `factorPrecision = “rounded”` is used, the function will select factor data from the rounded `factorsSPGMIr` data set. Setting this parameter to “not_rounded” will use the full precision factors SPGMI data available in both the `DataPlus` folder of the PCRA package, as described in Section 4, and in the development version of `PCRA` (assuming the user has the development version installed and loaded).
+3.  When the parameter `factorPrecision = “rounded”` is used, the function will select factor data from the rounded `factorsSPGMIr` data set. Setting this parameter to “not_rounded” will use the full precision factors SPGMI data available in both the `DataPlus` folder of the PCRA package, as described in [<u>Using Weekly and Daily CRSP® Data and Unrounded SPGMI Data</u>](#using-weekly-and-daily-crsp-data-and-unrounded-spgmi-data), and in the development version of `PCRA` (assuming the user has the development version installed and loaded).
 
 The reader should now type
 
@@ -240,7 +240,7 @@ and carefully read the Arguments and Details sections.
 
 In general `stockItems` can be any subset of the 14 `stocksCRSPmonthly` items, and `factorItems` can be any subset of the 22 `factorsSPGMIr` items. Note that 8 items in `stocksCRSPmonthly` and `factorsSPGMIr` are duplicated, and any subset of these items needs to be specified in either `stockItems` or `factorItems`, but not both.
 
-In the code example below we select 6 of 14 stocksCRSPmonthly items and select no factorsSPGMIr items.
+**Example 1.** In the code example below we select 6 of 14 stocksCRSPmonthly items and select no factorsSPGMIr items.
 
 ```r
 
@@ -259,9 +259,9 @@ colnames(stocksSmall)
 range(stocksSmall[ , Date])
 ```
 
-Show that the number rows of `stocksSmall` is equal to the number of months times the number of stocks.
+**Exercise.** Show that the number rows of `stocksSmall` is equal to the number of months times the number of stocks.
 
-In the code example below, for which we have in mind studying the relationship between small capitalization stock returns and the Size, Beta and BM factors, we select the SmallCap subset over the same time range as in the example above, but without the MktIndexCRSP and Ret13WkBill `stockItems`, and with the LogMktCap, Beta60M and EP `factorItems`.
+**Example 2.** In the code example below, for which we have in mind studying the relationship between small capitalization stock returns and the Size, Beta and BM factors, we select the SmallCap subset over the same time range as in the example above, but without the MktIndexCRSP and Ret13WkBill `stockItems`, and with the LogMktCap, Beta60M and EP `factorItems`.
 
 ```r
 
@@ -269,29 +269,30 @@ stockItems2 <- c("Date", "TickerLast", "CapGroupLast", "Return")
 factorItems <- c("LogMktCap", "Beta60M", "EP")
 dateRange <- c("1997-01-31", "2010-12-31")
 stocksSmall3Fac <- selectCRSPandSPGMI("monthly",
-									  dateRange = dateRange,
-									  stockItems = stockItems2,
-									  factorItems = factorItems,
-									  subsetType = "CapGroupLast",
-									  subsetValues = "SmallCap",
-									  outputType = "data.table")
+										dateRange = dateRange,
+										stockItems = stockItems2,
+										factorItems = factorItems,
+										subsetType = "CapGroupLast",
+										subsetValues = "SmallCap",
+										outputType = "data.table")
+
 length(unique(stocksSmall3Fac[ , TickerLast]))
 dim(stocksSmall3Fac)
 colnames(stocksSmall3Fac)
 ```
 
-Here we modify the code of Example 1 by changing `subsetValues = ‘‘ SmallCap ’’` to `subsetValues = ‘‘ MicroCap ’’,` and changing `outputType` from `‘‘ data.table ’’` to `‘‘ xts ’’`. This creates the `xts` time series object `stocksMicro`, which consists of the MicroCap stocks in `stocksCRSPmonthly`, along with the return of the market ("MktIndexCRSP"), and the risk-free rate ("Ret13WkBill").
+**Example 3.** Here we modify the code of Example 1 by changing `subsetValues = ‘‘ SmallCap ’’` to `subsetValues = ‘‘ MicroCap ’’,` and changing `outputType` from `‘‘ data.table ’’` to `‘‘ xts ’’`. This creates the `xts` time series object `stocksMicro`, which consists of the MicroCap stocks in `stocksCRSPmonthly`, along with the return of the market ("MktIndexCRSP"), and the risk-free rate ("Ret13WkBill").
 
 ```r
 
 dateRange <- c("1997-01-31","2010-12-31")
 stocksMicro <- selectCRSPandSPGMI("monthly",
-								  dateRange = dateRange,
-								  stockItems = stockItems1,
-								  factorItems = NULL,
-								  subsetType = "CapGroupLast",
-								  subsetValues = "MicroCap",
-								  outputType = "xts")
+									dateRange = dateRange,
+									stockItems = stockItems1,
+									factorItems = NULL,
+									subsetType = "CapGroupLast",
+									subsetValues = "MicroCap",
+									outputType = "xts")
 
 class(stocksMicro)
 dim(stocksMicro)
@@ -457,7 +458,7 @@ Modify the above code to check that the stocks’ sectors are the same in Januar
 
 ## Extracting a Subset of the Variables
 
-We typically work with a merged or unmerged subset of the variables in `stocksCRSPmonthly` and `factorsSPGMIr`, and often end up needing only a few of the items in the subset. For example, we might find that we are interested in only the Date, TickerLast, Return, Beta60M and EP items of the `data.table` object `stocksSmall3Fac` in Example 2 of Section 2. The following code creates the `data.table` we need:
+We typically work with a merged or unmerged subset of the variables in `stocksCRSPmonthly` and `factorsSPGMIr`, and often end up needing only a few of the items in the subset. For example, we might find that we are interested in only the Date, TickerLast, Return, Beta60M and EP items of the `data.table` object `stocksSmall3Fac` in Example 2 of [<u>The CRSP® Stocks and SPGMI Factors Data Sets</u>](#the-crsp-stocks-and-spgmi-factors-data-sets). The following code creates the `data.table` we need:
 
 ```r
 
