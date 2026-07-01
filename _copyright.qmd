@@ -1,5 +1,5 @@
 ---
 
-## Copyright
+# Copyright
 
 Copyright © 2026 R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. This material is planned for publication in 2026 by Springer. All rights reserved. No part of these materials may be reproduced, distributed, or transmitted in any form without prior written permission of the authors.
