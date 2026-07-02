@@ -22,7 +22,7 @@ Download any script directly. Each script reproduces all figures and tables for 
 | Chapter 15  | Influence Functions and Standard Errors | [Download R script](demos/Ch15_IFsandStandardErrors_Demo.R){target="_blank"} |
 
 ::: {.callout-warning appearance="minimal"}
-Some scripts take several minutes to run in full. It is better to run the initialization code abd then run the code for selected Figures and Tables.
+Some scripts take several minutes to run in full. It usually proves more effective to run the initialization code and then run the code for selected Figures and Tables as needed.
 :::
 
 {{< include _copyright.qmd >}}
