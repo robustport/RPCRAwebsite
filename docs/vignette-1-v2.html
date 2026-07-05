@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Vignette 1: RPCRA Package and Data Overview (v2 preview) – RPCRA</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a0e0c410f605b392fe4f2ebad2fe59ce.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-7a984b7a041620a675b728d1d00958f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const hero = document.querySelector(".hero-outer");
+  const columns = document.querySelector("#quarto-content.page-columns, .page-columns");
+  if (hero && columns && hero.parentElement !== columns) {
+    columns.insertBefore(hero, columns.firstChild);
+    document.body.classList.add("home-hero-page");
+  }
+
+  const sidebar = document.querySelector("#quarto-margin-sidebar");
+
+  // Auto-enable the styled/sticky margin TOC on any page that actually has
+  // one, instead of relying on a class that nothing was adding.
+  if (sidebar && sidebar.querySelector("#TOC")) {
+    document.body.classList.add("margin-toc-page");
+  }
+
+  if (!document.querySelector(".margin-toc-page, .hero-outer")) return;
+
+  function alignMarginToc() {
+    if (!sidebar) return;
+    if (window.innerWidth <= 991) {
+      sidebar.style.marginTop = "";
+      return;
+    }
+    // Only nudge the TOC down to meet a specific anchor on hero pages,
+    // where it needs to skip past the banner. On regular article/vignette
+    // pages, leave it alone so it stays at the CSS sticky `top` offset,
+    // near the top of the viewport.
+    if (!hero) {
+      sidebar.style.marginTop = "";
+      return;
+    }
+    const anchor =
+      document.querySelector("#about-the-book") ||
+      document.querySelector("#overview") ||
+      document.querySelector("#quarto-document-content h2, #quarto-document-content h3");
+    if (!anchor) return;
+    const offset =
+      anchor.getBoundingClientRect().top - sidebar.getBoundingClientRect().top;
+    sidebar.style.marginTop = Math.max(0, Math.round(offset)) + "px";
+  }
+
+  alignMarginToc();
+  window.addEventListener("resize", alignMarginToc);
+  window.addEventListener("load", function () {
+    alignMarginToc();
+    requestAnimationFrame(alignMarginToc);
+  });
+
+  const toc = document.querySelector("#quarto-margin-sidebar #TOC, #TOC");
+  if (!toc) return;
+
+  const links = [...toc.querySelectorAll('a[href^="#"]')];
+  const sections = links
+    .map(function (link) { return document.querySelector(link.getAttribute("href")); })
+    .filter(Boolean);
+  if (!sections.length) return;
+
+  const setActive = function (id) {
+    links.forEach(function (link) {
+      link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+    });
+  };
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    },
+    { rootMargin: "-15% 0px -65% 0px", threshold: 0 }
+  );
+
+  sections.forEach(function (section) { observer.observe(section); });
+  if (sections[0]) setActive(sections[0].id);
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const brand = document.querySelector(".navbar .navbar-brand");
+  if (!brand) return;
+  brand.innerHTML = '<span class="navbar-book-title"><em>R</em>PCRA</span>';
+  brand.setAttribute("aria-label", "Robust Portfolio Construction and Risk Analysis");
+});
+</script>
+
+
+<meta property="og:title" content="Robust Portfolio Construction and Risk Analysis">
+<meta property="og:description" content="Online supplementary materials covering preface, vignettes, demo code, and five technical appendices for the forthcoming RPCRA textbook.">
+<meta property="og:image" content="">
+<meta property="og:site_name" content="RPCRA">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">RPCRA</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./preface.html"> 
+<span class="menu-text">Preface</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chapter-summaries.html"> 
+<span class="menu-text">Chapter Summaries</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./vignettes.html"> 
+<span class="menu-text">Vignettes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./demo-code.html"> 
+<span class="menu-text">Demo Code</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./appendices.html"> 
+<span class="menu-text">Appendices</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+   
+  <ul class="collapse">
+  <li><a href="#sec-the-pcra-package" id="toc-sec-the-pcra-package" class="nav-link active" data-scroll-target="#sec-the-pcra-package"><span class="header-section-number">1</span> The PCRA Package</a>
+  <ul class="collapse">
+  <li><a href="#sec-other-data-in-the-pcra-package" id="toc-sec-other-data-in-the-pcra-package" class="nav-link" data-scroll-target="#sec-other-data-in-the-pcra-package"><span class="header-section-number">1.1</span> Other Data in the PCRA Package</a></li>
+  </ul></li>
+  <li><a href="#sec-cran-pcra-basics" id="toc-sec-cran-pcra-basics" class="nav-link" data-scroll-target="#sec-cran-pcra-basics"><span class="header-section-number">2</span> CRAN PCRA Basics</a>
+  <ul class="collapse">
+  <li><a href="#sec-datatables-vs-dataframes" id="toc-sec-datatables-vs-dataframes" class="nav-link" data-scroll-target="#sec-datatables-vs-dataframes"><span class="header-section-number">2.1</span> Data Table Objects Versus Data Frame Objects</a></li>
+  <li><a href="#sec-rounded-spgmi-factors-data" id="toc-sec-rounded-spgmi-factors-data" class="nav-link" data-scroll-target="#sec-rounded-spgmi-factors-data"><span class="header-section-number">2.2</span> The Rounded SPGMI Factors Data</a></li>
+  <li><a href="#sec-pcra-is-not-open-source" id="toc-sec-pcra-is-not-open-source" class="nav-link" data-scroll-target="#sec-pcra-is-not-open-source"><span class="header-section-number">2.3</span> PCRA Data Sets are <em>NOT</em> Open Source!</a></li>
+  </ul></li>
+  <li><a href="#sec-dev-version-of-pcra" id="toc-sec-dev-version-of-pcra" class="nav-link" data-scroll-target="#sec-dev-version-of-pcra"><span class="header-section-number">3</span> Development Version of PCRA</a></li>
+  <li><a href="#copyright" id="toc-copyright" class="nav-link" data-scroll-target="#copyright"><span class="header-section-number">4</span> Copyright</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Vignette 1: RPCRA Package and Data Overview (v2 preview)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="margin-toc-page">
+<div class="copyright-notice">
+<p><strong>Authors:</strong> Doug Martin, Tom Philips, Jon Spinney, and Kirk Li</p>
+</div>
+<div class="pdf-callout">
+<div class="pdf-icon">
+<p>📄</p>
+</div>
+<div class="pdf-text">
+<p><strong>Download vignette</strong> <a href="pdfs/vignette-1.pdf" target="_blank">Vignette 1 — RPCRA Package and Data Overview</a></p>
+</div>
+</div>
+<section id="sec-the-pcra-package" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> The PCRA Package</h1>
+<p>This vignette is intended primarily as an overview of the structure and contents of the <code>PCRA</code> package (other vignettes and help material will go into greater depth on the actual functionality and use of <code>PCRA</code> and its related packages), and assumes that you have already installed R version 4.4.3 or later, as well as a current version of RStudio, on your computer, or will do so before reading the following material. To find out how to install R and RStudio, we recommend reading the appropriate parts of Appendix A in <em>Hands on Programming with R</em>, available online at <a href="https://rstudio-education.github.io/hopr/" class="uri">https://rstudio-education.github.io/hopr/</a>.</p>
+<p>The <code>PCRA</code> package was created to provide data-oriented computational support for the book <em>Robust Portfolio Construction and Risk Analysis</em> (RPCRA), co-authored by Doug Martin, Thomas Philips, Bernd Scherer and Kirk Li. The book’s publication by Springer is planned for 2026.</p>
+<p>An important feature of the PCRA book is its emphasis on <em>reproducibility</em>, whereby many of its figures and tables are reproducible with R code that is downloadable from a <code>demo</code> folder in the <code>PCRA</code> package. Such reproducibility is made possible by the inclusion of many (but not all) the data sets used by the R code that reproduces the figures and tables. Currently the PCRA package contains thirty-one data sets, the most frequently used of which are CRSP® stocks data, Standard and Poor’s Global Market Intelligence (SPGMI) factors data, S&amp;P Dow Jones indices including the S&amp;P 500 ®, S&amp;P Industrials ®, S&amp;P 400 Industrials ®, and the S&amp;P 425 Industrials ®, as well as data sets from the Chicago Board of Options Exchange LiveVol, Conference Board, Intercontinental Exchange (ICE) and Tradeweb Markets LLC.</p>
+<p>These data sets may be used in conjunction with factor model fitting, portfolio optimization, and portfolio performance analysis methods in <code>PCRA</code> and other R packages to conduct realistic quantitative equity portfolio construction and performance analyses. These other packages include, but are not limited to, the time-series factor models package <code>facmodTS</code>, the cross-section factor models package <code>facmodCS</code>, the portfolio performance analysis package <code>PerformanceAnalytics</code>, and the portfolio optimization package <code>PortfolioAnalytics</code>, all of which are available at CRAN ( <a href="https://cran.r-project.org" class="uri">https://cran.r-project.org</a> ).</p>
+<p>It is important to keep in mind that there currently exist two versions of the PCRA package:</p>
+<ul>
+<li><p><code>PCRA-1.3</code> (the production version), which is available on CRAN at <a href="https://cran.r-project.org/web/packages/PCRA" class="uri">https://cran.r-project.org/web/packages/PCRA</a></p></li>
+<li><p><code>PCRA-1.3.1</code> (the development version), which is available at <a href="https://github.com/robustport/PCRA" class="uri">https://github.com/robustport/PCRA</a>.</p></li>
+</ul>
+<p>Before reading the rest of this document, you should install the CRAN version of <code>PCRA</code> using RStudio’s <code>Tools &gt; Install Packages</code> menu, entering <code>PCRA</code> in the “Packages” field, and clicking “Install”. After the installation is finished, load the package using R’s <code>library</code> function, ignoring any warning messages that might appear.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PCRA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Both PCRA versions have identical functionality except for new features and data sets in the development version, and differences in their CRSP® stocks and SPGMI factors data. Specifically, due to data storage space constraints, the <code>PCRA-1.3</code> package hosted on CRAN contains CRSP® stocks data only at a monthly frequency and slightly rounded SPGMI factors in the data sets</p>
+<ul>
+<li><p><code>stocksCRSPmonthly</code></p></li>
+<li><p><code>factorsSPGMIr</code>.</p></li>
+</ul>
+<p>For details of the above two data sets, use the use the R <code>help</code> function:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(stocksCRSPmonthly)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(factorsSPGMIr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>PCRA-1.3.1</code> development version contains daily and weekly CRSP® stocks data and unrounded SPGMI factors data in addition to the monthly CRSP® stocks data and rounded SPGMI factors data contained in <code>PCRA-1.3</code>. The additional data sets are:</p>
+<ul>
+<li><p><code>stocksCRSPweekly</code></p></li>
+<li><p><code>stocksCRSPdaily</code></p></li>
+<li><p><code>factorsSPGMI</code>.</p></li>
+</ul>
+<p>This vignette provides details in <a href="#sec-rounded-spgmi-factors-data" class="quarto-xref">Section&nbsp;2.2</a> concerning the rounding used to create the <code>factorsSPGMIr</code> data from the <code>factorsSPGMI</code> data, and shows that there are only minor differences on the order of 1% (and typically much less than 1%) in <code>factorsSPGMIr</code> data values relative to their <code>factorsSPGMI</code> counterparts. This suggest that one will see minimal differences in portfolio performance when using <code>factorsSPGMIr</code> in place of <code>factorsSPGMI</code>.</p>
+<p>Nonetheless, users of the <code>PCRA-1.3</code> package who prefer to use the unrounded <code>factorsSPGMI</code> data can do so in a manner described in the document “CRSP Stocks and SPGMI Factors in PCRA”, which is downloadable from CRAN at <a href="https://cran.r-project.org/web/packages/PCRA" class="uri">https://cran.r-project.org/web/packages/PCRA</a>, or can switch to the development version.</p>
+<p>The R code chunks used for creating this vignette are provided in the <code>PCRA Overview Demo.R</code> script in the <code>demo</code> folder of the <code>PCRA</code> package. Instructions for accessing and running such scripts are provided in the vignette “PCRA Reproducibility Code”, which we recommend reading in conjunction with this vignette.</p>
+<section id="sec-other-data-in-the-pcra-package" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="sec-other-data-in-the-pcra-package"><span class="header-section-number">1.1</span> Other Data in the PCRA Package</h2>
+<p>In addition to the relatively large CRSP® and SPGMI data sets, the <code>PCRA</code> package contains a large number of other data sets that are used throughout various chapters of the RPCRA book, and which may be used for a wide variety of computing exercises, <strong><em>though strictly for academic (i.e.&nbsp;non-commercial) purposes</em></strong>. The following use of the R <code>data</code> function results in the Figure 1 display of the data set names as well as their corresponding brief descriptions :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">"PCRA"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Detailed descriptions of each of the <code>PCRA</code> data sets can be obtained using R’s <code>help</code> function, e.g., to see the details of the SP500 index data, type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(SP500)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-datasets" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-datasets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="vignette-assets/dataNamesPCRA.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: PCRA package data sets and their descriptions"><img src="vignette-assets/dataNamesPCRA.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-datasets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: PCRA package data sets and their descriptions
+</figcaption>
+</figure>
+</div>
+<section id="sec-sandp-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="sec-sandp-datasets">The S&amp;P Datasets</h3>
+<p>Standard and Poor’s has graciously consented to the inclusion of five datasets in the <code>PCRA</code> package, one of which ( <code>SP500</code> ) is updated annually as new year-end data on the S&amp;P 500 ® Index becomes available. The other four datasets are historical and are copied from paper copies of the S&amp;P Analysts’ Handbook. All five data sets are of type <code>data.frame</code>.</p>
+<p>S&amp;P provides investors with a great deal of information on the S&amp;P 500 ® at <a href="https://www.spglobal.com/spdji/en/indices/equity/sp-500/" class="uri">https://www.spglobal.com/spdji/en/indices/equity/sp-500/</a>, and some (but not all) of this information can be found in <code>SP500,</code> which has (among other items), the per-share earnings, revenues, and price level of the S&amp;P 500 ® Index from 1925 to the most recent year-end. It is updated once a year, typically in April, after S&amp;P’s analysts finalize all the year-end data for the index. In addition, it provides year-end CPI and Nominal GDP levels sourced from the Federal Reserve’s FRED database at <a href="https://fred.stlouisfed.org/" class="uri">https://fred.stlouisfed.org/</a>.</p>
+<p>It is instructive to compare <code>SP500</code> with <code>SP500from1967to2007</code>, <code>SPIndustrials</code>, <code>SP400Industrials</code> and <code>SP425Industrials</code>. The first is updated once a year, and a superset of the data that is added to it each year can be viewed at <a href="https://www.spglobal.com/spdji/en/documents/additional-material/sp-500-eps-est.xlsx" class="uri">https://www.spglobal.com/spdji/en/documents/additional-material/sp-500-eps-est.xlsx</a>. The latter four data sets are, in contrast, derived from scans of old paper copies of the S&amp;P Analysts’ Handbook. Some columns that were provided in the past (e.g.&nbsp;<code>Cash_Flow</code>, <code>Depreciation</code> and <code>TotalReturnIndex</code> ) are no longer provided, while other columns that were not provided in the past (e.g.&nbsp;<code>SP500CapEx</code> ) are now provided.</p>
+</section>
+<section id="sec-cboe-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="sec-cboe-datasets">The CBOE Dataset</h3>
+<p>The PCRA data set <code>CboeOptionStrategies</code> is a <code>data.frame</code> with total return indices for ten options-related strategies as well as price and total return indices for the S&amp;P 500 ® Index, the yield on 3-month T-bills and two equity volatility indices (VIX and VXO) from June 1986 to December 2021. Information on these ten strategies, as well as many others, can be found at <a href="https://www.cboe.com/us/indices/indicessearch/" class="uri">https://www.cboe.com/us/indices/indicessearch/</a>.</p>
+</section>
+<section id="sec-conference-board-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="sec-conference-board-datasets">The Conference Board Dataset</h3>
+<p>The PCRA data set <code>ConferenceBoardETI</code> is a <code>data.frame</code> with the values of the Conference Board’s Employment Trends Index from November 1973 to September 2023. The Employment Trends Index is a proprietary composite of eight employment indicators, and information on it can be found at <a href="https://www.conference-board.org/topics/employment-trends-index" class="uri">https://www.conference-board.org/topics/employment-trends-index</a>. The Conference Board publishes a number of indicators of the health of the U.S. and global economies, including the Leading Economic Index ® ( <a href="https://www.conference-board.org/topics/us-leading-indicators" class="uri">https://www.conference-board.org/topics/us-leading-indicators</a> ) and the Total Economy Database ( <a href="https://www.conference-board.org/topics/total-economy-database" class="uri">https://www.conference-board.org/topics/total-economy-database</a> ), but these are available only to subscribers to their service.</p>
+</section>
+<section id="sec-ice-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="sec-ice-datasets">The ICE Dataset</h3>
+<p>The PCRA data set <code>ShortDurationCredit</code> is a <code>data.frame</code> with the monthly total return, Yield to Maturity, Weighted Average Maturity, Modified Duration and Option-Adjusted Spread of the ICE BofA 1-3 Year AAA-A US Corporate Index (Index C110) and the ICE BofA 1-3 Year US Treasury Index (Index G1O2).</p>
+</section>
+<section id="sec-tradeweb-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="sec-tradeweb-datasets">The Tradeweb Dataset</h3>
+<p>The PCRA data set <code>USTreasuryTradeweb</code> is a <code>data.frame</code> with the daily bid and ask prices and yields of the On-the-run and First Off-the-run 1-Year, 2-Year, 5-Year, 10-Year and 30-Year U.S. Treasury Notes (or Bonds) from January 2, 2008 to December 30, 2021.</p>
+</section>
+</section>
+</section>
+<section id="sec-cran-pcra-basics" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> CRAN PCRA Basics</h1>
+<p>Here we focus on a few basic aspects of the <code>stocksCRSPmonthly</code> and the <code>factorsSPGMIr</code> data sets in the CRAN version of <code>PCRA</code>, and defer more detailed discussion to the vignette “CRSP Stocks and SPGMI Factors in PCRA”. The <code>PCRA</code> package contains many R functions and datasets, a list of which can be viewed by typing <code>ls</code> in the RStudio Console:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PCRA)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">"package:PCRA"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The data sets <code>stocksCRSPmonthly</code> data, and the <code>factorsSPGMIr</code> are <code>data.table</code> type objects, and in order to view and manipulate them you need to install and load the <code>data.table</code> R package. Install the current version of <code>data.table</code> in RStudio the same way you installed the PCRA package. Then load <code>data.table</code> by typing <code>library(data.table)</code>, and confirm that <code>stocksCRSPmonthly</code> and <code>factorsSPGMIr</code> are indeed <code>data.table</code> objects by typing:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(stocksCRSPmonthly)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(factorsSPGMIr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>PCRA uses <code>data.table</code> types for the <code>stocksCRSPmonthly</code> and <code>factorsSPGMIr</code> data sets for two reasons:</p>
+<ol type="1">
+<li><p>The <code>data.table</code> package has powerful data manipulation tools that do not exist for <code>data.frame</code> objects, and</p></li>
+<li><p>The <code>data.table</code> package can handle large data sets without its performance becoming degraded.</p></li>
+</ol>
+<p>Note that a <code>data.table</code> object is indeed a “table object” whose dimensions and column names can be obtained by typing:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(stocksCRSPmonthly)      <span class="co"># Number of rows and columns</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(stocksCRSPmonthly) <span class="co"># Names of data items in each column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You can discover the structure of <code>stocksCRSPmonthly</code> by displaying the first and last five rows of its first, second and ninth columns by typing:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>stocksCRSPmonthly[, <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">9</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The results displayed above indicate that the row structure of <code>stocksCRSPmonthly</code> consists of blocks of size 294, one block for each of the months from 1993 through 2015. That time period consists of 24 years (or 276 months), and since the block for each month consists of 294 stocks, the total number of rows of <code>stocksCRSPmonthly</code> is 276×294=81,144, as was seen by the use of <code>dim(stocksCRSPmonthly</code> ).</p>
+<p>Similarly, you can see the dimensions and column names of <code>factorsSPGMIr</code> with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(factorsSPGMIr)      <span class="co"># Number of rows and columns</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(factorsSPGMIr) <span class="co"># Names of data items in each column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="sec-datatables-vs-dataframes" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sec-datatables-vs-dataframes"><span class="header-section-number">2.1</span> Data Table Objects Versus Data Frame Objects</h2>
+<p>You may have wondered why <code>class(stocksCRSPmonthly)</code> and <code>class(factorsSPGMIr)</code> return both “data.table” and “data.frame”, the first of which is indeed the class of each these two data sets. The occurrence of “data.frame” after “data.table” indicates that the <code>data.table</code> object <em>inherits</em> all the properties of a <code>data.frame</code> object, and adds to these a number of features to enhance both its syntax and its performance. In view of the above property of a <code>data.table</code> object, it should not be surprising that you can easily convert a <code>data.table</code> object to a <code>data.frame</code> by applying the <code>data.frame</code> function to it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dat.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(stocksCRSPmonthly)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dat.df)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dat.df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Users who are familiar with manipulating <code>data.frame</code> objects will find the above conversion method handy.</p>
+</section>
+<section id="sec-rounded-spgmi-factors-data" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-rounded-spgmi-factors-data"><span class="header-section-number">2.2</span> The Rounded SPGMI Factors Data</h2>
+<p>The rounded data in <code>factorsSPGMIr</code> was obtained by rounding the data in <code>factorsSPGMI</code> to 4 significant digits, and then compressing it with level 9 “xz” compression. The results of these steps are displayed in Table 2.2. The compression reduces the 6.452 MB <code>factorsSPGMI</code> data set by 72.3% to about 1.787 MB for <code>factorsSPGMIr</code>. This overall data compression process was required so that the <code>PCRA</code> package, which also contains the 1MB sized <code>stocksCRSPmonthly</code> data and other miscellaneous data sets totaling about 2MB in size satisfies CRAN’s maximum package data size of 5MB.</p>
+<p><strong>Table 1.</strong> Reduction in size of the <code>factorsSPGMI</code> data set from rounding and data compression.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><code>factorsSPGMI</code></th>
+<th style="text-align: center;">Size(KB)</th>
+<th style="text-align: center;">Reduction(%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Original</td>
+<td style="text-align: center;">6452</td>
+<td style="text-align: center;">0.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Rounded to 4 Sig. Digits</td>
+<td style="text-align: center;">2702</td>
+<td style="text-align: center;">58.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Level 9 ‘xz’ Compressed</td>
+<td style="text-align: center;">1787</td>
+<td style="text-align: center;">72.3</td>
+</tr>
+</tbody>
+</table>
+<p>Rounding factors data to four significant digits turns out to make little difference in the precision of the <code>factorsSPGMIr</code> data relative to the <code>factorsSPGMI</code>. This claim is supported by Figure 2, which shows that the fractional error in all the factors is always less than about 1% (it is less than 1/2% for four of the fourteen factors). We expect these minor differences in <code>factorsSPGMIr</code> relative to <code>factorsSPGMI</code> to have a negligible impact on factor model fits.</p>
+<div id="fig-differences" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-differences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="vignette-assets/factorsRelativeDiff.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Fractional differences in factorsSPGMIr relative to factorsSPGMI for each of the 14 factors"><img src="vignette-assets/factorsRelativeDiff.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-differences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Fractional differences in factorsSPGMIr relative to factorsSPGMI for each of the 14 factors
+</figcaption>
+</figure>
+</div>
+<p>As is explained in the vignette “Introduction to CRSP Stocks and SPGMI Factors in PCRA”, users of the CRAN <code>PCRA-1.3</code> package actually have access to the non-rounded <code>factorsSPGMI</code> data in a special <code>DataPlus</code> folder of the <code>PCRA</code> github repository at <a href="https://github.com/robustport/PCRA" class="uri">https://github.com/robustport/PCRA</a>. Our recommendation to users of the CRAN version of PCRA is to first fit factor models using <code>factorsSPGMIr</code>, and then, if there is any concern about the adverse impact of rounding, to check the model fit by refitting it using <code>factorsSPGMI</code>.</p>
+</section>
+<section id="sec-pcra-is-not-open-source" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-pcra-is-not-open-source"><span class="header-section-number">2.3</span> PCRA Data Sets are <em>NOT</em> Open Source!</h2>
+<p>While the <code>PCRA</code> package contains a number of open source R functions and scripts, the <code>stocksCRSPmonthly</code>, <code>stocksCRSPweekly</code>, <code>stocksCRSPdaily,</code> <code>factorsSPGMIr</code>, <code>factorsSPGMI,</code> <code>SP500</code>, <code>SP500from1967to2007</code>, <code>SPIndustrials</code>, <code>SP400Industrials, SP425Industrials, CboeOptionStrategies, ConferenceBoardETI,</code> <code>ShortDurationCredit</code> and <code>USTreasuryTradeweb</code> datasets supplied with it <strong><em>are not open source, and may not be redistributed in any way or form or used for any commercial (i.e.&nbsp;non-educational) purpose</em></strong>.</p>
+<p>The authors wish to express their gratitude to CRSP®, SPGMI, S&amp;P Dow Jones Indices, CBOE LiveVol LLC, ICE Data Indices LLC and Tradeweb Markets LLC for allowing us to provide these data sets in the PCRA package. Their generosity will greatly enhance students’ understanding of portfolio construction and risk analysis methods through the use of these data sets in reproducing the examples and doing the various computational exercises provided in the book, as well as by solving problems assigned by their course instructors.</p>
+</section>
+</section>
+<section id="sec-dev-version-of-pcra" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Development Version of PCRA</h1>
+<p>The development version of <code>PCRA</code> (currently <code>PCRA-1.3.1</code> ) can be installed from its github repository (repo) at <a href="https://github.com/robustport/PCRA" class="uri">https://github.com/robustport/PCRA</a>. It contains new features that will be included in the next <code>PCRA</code> CRAN release (currently <code>PCRA</code> -1.4). Furthermore, an important convenience feature of <code>PCRA</code> development versions is that they contain all the CRSP® stocks data and SPGMI factors data sets, namely:</p>
+<ul>
+<li><p><code>stocksCRSPmonthly</code></p></li>
+<li><p><code>stocksCRSPweekly</code></p></li>
+<li><p><code>stocksCRSPdaily</code></p></li>
+<li><p><code>factorsSPGMI</code></p></li>
+<li><p><code>factorsSPGMIr</code></p></li>
+</ul>
+<p>However, PCRA development version users will need only the <code>factorsSPGMIr</code> rounded data in case they want to confirm that its use in portfolio construction does not result in any significant differences between a portfolio’s performance based on <code>factorsSPGMIr</code> and its performance based on the <code>factorsSPGMI</code>.</p>
+<p>In order to install the development version of <code>PCRA</code> one needs to have installed the R packages <code>devtools</code> or <code>pak</code>, which can be done in the RStudio console following the procedure used to install the <code>data.table</code> and <code>PCRA</code> packages. Once <code>devtools</code> or <code>pak</code> has been installed (<code>pak</code> is a modern package installer, and has drop-in replacements for a number of <code>devtools</code> functions including <code>install_github()</code>, <code>install_git()</code>, <code>install_version()</code>, and <code>install_local()</code> among others), the development version of <code>PCRA</code> can be loaded and installed using the following commands in the RStudio console:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Traditional approach using devtools</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools) </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"robustport/PCRA"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Modern approach using pak</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Install directly from GitHub, separate function not needed</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_install</span>(<span class="st">"robustport/PCRA"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The main advantages of the development version of <code>PCRA</code> are:</p>
+<ul>
+<li><p>It will contain new features that are not contained in the CRAN version of <code>PCRA</code></p></li>
+<li><p>It will contain all the CRSP® and SPGMI data sets</p></li>
+</ul>
+<p>The primary disadvantage of using the <code>PCRA</code> development version is that some new features or data sets may not yet be fully tested or documented.</p>
+<hr>
+</section>
+<section id="copyright" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Copyright</h1>
+<p>Copyright © 2026 R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. This material is planned for publication in 2026 by Springer. All rights reserved. No part of these materials may be reproduced, distributed, or transmitted in any form without prior written permission of the authors.</p>
+</section></div>
+
+
+
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/robustport\.github\.io\/RPCRAwebsite\/docs\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Martin, Philips, Scherer &amp; Li. All rights reserved.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

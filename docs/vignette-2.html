@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Vignette 2: CRSP Stocks and SPGMI Factors in PCRA (v2 preview) – RPCRA</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-a0e0c410f605b392fe4f2ebad2fe59ce.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-7a984b7a041620a675b728d1d00958f3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const hero = document.querySelector(".hero-outer");
+  const columns = document.querySelector("#quarto-content.page-columns, .page-columns");
+  if (hero && columns && hero.parentElement !== columns) {
+    columns.insertBefore(hero, columns.firstChild);
+    document.body.classList.add("home-hero-page");
+  }
+
+  const sidebar = document.querySelector("#quarto-margin-sidebar");
+
+  // Auto-enable the styled/sticky margin TOC on any page that actually has
+  // one, instead of relying on a class that nothing was adding.
+  if (sidebar && sidebar.querySelector("#TOC")) {
+    document.body.classList.add("margin-toc-page");
+  }
+
+  if (!document.querySelector(".margin-toc-page, .hero-outer")) return;
+
+  function alignMarginToc() {
+    if (!sidebar) return;
+    if (window.innerWidth <= 991) {
+      sidebar.style.marginTop = "";
+      return;
+    }
+    // Only nudge the TOC down to meet a specific anchor on hero pages,
+    // where it needs to skip past the banner. On regular article/vignette
+    // pages, leave it alone so it stays at the CSS sticky `top` offset,
+    // near the top of the viewport.
+    if (!hero) {
+      sidebar.style.marginTop = "";
+      return;
+    }
+    const anchor =
+      document.querySelector("#about-the-book") ||
+      document.querySelector("#overview") ||
+      document.querySelector("#quarto-document-content h2, #quarto-document-content h3");
+    if (!anchor) return;
+    const offset =
+      anchor.getBoundingClientRect().top - sidebar.getBoundingClientRect().top;
+    sidebar.style.marginTop = Math.max(0, Math.round(offset)) + "px";
+  }
+
+  alignMarginToc();
+  window.addEventListener("resize", alignMarginToc);
+  window.addEventListener("load", function () {
+    alignMarginToc();
+    requestAnimationFrame(alignMarginToc);
+  });
+
+  const toc = document.querySelector("#quarto-margin-sidebar #TOC, #TOC");
+  if (!toc) return;
+
+  const links = [...toc.querySelectorAll('a[href^="#"]')];
+  const sections = links
+    .map(function (link) { return document.querySelector(link.getAttribute("href")); })
+    .filter(Boolean);
+  if (!sections.length) return;
+
+  const setActive = function (id) {
+    links.forEach(function (link) {
+      link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+    });
+  };
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    },
+    { rootMargin: "-15% 0px -65% 0px", threshold: 0 }
+  );
+
+  sections.forEach(function (section) { observer.observe(section); });
+  if (sections[0]) setActive(sections[0].id);
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const brand = document.querySelector(".navbar .navbar-brand");
+  if (!brand) return;
+  brand.innerHTML = '<span class="navbar-book-title"><em>R</em>PCRA</span>';
+  brand.setAttribute("aria-label", "Robust Portfolio Construction and Risk Analysis");
+});
+</script>
+
+
+<meta property="og:title" content="Robust Portfolio Construction and Risk Analysis">
+<meta property="og:description" content="Online supplementary materials covering preface, vignettes, demo code, and five technical appendices for the forthcoming RPCRA textbook.">
+<meta property="og:image" content="">
+<meta property="og:site_name" content="RPCRA">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">RPCRA</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./preface.html"> 
+<span class="menu-text">Preface</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./chapter-summaries.html"> 
+<span class="menu-text">Chapter Summaries</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./vignettes.html"> 
+<span class="menu-text">Vignettes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./demo-code.html"> 
+<span class="menu-text">Demo Code</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./appendices.html"> 
+<span class="menu-text">Appendices</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+   
+  <ul class="collapse">
+  <li><a href="#sec-introduction" id="toc-sec-introduction" class="nav-link active" data-scroll-target="#sec-introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#sec-the-crsp-stocks-and-spgmi-factors-data-sets" id="toc-sec-the-crsp-stocks-and-spgmi-factors-data-sets" class="nav-link" data-scroll-target="#sec-the-crsp-stocks-and-spgmi-factors-data-sets"><span class="header-section-number">2</span> The CRSP® Stocks and SPGMI Factors Data Sets</a>
+  <ul class="collapse">
+  <li><a href="#sec-the-stocks-crsp-monthly-data-set" id="toc-sec-the-stocks-crsp-monthly-data-set" class="nav-link" data-scroll-target="#sec-the-stocks-crsp-monthly-data-set"><span class="header-section-number">2.1</span> The stocksCRSPmonthly Data Set</a></li>
+  <li><a href="#sec-the-factors-spgmir-data-set" id="toc-sec-the-factors-spgmir-data-set" class="nav-link" data-scroll-target="#sec-the-factors-spgmir-data-set"><span class="header-section-number">2.2</span> The factorsSPGMIr Data Set</a></li>
+  <li><a href="#sec-manipulating-a-data-table" id="toc-sec-manipulating-a-data-table" class="nav-link" data-scroll-target="#sec-manipulating-a-data-table"><span class="header-section-number">2.3</span> Manipulating a data.table</a></li>
+  </ul></li>
+  <li><a href="#sec-selecting-crsp-stocks-and-spgmi-factors-data" id="toc-sec-selecting-crsp-stocks-and-spgmi-factors-data" class="nav-link" data-scroll-target="#sec-selecting-crsp-stocks-and-spgmi-factors-data"><span class="header-section-number">3</span> Selecting CRSP® Stocks and SPGMI Factors Data</a>
+  <ul class="collapse">
+  <li><a href="#sec-manipulation-of-xts-objects" id="toc-sec-manipulation-of-xts-objects" class="nav-link" data-scroll-target="#sec-manipulation-of-xts-objects"><span class="header-section-number">3.1</span> Manipulation of xts Objects</a></li>
+  <li><a href="#sec-simple-selection-function-for-crsp-stocks-data" id="toc-sec-simple-selection-function-for-crsp-stocks-data" class="nav-link" data-scroll-target="#sec-simple-selection-function-for-crsp-stocks-data"><span class="header-section-number">3.2</span> A Simple Selection Function for CRSP® Stocks Data</a></li>
+  </ul></li>
+  <li><a href="#sec-using-weekly-and-daily-crsp-data-and-unrounded-spgmi-data" id="toc-sec-using-weekly-and-daily-crsp-data-and-unrounded-spgmi-data" class="nav-link" data-scroll-target="#sec-using-weekly-and-daily-crsp-data-and-unrounded-spgmi-data"><span class="header-section-number">4</span> Using Weekly and Daily CRSP® Data and Unrounded SPGMI Data</a></li>
+  <li><a href="#sec-basic-data-table-manipulations" id="toc-sec-basic-data-table-manipulations" class="nav-link" data-scroll-target="#sec-basic-data-table-manipulations"><span class="header-section-number">5</span> Basic Data.Table Manipulations</a>
+  <ul class="collapse">
+  <li><a href="#sec-sector-and-capitalization-group-counts" id="toc-sec-sector-and-capitalization-group-counts" class="nav-link" data-scroll-target="#sec-sector-and-capitalization-group-counts"><span class="header-section-number">5.1</span> Sector and Capitalization Group Counts</a></li>
+  <li><a href="#sec-extracting-a-subset-of-the-variables" id="toc-sec-extracting-a-subset-of-the-variables" class="nav-link" data-scroll-target="#sec-extracting-a-subset-of-the-variables"><span class="header-section-number">5.2</span> Extracting a Subset of the Variables</a></li>
+  <li><a href="#sec-renaming-variables" id="toc-sec-renaming-variables" class="nav-link" data-scroll-target="#sec-renaming-variables"><span class="header-section-number">5.3</span> Renaming Variables</a></li>
+  <li><a href="#sec-intersecting-sector-and-size-groupings" id="toc-sec-intersecting-sector-and-size-groupings" class="nav-link" data-scroll-target="#sec-intersecting-sector-and-size-groupings"><span class="header-section-number">5.4</span> Intersecting Sector and Size Groupings</a></li>
+  <li><a href="#sec-selecting-a-time-range" id="toc-sec-selecting-a-time-range" class="nav-link" data-scroll-target="#sec-selecting-a-time-range"><span class="header-section-number">5.5</span> Selecting a Time Range for a Set of Stocks and Factors</a></li>
+  </ul></li>
+  <li><a href="#sec-crsp-stocks-market-capitalization-break-points" id="toc-sec-crsp-stocks-market-capitalization-break-points" class="nav-link" data-scroll-target="#sec-crsp-stocks-market-capitalization-break-points"><span class="header-section-number">6</span> CRSP® Stocks Market Capitalization Break Points</a></li>
+  <li><a href="#sec-names-of-crsp-items-in-stockscrspmonthly-data-set" id="toc-sec-names-of-crsp-items-in-stockscrspmonthly-data-set" class="nav-link" data-scroll-target="#sec-names-of-crsp-items-in-stockscrspmonthly-data-set"><span class="header-section-number">7</span> Names of CRSP® Items in stocksCRSPmonthly Data Set</a></li>
+  <li><a href="#copyright" id="toc-copyright" class="nav-link" data-scroll-target="#copyright"><span class="header-section-number">8</span> Copyright</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Vignette 2: CRSP Stocks and SPGMI Factors in PCRA (v2 preview)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="margin-toc-page">
+<div class="copyright-notice">
+<p><strong>Authors:</strong> Doug Martin and Jon Spinney</p>
+</div>
+<div class="pdf-callout">
+<div class="pdf-icon">
+<p>📄</p>
+</div>
+<div class="pdf-text">
+<p><strong>Download vignette</strong> <a href="pdfs/vignette-2.pdf" target="_blank">Vignette 2 — CRSP Stocks and SPGMI Factors in PCRA</a></p>
+</div>
+</div>
+<section id="sec-introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>The <code>PCRA</code> package, with its included CRSP® stocks data and SPGMI factors data, provides important computational support for the book <em>Robust Portfolio Construction and Risk Analysis</em> (RPCRA), co-authored by Doug Martin, Thomas Philips, Bernd Scherer and Kirk Li. CRSP® stands for the Center for Research in Security Prices, LLC, an Affiliate of the University of Chicago Booth School of Businsess, and SPGMI is an acronym for S&amp;P Global Market Intelligence.</p>
+<p>There are two versions of the PCRA package:</p>
+<ol type="1">
+<li><p>The <em>production</em> CRAN version that is available at <a href="https://CRAN.R-project.org/package=PCRA" class="uri">https://CRAN.R-project.org/package=PCRA</a> and which is the focus of this document, and</p></li>
+<li><p>The <em>development version</em> located at <a href="https://github.com/robustport/PCRA" class="uri">https://github.com/robustport/PCRA</a>.</p></li>
+</ol>
+<p>This document focuses on two <code>data.table</code> objects in <code>PCRA</code>: <code>stocksCRSPmonthly</code> and <code>factorsSPGMIr</code>, as well as the function <code>selectCRSPandSPGMI</code> for extracting subsets of their data jointly or separately. When doing so, the user can specify the format of the extracted data – it can be returned either as a <code>data.table</code> or as an <code>xts</code> time series object.</p>
+<p>The <code>stocksCRSPmonthly</code> data set consists of monthly CRSP® stock returns and descriptive data for 294 stocks from January 1993 to December 2015, while <code>factorsSPGMIr</code> contains 14 monthly factor exposures and related data for each of the stocks in <code>stocksCRSPmonthly</code>. The postscript <code>r</code> in <code>factorsSPGMIr</code> signifies that the factor data has been slightly rounded to decrease the size of the dataset – full precision data can be found in the development version of <code>PCRA</code>. Further details concerning <code>factorsSPGMIr</code> and <code>factorsSPGMI</code> are provided in the vignette “PCRA Package Overview” that is mentioned above.</p>
+<p>Note that unlike the open source functions in the <code>PCRA</code> package, the CRSP® stocks and SPGMI factors data <strong><em>are not open source, and may not be redistributed in any form or used for any commercial (i.e.&nbsp;non-educational) purpose</em></strong>.</p>
+<p>The authors of the <code>PCRA</code> package wish to express their gratitude to CRSP® and SPGMI for allowing them to provide these data sets in the PCRA package. Their inclusion is of great educational benefit to students, who will more effectively learn portfolio construction and risk analysis methods through the use of these data sets in reproducing the examples in the PCRA book, as well as by doing computational exercises provided by their course instructors, both from this book and elsewhere.</p>
+<p>The complete set of R code chunks in the remainder of this document is provided in the <code>CRSPandSPGMIdata.R</code> script in the <code>demo</code> folder of the <code>PCRA</code> package, and we recommend running the code in conjunction with reading this vignette.</p>
+<p><code>PCRA</code> makes extensive use of the <code>data.table</code> package. Our primary motivation for its extensive use in <code>PCRA</code>, as well as in the companion cross-section factor models package <code>facmodCS</code>, are:</p>
+<ol type="1">
+<li><p>The enhanced performance of <code>data.table</code> objects for factor model fitting and portfolio optimization using large cross-sections of stock returns and factor exposures, and</p></li>
+<li><p>The ability of <code>data.table</code> objects to support portfolio optimization with a time-varying number of investable assets.</p></li>
+</ol>
+<p>In order to access the CRSP® stocks and SPGMI factors data, one needs to install the <code>PCRA</code> package from CRAN, or the development version of <code>PCRA</code> located at <a href="https://github.com/robustport" class="uri">https://github.com/robustport</a>, depending on one’s preference or an instructor’s guidance. The CRAN version of <code>PCRA</code> can be installed in RStudio using the <code>Tools &gt; Install Packages</code> menu item.</p>
+<p>In order to install the development version of <code>PCRA</code> one needs to have installed the R packages <code>devtools</code> or <code>pak</code>, which can be done in the RStudio console following the procedure used to install the <code>data.table</code> and <code>PCRA</code> packages. Once <code>devtools</code> or <code>pak</code> has been installed (<code>pak</code> is a modern package installer, and has drop-in replacements for a number of <code>devtools</code> functions including <code>install_github()</code>, <code>install_git()</code>, <code>install_version()</code>, and <code>install_local()</code> among others), the development version of <code>PCRA</code> can be loaded and installed using the following commands in the RStudio console:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Traditional approach using devtools</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(devtools) </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"robustport/PCRA"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Modern approach using pak</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Install directly from GitHub, separate function not needed</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_install</span>(<span class="st">"robustport/PCRA"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="sec-the-crsp-stocks-and-spgmi-factors-data-sets" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> The CRSP® Stocks and SPGMI Factors Data Sets</h1>
+<section id="sec-the-stocks-crsp-monthly-data-set" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sec-the-stocks-crsp-monthly-data-set"><span class="header-section-number">2.1</span> The stocksCRSPmonthly Data Set</h2>
+<p>Most of the contents of this section apply equally well to the weekly and daily CRSP® data. After installing the <code>PCRA</code> and <code>data.table</code> packages, the following lines of code can be used to load and extract the class, dimension, and names of the <code>stocksCRSPmonthly</code> data:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PCRA)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(stocksCRSPmonthly)    <span class="co"># Class of stocksCRSPmonthly</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(stocksCRSPmonthly)      <span class="co"># Number of rows and columns</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(stocksCRSPmonthly) <span class="co"># Names of items in each column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The dimension values 81,144 and 14 are the number of rows and columns, respectively, in <code>stocksCRSPmonthly</code>. The number of rows is equal to the number of stocks (294) times the number of months (276) from January 1993 to December 2015, i.e.&nbsp;294×276=81,144. The fourteen columns contain the fourteen data items (variables) whose names are displayed above.</p>
+<p>The temporal structure of stocksCRSPmonthly is revealed by displaying the first and last five rows of its first four columns using a single line of code :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>stocksCRSPmonthly[ , <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It is apparent that the table consists of 276 blocks of length 294, where each block contains data for the 294 stocks for one of the 276 months between 1993 and 2015.</p>
+<p>The ten <code>stocksCRSPmonthly</code> data items “Date”, “Ticker”, “TickerLast”, “Company”, “Return”, “RetExDiv”, “Price”, “PrcSplitAdj”, “Ret13WkBill”, and “MktIndexCRSP” are provided by CRSP®. The ticker of a company can change over time, and thus the “Ticker” column contains the tickers of the stocks in <code>stocksCRSPmonthly</code> as they originally appeared in that month. As a matter of convenience in some applications, and in order to have a single unique ticker for each stock, “TickerLast” contains the stock ticker of each company as of December, 2015. The “Company” item contains the names of the companies in December 2015. #sec-names-of-crsp-items-in-stockscrspmonthly-data-set provides the mapping of all but the first of the above ten item names to the names used internally by CRSP®.</p>
+<p>The “GICS” data is based the <em>Global Industry Classification Standard</em> six digit code developed by MSCI and Standard and Poor’s (S&amp;P), the details of which are available at <a href="https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard" class="uri">https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard</a>. The “Sector” item indicates which of a number of broad industry groups each Company belongs to, and the following line of code reveals that the stocks in <code>stocksCRSPmonthly</code> belong to one of eight sectors:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(stocksCRSPmonthly[ , Sector])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The GICS classification has eleven sectors, consisting of the eight listed above as well as “Financials”, “Utilities” and “Real Estate”. It just so happened that in the process of selecting 294 stocks with relatively few missing factor exposures for use in both the <code>stocksCRSPmonthly</code> and <code>factorsSPGMI</code> data sets, we ended up with only eight of the eleven possible sectors.</p>
+<p>The “CapGroup” data is the time-varying capitalization group of a company for each month from the beginning of 1993 until the end of 2015, and its values are one of the character strings “MicroCap”, “SmallCap”, “MidCap” or “LargeCap”. CapGroup can be useful when one wants to study the performance of a capitalization group portfolio, e.g., an equally-weighted or value-weighted portfolio consisting of all the SmallCap stocks in <code>stocksCRSPmonthly</code>. Again, for convenience, “CapGroupLast” is the market capitalization group of a company as of December, 2015. The methodology we use to compute the CapGroup breakpoints for each month is discussed in <a href="#sec-crsp-stocks-market-capitalization-break-points" class="quarto-xref">Section&nbsp;6</a>.</p>
+<p>Detailed descriptions of the data in the columns of <code>stocksCRSPmonthly</code> are provided in the “PCRA Reference Manual”, which is downloadable from the CRAN PCRA website ( <a href="https://CRAN.R-project.org/package=PCRA" class="uri">https://CRAN.R-project.org/package=PCRA</a> ), and you can view these descriptions using the R <code>help</code> function:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(stocksCRSPmonthly)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Readers are encouraged to familiarize themselves with the detailed descriptions of the data in the columns of <code>stocksCRSPmonthly</code>.</p>
+</section>
+<section id="sec-the-factors-spgmir-data-set" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-the-factors-spgmir-data-set"><span class="header-section-number">2.2</span> The factorsSPGMIr Data Set</h2>
+<p>Everything discussed in this section applies equally well to the unrounded SPGMI factors data set <code>factorsSPGMI</code>. It takes only three lines of code to display the class, dimension, and item names associated with <code>factorsSPGMIr</code> in the RStudio Console:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(factorsSPGMIr)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(factorsSPGMIr)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(factorsSPGMIr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Observe that the number of rows of the <code>factorsSPGMIr</code> table is the same as for the <code>stocksCRSPmonthly</code> table, but the number of columns is 22, not 14. The first 8 columns of <code>factorsSPGMIr</code> are identical to the first 8 columns of <code>stockSPGMI</code>, and its last 14 columns contain the 14 SPGMI factors, whose values are referred to as <em>factor exposures</em>. Detailed descriptions of each of the 14 factors are provided in the “PCRA Reference Manual”, which is downloadable from the PCRA CRAN website, and can be viewed in the RStudio <code>help</code> tab with:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(factorsSPGMIr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We recommend that readers familiarize themselves with the detailed descriptions of the 14 factor exposures in <code>factorsSPGMIr</code>.</p>
+<p>The following code line displays the first and last five rows of the first four columns of <code>factorsSPGMIr</code> and makes clear that it has the same table structure as <code>stocksCRSPmonthly</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>factorsSPGMIr[ , <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10</span><span class="sc">:</span><span class="dv">13</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Check that <code>factorsSPGMIr[c(1:3, 81142:81144), c(1, 2, 11, 12)]</code> results in the first and last three rows of the “Date”, “Ticker”, “BP”, and “EP” columns of <code>factorsSPGMIr</code> being printed and that <code>factorsSPGMIr[1, 17:22]</code> results in the last six rows of its first column being printed.</p>
+</section>
+<section id="sec-manipulating-a-data-table" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-manipulating-a-data-table"><span class="header-section-number">2.3</span> Manipulating a data.table</h2>
+<p>The simple method of sub-setting the columns of a <code>data.table</code> with numeric column values is identical to the method applicable to <code>data.frames</code>. But sub-setting columns by their names is done differently for <code>data.table</code> and <code>data.frame</code> objects. We illustrate this by first converting the <code>stocksCRSPmonthly</code> to a <code>data.frame</code> object in preparation for comparing sub-setting by column names:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>dat.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(stocksCRSPmonthly)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dat.df)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dat.df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Recall that you can subset a <code>data.frame</code> by using a character vector of the column names in quotes, and if you subset by two or more columns, the subset will also be a <code>data.frame</code>. But if you subset a single column, the result is (somewhat unexpectedly) a <em>vector</em> instead of a <code>data.frame</code>. We can force R to return a <code>data.frame</code> by using the <code>drop = FALSE</code> argument when sub-setting a single column as in the example below.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dat.Return <span class="ot">&lt;-</span> dat.df[ , <span class="st">"Return"</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dat.Return)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>dat.Return <span class="ot">&lt;-</span> dat.df[ , <span class="st">"Return"</span>, drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dat.Return)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>dat.DateAndReturn <span class="ot">&lt;-</span> dat.df[ , <span class="fu">c</span>(<span class="st">"Date"</span>,<span class="st">"Return"</span>)]</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dat.DateAndReturn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In the case of a <code>data.table,</code> we can subset a single column, for example the “Return” column, by using its name without quotes, but the result is once again a vector (in this case a numeric vector) instead of a <code>data.table</code>. The way to return a <code>data.table</code> when sub-setting one or more columns of a <code>data.table</code> is to define the subset using a list of column names without quotes, e.g., <code>list(Return)</code> instead of <code>Return</code>. This is illustrated below, where it is also shown that <code>.( Return)</code> is shorthand for <code>list(Return)</code>, and that this shorthand also works when selecting two or more columns of a <code>data.table</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> stocksCRSPmonthly <span class="co"># This is a data.table</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>dat.Return <span class="ot">&lt;-</span> dat[ , Return]</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dat.Return)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>dat.Return <span class="ot">&lt;-</span> dat[ , <span class="fu">list</span>(Return)]</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dat.Return)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>dat.Return <span class="ot">&lt;-</span> dat[ , .(Return)]</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dat.Return)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>dat.DateAndReturn <span class="ot">&lt;-</span> dat[ , .(Date, Return)]</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dat.DateAndReturn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>There is much to learn about manipulating <code>data.table</code> objects, and the interested reader can begin to do so by reading the “Introduction to data.table” Vignette at <a href="https://CRAN.R-project.org/package=data.table" class="uri">https://CRAN.R-project.org/package=data.table</a>.</p>
+<p>Meanwhile, the code below illustrates simple uses of <code>data.table</code> sub-setting of a single column, which results in a <code>numeric</code> object, first to compute the number of rows of <code>stocksCRSPmonthly</code>, and then to determine first and last dates of <code>stocksCRSPmonthly.</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>nMonths <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(stocksCRSPmonthly[ , Date]))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>nStocks <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(stocksCRSPmonthly[ , TickerLast]))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>nMonths</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>nStocks</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>nMonths<span class="sc">*</span>nStocks <span class="co"># Number of rows</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(stocksCRSPmonthly[ , Date]) <span class="co"># First and last date</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We suggest the reader create the data set <code>datBP</code> with <code>datBP &lt;- factorsSPGMIr[ , .(Date, TickerLast, BP)]</code>, and, without looking at <code>datBP</code>, estimate its dimension. It is a simple matter to then confirm whether or not one’s estimate is correct.</p>
+</section>
+</section>
+<section id="sec-selecting-crsp-stocks-and-spgmi-factors-data" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Selecting CRSP® Stocks and SPGMI Factors Data</h1>
+<p>We next discuss use of the <code>selectCRSPandSPGMI</code> function to select individual or merged subsets of CRSP® stocks in <code>stocksCRSPmonthly</code> and SPGMI factors in <code>factorsSPGMIr</code>, returning either a <code>data.table</code> or a time series <code>xts</code> object. This capability will be particularly useful for creating cross-section factor model data sets for use in the cross-section factor models package <code>facmodCS</code>.</p>
+<p>The default arguments of <code>selectCRSPandSPGMI</code> are:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(selectCRSPandSPGMI)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It is important to keep in mind that:</p>
+<ol type="1">
+<li><p>When the default <code>periodicity = “monthly”</code> is used, the stocks data set <code>stocksCRSPmonthly</code> is used,</p></li>
+<li><p>When the <code>factorItems =</code> argument <em>is not set</em> to <code>factorItems = NULL</code>, the <code>factorsSPGMIr</code> data is used,</p></li>
+<li><p>When the parameter <code>factorPrecision = “rounded”</code> is used, the function will select factor data from the rounded <code>factorsSPGMIr</code> data set. Setting this parameter to “not_rounded” will use the full precision factors SPGMI data available in both the <code>DataPlus</code> folder of the PCRA package, as described in <a href="#sec-using-weekly-and-daily-crsp-data-and-unrounded-spgmi-data" class="quarto-xref">Section&nbsp;4</a>, and in the development version of <code>PCRA</code> (assuming the user has the development version installed and loaded).</p></li>
+</ol>
+<p>The reader should now type</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(selectCRSPandSPGMI)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>and carefully read the Arguments and Details sections.</p>
+<p>In general <code>stockItems</code> can be any subset of the 14 <code>stocksCRSPmonthly</code> items, and <code>factorItems</code> can be any subset of the 22 <code>factorsSPGMIr</code> items. Note that 8 items in <code>stocksCRSPmonthly</code> and <code>factorsSPGMIr</code> are duplicated, and any subset of these items needs to be specified in either <code>stockItems</code> or <code>factorItems</code>, but not both.</p>
+<p><strong>Example 1.</strong> In the code example below we select 6 of 14 stocksCRSPmonthly items and select no factorsSPGMIr items.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>stockItems1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Date"</span>,<span class="st">"TickerLast"</span>,<span class="st">"CapGroupLast"</span>,<span class="st">"Return"</span>,<span class="st">"MktIndexCRSP"</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="st">"Ret13WkBill"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>dateRange <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1997-01-31"</span>,<span class="st">"2010-12-31"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>stocksSmall <span class="ot">&lt;-</span> <span class="fu">selectCRSPandSPGMI</span>(<span class="st">"monthly"</span>, <span class="at">dateRange =</span> dateRange,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">stockItems =</span> stockItems1, <span class="at">factorItems =</span> <span class="cn">NULL</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">subsetType =</span> <span class="st">"CapGroupLast"</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">subsetValues =</span> <span class="st">"SmallCap"</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">outputType =</span> <span class="st">"data.table"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(stocksSmall[ , TickerLast]))</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(stocksSmall)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(stocksSmall)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(stocksSmall[ , Date])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Exercise.</strong> Show that the number rows of <code>stocksSmall</code> is equal to the number of months times the number of stocks.</p>
+<p><strong>Example 2.</strong> In the code example below, for which we have in mind studying the relationship between small capitalization stock returns and the Size, Beta and BM factors, we select the SmallCap subset over the same time range as in the example above, but without the MktIndexCRSP and Ret13WkBill <code>stockItems</code>, and with the LogMktCap, Beta60M and EP <code>factorItems</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>stockItems2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Date"</span>, <span class="st">"TickerLast"</span>, <span class="st">"CapGroupLast"</span>, <span class="st">"Return"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>factorItems <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"LogMktCap"</span>, <span class="st">"Beta60M"</span>, <span class="st">"EP"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>dateRange <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1997-01-31"</span>, <span class="st">"2010-12-31"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>stocksSmall3Fac <span class="ot">&lt;-</span> <span class="fu">selectCRSPandSPGMI</span>(<span class="st">"monthly"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">dateRange =</span> dateRange,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">stockItems =</span> stockItems2,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">factorItems =</span> factorItems,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">subsetType =</span> <span class="st">"CapGroupLast"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">subsetValues =</span> <span class="st">"SmallCap"</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">outputType =</span> <span class="st">"data.table"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(stocksSmall3Fac[ , TickerLast]))</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(stocksSmall3Fac)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(stocksSmall3Fac)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Example 3.</strong> Here we modify the code of Example 1 by changing <code>subsetValues = ‘‘ SmallCap ’’</code> to <code>subsetValues = ‘‘ MicroCap ’’,</code> and changing <code>outputType</code> from <code>‘‘ data.table ’’</code> to <code>‘‘ xts ’’</code>. This creates the <code>xts</code> time series object <code>stocksMicro</code>, which consists of the MicroCap stocks in <code>stocksCRSPmonthly</code>, along with the return of the market (“MktIndexCRSP”), and the risk-free rate (“Ret13WkBill”).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dateRange <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1997-01-31"</span>,<span class="st">"2010-12-31"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>stocksMicro <span class="ot">&lt;-</span> <span class="fu">selectCRSPandSPGMI</span>(<span class="st">"monthly"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">dateRange =</span> dateRange,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">stockItems =</span> stockItems1,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">factorItems =</span> <span class="cn">NULL</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">subsetType =</span> <span class="st">"CapGroupLast"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">subsetValues =</span> <span class="st">"MicroCap"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">outputType =</span> <span class="st">"xts"</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(stocksMicro)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(stocksMicro)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(stocksMicro)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>We see that stocksMicro is indeed an <code>xts</code> time series object, with 168 rows and 36 columns, where the names of the first 34 columns are the tickers of the microcap stocks, and the last two columns contain”MktIndexCRSP” and “Ret13WkBill”, respectively.</p>
+<p>For labeling convenience, we replace “MktIndexCRSP” with “Market” and “Ret13WkBill” with “Risk-Free”, and display in Figure 1 the time series of returns of the first 4 microcap stocks, the Market, and the Risk-Free rate.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="at">file =</span> <span class="st">"vignette-assets/stocksMicroAll.png"</span>, <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">3</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> <span class="st">"in"</span>, <span class="at">pointsize =</span> <span class="dv">6</span>, <span class="at">res =</span> <span class="dv">600</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(stocksMicro)[<span class="fu">c</span>(<span class="dv">35</span>, <span class="dv">36</span>)] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Market"</span>, <span class="st">"Risk-Free"</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tsPlotMP</span>(stocksMicro[ , <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">35</span>, <span class="dv">36</span>)], <span class="at">scaleType =</span> <span class="st">"free"</span>, </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">stripText.cex =</span> .<span class="dv">45</span>, <span class="at">axis.cex =</span> <span class="fl">0.4</span>, <span class="at">lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-microcapmktrfreturns" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-microcapmktrfreturns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="vignette-assets/stocksMicroAll.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1: Returns of the first 4 CRSP® microcap stocks, the Market, and the Risk-Free rate from 1997 to 2010"><img src="vignette-assets/stocksMicroAll.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-microcapmktrfreturns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Returns of the first 4 CRSP® microcap stocks, the Market, and the Risk-Free rate from 1997 to 2010
+</figcaption>
+</figure>
+</div>
+<section id="sec-manipulation-of-xts-objects" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-manipulation-of-xts-objects"><span class="header-section-number">3.1</span> Manipulation of xts Objects</h2>
+<p>The package <code>xts</code> contains a large set of functions for manipulating and plotting <code>xts</code> objects, and you need to have <code>xts</code> loaded in order to take advantage of its capabilities. We illustrate here just one such capability here, namely use of the <code>index</code> and <code>range</code> functions as applied to the <code>stocksMicro</code> <code>xts</code> object we earlier created.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xts)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>datesIndex <span class="ot">&lt;-</span> <span class="fu">index</span>(stocksMicro)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(datesIndex)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(datesIndex) <span class="co"># Recall 14 years x 12 months</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(datesIndex, <span class="dv">3</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(datesIndex, <span class="dv">3</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(datesIndex)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To find out more about working with <code>xts</code> objects, it is recommended to read the vignettes “xts: Extensible Time Series” and “xts FAQ”, both of which are available at <a href="https://CRAN.R-project.org/package=xts" class="uri">https://CRAN.R-project.org/package=xts</a>. A number of online tutorials for <code>xts</code> are also available.</p>
+</section>
+<section id="sec-simple-selection-function-for-crsp-stocks-data" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-simple-selection-function-for-crsp-stocks-data"><span class="header-section-number">3.2</span> A Simple Selection Function for CRSP® Stocks Data</h2>
+<p>As we have seen, the function <code>selectCRSPandSPGMI</code> has general capabilities for selecting joint and separate subsets of <code>stockCRSPmonthly</code> and <code>factorsSPGMIr</code>. Sometimes, users of PCRA may wish to create an <code>xts</code> time series object from a very simple subset of the stocks in <code>stocksCRSPmonthly</code>, e.g., by specifying only a time interval and a subset of the tickers in <code>TickerLast</code>. The function <code>stocksCRSPxts</code> serves this purpose, and its arguments are:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(stocksCRSPxts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use of <code>stocksCRSPxts</code> with the default arguments creates an <code>xts</code> object that contains the entire cross-section of 294 CRSP® stocks for the entire 276 month time interval 1993 - 2015:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>stocksAll <span class="ot">&lt;-</span> <span class="fu">stocksCRSPxts</span>(stocksCRSPmonthly)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(stocksAll)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(stocksAll)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xts)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(<span class="fu">index</span>(stocksAll))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The following is a typical application example where the simple function <code>stocksCRSPxts</code> proves convenient. The goal of the application is to compute the excess Kurtosis (eKR) of the cross-section of CRSP® stocks monthly returns for the 6 contiguous time intervals “1993-1995”, “1996-1999”, “2000-2003”, “2004-2007”, “2008-2011”, “2012-2015”, and display the cross-section distributions of the eKR values with 6 boxplots. The code is displayed below and is followed by the display of the boxplots in Figure 2.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract cross-sections of stocksCRSPmonthly returns on 6 time intervals</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>dates1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1993-01-31"</span>,<span class="st">"1995-12-31"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>dates2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1996-01-31"</span>,<span class="st">"1999-12-31"</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>dates3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2000-01-31"</span>,<span class="st">"2003-12-31"</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>dates4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2004-01-31"</span>,<span class="st">"2007-12-31"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>dates5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2008-01-31"</span>,<span class="st">"2011-12-31"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>dates6 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2012-01-31"</span>,<span class="st">"2015-12-31"</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>ret1  <span class="ot">&lt;-</span> <span class="fu">stocksCRSPxts</span>(stocksCRSPmonthly,<span class="at">dateRange =</span> dates1)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>ret2  <span class="ot">&lt;-</span> <span class="fu">stocksCRSPxts</span>(stocksCRSPmonthly,<span class="at">dateRange =</span> dates2)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>ret3  <span class="ot">&lt;-</span> <span class="fu">stocksCRSPxts</span>(stocksCRSPmonthly,<span class="at">dateRange =</span> dates3)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>ret4  <span class="ot">&lt;-</span> <span class="fu">stocksCRSPxts</span>(stocksCRSPmonthly,<span class="at">dateRange =</span> dates4)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>ret5  <span class="ot">&lt;-</span> <span class="fu">stocksCRSPxts</span>(stocksCRSPmonthly,<span class="at">dateRange =</span> dates5)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>ret6  <span class="ot">&lt;-</span> <span class="fu">stocksCRSPxts</span>(stocksCRSPmonthly,<span class="at">dateRange =</span> dates6)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute cross-section of excess kurtosis values on those time intervals</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>eKR1 <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">coredata</span>(ret1),<span class="dv">2</span>,KRest)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>eKR2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">coredata</span>(ret2),<span class="dv">2</span>,KRest)</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>eKR3 <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">coredata</span>(ret3),<span class="dv">2</span>,KRest)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>eKR4 <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">coredata</span>(ret4),<span class="dv">2</span>,KRest)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>eKR5 <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">coredata</span>(ret5),<span class="dv">2</span>,KRest)</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>eKR6 <span class="ot">&lt;-</span> <span class="fu">apply</span>(<span class="fu">coredata</span>(ret6),<span class="dv">2</span>,KRest)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>eKR   <span class="ot">&lt;-</span> <span class="fu">cbind</span>(eKR1,eKR2,eKR3,eKR4,eKR5,eKR6)</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1993-1995"</span>, <span class="st">"1996-1999"</span>, <span class="st">"2000-2003"</span>, </span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>           <span class="st">"2004-2007"</span>, <span class="st">"2008-2011"</span>, <span class="st">"2012-2015"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="at">file =</span> <span class="st">"vignette-assets/eKRstocksMonthly.png"</span>, <span class="at">width =</span> <span class="dv">5</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">units =</span> <span class="st">"in"</span>, <span class="at">pointsize =</span> <span class="dv">8</span>, <span class="at">res =</span> <span class="dv">600</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">boxplot</span>(eKR, <span class="at">xaxt =</span> <span class="st">"n"</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">12</span>), <span class="at">main =</span> <span class="st">"Excess Kurtosis stocksCRSPmonthly"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">cex.main =</span> <span class="fl">1.5</span>, <span class="at">col =</span> <span class="st">"cyan"</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">labels=</span>times, <span class="at">cex.axis =</span> <span class="fl">1.1</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">lty =</span> <span class="st">"dotted"</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-microcap-mkt-rf-returns" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-microcap-mkt-rf-returns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="vignette-assets/eKRstocksMonthly.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: Boxplots of cross-sections of CRSP® stock returns excess kurtosis (eKR) for 6 contiguous time intervals"><img src="vignette-assets/eKRstocksMonthly.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-microcap-mkt-rf-returns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Boxplots of cross-sections of CRSP® stock returns excess kurtosis (eKR) for 6 contiguous time intervals
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="sec-using-weekly-and-daily-crsp-data-and-unrounded-spgmi-data" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Using Weekly and Daily CRSP® Data and Unrounded SPGMI Data</h1>
+<p>The data sets <code>stocksCRSPweekly</code>, <code>stocksCRSPdaily</code>, and the unrounded SPGMI data set <code>factorsSPGMI</code>, do not exist in the <code>PCRA</code> package on CRAN. Instead they are contained in the <code>DataPlus</code> folder of the <code>PCRA</code> package repository (repo) at <a href="https://github.com/robustport" class="uri">https://github.com/robustport</a>.</p>
+<p>These data sets can be accessed using the <code>getPCRAdata</code> function in the <code>PCRA</code> package. We next illustrate its use to extract <code>stocksCRSPweekly</code> data:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>stocksCRSPweekly <span class="ot">&lt;-</span> <span class="fu">getPCRAData</span>(<span class="at">dataset =</span> <span class="st">"stocksCRSPweekly"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>dateRange <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"2000-01-7"</span>,<span class="st">"2000-12-31"</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>stocksMicroWeekly <span class="ot">&lt;-</span> <span class="fu">selectCRSPandSPGMI</span>(<span class="st">"weekly"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">dateRange =</span> dateRange,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">stockItems =</span> stockItems1,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">factorItems =</span> <span class="cn">NULL</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">subsetType =</span> <span class="st">"CapGroupLast"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">subsetValues =</span> <span class="st">"MicroCap"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">outputType =</span> <span class="st">"xts"</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(stocksMicroWeekly)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(stocksMicroWeekly)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(stocksMicroWeekly)[<span class="dv">35</span>] <span class="ot">&lt;-</span> <span class="st">"Market"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Next, we create a time series plot of the data using:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="at">file =</span> <span class="st">"vignette-assets/weeklyStockReturns.png"</span>, <span class="at">width =</span> <span class="dv">6</span>,<span class="at">height =</span> <span class="dv">5</span>,<span class="at">units =</span> <span class="st">"in"</span>,<span class="at">pointsize =</span> <span class="dv">8</span>, <span class="at">res =</span> <span class="dv">600</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tsPlotMP</span>(stocksMicroWeekly[ , <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">35</span>)], </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">scaleType =</span> <span class="st">"free"</span>, <span class="at">stripText.cex =</span> .<span class="dv">45</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">yname =</span> <span class="st">"RETURNS"</span>, <span class="at">layout =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">6</span>), </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">axis.cex =</span> <span class="fl">0.7</span>, <span class="at">lwd =</span> <span class="fl">0.6</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-weekly-returns-5-microcap-stocks" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-weekly-returns-5-microcap-stocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="vignette-assets/weeklyStockReturns.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: Time series of weekly returns for the first 5 of the 34 MicroCap CRSP® stocks, and the CRSP® Market returns"><img src="vignette-assets/weeklyStockReturns.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-weekly-returns-5-microcap-stocks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Time series of weekly returns for the first 5 of the 34 MicroCap CRSP® stocks, and the CRSP® Market returns
+</figcaption>
+</figure>
+</div>
+<p>To obtain returns and related data for daily CRSP® stocks, we need only replace <code>"stocksCRSPweekly"</code> with <code>"stocksCRSPdaily"</code> in the <code>getPCRAData</code> function, and the argument <code>‘‘ weekly ’’</code> with <code>‘‘ daily ’’</code> in the <code>selectCRSPandSPGMI</code> function.</p>
+<p>N.B. Since <code>stocksCRSPmonthly</code> is already contained in the CRAN version of <code>PCRA</code>, ** it is not contained ** in the <code>DataPlus</code> folder in the <code>PCRA</code> repository ( “repo” ) at <a href="https://github.com/robustport" class="uri">https://github.com/robustport</a>. Using <code>stocksCRSPmonthly</code> as the argument to <code>getPCRAData</code> you will result in an error.</p>
+</section>
+<section id="sec-basic-data-table-manipulations" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Basic Data.Table Manipulations</h1>
+<p>The <code>data.table</code> package provides a variety of powerful data manipulation and analysis tools, some of which are quite simple, as we illustrate here.</p>
+<section id="sec-sector-and-capitalization-group-counts" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-sector-and-capitalization-group-counts"><span class="header-section-number">5.1</span> Sector and Capitalization Group Counts</h2>
+<p>You will have noticed that <code>stocksCRSPmonthly</code> and <code>factorsSPGMIr</code> <code>data.table</code> objects contain “Sector”, and “CapGroupLast” variables. The following code prints the number of stocks in each sector and capitalization group.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>lastDate <span class="ot">&lt;-</span> <span class="fu">tail</span>(factorsSPGMIr[ , Date], <span class="dv">1</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>factorsSPGMILast <span class="ot">&lt;-</span> factorsSPGMIr[Date <span class="sc">==</span> lastDate]</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>factorsSPGMILast[ , .N, by <span class="ot">=</span> Sector]</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>factorsSPGMILast[ , .N, by <span class="ot">=</span> CapGroup]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Modify the above code to check that the stocks’ sectors are the same in January 1993 as they are in December 2015, but their capitalization groups are not always the same in these two months (some small companies will grow much faster than their peers while others, in constrast, will decline).</p>
+</section>
+<section id="sec-extracting-a-subset-of-the-variables" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-extracting-a-subset-of-the-variables"><span class="header-section-number">5.2</span> Extracting a Subset of the Variables</h2>
+<p>We typically work with a merged or unmerged subset of the variables in <code>stocksCRSPmonthly</code> and <code>factorsSPGMIr</code>, and often end up needing only a few of the items in the subset. For example, we might find that we are interested in only the Date, TickerLast, Return, Beta60M and EP items of the <code>data.table</code> object <code>stocksSmall3Fac</code> in Example 2 of <a href="#sec-the-crsp-stocks-and-spgmi-factors-data-sets" class="quarto-xref">Section&nbsp;2</a>. The following code creates the <code>data.table</code> we need:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>colNames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Date"</span>, <span class="st">"TickerLast"</span>, <span class="st">"Return"</span>, <span class="st">"Beta60M"</span>, <span class="st">"EP"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>stocksSmall3FacSubset <span class="ot">&lt;-</span> stocksSmall3Fac[ , .SD, .SDcols <span class="ot">=</span> colNames]</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(stocksSmall3FacSubset)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In this code, <code>.SD</code> represents the subset of columns that is specified by <code>.SDcols</code>. For further details on <code>.SD,</code> see the “Using .SD for Data Analysis” Vignette at <a href="https://CRAN.R-project.org/package=data.table" class="uri">https://CRAN.R-project.org/package=data.table</a>.</p>
+</section>
+<section id="sec-renaming-variables" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-renaming-variables"><span class="header-section-number">5.3</span> Renaming Variables</h2>
+<p>Some of the names of variables in <code>stocksCRSPmonthly</code> and <code>factorsSPGMIr</code> are long, and it is often convenient to shorten them. We may, for example, wish to replace the names “MktIndexCRSP” and “Ret13WkBill” with the shorter common names “Market” and “RiskFree”. This is easily done using <code>data.table</code> ’s <code>setnames</code> function, as is done below for the data set <code>stocksSmall</code> of Example 1:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setnames</span>(stocksSmall, <span class="at">old =</span> <span class="fu">c</span>(<span class="st">"MktIndexCRSP"</span>, <span class="st">"Ret13WkBill"</span>),</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">new =</span> <span class="fu">c</span>(<span class="st">"Market"</span>,<span class="st">"RiskFree"</span>))</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(stocksSmall)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="sec-intersecting-sector-and-size-groupings" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-intersecting-sector-and-size-groupings"><span class="header-section-number">5.4</span> Intersecting Sector and Size Groupings</h2>
+<p>One sometimes wants to study portfolios whose constituents are all drawn from a single sector and size group, e.g.&nbsp;the Information Technology (IT) sector of the SmallCap group. This is easily done by first obtaining the subset of all SmallCap stocks for the default <code>dateRange</code> of 1993 to 2015 and then extracting the Information Technology sector from this subset.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>stockItems <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Date"</span>, <span class="st">"TickerLast"</span>, <span class="st">"CapGroupLast"</span>, <span class="st">"Return"</span>, <span class="st">"Sector"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>stocksSmallCap <span class="ot">&lt;-</span> <span class="fu">selectCRSPandSPGMI</span>(<span class="st">"monthly"</span>,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">stockItems =</span> stockItems, </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">factorItems =</span> <span class="cn">NULL</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">subsetType =</span> <span class="st">"CapGroupLast"</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">subsetValues =</span> <span class="st">"SmallCap"</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">outputType =</span> <span class="st">"data.table"</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(stocksSmallCap[ , TickerLast])) <span class="co"># Verify that there are 106 smallcap stocks</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>stocksSmallCapIT <span class="ot">&lt;-</span> stocksSmallCap[Sector <span class="sc">==</span> <span class="st">"Information Technology"</span>]</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(stocksSmallCapIT[ , TickerLast])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="sec-selecting-a-time-range" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sec-selecting-a-time-range"><span class="header-section-number">5.5</span> Selecting a Time Range for a Set of Stocks and Factors</h2>
+<p>One may wish to look at stocks, factors, or merged stocks and factors data over a specified subset of a longer timeframe. For example, we can extract the 5 years from 2010 to 2014 of the <code>stocksSmallCapIT</code> data with the first line below, and check its time range and length (i.e.&nbsp;the number of months) with the second and third lines:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>stocksSmallCapIT5Year <span class="ot">&lt;-</span> stocksSmallCapIT[stocksSmallCapIT[ , Date] <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">"2010-01-31"</span>) <span class="sc">&amp;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                                          stocksSmallCapIT[ , Date] <span class="sc">&lt;=</span> <span class="fu">as.Date</span>(<span class="st">"2014-12-31"</span>), ]</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                                          </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(stocksSmallCapIT5Year[ , Date])</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">unique</span>(stocksSmallCapIT5Year[ , Date]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="sec-crsp-stocks-market-capitalization-break-points" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> CRSP® Stocks Market Capitalization Break Points</h1>
+<p>We use a methodology similar to both the CRSP® method ( <a href="https://www.crsp.org/indexes/breakpoints-chart/" class="uri">https://www.crsp.org/indexes/breakpoints-chart/</a> ) and the MSCI method to allocate the 294 firms in the <code>stocksCRSPmonthly</code> universe into four disjoint groups. To do so, we first sort the universe of stocks in each month by their market capitalization and then separate them into four disjoint groups using capitalization breakpoints.</p>
+<p>Specifically, we separate companies into Large-, Mid-, Small-, and Micro-cap groups, where Large-cap companies are those that cumulatively comprise the largest 70% of the total market capitalization of our universe. Mid-cap companies are those that account for the next 15% of the market capitalization of our universe. Small-Cap firms account for a further 13% of the market capitalization of our universe and Micro-cap firms account for the remaining 2%. We use a point-in-time methodology to estimate dollar breakpoints at each month end from 1993 to 2015.</p>
+<p>Expressed in dollars, the January 1993 Large-, Mid-, and Small-Cap breakpoints were $4,257,427,625, $1,518,241,542, and $138,749,166, respectively, meaning that Large-cap companies had market capitalizations in excess of $4.257B, while Micro-cap companies had market capitalizations smaller than $138.7M. By December 2015, these breakpoints had grown to $15,632,448,677, $5,418,935,67 5, and $604,640,580, respectively.</p>
+</section>
+<section id="sec-names-of-crsp-items-in-stockscrspmonthly-data-set" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Names of CRSP® Items in stocksCRSPmonthly Data Set</h1>
+<p>The following table provides table provides CRSP® database names and descriptions that correspond to our <code>PCRA</code> package <code>stocksCRSPmonthly</code> item names.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 28%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">stocksCRSPmonthly Name</th>
+<th style="text-align: left;">CRSP® Names Monthly</th>
+<th style="text-align: left;">CRSP® Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Ticker</td>
+<td style="text-align: left;">Ticker</td>
+<td style="text-align: left;">Ticker</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TickerLast</td>
+<td style="text-align: left;">Tickerl</td>
+<td style="text-align: left;">Ticker on Last Date</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Company</td>
+<td style="text-align: left;">Company</td>
+<td style="text-align: left;">Company on Last Date</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Return</td>
+<td style="text-align: left;">mret</td>
+<td style="text-align: left;">Total Returns</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RetExDiv</td>
+<td style="text-align: left;">mretx</td>
+<td style="text-align: left;">Returns Without Dividends</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Price</td>
+<td style="text-align: left;">mprc</td>
+<td style="text-align: left;">Closing Price</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PrcSplitAdj</td>
+<td style="text-align: left;">madjprc</td>
+<td style="text-align: left;">Adjusted Closing Price</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ret13WkBill</td>
+<td style="text-align: left;">kyindno 1000707</td>
+<td style="text-align: left;">CRSP® CTI Indexes 90-Day</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MktIndexCRSP</td>
+<td style="text-align: left;">kyindno 1000200</td>
+<td style="text-align: left;">Value-Weighted Market Index*</td>
+</tr>
+</tbody>
+</table>
+<p>*Total Return of the CRSP® NYSE/NYSEMKT/NASDAQ/Arca Value-Weighted Market Index.</p>
+<hr>
+</section>
+<section id="copyright" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Copyright</h1>
+<p>Copyright © 2026 R. Douglas Martin, Thomas K. Philips, Bernd Scherer, and Kirk Li. This material is planned for publication in 2026 by Springer. All rights reserved. No part of these materials may be reproduced, distributed, or transmitted in any form without prior written permission of the authors.</p>
+</section></div>
+
+
+
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/robustport\.github\.io\/RPCRAwebsite\/docs\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Martin, Philips, Scherer &amp; Li. All rights reserved.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
