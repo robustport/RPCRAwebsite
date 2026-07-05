@@ -5,6 +5,7 @@ project:
 engine: markdown
 
 website:
+  site-url: https://robustport.github.io/RPCRAwebsite/docs/
   title: "RPCRA"
   description: >
     Robust Portfolio Construction and Risk Analysis —
