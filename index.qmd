@@ -38,7 +38,7 @@ toc-title: ""
 
 The text integrates classical mean-variance portfolio theory — the estimation of expected returns and modeling risk, cross-section and time-series factor models, the construction of optimal portfolios and the measurement of their performance — with modern statistical methodology including robust estimators that are not much influenced by outliers, influence function-based analyses of risk and performance estimators, and statistical process control-based monitoring of portfolio performance.
 
-These techiques are applied to active equity and fixed income portfolios, as well as to the construction of specialized portfolios that are of great practical importance: miminimum downside risk portfolios, portfolios designed to defease liabililities and to meet spending objectives, and portfolios with options. Throughout, the authors emphasize the computational aspects of portfolio management and make available the companion open-source PCRA package and R code to reproduce many of the exhibits in the book as well as for *non-commercial* use by readers.
+These techiques are applied to active equity and fixed income portfolios, as well as to the construction of specialized portfolios that are of great practical importance: miminimum downside risk portfolios, portfolios designed to meet spending objectives, and portfolios with options. Throughout, the authors emphasize the computational aspects of portfolio management and make available the companion open-source PCRA package to reproduce many of the exhibits in the book as well as for *non-commercial* use by readers.
 
 ```{=html}
 <div class="section-rule"><span>Preface</span></div>
@@ -46,7 +46,11 @@ These techiques are applied to active equity and fixed income portfolios, as wel
 
 # Preface {#preface}
 
-The [Preface](preface.qmd) provides an overview of the book's sixteen chapters and five appendices, describes its reproducibility theme as well as its supporting R packages (`PCRA`, `facmodCS`, `facmodTS`, `robustGarch`), motivates the use of robust estimators, introduces its special focus topics in Chapters 10–16, and includes disclaimers and conditions for the *non-commercial* use of CRSP, SPGMI, ICE, Tradeweb, S&P and CBOE datasets.
+The [Preface](preface.qmd) provides an overview of the book's sixteen chapters, five appendices, and supporting chapter summaries, vignettes, R packages, and reproducibility code; describes its reproducibility theme as well as its supporting R packages, motivates the use of robust estimators, introduces its special focus topics in Chapters 10–16, and includes disclaimers and conditions for the *non-commercial* use of CRSP, SPGMI, ICE, Tradeweb, S&P and CBOE datasets.
+
+```{=html}
+<a href="chapter-summaries.html" class="card-link" style="display:inline-flex;margin-top:0.5rem;">View Preface</a>
+```
 
 ```{=html}
 <div class="section-rule"><span>Chapter Summaries</span></div>
@@ -66,7 +70,7 @@ Concise summaries of all 16 chapters in *Robust Portfolio Construction and Risk 
 
 # Vignettes {#vignettes}
 
-The book is accompanied by three vignettes that provide hands-on documentation for the `PCRA` R package and its data. PDFs are available for download on each vignette page.
+The book is accompanied by three vignettes that provide documentation for the `PCRA` R package functions and data. PDFs are available for download on each vignette page linked to below.
 
 ```{=html}
 <div class="appendix-grid">
@@ -114,7 +118,7 @@ The book is accompanied by three vignettes that provide hands-on documentation f
 
 # Demo Code {#demo-code}
 
-Chapter-by-chapter R scripts that reproduce the figures and tables in the book are provided in the `PCRA` R package. The [Demo Code](demo-code.qmd) page lists all the available scripts and instructions for running them.
+Chapter-by-chapter R scripts that reproduce most of the figures and tables in the book may be downloaded from the `PCRA` package demo folder or from the Demo Code folder linked to below. The [Demo Code](demo-code.qmd) page lists all the available scripts and provides instructions for running them.
 
 ```{=html}
 <a href="demo-code.html" class="card-link" style="display:inline-flex;margin-top:0.5rem;">View Demo Code</a>

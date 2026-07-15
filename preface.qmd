@@ -58,7 +58,7 @@ In addition, we will maintain a companion website for this book at [https://www.
 
 # Reproducibility {#reproducibility}
 
-R packages that include R functions and data support reproducibility of figures and tables throughout the book. Specifically, this is the case for most of the figures and tables in Chapters 2–6 and 9–12, as well as the figures and tables in some sections of Chapters 1 and 7–8. These features allow students to get hands-on experience in replicating the figures and tables in RPCRA, and in extending the code to study portfolio performance for different time periods, different portfolio stock groups (such as capitalization groups and sectors), and different returns frequencies. These features also support instructors in creating new computing-oriented portfolio construction and risk analysis exercises.
+This book is supported by a number of R packages with functions and data to support the reproducibility of figures and tables throughout the book. Specifically, this is the case for most of the figures and tables in Chapters 2–6 and 9–12, as well as the figures and tables in some sections of Chapters 1 and 7–8. These features allow students to get hands-on experience in replicating the figures and tables in RPCRA, and in extending the code to study portfolio performance for different time periods, different portfolio stock groups (such as capitalization groups and sectors), and different returns frequencies. These features also support instructors in creating new computing-oriented portfolio construction and risk analysis exercises.
 
 ## R Packages for the RPCRA Book and its Reproducibility Character {#r-packages}
 

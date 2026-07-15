@@ -1,19 +1,11 @@
 ---
 title: "About"
-subtitle: "Authors, Book Information, and Contact"
+subtitle: "Authors, Book Information, and This Website"
 page-layout: article
 toc: true
 toc-location: right
 toc-depth: 2
 toc-title: ""
----
-
-# The Book
-
-*Robust Portfolio Construction and Risk Analysis* (RPCRA) is a graduate-level textbook providing a rigorous, unified treatment of quantitative portfolio management techniques that are designed to work in the presence of noise.
-
-The book integrates the classical theory of mean-variance optimization, the Capital Asset Pricing Model, and the Arbitrage Pricing Theory with modern statistical methodology — including robust estimation, regularized regression, time-series factor models, and machine learning — all grounded in practical portfolio construction.
-
 ---
 
 # The Authors
@@ -52,6 +44,21 @@ Kirk Li is a Principal Machine Learning Science Manager at Microsoft. He earned 
 
 ---
 
+# About This Book
+
+*Robust Portfolio Construction and Risk Analysis* (RPCRA) is a graduate-level textbook providing a rigorous, unified treatment of quantitative portfolio management techniques that are designed to work in the presence of noise. It is distinguished by its focus on reproducibility, and its companion `PCRA` package contains data sets that support reproducibility as which may also be used by course instructors to create new exercises. 
+
+The book integrates the classical theory of mean-variance optimization, including the estimation of expected returns and the measurement of risk and performance, with robust statistical methods for parameter estimation, regression and portfolio construction. It aims to provide its readers with a sound understanding of the ideas that underlie modern portfolio theory while enabling their translation to practice in markets that are dominated by noise.
+
+The following R packages were developed specifically to support this book and its reproducibility character, and are downloadable from CRAN  [https://cran.r-project.org](https://cran.r-project.org):
+
+- `PCRA`: Portfolio construction and risk analysis
+- `facmodCS`: Cross-section factor models
+- `facmodTS`: Time-series factor models
+- `robustGarch`: Robust Garch(1, 1) models.
+
+---
+
 # This Website
 
 This site hosts the five technical appendices to RPCRA:
@@ -68,7 +75,7 @@ This site hosts the five technical appendices to RPCRA:
 
 # Citation
 
-To cite the book:
+Citing the Book {#citation}
 
 ```
 Martin, R. D., Philips, T. K., Scherer, B., and Li, K. (2026).
