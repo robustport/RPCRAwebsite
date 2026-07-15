@@ -261,14 +261,14 @@ document.addEventListener("DOMContentLoaded", function () {
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
    
   <ul class="collapse">
-  <li><a href="#the-book" id="toc-the-book" class="nav-link active" data-scroll-target="#the-book"><span class="header-section-number">1</span> The Book</a></li>
-  <li><a href="#the-authors" id="toc-the-authors" class="nav-link" data-scroll-target="#the-authors"><span class="header-section-number">2</span> The Authors</a>
+  <li><a href="#the-authors" id="toc-the-authors" class="nav-link active" data-scroll-target="#the-authors"><span class="header-section-number">1</span> The Authors</a>
   <ul class="collapse">
   <li><a href="#r.-douglas-martin" id="toc-r.-douglas-martin" class="nav-link" data-scroll-target="#r.-douglas-martin">R. Douglas Martin</a></li>
   <li><a href="#thomas-k.-philips" id="toc-thomas-k.-philips" class="nav-link" data-scroll-target="#thomas-k.-philips">Thomas K. Philips</a></li>
   <li><a href="#bernd-scherer" id="toc-bernd-scherer" class="nav-link" data-scroll-target="#bernd-scherer">Bernd Scherer</a></li>
   <li><a href="#kirk-li" id="toc-kirk-li" class="nav-link" data-scroll-target="#kirk-li">Kirk Li</a></li>
   </ul></li>
+  <li><a href="#about-this-book" id="toc-about-this-book" class="nav-link" data-scroll-target="#about-this-book"><span class="header-section-number">2</span> About This Book</a></li>
   <li><a href="#this-website" id="toc-this-website" class="nav-link" data-scroll-target="#this-website"><span class="header-section-number">3</span> This Website</a></li>
   <li><a href="#citation" id="toc-citation" class="nav-link" data-scroll-target="#citation"><span class="header-section-number">4</span> Citation</a></li>
   <li><a href="#copyright" id="toc-copyright" class="nav-link" data-scroll-target="#copyright"><span class="header-section-number">5</span> Copyright</a></li>
@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">About</h1>
-<p class="subtitle lead">Authors, Book Information, and Contact</p>
+<p class="subtitle lead">Authors, Book Information, and This Website</p>
 </div>
 
 
@@ -298,14 +298,8 @@ document.addEventListener("DOMContentLoaded", function () {
 </header>
 
 
-<section id="the-book" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> The Book</h1>
-<p><em>Robust Portfolio Construction and Risk Analysis</em> (RPCRA) is a graduate-level textbook providing a rigorous, unified treatment of quantitative portfolio management techniques that are designed to work in the presence of noise.</p>
-<p>The book integrates the classical theory of mean-variance optimization, the Capital Asset Pricing Model, and the Arbitrage Pricing Theory with modern statistical methodology — including robust estimation, regularized regression, time-series factor models, and machine learning — all grounded in practical portfolio construction.</p>
-<hr>
-</section>
-<section id="the-authors" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> The Authors</h1>
+<section id="the-authors" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> The Authors</h1>
 <div class="author-card">
 <section id="r.-douglas-martin" class="level2 unnumbered author-info">
 <h2 class="unnumbered anchored" data-anchor-id="r.-douglas-martin">R. Douglas Martin</h2>
@@ -330,6 +324,19 @@ document.addEventListener("DOMContentLoaded", function () {
 <p>Kirk Li is a Principal Machine Learning Science Manager at Microsoft. He earned his Ph.D.&nbsp;in Statistics from the University of Washington.</p>
 </section>
 </div>
+<hr>
+</section>
+<section id="about-this-book" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> About This Book</h1>
+<p><em>Robust Portfolio Construction and Risk Analysis</em> (RPCRA) is a graduate-level textbook providing a rigorous, unified treatment of quantitative portfolio management techniques that are designed to work in the presence of noise. It is distinguished by its focus on reproducibility, and its companion <code>PCRA</code> package contains data sets that support reproducibility as which may also be used by course instructors to create new exercises.</p>
+<p>The book integrates the classical theory of mean-variance optimization, including the estimation of expected returns and the measurement of risk and performance, with robust statistical methods for parameter estimation, regression and portfolio construction. It aims to provide its readers with a sound understanding of the ideas that underlie modern portfolio theory while enabling their translation to practice in markets that are dominated by noise.</p>
+<p>The following R packages were developed specifically to support this book and its reproducibility character, and are downloadable from CRAN <a href="https://cran.r-project.org">https://cran.r-project.org</a>:</p>
+<ul>
+<li><code>PCRA</code>: Portfolio construction and risk analysis</li>
+<li><code>facmodCS</code>: Cross-section factor models</li>
+<li><code>facmodTS</code>: Time-series factor models</li>
+<li><code>robustGarch</code>: Robust Garch(1, 1) models.</li>
+</ul>
 <hr>
 </section>
 <section id="this-website" class="level1" data-number="3">
@@ -375,7 +382,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </section>
 <section id="citation" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Citation</h1>
-<p>To cite the book:</p>
+<p>Citing the Book {#citation}</p>
 <pre><code>Martin, R. D., Philips, T. K., Scherer, B., and Li, K. (2026).
 Robust Portfolio Construction and Risk Analysis. Springer. (In press.)</code></pre>
 <p>BibTeX:</p>
