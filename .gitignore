@@ -9,5 +9,6 @@ __pycache__/
 *.Rproj.user/
 .DS_Store
 Thumbs.db
+.jetro/
 
 **/*.quarto_ipynb

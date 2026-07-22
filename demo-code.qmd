@@ -4,9 +4,7 @@ title: "Demo Code"
 
 The RPCRA book has a distinctive **reproducibility** theme: most figures and tables in most chapters are reproducible using R scripts provided in the `PCRA` R package. These scripts allow students and instructors to replicate book results and experiment with different portfolio strategies, time periods, stock groups, and optimization parameters.
 
-# Chapter Demo Scripts
-
-Download any script directly. Each script reproduces all figures and tables for its chapter.
+Download any script directly to your computer. Each script reproduces many (but not all) figures and tables for its chapter.
 
 | Chapter    | Topic | Download Link|
 |------------|-------|--------------|
