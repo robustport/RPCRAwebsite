@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -38,10 +38,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-a0e0c410f605b392fe4f2ebad2fe59ce.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-3d9d48692dfd2b2465d47dbc7ac4cf50.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-890d1e81f9963d5f3d9c152c8a3d6010.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6a671c57f1fd25242f68db333cf3344f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,94 +70,183 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+
 <script>
+
 document.addEventListener("DOMContentLoaded", function () {
+
   const hero = document.querySelector(".hero-outer");
+
   const columns = document.querySelector("#quarto-content.page-columns, .page-columns");
+
   if (hero && columns && hero.parentElement !== columns) {
+
     columns.insertBefore(hero, columns.firstChild);
+
     document.body.classList.add("home-hero-page");
+
   }
+
+
 
   const sidebar = document.querySelector("#quarto-margin-sidebar");
 
+
+
   // Auto-enable the styled/sticky margin TOC on any page that actually has
+
   // one, instead of relying on a class that nothing was adding.
+
   if (sidebar && sidebar.querySelector("#TOC")) {
+
     document.body.classList.add("margin-toc-page");
+
   }
+
+
 
   if (!document.querySelector(".margin-toc-page, .hero-outer")) return;
 
+
+
   function alignMarginToc() {
+
     if (!sidebar) return;
+
     if (window.innerWidth <= 991) {
+
       sidebar.style.marginTop = "";
+
       return;
+
     }
+
     // Only nudge the TOC down to meet a specific anchor on hero pages,
+
     // where it needs to skip past the banner. On regular article/vignette
+
     // pages, leave it alone so it stays at the CSS sticky `top` offset,
+
     // near the top of the viewport.
+
     if (!hero) {
+
       sidebar.style.marginTop = "";
+
       return;
+
     }
+
     const anchor =
+
       document.querySelector("#about-the-book") ||
+
       document.querySelector("#overview") ||
+
       document.querySelector("#quarto-document-content h2, #quarto-document-content h3");
+
     if (!anchor) return;
+
     const offset =
+
       anchor.getBoundingClientRect().top - sidebar.getBoundingClientRect().top;
+
     sidebar.style.marginTop = Math.max(0, Math.round(offset)) + "px";
+
   }
 
+
+
   alignMarginToc();
+
   window.addEventListener("resize", alignMarginToc);
+
   window.addEventListener("load", function () {
+
     alignMarginToc();
+
     requestAnimationFrame(alignMarginToc);
+
   });
 
+
+
   const toc = document.querySelector("#quarto-margin-sidebar #TOC, #TOC");
+
   if (!toc) return;
 
+
+
   const links = [...toc.querySelectorAll('a[href^="#"]')];
+
   const sections = links
+
     .map(function (link) { return document.querySelector(link.getAttribute("href")); })
+
     .filter(Boolean);
+
   if (!sections.length) return;
 
+
+
   const setActive = function (id) {
+
     links.forEach(function (link) {
+
       link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+
     });
+
   };
 
+
+
   const observer = new IntersectionObserver(
+
     function (entries) {
+
       entries.forEach(function (entry) {
+
         if (entry.isIntersecting) setActive(entry.target.id);
+
       });
+
     },
+
     { rootMargin: "-15% 0px -65% 0px", threshold: 0 }
+
   );
 
+
+
   sections.forEach(function (section) { observer.observe(section); });
+
   if (sections[0]) setActive(sections[0].id);
+
 });
+
 </script>
+
 <script>
+
 document.addEventListener("DOMContentLoaded", function () {
+
   const brand = document.querySelector(".navbar .navbar-brand");
+
   if (!brand) return;
+
   brand.innerHTML = '<span class="navbar-book-title"><em>R</em>PCRA</span>';
+
   brand.setAttribute("aria-label", "Robust Portfolio Construction and Risk Analysis");
+
 });
+
 </script>
+
 
 
 <meta property="og:title" content="Robust Portfolio Construction and Risk Analysis">

@@ -22,7 +22,7 @@ Doug Martin is Professor Emeritus in the Department of Applied Mathematics and S
 ::: {.author-info}
 ## Thomas K. Philips {.unnumbered}
 
-Tom Philips is an Adjunct Professor in the Department of Finance and Risk Engineering at NYU's Tandon School of Engineering. Prior to teaching Portfolio Managment and Corporate Valuation Theory at Tandon, he was the Global Head of Front Office Risk for the Institutional Division of BNP Paribas Investment Partners. He was awarded the First Bernstein/Fabozzi/Jacobs-Levy Prize for his paper *Why Do Valuation Ratios Forecast Long-Run Equity Returns?* and the Graham and Dodd Scroll Award for *Saving Social Security: A Better Approach* which was co-authored with Arun Muralidhar.
+Tom Philips is an Adjunct Professor in the Department of Finance and Risk Engineering at NYU's Tandon School of Engineering. Prior to teaching Portfolio Managment and Valuation for Startups and Corporate Transactions at Tandon, he was the Global Head of Front Office Risk for the Institutional Division of BNP Paribas Investment Partners. He was awarded the First Bernstein/Fabozzi/Jacobs-Levy Prize for his paper *Why Do Valuation Ratios Forecast Long-Run Equity Returns?* and the Graham and Dodd Scroll Award for *Saving Social Security: A Better Approach* which was co-authored with Arun Muralidhar.
 :::
 :::
 
@@ -30,7 +30,7 @@ Tom Philips is an Adjunct Professor in the Department of Finance and Risk Engine
 ::: {.author-info}
 ## Bernd Scherer {.unnumbered}
 
-Bernd Scherer is the Head of Portfolio Implementation at the Abu Dhabi Investment Authorty, and is on the Advisory Board of EDHEC's Ph.D. in Finance program. He co-authored *Portfolio Construction and Risk Budgeting* with Doug Martin.
+Bernd Scherer is the Head of Portfolio Implementation at the Abu Dhabi Investment Authority and is on the Advisory Board of EDHEC’s Ph.D. in Finance program where he served as Professor of Finance and Head of the European Master's in Finance program.  He is currently on the editorial board of the Financial Analysts Journal and the Journal of Asset Management. Before joining ADIA, he was CIO at LBBW Asset Management where he was responsible for 110 billion assets under management. He won two best paper awards from EQD and one from the German CFA society and was named to be among the top 25 quants worldwide by EQD.
 :::
 :::
 
