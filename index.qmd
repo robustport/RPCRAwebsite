@@ -11,7 +11,7 @@ toc-title: ""
 <div class="hero-outer">
   <div class="hero-inner">
 
-<!--    <div class="hero-eyebrow">Book Overview &amp; Supplementary Materials</div> -->
+    <div class="hero-eyebrow">Book Overview &amp; Supplementary Materials</div>
 
     <h1 class="hero-title"><em>Robust</em> Portfolio Construction<br>and Risk Analysis</h1>
 
