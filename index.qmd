@@ -8,6 +8,13 @@ toc-title: ""
 ---
 
 ```{=html}
+
+<style>
+.hero-eyebrow {
+  display: none;
+}
+</style>
+
 <div class="hero-outer">
   <div class="hero-inner">
 
