@@ -13,6 +13,12 @@ toc-title: ""
 .hero-eyebrow {
   display: none;
 }
+.hero-date {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 </style>
 
 <div class="hero-outer">
@@ -22,7 +28,7 @@ toc-title: ""
 
     <h1 class="hero-title"><em>Robust</em> Portfolio Construction<br>and Risk Analysis</h1>
 
-    <p class="hero-subtitle">Taming Outliers and Reducing Estimation Error.</p>
+    <p class="hero-subtitle">Taming Outliers and Reducing Estimation Error</p>
 
     <p class="hero-date">To be published by Springer in 2026</p>
 
